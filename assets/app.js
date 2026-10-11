@@ -6,7 +6,7 @@
 const EMAIL = "pospisilal@email.cz";
 /* Volitelné: klíč z web3forms.com – pak se objednávky odesílají rovnou na tvůj e-mail.
    Když je prázdný, objednávka se dokončí odesláním z e-mailu zákazníka. */
-const WEB3FORMS_KEY = "";
+const WEB3FORMS_KEY = "2d1be97d-5752-427f-bbf3-e49d1acd0b37";
 
 /* ===== SLUŽBY A CENY – uprav podle sebe (remote:true = jde i na dálku) ===== */
 const SERVICES = [
