@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corphik – IT podpora a zabezpečení</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23172026'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3.5' fill='%237CC1D4'/%3E%3Cpath d='M19 13a4.2 4.2 0 1 0 0 6' fill='none' stroke='%23172026' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta property="og:title" content="Corphik – IT podpora a zabezpečení">
+<meta name="description" content="Corphik – IT podpora: sestavení PC, instalace Windows a Linuxu, opravy, zabezpečení a redesign webu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F4F3; --surface:#FFFFFF; --ink:#172026; --muted:#5E6A70;
+  --line:#D5DBDC; --accent:#1F5E73; --accent-soft:#DCE9EC; --ok:#2E7D5B;
+  --glass1:#6A3F7E; --glass2:#2E1F44;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121A1E; --surface:#18232A; --ink:#E6ECEE; --muted:#93A2A8;
+    --line:#2A3940; --accent:#7CC1D4; --accent-soft:#1D3640; --ok:#7FD3AB;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121A1E; --surface:#18232A; --ink:#E6ECEE; --muted:#93A2A8;
+  --line:#2A3940; --accent:#7CC1D4; --accent-soft:#1D3640; --ok:#7FD3AB;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 1.25rem}
+
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;height:60px;gap:1rem}
+.mono{font-weight:900;letter-spacing:-.03em;font-size:1.25rem;color:var(--ink);text-decoration:none;margin-right:auto;display:inline-flex;align-items:center;gap:.5rem}
+.mono .logo{width:28px;height:28px;color:var(--accent);flex:none}
+@media (max-width:600px){.mono span{display:none}.lang button{padding:.3rem .42rem}}
+.nav ul{display:flex;gap:1.1rem;list-style:none;margin:0;padding:0;font-size:.95rem}
+.nav ul a{color:var(--muted);text-decoration:none;padding:.2rem 0}
+.nav ul a:hover,.nav ul a[aria-current="page"]{color:var(--ink)}
+.nav ul a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--accent)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--muted);font:inherit;font-size:.8rem;font-weight:500;padding:.3rem .55rem;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.theme{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;width:34px;height:34px;font-size:1rem;cursor:pointer;flex:none}
+@media (max-width:640px){.nav .wrap{gap:.55rem}.nav ul{gap:.75rem;font-size:.9rem}.mono{font-size:1.05rem}}
+@media (max-width:430px){.theme{display:none}.nav ul{gap:.6rem;font-size:.85rem}}
+
+.page[hidden]{display:none}
+
+/* home hero */
+.hero-biz{padding:4.5rem 0 3.5rem}
+.hero-biz h1{font-size:clamp(2.6rem,8.5vw,5.4rem);line-height:.95;font-weight:900;letter-spacing:-.045em;margin:0 0 1.4rem;max-width:12ch}
+.hero-biz .lead{font-size:clamp(1.15rem,2.4vw,1.4rem);color:var(--muted);max-width:36ch;margin:0 0 2rem}
+.who{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;color:var(--muted);font-size:.95rem}
+.who b{color:var(--ink);font-weight:500}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:900;letter-spacing:-.04em;flex:none}
+.links{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-block;padding:.75rem 1.25rem;border-radius:999px;text-decoration:none;font-weight:500;border:1px solid var(--line);color:var(--ink);background:none;font:inherit;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* sections */
+section.block{padding:4rem 0;border-top:1px solid var(--line)}
+.block h2{font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:-.03em;margin:0 0 1.5rem;font-weight:700}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+@media (max-width:760px){.cols{grid-template-columns:1fr;gap:1.5rem}}
+.prose p{margin:0 0 1rem;max-width:62ch}
+.muted{color:var(--muted)}
+
+/* services – price-list style */
+.svc{list-style:none;margin:0;padding:0}
+.svc li{display:grid;grid-template-columns:1fr auto;gap:.35rem 1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--line);align-items:center}
+.svc li:first-child{border-top:1px solid var(--line)}
+.svc h3{margin:0;font-size:1.2rem;letter-spacing:-.01em;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.svc .remote{font-size:.75rem;font-weight:500;padding:.1rem .55rem;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.svc p{margin:0;color:var(--muted);max-width:58ch}
+.svc .txt{display:grid;gap:.35rem}
+.buy{display:inline-flex;align-items:center;gap:.55rem;padding:.65rem 1.1rem .65rem .95rem;border-radius:999px;
+  background:var(--ink);color:var(--bg);border:0;font:inherit;font-weight:700;font-size:1rem;cursor:pointer;white-space:nowrap;
+  transition:transform .15s ease,background .15s ease}
+.buy:hover{background:var(--accent)}
+.buy:active{transform:scale(.97)}
+.buy svg{width:20px;height:20px;flex:none}
+@media (max-width:560px){.svc li{grid-template-columns:1fr}.buy{justify-self:start}}
+
+/* portfolio */
+.pf-filter{display:flex;gap:.5rem;flex-wrap:wrap;margin:-.5rem 0 1.5rem}
+.pf-filter button{font:inherit;font-size:.9rem;padding:.4rem .9rem;border-radius:999px;border:1px solid var(--line);background:none;color:var(--muted);cursor:pointer}
+.pf-filter button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pf{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.5rem}
+.pf article{display:grid;gap:.75rem}
+.pf article[hidden]{display:none}
+.pv{aspect-ratio:16/10;border-radius:16px;overflow:hidden;border:1px solid var(--line);position:relative;background:var(--surface)}
+.pv .bar{height:22px;display:flex;gap:5px;align-items:center;padding:0 9px;background:rgba(127,127,127,.12)}
+.pv .bar i{width:7px;height:7px;border-radius:50%;background:rgba(127,127,127,.45)}
+.pv img{width:100%;height:100%;object-fit:cover;display:block}
+.pv-tj{background:radial-gradient(120% 90% at 15% 10%,var(--glass1),var(--glass2) 70%)}
+.pv-tj .in{position:absolute;inset:22px 0 0;display:grid;place-items:center}
+.pv-tj .in img{width:34%;height:auto;aspect-ratio:1;border-radius:18%;box-shadow:0 8px 24px -8px rgba(240,140,150,.55)}
+.pv-ap .in{position:absolute;inset:22px 0 0;padding:14% 10% 0;background:var(--bg)}
+.pv-ap .h{font-weight:900;letter-spacing:-.04em;font-size:clamp(1.1rem,3.4vw,1.5rem);line-height:1;color:var(--ink)}
+.pv-ap .l{height:6px;border-radius:3px;background:var(--line);margin-top:9px;width:70%}
+.pv-ap .l.s{width:45%}
+.pv-ap .b{width:34%;height:16px;border-radius:999px;background:var(--ink);margin-top:14px}
+.pv-pc{display:grid;place-items:center;background:linear-gradient(160deg,#1E2A30,#0E1418)}
+.pv-pc svg{width:34%;height:auto;color:#7CC1D4}
+.pf h3{margin:0;font-size:1.15rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.pf h3 .mini{font-size:.72rem;font-weight:500;padding:.1rem .5rem;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.pf p{margin:0;color:var(--muted);font-size:.95rem}
+.pf .tags{display:flex;flex-wrap:wrap;gap:.35rem;list-style:none;margin:0;padding:0}
+.pf .tags li{font-size:.75rem;padding:.1rem .55rem;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+@media (max-width:560px){.nav .hide-sm{display:none}}
+
+/* steps (real sequence) */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;counter-reset:s}
+@media (max-width:760px){.steps{grid-template-columns:1fr;gap:1.25rem}}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;margin-bottom:.6rem}
+.steps h3{margin:0 0 .25rem;font-size:1.1rem}.steps p{margin:0;color:var(--muted)}
+
+/* order form */
+.form{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:1.5rem;display:grid;gap:1rem}
+.form label{display:grid;gap:.35rem;font-size:.9rem;font-weight:500}
+.form input,.form select,.form textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:.7rem .85rem;width:100%}
+.form textarea{min-height:120px;resize:vertical}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:560px){.form .row{grid-template-columns:1fr}}
+.form .err{color:#B3261E;font-size:.9rem;margin:0;min-height:1.2em}
+.result{display:none;border-radius:16px;background:var(--accent-soft);padding:1.25rem}
+.result.show{display:block}
+.result b{display:block;margin-bottom:.4rem}
+.result pre{white-space:pre-wrap;font-family:inherit;font-size:.9rem;background:var(--surface);border-radius:10px;padding:.85rem;margin:.75rem 0;max-height:220px;overflow:auto}
+
+/* about */
+.hero{padding:4rem 0 3rem}
+.hero h1{font-size:clamp(2.6rem,9vw,5.5rem);line-height:.92;font-weight:900;letter-spacing:-.045em;margin:0 0 1.4rem}
+.hero .lead{font-size:clamp(1.15rem,2.4vw,1.4rem);max-width:34ch;margin:0;color:var(--muted)}
+.hero .lead strong{color:var(--ink);font-weight:500}
+.route{margin:3.5rem 0 0}
+.route ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);position:relative}
+.route ol::before{content:"";position:absolute;left:0;right:0;top:11px;height:3px;background:linear-gradient(90deg,var(--line) 0 66%,var(--accent) 66% 100%)}
+.route li{position:relative;padding:2.2rem 1rem 0 0}
+.route li::before{content:"";position:absolute;top:2px;left:0;width:21px;height:21px;border-radius:50%;background:var(--bg);border:3px solid var(--line)}
+.route li.now::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 6px var(--accent-soft)}
+.route .yr{font-size:.85rem;color:var(--muted)}
+.route h3{margin:.1rem 0 .25rem;font-size:1.15rem}
+.route p{margin:0;color:var(--muted);font-size:.95rem;max-width:26ch}
+@media (max-width:640px){
+  .route ol{grid-template-columns:1fr;padding-left:2.2rem}
+  .route ol::before{left:9px;right:auto;top:0;bottom:0;width:3px;height:auto;background:linear-gradient(180deg,var(--line) 0 66%,var(--accent) 66% 100%)}
+  .route li{padding:0 0 1.75rem}.route li::before{left:-2.2rem}
+}
+.tj{position:relative;border-radius:24px;padding:1.75rem;color:#fff;overflow:hidden;display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;
+  background:radial-gradient(120% 90% at 15% 10%,var(--glass1),var(--glass2) 70%);box-shadow:0 30px 60px -30px rgba(46,31,68,.6)}
+.tj::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(160deg,rgba(255,255,255,.28),rgba(255,255,255,0) 45%);pointer-events:none}
+.tj-logo{width:88px;height:88px;flex:none;position:relative;border-radius:22px;box-shadow:0 0 0 1px rgba(255,255,255,.25),0 10px 30px -10px rgba(240,140,150,.5)}
+.tj h3{margin:0;font-size:1.6rem;letter-spacing:-.03em;line-height:1}
+.tj .role{margin:.3rem 0 .75rem;opacity:.85}
+.tj p.d{margin:0 0 .9rem;opacity:.85;max-width:46ch}
+.pill{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .75rem;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-size:.85rem;font-weight:500}
+.pill i{width:8px;height:8px;border-radius:50%;background:#9EF0C9;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:flex;justify-content:space-between;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.list li:first-child{border-top:1px solid var(--line)}
+.list .t{font-weight:500}.list .s{font-size:.85rem;color:var(--muted);white-space:nowrap}
+.goal{margin-top:1.5rem;padding:1.25rem;border-radius:14px;background:var(--accent-soft)}
+.goal b{display:block;font-size:1.1rem}.goal span{color:var(--muted);font-size:.95rem}
+.hob{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+.hob h3{margin:0 0 .3rem;font-size:1.05rem}.hob p{margin:0;color:var(--muted);font-size:.95rem}
+footer{padding:2rem 0 3rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+
+
+<header class="nav">
+  <div class="wrap">
+    <a class="mono" href="#home" aria-label="Corphik"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v3M16 2.5v3M20 2.5v3M12 26.5v3M16 26.5v3M20 26.5v3M2.5 12h3M2.5 16h3M2.5 20h3M26.5 12h3M26.5 16h3M26.5 20h3"/></g><rect x="7" y="7" width="18" height="18" rx="4" fill="currentColor"/><path d="M19.6 12.6a4.8 4.8 0 1 0 0 6.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round"/></svg><span>Corphik</span></a>
+    <ul>
+      <li><a href="#home" data-link="home" data-i18n="nav.home"></a></li>
+      <li class="hide-sm"><a href="#portfolio" data-i18n="nav.portfolio"></a></li>
+      <li><a href="#about" data-link="about" data-i18n="nav.about"></a></li>
+      <li><a href="#objednat" data-i18n="nav.order"></a></li>
+    </ul>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="cs">CS</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="es">ES</button>
+    </div>
+    <button class="theme" id="theme" type="button">◐</button>
+  </div>
+</header>
+
+<main>
+<!-- ================= HOME – IT podpora ================= -->
+<div class="page" data-page="home">
+  <div class="wrap hero-biz">
+    <div class="who"><span class="avatar">AP</span><span><b>Aleš Pospíšil</b> · <span data-i18n="h.area"></span></span></div>
+    <h1 data-i18n="h.title"></h1>
+    <p class="lead" data-i18n="h.lead"></p>
+    <div class="links">
+      <a class="btn primary" href="#objednat" data-i18n="h.cta"></a>
+      <a class="btn" href="#sluzby" data-i18n="h.cta2"></a>
+    </div>
+  </div>
+
+  <section class="block" id="sluzby">
+    <div class="wrap">
+      <h2 data-i18n="s.h"></h2>
+      <ul class="svc" id="svcList"></ul>
+    </div>
+  </section>
+
+  <section class="block" id="portfolio">
+    <div class="wrap">
+      <h2 data-i18n="pf.h"></h2>
+      <div class="pf-filter" role="group" aria-label="Filter">
+        <button type="button" data-f="all" aria-pressed="true" data-i18n="pf.all"></button>
+        <button type="button" data-f="web" aria-pressed="false" data-i18n="pf.web"></button>
+        <button type="button" data-f="pc" aria-pressed="false" data-i18n="pf.pc"></button>
+      </div>
+      <div class="pf" id="pfList"></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2 data-i18n="p.h"></h2>
+      <ol class="steps">
+        <li><h3 data-i18n="p.1h"></h3><p data-i18n="p.1p"></p></li>
+        <li><h3 data-i18n="p.2h"></h3><p data-i18n="p.2p"></p></li>
+        <li><h3 data-i18n="p.3h"></h3><p data-i18n="p.3p"></p></li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<div class="page" data-page="about" hidden>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Aleš<br>Pospíšil</h1>
+      <p class="lead" data-i18n="ab.lead"></p>
+      <nav class="route" aria-label="Route">
+        <ol>
+          <li><span class="yr">2020–2024</span><h3 data-i18n="r.1h"></h3><p data-i18n="r.1p"></p></li>
+          <li><span class="yr" data-i18n="r.2y"></span><h3 data-i18n="r.2h"></h3><p data-i18n="r.2p"></p></li>
+          <li class="now"><span class="yr" data-i18n="r.3y"></span><h3 data-i18n="r.3h"></h3><p data-i18n="r.3p"></p></li>
+        </ol>
+      </nav>
+    </section>
+  </div>
+
+  <section class="block">
+    <div class="wrap cols">
+      <h2 data-i18n="ab.h"></h2>
+      <div class="prose"><p data-i18n="ab.p1"></p><p data-i18n="ab.p2"></p><p data-i18n="ab.p3"></p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="tj">
+        <img class="tj-logo" src="data:image/webp;base64,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" alt="Tandjo logo" width="88" height="88">
+        <div>
+          <h3>Tandjo</h3>
+          <div class="role" data-i18n="tj.role"></div>
+          <p class="d" data-i18n="tj.d"></p>
+          <span class="pill"><i></i><span data-i18n="tj.status"></span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap cols">
+      <div>
+        <h2 data-i18n="le.h"></h2>
+        <div class="goal"><b data-i18n="le.goal"></b><span data-i18n="le.goalp"></span></div>
+      </div>
+      <ul class="list">
+        <li><span class="t">Cisco – Introduction to Cybersecurity</span><span class="s" data-i18n="m.sep"></span></li>
+        <li><span class="t">TryHackMe – Cyber Security 101</span><span class="s" data-i18n="m.aug"></span></li>
+        <li><span class="t">TryHackMe – Hacker Holidays</span><span class="s" data-i18n="m.aug"></span></li>
+        <li><span class="t">TryHackMe – Pre Security</span><span class="s" data-i18n="m.jul"></span></li>
+        <li><span class="t">OverTheWire – Bandit</span><span class="s" data-i18n="m.ongoing"></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2 data-i18n="ho.h"></h2>
+      <div class="hob">
+        <div><h3>Hardware</h3><p data-i18n="ho.1"></p></div>
+        <div><h3>Linux</h3><p data-i18n="ho.2"></p></div>
+        <div><h3 data-i18n="ho.3h"></h3><p data-i18n="ho.3"></p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= OBJEDNÁVKA (na obou stránkách) ================= -->
+<section class="block" id="objednat">
+  <div class="wrap cols">
+    <div>
+      <h2 data-i18n="o.h"></h2>
+      <p class="muted" data-i18n="o.p"></p>
+    </div>
+    <div>
+      <form class="form" id="orderForm" novalidate>
+        <div class="row">
+          <label><span data-i18n="o.name"></span><input id="fName" autocomplete="name" required></label>
+          <label><span data-i18n="o.contact"></span><input id="fContact" autocomplete="email" required></label>
+        </div>
+        <label><span data-i18n="o.service"></span><select id="fService"></select></label>
+        <label><span data-i18n="o.msg"></span><textarea id="fMsg" required></textarea></label>
+        <label><span data-i18n="o.when"></span><input id="fWhen"></label>
+        <p class="err" id="fErr" role="alert"></p>
+        <button class="btn primary" type="submit" data-i18n="o.send"></button>
+      </form>
+      <div class="result" id="result" aria-live="polite">
+        <b data-i18n="o.doneH"></b>
+        <span class="muted" data-i18n="o.doneP"></span>
+        <pre id="orderText"></pre>
+        <div class="links">
+          <a class="btn primary" id="mailBtn" target="_top" data-i18n="o.mail"></a>
+          <button class="btn" type="button" id="copyBtn" data-i18n="o.copy"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">© <span id="y"></span> Corphik · Aleš Pospíšil · corphik.eu</div></footer>
+
+<script>
+/* ===== NASTAVENÍ – sem napiš svůj e-mail ===== */
+const EMAIL = "pospisilal@email.cz";
+
+/* ===== SLUŽBY A CENY – uprav podle sebe (remote:true = jde i na dálku) ===== */
+const SERVICES = [
+ { id:"build", remote:false,
+   price:{cs:"od 1 000 Kč",en:"from CZK 1,000 (≈ €40)",es:"desde 1.000 CZK (≈ 40 €)"},
+   name:{cs:"Sestavení PC na míru",en:"Custom PC build",es:"PC a medida"},
+   desc:{cs:"Vyberu komponenty podle rozpočtu a účelu (hry, práce, škola), PC sestavím a otestuju.",
+         en:"I pick parts for your budget and needs (gaming, work, school), then build and test the PC.",
+         es:"Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo."} },
+ { id:"os", remote:false,
+   price:{cs:"od 700 Kč",en:"from CZK 700 (≈ €28)",es:"desde 700 CZK (≈ 28 €)"},
+   name:{cs:"Instalace Windows a Linuxu",en:"Windows & Linux installation",es:"Instalación de Windows y Linux"},
+   desc:{cs:"Čistá instalace systému, ovladače, aktualizace a nastavení, aby vše fungovalo od prvního spuštění.",
+         en:"Clean OS install, drivers, updates and setup so everything works from the first boot.",
+         es:"Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque."} },
+ { id:"upgrade", remote:false,
+   price:{cs:"od 500 Kč",en:"from CZK 500 (≈ €20)",es:"desde 500 CZK (≈ 20 €)"},
+   name:{cs:"Upgrade a zrychlení PC",en:"PC upgrade & speed-up",es:"Mejora y aceleración del PC"},
+   desc:{cs:"Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Díly se platí zvlášť.",
+         en:"New SSD, RAM or graphics card, cleaning and fresh thermal paste. Parts are paid separately.",
+         es:"Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte."} },
+ { id:"fix", remote:true,
+   price:{cs:"od 400 Kč",en:"from CZK 400 (≈ €16)",es:"desde 400 CZK (≈ 16 €)"},
+   name:{cs:"Diagnostika a opravy",en:"Diagnostics & repairs",es:"Diagnóstico y reparación"},
+   desc:{cs:"PC nejde zapnout, padá, je pomalé nebo hlučné? Najdu příčinu a vyřeším ji.",
+         en:"PC won't start, crashes, runs slow or loud? I'll find the cause and fix it.",
+         es:"¿El PC no enciende, se cuelga, va lento o hace ruido? Encuentro la causa y lo soluciono."} },
+ { id:"sec", remote:true,
+   price:{cs:"od 600 Kč",en:"from CZK 600 (≈ €24)",es:"desde 600 CZK (≈ 24 €)"},
+   name:{cs:"Zabezpečení a zálohy",en:"Security & backups",es:"Seguridad y copias de seguridad"},
+   desc:{cs:"Kontrola zabezpečení počítače, nastavení záloh, aktualizací a bezpečných hesel.",
+         en:"Security check-up, backups, updates and safe password setup.",
+         es:"Revisión de seguridad, copias de seguridad, actualizaciones y contraseñas seguras."} },
+ { id:"web", remote:true,
+   price:{cs:"od 3 000 Kč",en:"from CZK 3,000 (≈ €120)",es:"desde 3.000 CZK (≈ 120 €)"},
+   name:{cs:"Redesign webu",en:"Website redesign",es:"Rediseño web"},
+   desc:{cs:"Starý web předělám do moderní podoby: nový vzhled, mobilní verze, rychlejší načítání a základní zabezpečení.",
+         en:"I turn an outdated website into a modern one: fresh design, mobile version, faster loading and basic security.",
+         es:"Convierto una web anticuada en una moderna: nuevo diseño, versión móvil, carga más rápida y seguridad básica."} },
+ { id:"remote", remote:true,
+   price:{cs:"400 Kč / hod",en:"CZK 400 / hour (≈ €16)",es:"400 CZK / hora (≈ 16 €)"},
+   name:{cs:"Vzdálená pomoc",en:"Remote help",es:"Ayuda a distancia"},
+   desc:{cs:"Připojím se k tvému počítači přes internet a vyřeším problém, nastavení nebo instalaci programů – ať jsi kdekoli.",
+         en:"I connect to your computer over the internet and sort out problems, settings or software installs – wherever you are.",
+         es:"Me conecto a tu ordenador por internet y soluciono problemas, ajustes o instalaciones de programas, estés donde estés."} }
+];
+
+const T = {
+cs:{
+ "nav.portfolio":"Portfolio","pf.h":"Portfolio","pf.all":"Vše","pf.web":"Weby","pf.pc":"Počítače","pf.wip":"Ve vývoji","pf.view":"Otevřít",
+ "nav.home":"Služby","nav.about":"O mně","nav.order":"Objednat","theme.dark":"Přepnout na tmavý režim","theme.light":"Přepnout na světlý režim",
+ "h.area":"IT podpora v Praze a okolí, i na dálku",
+ "h.title":"Počítač, který prostě funguje.",
+ "h.lead":"Sestavím, nainstaluju, opravím, zabezpečím a předělám web. Osobně v Praze a okolí, nebo na dálku odkudkoli.",
+ "h.cta":"Objednat službu","h.cta2":"Co nabízím",
+ "s.h":"Co nabízím","s.remote":"I na dálku","s.order":"Objednat",
+ "p.h":"Jak to probíhá",
+ "p.1h":"Objednáš","p.1p":"Vyplníš krátký formulář a popíšeš, co potřebuješ.",
+ "p.2h":"Ozvu se","p.2p":"Domluvíme se na detailech, ceně a termínu.",
+ "p.3h":"Vyřeším to","p.3p":"Udělám práci a vysvětlím ti, co jsem změnil.",
+ "o.h":"Objednávka","o.p":"Napiš, s čím potřebuješ pomoct. Ozvu se co nejdřív.",
+ "o.name":"Jméno","o.contact":"E-mail nebo telefon","o.service":"Služba","o.other":"Něco jiného",
+ "o.msg":"Co potřebuješ?","o.when":"Kdy se ti to hodí? (nepovinné)","o.send":"Pokračovat k odeslání",
+ "o.errFill":"Vyplň prosím jméno, kontakt a popis.",
+ "o.doneH":"Objednávka je připravená","o.doneP":"Odešli ji e-mailem jedním klepnutím, nebo ji zkopíruj a pošli, jak chceš.",
+ "o.mail":"Odeslat e-mailem","o.copy":"Zkopírovat","o.copied":"Zkopírováno",
+ "o.subj":"Objednávka IT podpory",
+ "ab.lead":"Dřív jsem opravoval stroje. <strong>Teď se učím, jak se rozbíjejí systémy</strong> – a jak je ochránit.",
+ "r.1h":"Mechanik","r.1p":"Zemědělské stroje, nákladní auta, svařování.",
+ "r.2y":"od 2026","r.2h":"Logistika","r.2p":"Team lead a administrátor v DSV, Praha.",
+ "r.3y":"teď","r.3h":"Kyberbezpečnost a Tandjo","r.3p":"Mířím k penetračnímu testování a stavím vlastní produkt.",
+ "ab.h":"O mně",
+ "ab.p1":"Vyučil jsem se mechanikem zemědělských strojů a pár let jsem dělal s rukama – opravy, svařování, lisy. Naučilo mě to hledat, proč věci nefungují, a nevzdat se, dokud to nenajdu.",
+ "ab.p2":"Dnes vedu tým v logistice, při tom dělám IT podporu, stavím Tandjo a věnuju se kyberbezpečnosti. Baví mě ofenzivní strana: pochopit systém tak dobře, abych v něm našel slabé místo dřív než někdo jiný.",
+ "ab.p3":"Mluvím česky a anglicky (v práci denně), učím se španělsky.",
+ "tj.role":"Zakladatel a CEO","tj.d":"Sociální síť pro páry, kterou stavím s pomocí AI.","tj.status":"Ve vývoji",
+ "le.h":"Co jsem se naučil","le.goal":"Další cíl: CompTIA Security+","le.goalp":"Právě se na certifikaci připravuji.",
+ "m.sep":"září 2026","m.aug":"srpen 2026","m.jul":"červenec 2026","m.ongoing":"průběžně",
+ "ho.h":"Mimo práci","ho.1":"Moje sestava: Ryzen 7 5800X3D a RX 7800 XT. Čekám na Zen 6.",
+ "ho.2":"Terminál, Bandit a všechno, co se dá rozebrat.","ho.3h":"Španělština","ho.3":"Učím se třetí jazyk.",
+ "f.name":"Jméno","f.contact":"Kontakt","f.service":"Služba","f.when":"Termín","f.msg":"Popis"
+},
+en:{
+ "nav.portfolio":"Portfolio","pf.h":"Portfolio","pf.all":"All","pf.web":"Websites","pf.pc":"PCs","pf.wip":"In progress","pf.view":"Open",
+ "nav.home":"Services","nav.about":"About me","nav.order":"Order","theme.dark":"Switch to dark mode","theme.light":"Switch to light mode",
+ "h.area":"IT support in the Prague area, and remotely",
+ "h.title":"A computer that just works.",
+ "h.lead":"I build, install, repair, secure and redesign websites. In person around Prague, or remotely from anywhere.",
+ "h.cta":"Order a service","h.cta2":"What I offer",
+ "s.h":"What I offer","s.remote":"Remote available","s.order":"Order",
+ "p.h":"How it works",
+ "p.1h":"You order","p.1p":"Fill in a short form and describe what you need.",
+ "p.2h":"I get back to you","p.2p":"We agree on the details, price and date.",
+ "p.3h":"I sort it out","p.3p":"I do the work and explain what I changed.",
+ "o.h":"Order","o.p":"Tell me what you need help with. I'll get back to you as soon as I can.",
+ "o.name":"Name","o.contact":"Email or phone","o.service":"Service","o.other":"Something else",
+ "o.msg":"What do you need?","o.when":"When suits you? (optional)","o.send":"Continue to send",
+ "o.errFill":"Please fill in your name, contact and description.",
+ "o.doneH":"Your order is ready","o.doneP":"Send it by email in one tap, or copy it and send it any way you like.",
+ "o.mail":"Send by email","o.copy":"Copy","o.copied":"Copied",
+ "o.subj":"IT support order",
+ "ab.lead":"I used to fix machines. <strong>Now I'm learning how systems break</strong> – and how to protect them.",
+ "r.1h":"Mechanic","r.1p":"Agricultural machinery, trucks, welding.",
+ "r.2y":"since 2026","r.2h":"Logistics","r.2p":"Team lead and administrator at DSV, Prague.",
+ "r.3y":"now","r.3h":"Cybersecurity & Tandjo","r.3p":"Heading toward penetration testing and building my own product.",
+ "ab.h":"About me",
+ "ab.p1":"I trained as an agricultural machinery mechanic and spent a few years working with my hands – repairs, welding, presses. It taught me to dig into why things don't work and not give up until I find out.",
+ "ab.p2":"Today I lead a team in logistics, do IT support on the side, build Tandjo and study cybersecurity. I enjoy the offensive side: understanding a system well enough to find its weak spot before anyone else does.",
+ "ab.p3":"I speak Czech and English (daily at work) and I'm learning Spanish.",
+ "tj.role":"Founder & CEO","tj.d":"A social network for couples, built with the help of AI.","tj.status":"In progress",
+ "le.h":"What I've learned","le.goal":"Next goal: CompTIA Security+","le.goalp":"Currently preparing for the exam.",
+ "m.sep":"Sep 2026","m.aug":"Aug 2026","m.jul":"Jul 2026","m.ongoing":"ongoing",
+ "ho.h":"Outside work","ho.1":"My rig: Ryzen 7 5800X3D and RX 7800 XT. Waiting for Zen 6.",
+ "ho.2":"The terminal, Bandit and anything I can take apart.","ho.3h":"Spanish","ho.3":"Learning my third language.",
+ "f.name":"Name","f.contact":"Contact","f.service":"Service","f.when":"Date","f.msg":"Description"
+},
+es:{
+ "nav.portfolio":"Portafolio","pf.h":"Portafolio","pf.all":"Todo","pf.web":"Webs","pf.pc":"Ordenadores","pf.wip":"En desarrollo","pf.view":"Abrir",
+ "nav.home":"Servicios","nav.about":"Sobre mí","nav.order":"Pedir","theme.dark":"Cambiar a modo oscuro","theme.light":"Cambiar a modo claro",
+ "h.area":"Soporte informático en Praga y alrededores, y a distancia",
+ "h.title":"Un ordenador que simplemente funciona.",
+ "h.lead":"Monto, instalo, reparo, protejo y rediseño webs. En persona en Praga y alrededores, o a distancia desde cualquier lugar.",
+ "h.cta":"Pedir un servicio","h.cta2":"Qué ofrezco",
+ "s.h":"Qué ofrezco","s.remote":"También a distancia","s.order":"Pedir",
+ "p.h":"Cómo funciona",
+ "p.1h":"Haces el pedido","p.1p":"Rellenas un formulario corto y describes lo que necesitas.",
+ "p.2h":"Te contacto","p.2p":"Acordamos los detalles, el precio y la fecha.",
+ "p.3h":"Lo soluciono","p.3p":"Hago el trabajo y te explico qué he cambiado.",
+ "o.h":"Pedido","o.p":"Cuéntame con qué necesitas ayuda. Te responderé lo antes posible.",
+ "o.name":"Nombre","o.contact":"Correo o teléfono","o.service":"Servicio","o.other":"Otra cosa",
+ "o.msg":"¿Qué necesitas?","o.when":"¿Cuándo te viene bien? (opcional)","o.send":"Continuar al envío",
+ "o.errFill":"Rellena tu nombre, contacto y descripción, por favor.",
+ "o.doneH":"Tu pedido está listo","o.doneP":"Envíalo por correo con un toque, o cópialo y envíalo como prefieras.",
+ "o.mail":"Enviar por correo","o.copy":"Copiar","o.copied":"Copiado",
+ "o.subj":"Pedido de soporte informático",
+ "ab.lead":"Antes reparaba máquinas. <strong>Ahora aprendo cómo se rompen los sistemas</strong>, y cómo protegerlos.",
+ "r.1h":"Mecánico","r.1p":"Maquinaria agrícola, camiones, soldadura.",
+ "r.2y":"desde 2026","r.2h":"Logística","r.2p":"Jefe de equipo y administrador en DSV, Praga.",
+ "r.3y":"ahora","r.3h":"Ciberseguridad y Tandjo","r.3p":"Rumbo a las pruebas de penetración y construyendo mi propio producto.",
+ "ab.h":"Sobre mí",
+ "ab.p1":"Me formé como mecánico de maquinaria agrícola y pasé unos años trabajando con las manos: reparaciones, soldadura, prensas. Aprendí a buscar por qué algo no funciona y a no rendirme hasta encontrarlo.",
+ "ab.p2":"Hoy dirijo un equipo en logística, ofrezco soporte informático, construyo Tandjo y estudio ciberseguridad. Me atrae el lado ofensivo: entender un sistema tan bien como para encontrar su punto débil antes que nadie.",
+ "ab.p3":"Hablo checo e inglés (a diario en el trabajo) y estoy aprendiendo español.",
+ "tj.role":"Fundador y CEO","tj.d":"Una red social para parejas, creada con ayuda de la IA.","tj.status":"En desarrollo",
+ "le.h":"Lo que he aprendido","le.goal":"Próximo objetivo: CompTIA Security+","le.goalp":"Me estoy preparando para el examen.",
+ "m.sep":"sep. 2026","m.aug":"ago. 2026","m.jul":"jul. 2026","m.ongoing":"en curso",
+ "ho.h":"Fuera del trabajo","ho.1":"Mi equipo: Ryzen 7 5800X3D y RX 7800 XT. Esperando a Zen 6.",
+ "ho.2":"La terminal, Bandit y todo lo que se pueda desmontar.","ho.3h":"Español","ho.3":"Aprendiendo mi tercer idioma.",
+ "f.name":"Nombre","f.contact":"Contacto","f.service":"Servicio","f.when":"Fecha","f.msg":"Descripción"
+}};
+
+const root = document.documentElement;
+let lang = "en";
+
+/* ===== Jazyk podle toho, odkud návštěvník je (časové pásmo zařízení) ===== */
+function langFromLocation(){
+  let tz = "";
+  try{ tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; }catch(e){}
+  if(/^Europe\/(Prague|Bratislava)$/.test(tz)) return "cs";
+  const es = ["Europe/Madrid","Atlantic/Canary","Africa/Ceuta","Africa/Malabo","Pacific/Galapagos","Pacific/Easter",
+    "America/Mexico_City","America/Cancun","America/Merida","America/Monterrey","America/Matamoros","America/Chihuahua",
+    "America/Ciudad_Juarez","America/Ojinaga","America/Hermosillo","America/Mazatlan","America/Tijuana","America/Bahia_Banderas",
+    "America/Bogota","America/Lima","America/Santiago","America/Punta_Arenas","America/Buenos_Aires","America/Caracas",
+    "America/Guayaquil","America/La_Paz","America/Asuncion","America/Montevideo","America/Havana","America/Santo_Domingo",
+    "America/Puerto_Rico","America/Panama","America/Costa_Rica","America/Managua","America/Tegucigalpa",
+    "America/El_Salvador","America/Guatemala"];
+  if(es.includes(tz) || tz.startsWith("America/Argentina/")) return "es";
+  return "en";
+}
+
+const TJLOGO="data:image/webp;base64,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";
+/* ===== PORTFOLIO – přidávej projekty (img: "" = automatický náhled, nebo vlož odkaz/data obrázku) ===== */
+const PORTFOLIO = [
+ { cat:"web", pv:"tj", img:"", url:"", wip:true,
+   title:{cs:"Tandjo",en:"Tandjo",es:"Tandjo"},
+   desc:{cs:"Webová aplikace pro páry: kalendář, galerie, místa, plány a hry pro dva.",
+         en:"A web app for couples: calendar, gallery, places, plans and games for two.",
+         es:"Una app web para parejas: calendario, galería, lugares, planes y juegos para dos."},
+   tags:["HTML","CSS","JavaScript","PWA"] },
+ { cat:"web", pv:"ap", img:"", url:"", wip:false,
+   title:{cs:"Tento web",en:"This website",es:"Esta web"},
+   desc:{cs:"Firemní web ve třech jazycích s ceníkem a objednávkovým formulářem.",
+         en:"A business site in three languages with a price list and order form.",
+         es:"Una web de empresa en tres idiomas con lista de precios y formulario de pedido."},
+   tags:["HTML","CSS","JavaScript","i18n"] },
+ { cat:"pc", pv:"pc", img:"", url:"", wip:false,
+   title:{cs:"Herní PC",en:"Gaming PC",es:"PC gaming"},
+   desc:{cs:"Sestava s Ryzen 7 5800X3D a Radeon RX 7800 XT pro hraní ve vysokém rozlišení.",
+         en:"A build with Ryzen 7 5800X3D and Radeon RX 7800 XT for high-resolution gaming.",
+         es:"Un equipo con Ryzen 7 5800X3D y Radeon RX 7800 XT para jugar en alta resolución."},
+   tags:["AMD","AM4","Build"] }
+];
+let pfFilter="all";
+const PCICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="14" r="3"/><path d="M9 6h6M9 9h6"/></svg>';
+function preview(p){
+  if(p.img) return `<div class="pv"><img src="${p.img}" alt=""></div>`;
+  if(p.pv==="tj") return `<div class="pv pv-tj"><div class="bar"><i></i><i></i><i></i></div><div class="in"><img src="${TJLOGO}" alt=""></div></div>`;
+  if(p.pv==="ap") return `<div class="pv pv-ap"><div class="bar"><i></i><i></i><i></i></div><div class="in"><div class="h">AP</div><div class="l"></div><div class="l s"></div><div class="b"></div></div></div>`;
+  return `<div class="pv pv-pc">${PCICON}</div>`;
+}
+function renderPortfolio(){
+  const box=document.getElementById('pfList'); box.innerHTML="";
+  PORTFOLIO.forEach(p=>{
+    const a=document.createElement('article');
+    a.hidden = pfFilter!=="all" && p.cat!==pfFilter;
+    a.innerHTML = preview(p)+`<h3><span class="t"></span></h3><p></p><ul class="tags"></ul>`;
+    a.querySelector('.t').textContent=p.title[lang];
+    if(p.wip){ const m=document.createElement('span'); m.className='mini'; m.textContent=T[lang]["pf.wip"]; a.querySelector('h3').appendChild(m); }
+    if(p.url){ const l=document.createElement('a'); l.href=p.url; l.target="_blank"; l.rel="noopener"; l.textContent=T[lang]["pf.view"]; a.querySelector('h3').appendChild(l); }
+    a.querySelector('p').textContent=p.desc[lang];
+    p.tags.forEach(t=>{ const li=document.createElement('li'); li.textContent=t; a.querySelector('.tags').appendChild(li); });
+    box.appendChild(a);
+  });
+}
+document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{
+  pfFilter=b.dataset.f;
+  document.querySelectorAll('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  renderPortfolio();
+}));
+
+const CART='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg>';
+function renderServices(){
+  const ul = document.getElementById('svcList'); ul.innerHTML="";
+  SERVICES.forEach(s=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<div class="txt"><h3><span class="n"></span></h3><p></p></div><button class="buy" type="button">${CART}<span class="pr"></span></button>`;
+    li.querySelector('.n').textContent=s.name[lang];
+    if(s.remote){ const r=document.createElement('span'); r.className='remote'; r.textContent=T[lang]["s.remote"]; li.querySelector('h3').appendChild(r); }
+    li.querySelector('p').textContent=s.desc[lang];
+    const b=li.querySelector('.buy');
+    b.querySelector('.pr').textContent=s.price[lang];
+    b.setAttribute('aria-label', `${T[lang]["s.order"]}: ${s.name[lang]}, ${s.price[lang]}`);
+    b.addEventListener('click',()=>{ document.getElementById('fService').value=s.id; go("objednat"); document.getElementById('fName').focus({preventScroll:true}); });
+    ul.appendChild(li);
+  });
+  const sel=document.getElementById('fService'); const keep=sel.value;
+  sel.innerHTML="";
+  [...SERVICES.map(s=>[s.id,`${s.name[lang]} – ${s.price[lang]}`]),["other",T[lang]["o.other"]]].forEach(([v,t])=>{
+    const o=document.createElement('option'); o.value=v; o.textContent=t; sel.appendChild(o);
+  });
+  if(keep) sel.value=keep;
+}
+
+function setLang(l, remember){
+  lang = T[l]?l:"en"; root.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ el.innerHTML = T[lang][el.dataset.i18n] ?? ""; });
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.lang===lang));
+  renderServices(); renderPortfolio(); themeLabel();
+  document.title = "Corphik – " + T[lang]["h.area"].split(",")[0];
+  if(remember){ try{ localStorage.setItem('lang',lang); }catch(e){} }
+}
+document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang,true)));
+
+/* ===== Objednávka ===== */
+const form=document.getElementById('orderForm'), result=document.getElementById('result');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=id=>document.getElementById(id).value.trim();
+  if(!v('fName')||!v('fContact')||!v('fMsg')){ document.getElementById('fErr').textContent=T[lang]["o.errFill"]; return; }
+  document.getElementById('fErr').textContent="";
+  const sel=document.getElementById('fService');
+  const text=[
+    `${T[lang]["f.name"]}: ${v('fName')}`,
+    `${T[lang]["f.contact"]}: ${v('fContact')}`,
+    `${T[lang]["f.service"]}: ${sel.options[sel.selectedIndex].text}`,
+    v('fWhen')?`${T[lang]["f.when"]}: ${v('fWhen')}`:"",
+    "", `${T[lang]["f.msg"]}:`, v('fMsg')
+  ].filter((x,i)=>x!==""||i===4).join("\n");
+  document.getElementById('orderText').textContent=text;
+  document.getElementById('mailBtn').href=`mailto:${EMAIL}?subject=${encodeURIComponent(T[lang]["o.subj"])}&body=${encodeURIComponent(text)}`;
+  form.style.display="none"; result.classList.add('show');
+});
+document.getElementById('copyBtn').addEventListener('click',async e=>{
+  const t=document.getElementById('orderText').textContent;
+  try{ await navigator.clipboard.writeText(t); e.target.textContent=T[lang]["o.copied"]; }
+  catch(err){ const r=document.createRange(); r.selectNodeContents(document.getElementById('orderText')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+});
+
+/* ===== Stránky – přepínání přímo po kliknutí (funguje i v náhledu) ===== */
+let current="";
+function showPage(name){
+  if(name===current) return;
+  current=name;
+  document.querySelectorAll('.page').forEach(p=>p.hidden=p.dataset.page!==name);
+  document.querySelectorAll('[data-link]').forEach(a=>{ if(a.dataset.link===name) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+}
+function go(id){
+  if(id==="about"||id==="home"||id===""){
+    showPage(id==="about"?"about":"home");
+    window.scrollTo({top:0});
+  } else {
+    const el=document.getElementById(id);
+    if(!el) return;
+    const pg=el.closest('.page');
+    if(pg) showPage(pg.dataset.page);
+    el.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  }
+  try{ history.replaceState(null,'','#'+(id||'home')); }catch(e){}
+}
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');
+  if(!a) return;
+  e.preventDefault();
+  go(a.getAttribute('href').slice(1));
+});
+
+/* ===== Motiv ===== */
+const btn=document.getElementById('theme');
+function isDark(){ const t=root.dataset.theme; return t? t==="dark" : matchMedia('(prefers-color-scheme: dark)').matches; }
+function themeLabel(){ const l=T[lang][isDark()?"theme.light":"theme.dark"]; btn.setAttribute('aria-label',l); btn.title=l; }
+try{ const s=localStorage.getItem('theme'); if(s) root.dataset.theme=s; }catch(e){}
+btn.addEventListener('click',()=>{ root.dataset.theme=isDark()?"light":"dark"; try{localStorage.setItem('theme',root.dataset.theme);}catch(e){} themeLabel(); });
+
+document.getElementById('y').textContent=new Date().getFullYear();
+
+let saved=null; try{ saved=localStorage.getItem('lang'); }catch(e){}
+setLang(saved || langFromLocation(), false);
+showPage("home");
+{ const h=location.hash.slice(1); if(h) go(h); }
+</script>
+</body>
+</html>
