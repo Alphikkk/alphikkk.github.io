@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corphik</title>
+<meta name="description" content="Corphik – IT podpora: sestavení PC, instalace Windows a Linuxu, opravy, zabezpečení a redesign webu.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23172026'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3.5' fill='%237CC1D4'/%3E%3Cpath d='M19 13a4.2 4.2 0 1 0 0 6' fill='none' stroke='%23172026' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta property="og:title" content="Corphik – IT podpora a zabezpečení">
+<meta name="description" content="Corphik – IT podpora: sestavení PC, instalace Windows a Linuxu, opravy, zabezpečení a redesign webu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="about">
+<header class="nav">
+  <div class="wrap">
+    <a class="mono" href="/" aria-label="Corphik"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v3M16 2.5v3M20 2.5v3M12 26.5v3M16 26.5v3M20 26.5v3M2.5 12h3M2.5 16h3M2.5 20h3M26.5 12h3M26.5 16h3M26.5 20h3"/></g><rect x="7" y="7" width="18" height="18" rx="4" fill="currentColor"/><path d="M19.6 12.6a4.8 4.8 0 1 0 0 6.8" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round"/></svg><span>Corphik</span></a>
+    <ul>
+      <li><a href="/" data-i18n="nav.home"></a></li>
+      <li class="hide-sm"><a href="/portfolio/" data-i18n="nav.portfolio"></a></li>
+      <li><a href="/about/" data-i18n="nav.about" aria-current="page"></a></li>
+      <li><a href="/orders/" class="cta" data-i18n="nav.order"></a></li>
+    </ul>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="cs">CS</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="es">ES</button>
+    </div>
+    <button class="theme" id="theme" type="button">◐</button>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Aleš<br>Pospíšil</h1>
+      <p class="lead" data-i18n="ab.lead"></p>
+      <nav class="route" aria-label="Route">
+        <ol>
+          <li><span class="yr">2020–2024</span><h3 data-i18n="r.1h"></h3><p data-i18n="r.1p"></p></li>
+          <li><span class="yr" data-i18n="r.2y"></span><h3 data-i18n="r.2h"></h3><p data-i18n="r.2p"></p></li>
+          <li class="now"><span class="yr" data-i18n="r.3y"></span><h3 data-i18n="r.3h"></h3><p data-i18n="r.3p"></p></li>
+        </ol>
+      </nav>
+    </section>
+  </div>
+
+  <section class="block">
+    <div class="wrap cols">
+      <h2 data-i18n="ab.h"></h2>
+      <div class="prose"><p data-i18n="ab.p1"></p><p data-i18n="ab.p2"></p><p data-i18n="ab.p3"></p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="tj">
+        <img class="tj-logo" src="data:image/webp;base64,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" alt="Tandjo logo" width="88" height="88">
+        <div>
+          <h3>Tandjo</h3>
+          <div class="role" data-i18n="tj.role"></div>
+          <p class="d" data-i18n="tj.d"></p>
+          <span class="pill"><i></i><span data-i18n="tj.status"></span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap cols">
+      <div>
+        <h2 data-i18n="le.h"></h2>
+        <div class="goal"><b data-i18n="le.goal"></b><span data-i18n="le.goalp"></span></div>
+      </div>
+      <ul class="list">
+        <li><span class="t">Cisco – Introduction to Cybersecurity</span><span class="s" data-i18n="m.sep"></span></li>
+        <li><span class="t">TryHackMe – Cyber Security 101</span><span class="s" data-i18n="m.aug"></span></li>
+        <li><span class="t">TryHackMe – Hacker Holidays</span><span class="s" data-i18n="m.aug"></span></li>
+        <li><span class="t">TryHackMe – Pre Security</span><span class="s" data-i18n="m.jul"></span></li>
+        <li><span class="t">OverTheWire – Bandit</span><span class="s" data-i18n="m.ongoing"></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2 data-i18n="ho.h"></h2>
+      <div class="hob">
+        <div><h3>Hardware</h3><p data-i18n="ho.1"></p></div>
+        <div><h3>Linux</h3><p data-i18n="ho.2"></p></div>
+        <div><h3 data-i18n="ho.3h"></h3><p data-i18n="ho.3"></p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer><div class="wrap"><span>© <span class="year"></span> Corphik · Aleš Pospíšil</span><span><span data-i18n="ft.contact"></span>: <a class="mail" href="#"></a></span></div></footer>
+<script src="/assets/app.js"></script>
+</body>
+</html>
