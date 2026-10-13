@@ -1,0 +1,22 @@
+# Corphik
+
+> IT support by Aleš Pospíšil. In person in Prague and surroundings (Czechia), remote across Spain and the rest of Europe. Languages: Czech, English, Spanish. Prices in CZK, "+" = starting price.
+> CS: IT podpora v Praze a okolí, na dálku po Evropě. ES: Soporte informático en Praga, a distancia en Europa.
+
+## Services / Služby / Servicios
+- Custom PC build / Sestavení PC na míru / PC a medida – 1 500 CZK+. Parts picked for budget and use (gaming, work, school). Deposit for parts up front, built and tested, delivered free around Prague. In person only.
+- Windows & Linux install / Instalace / Instalación – 700 CZK+. Clean install, drivers, updates, setup. Windows licence not included. In person.
+- PC upgrade & speed-up / Upgrade a zrychlení / Mejora – 500 CZK+. SSD, RAM, GPU swap, cleaning, new thermal paste. Parts extra. In person.
+- Diagnostics & repairs / Diagnostika a opravy / Diagnóstico y reparación – 400 CZK+. Won't start, crashes, slow, noisy. Partly remote. Diagnostics fee deducted from repair.
+- Security & backups / Zabezpečení a zálohy / Seguridad y copias – 800 CZK+. Security check, backups, updates, passwords. In person or remote.
+- Website redesign / Redesign webu / Rediseño web – 3 499 CZK+. Modern look, mobile version, faster loading, basic security. Remote.
+- Remote help / Vzdálená pomoc / Ayuda a distancia – 400 CZK/hour, billed per started 15 min. Problems, settings, software installs. Remote only.
+
+## How it works / Jak to probíhá / Cómo funciona
+Order form → I reply to agree details, price and date → job done and explained.
+
+## Links
+- [CS](https://corphik.eu/) · [EN](https://corphik.eu/en/) · [ES](https://corphik.eu/es/)
+- [Order / Objednat / Pedir](https://corphik.eu/orders/) · [About](https://corphik.eu/about/)
+
+Contact: ales@corphik.eu
