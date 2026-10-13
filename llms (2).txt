@@ -1,0 +1,66 @@
+# Corphik
+
+> IT support, repairs, and custom computer services by Aleš Pospíšil.
+
+For home users, students, and small businesses. In person in Prague and nearby areas (Czechia), and remote support across Spain and the rest of Europe. Languages: Czech, English, Spanish. Prices are listed in CZK; "+" indicates the starting price.
+
+CS: IT podpora pro domácnosti, studenty a malé firmy v Praze a okolí, na dálku po Evropě.
+ES: Soporte informático para particulares, estudiantes y pequeñas empresas en Praga y a distancia en Europa.
+
+## Services / Služby / Servicios
+
+- Custom PC builds / Sestavení PC na míru / PC a medida
+  1,500 CZK+.
+  Custom-built computers tailored to your budget and use case (gaming, office work, study, design, etc.).
+  Parts are ordered after a deposit is paid.
+  The PC is built, tested, and delivered free of charge in Prague and nearby areas.
+
+- Windows & Linux installation / Instalace / Instalación
+  700 CZK+.
+  Clean installation, driver setup, updates, software configuration, and basic system setup.
+  Windows licence is not included.
+  In person service.
+
+- PC upgrades & performance tuning / Upgrade a zrychlení / Mejora
+  500 CZK+.
+  SSD installation, RAM upgrades, GPU replacement, cleaning, thermal paste renewal, and general performance improvements.
+  Parts are extra.
+  In person service.
+
+- Diagnostics & repairs / Diagnostika a opravy / Diagnóstico y reparación
+  400 CZK+.
+  For computers that won’t start, crash, run slowly, make unusual noises, or show other problems.
+  Some issues can be diagnosed remotely.
+  The diagnostic fee is deducted from the final repair cost when the repair goes ahead.
+
+- Security & backups / Zabezpečení a zálohy / Seguridad y copias
+  800 CZK+.
+  Security check, backup setup, system updates, password guidance, and practical protection recommendations.
+  In person or remote.
+
+- Website redesign / Redesign webu / Rediseño web
+  3,499 CZK+.
+  Modern website design, responsive/mobile-friendly layout, faster loading, and basic security improvements.
+  Remote service.
+
+- Remote help / Vzdálená pomoc / Ayuda a distancia
+  400 CZK/hour, billed in 15-minute increments.
+  Troubleshooting, software installation, settings changes, general IT support, and advice.
+  Remote only.
+
+## How it works / Jak to probíhá / Cómo funciona
+
+1. Send a request or describe the issue.
+2. I reply to confirm the details, expected price, and suitable date.
+3. The work is completed and explained clearly after the job.
+
+## Links / Odkazy / Enlaces
+
+- [CS](https://corphik.eu/)
+- [EN](https://corphik.eu/en/)
+- [ES](https://corphik.eu/es/)
+- [Order / Objednat / Pedir](https://corphik.eu/orders/)
+- [About](https://corphik.eu/about/)
+
+Contact:
+ales@corphik.eu
