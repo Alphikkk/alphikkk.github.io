@@ -1,4 +1,23 @@
-User-agent: *
+# Povolení pro Google Gemini (trénování a reálný čas)
+User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://corphik.eu/sitemap.xml
+User-agent: Googlebot
+Allow: /
+
+# Povolení pro OpenAI (ChatGPT a vyhledávací funkce)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Povolení pro Anthropic (Claude a jeho agenty)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Odkaz na vaši mapu stránek
+Sitemap: https://corphik.eu
