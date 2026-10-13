@@ -212,6 +212,10 @@ es:{
 
 /* ===== Texty nového úvodu (redesign) ===== */
 Object.assign(T.cs,{
+ "ck.country":"Kde se nacházíš?","ck.cz":"Česko","ck.es":"Španělsko","ck.eu":"Jiná země v Evropě",
+ "ck.abroadRemote":"Mimo Česko zatím pomáhám jen na dálku.",
+ "ck.abroadNa":"Tuhle službu zatím dělám jen v Česku. Mimo Česko si vyber službu, která jde na dálku.",
+ "f.country":"Země",
  "h.lead":"IT podpora a stavba PC na míru.",
  "h.r1":"Česko: osobně i na dálku","h.r2":"Španělsko a zbytek Evropy: zatím na dálku",
  "s.big":"Všechno kolem počítače. Na jednom místě.",
@@ -223,6 +227,10 @@ Object.assign(T.cs,{
  "ck.payb":"U sestavení PC zaplatíš předem zálohu na komponenty, abych je mohl objednat. Zbytek ceny se platí při předání hotového počítače."
 });
 Object.assign(T.en,{
+ "ck.country":"Where are you based?","ck.cz":"Czechia","ck.es":"Spain","ck.eu":"Another European country",
+ "ck.abroadRemote":"Outside Czechia I only help remotely for now.",
+ "ck.abroadNa":"For now I only offer this service in Czechia. Outside Czechia, please pick a service that can be done remotely.",
+ "f.country":"Country",
  "h.lead":"IT support and custom PC builds.",
  "h.r1":"Czechia: in person or remotely","h.r2":"Spain and Europe: remote for now",
  "s.big":"Everything your computer needs. In one place.",
@@ -234,6 +242,10 @@ Object.assign(T.en,{
  "ck.payb":"For a PC build you pay a deposit for the parts up front so I can order them. The rest is paid when the finished PC is handed over."
 });
 Object.assign(T.es,{
+ "ck.country":"¿Dónde estás?","ck.cz":"Chequia","ck.es":"España","ck.eu":"Otro país de Europa",
+ "ck.abroadRemote":"Fuera de Chequia, por ahora solo ayudo a distancia.",
+ "ck.abroadNa":"Por ahora este servicio solo lo ofrezco en Chequia. Fuera de Chequia, elige un servicio que se pueda hacer a distancia.",
+ "f.country":"País",
  "h.lead":"Soporte informático y PC a medida.",
  "h.r1":"Chequia: en persona o a distancia","h.r2":"España y Europa: por ahora a distancia",
  "s.big":"Todo lo que necesita tu ordenador. En un solo lugar.",
@@ -380,12 +392,25 @@ function updateSummary(){
   const dep = !!s && s.id === "build";
   document.querySelectorAll('[data-i18n="ck.payH"]').forEach(el=>{ el.innerHTML = t(dep ? "ck.payHb" : "ck.payH"); });
   document.querySelectorAll('[data-i18n="ck.pay"]').forEach(el=>{ el.innerHTML = t(dep ? "ck.payb" : "ck.pay"); });
+  /* Osobně jen v Česku; Španělsko a zbytek Evropy zatím jen na dálku */
   const remoteOk = !s || s.remote;
-  const rem = $('modeRemote');
+  const abroad = isAbroad();
+  const rem = $('modeRemote'), ons = $('modeOnsite');
   rem.disabled = !remoteOk;
-  $('remoteNa').hidden = remoteOk;
-  if(!remoteOk) $('modeOnsite').checked = true;
-  $('addrWrap').hidden = !$('modeOnsite').checked;
+  ons.disabled = abroad;
+  $('remoteNa').hidden = remoteOk || abroad;
+  const ab = $('abroadNote');
+  if(ab){ ab.hidden = !abroad; ab.textContent = abroad ? t(remoteOk ? "ck.abroadRemote" : "ck.abroadNa") : ""; ab.classList.toggle('warn', abroad && !remoteOk); }
+  if(abroad && remoteOk) rem.checked = true;
+  else if(!remoteOk) ons.checked = true;
+  $('addrWrap').hidden = abroad || !ons.checked;
+}
+function isAbroad(){ const c=$('ckCountry'); return !!c && c.value !== "cz"; }
+function countryFromLocation(){
+  let tz=""; try{ tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; }catch(e){}
+  if(tz==="Europe/Prague") return "cz";
+  if(["Europe/Madrid","Atlantic/Canary","Africa/Ceuta"].includes(tz)) return "es";
+  return "eu";
 }
 function collectOrder(){
   const v = id => $(id).value.trim();
@@ -393,15 +418,16 @@ function collectOrder(){
   return {
     name:v('ckName'), email:v('ckEmail'), phone:v('ckPhone'),
     serviceId: $('ckService').value, service: s ? s.name[lang] : t("o.other"), price: s ? s.price[lang] : "",
-    mode: $('modeOnsite').checked ? t("ck.onsite") : t("ck.remote"),
-    address: $('modeOnsite').checked ? v('ckAddr') : "",
+    country: $('ckCountry') ? $('ckCountry').selectedOptions[0].textContent : "",
+    mode: ($('modeOnsite').checked && !isAbroad()) ? t("ck.onsite") : t("ck.remote"),
+    address: ($('modeOnsite').checked && !isAbroad()) ? v('ckAddr') : "",
     when:v('ckWhen'), msg:v('ckMsg'), lang
   };
 }
 function orderText(o){
   return [
     `${t("f.name")}: ${o.name}`, `${t("f.email")}: ${o.email}`, o.phone?`${t("f.phone")}: ${o.phone}`:"",
-    `${t("f.service")}: ${o.service}${o.price?` (${o.price})`:""}`, `${t("f.mode")}: ${o.mode}`,
+    `${t("f.service")}: ${o.service}${o.price?` (${o.price})`:""}`, o.country?`${t("f.country")}: ${o.country}`:"", `${t("f.mode")}: ${o.mode}`,
     o.address?`${t("f.addr")}: ${o.address}`:"", o.when?`${t("f.when")}: ${o.when}`:"",
     "", `${t("f.msg")}:`, o.msg
   ].filter((x,i,a)=>x!=="" || (i>0 && a[i-1]!=="")).join("\n");
@@ -409,13 +435,16 @@ function orderText(o){
 function initCheckout(){
   const form = $('ckForm'); if(!form) return;
   $('ckService').addEventListener('change', updateSummary);
+  const cc = $('ckCountry');
+  if(cc){ cc.value = countryFromLocation(); cc.addEventListener('change', updateSummary); }
   document.querySelectorAll('input[name="mode"]').forEach(r=>r.addEventListener('change', updateSummary));
   form.addEventListener('submit', async e=>{
     e.preventDefault();
     const o = collectOrder(), err = $('ckErr');
     if(!o.name || !o.email || !o.msg || !$('ckConsent').checked){ err.textContent=t("ck.err"); return; }
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(o.email)){ err.textContent=t("ck.errEmail"); $('ckEmail').focus(); return; }
-    if($('modeOnsite').checked && !o.address){ err.textContent=t("ck.errAddr"); $('ckAddr').focus(); return; }
+    if(isAbroad() && checkoutService() && !checkoutService().remote){ err.textContent=t("ck.abroadNa"); $('ckService').focus(); return; }
+    if($('modeOnsite').checked && !isAbroad() && !o.address){ err.textContent=t("ck.errAddr"); $('ckAddr').focus(); return; }
     if($('ckHp').value) return; // ochrana proti robotům
     err.textContent = "";
     const btn = $('ckSubmit'); btn.disabled = true; btn.textContent = t("ck.sending");
