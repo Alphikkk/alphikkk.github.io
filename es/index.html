@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corphik – Soporte informático en Praga y alrededores</title>
-<meta name="description" content="Corphik – Soporte informático en Praga y alrededores, y a distancia: PC a medida, instalación de Windows y Linux, reparaciones, seguridad y rediseño web.">
+<meta name="description" content="Corphik – soporte informático en Praga y alrededores y a distancia: montaje de PC a medida, instalación de Windows y Linux, reparaciones, seguridad y rediseño web.">
 <link rel="canonical" href="https://corphik.eu/es/">
 <link rel="alternate" hreflang="cs" href="https://corphik.eu/">
 <link rel="alternate" hreflang="en" href="https://corphik.eu/en/">
@@ -14,11 +14,12 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://corphik.eu/es/">
 <meta property="og:title" content="Corphik – Soporte informático y seguridad">
-<meta property="og:description" content="Corphik – Soporte informático en Praga y alrededores, y a distancia: PC a medida, instalación de Windows y Linux, reparaciones, seguridad y rediseño web.">
+<meta property="og:description" content="Corphik – soporte informático en Praga y alrededores y a distancia: montaje de PC a medida, instalación de Windows y Linux, reparaciones, seguridad y rediseño web.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v=3">
+<link rel="stylesheet" href="/assets/home.css?v=3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -26,10 +27,17 @@
   "name": "Corphik",
   "url": "https://corphik.eu/es/",
   "email": "pospisilal@email.cz",
-  "description": "Corphik es soporte informático en Praga y alrededores, y a distancia: PC a medida, instalación de Windows y Linux, mejoras, diagnóstico y reparación, seguridad y copias de seguridad, rediseño web y ayuda a distancia.",
-  "areaServed": "Praga y alrededores",
-  "knowsLanguage": ["cs", "en", "es"],
-  "founder": { "@type": "Person", "name": "Aleš Pospíšil" }
+  "description": "Corphik ofrece soporte informático en Praga y alrededores y a distancia: montaje de PC a medida, instalación de Windows y Linux, mejoras, diagnóstico y reparación, seguridad y copias de seguridad, rediseño web y ayuda a distancia.",
+  "areaServed": ["Chequia", "España", "Europa"],
+  "knowsLanguage": [
+    "cs",
+    "en",
+    "es"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Aleš Pospíšil"
+  }
 }
 </script>
 </head>
@@ -43,7 +51,7 @@
       <li><a href="/about/" data-i18n="nav.about">Sobre mí</a></li>
       <li><a href="/orders/" class="cta" data-i18n="nav.order">Pedir</a></li>
     </ul>
-    <div class="lang" role="group" aria-label="Language">
+    <div class="lang" role="group" aria-label="Idioma">
       <button type="button" data-lang="cs">CS</button>
       <button type="button" data-lang="en">EN</button>
       <button type="button" data-lang="es">ES</button>
@@ -52,33 +60,34 @@
   </div>
 </header>
 <main>
-  <div class="wrap hero-biz">
-    <div class="who"><span class="avatar">AP</span><span><b>Aleš Pospíšil</b> · <span data-i18n="h.area">Soporte informático en Praga y alrededores, y a distancia</span></span></div>
+  <header class="wrap home-hero">
     <h1 data-i18n="h.title">Un ordenador que simplemente funciona.</h1>
-    <p class="lead" data-i18n="h.lead">Monto, instalo, reparo, protejo y rediseño webs. En persona en Praga y alrededores, o a distancia desde cualquier lugar.</p>
+    <p class="lead" data-i18n="h.lead">Soporte informático y PC a medida.</p>
+    <ul class="regions"><li data-i18n="h.r1">Chequia: en persona o a distancia</li><li class="r2" data-i18n="h.r2">España y Europa: por ahora a distancia</li></ul>
     <div class="links">
       <a class="btn primary" href="/orders/" data-i18n="h.cta">Pedir un servicio</a>
       <a class="btn" href="#sluzby" data-i18n="h.cta2">Qué ofrezco</a>
     </div>
-  </div>
+  </header>
 
-  <section class="block" id="sluzby">
+  <section class="services" id="sluzby">
     <div class="wrap">
-      <h2 data-i18n="s.h">Qué ofrezco</h2>
-      <ul class="svc" id="svcList">
-        <li><div class="txt"><h3><span class="n">PC a medida</span></h3><p>Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo.</p></div><a class="buy" href="/orders/?service=build"><span class="pr">desde 1.000 CZK (≈ 40 €)</span></a></li>
-        <li><div class="txt"><h3><span class="n">Instalación de Windows y Linux</span></h3><p>Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque.</p></div><a class="buy" href="/orders/?service=os"><span class="pr">desde 700 CZK (≈ 28 €)</span></a></li>
-        <li><div class="txt"><h3><span class="n">Mejora y aceleración del PC</span></h3><p>Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte.</p></div><a class="buy" href="/orders/?service=upgrade"><span class="pr">desde 500 CZK (≈ 20 €)</span></a></li>
-        <li><div class="txt"><h3><span class="n">Diagnóstico y reparación</span><span class="remote">También a distancia</span></h3><p>¿El PC no enciende, se cuelga, va lento o hace ruido? Encuentro la causa y lo soluciono.</p></div><a class="buy" href="/orders/?service=fix"><span class="pr">desde 400 CZK (≈ 16 €)</span></a></li>
-        <li><div class="txt"><h3><span class="n">Seguridad y copias de seguridad</span><span class="remote">También a distancia</span></h3><p>Revisión de seguridad, copias de seguridad, actualizaciones y contraseñas seguras.</p></div><a class="buy" href="/orders/?service=sec"><span class="pr">desde 600 CZK (≈ 24 €)</span></a></li>
-        <li><div class="txt"><h3><span class="n">Rediseño web</span><span class="remote">También a distancia</span></h3><p>Convierto una web anticuada en una moderna: nuevo diseño, versión móvil, carga más rápida y seguridad básica.</p></div><a class="buy" href="/orders/?service=web"><span class="pr">desde 3.000 CZK (≈ 120 €)</span></a></li>
-        <li><div class="txt"><h3><span class="n">Ayuda a distancia</span><span class="remote">También a distancia</span></h3><p>Me conecto a tu ordenador por internet y soluciono problemas, ajustes o instalaciones de programas, estés donde estés.</p></div><a class="buy" href="/orders/?service=remote"><span class="pr">400 CZK / hora (≈ 16 €)</span></a></li>
+      <h2 class="big-h reveal" data-i18n="s.big">Todo lo que necesita tu ordenador. En un solo lugar.</h2>
+      <ul class="bento reveal" id="svcList">
+        <li class="tile t-big"><div class="strips" aria-hidden="true"><i style="background-image:url('/assets/img/pc-skrin.webp')"></i><i style="background-image:url('/assets/img/pc-kabely.webp')"></i><i style="background-image:url('/assets/img/pc-rog.webp')"></i></div><h3><span class="n">PC a medida</span></h3><p class="d">Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo.</p><ul class="pc-info"><li><strong>Anticipo para los componentes</strong><span>Pido las piezas en cuanto se paga el anticipo.</span></li><li><strong>Montaje y pruebas en mi casa</strong><span>Monto y pruebo el PC yo mismo.</span></li><li><strong>Te lo llevo a casa</strong><span>Te entrego el equipo ya probado.</span></li></ul><a class="buy" href="/orders/?service=build" aria-label="Pedir: PC a medida, desde 1.000 CZK (≈ 40 €)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">desde 1.000 CZK (≈ 40 €)</span></a></li>
+        <li class="tile"><h3><span class="n">Instalación de Windows y Linux</span></h3><p class="d">Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque.</p><a class="buy" href="/orders/?service=os" aria-label="Pedir: Instalación de Windows y Linux, desde 700 CZK (≈ 28 €)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">desde 700 CZK (≈ 28 €)</span></a></li>
+        <li class="tile"><h3><span class="n">Mejora y aceleración del PC</span></h3><p class="d">Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte.</p><a class="buy" href="/orders/?service=upgrade" aria-label="Pedir: Mejora y aceleración del PC, desde 500 CZK (≈ 20 €)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">desde 500 CZK (≈ 20 €)</span></a></li>
+        <li class="tile"><h3><span class="n">Diagnóstico y reparación</span><span class="remote">También a distancia</span></h3><p class="d">¿El PC no enciende, se cuelga, va lento o hace ruido? Encuentro la causa y lo soluciono.</p><a class="buy" href="/orders/?service=fix" aria-label="Pedir: Diagnóstico y reparación, desde 400 CZK (≈ 16 €)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">desde 400 CZK (≈ 16 €)</span></a></li>
+        <li class="tile"><h3><span class="n">Seguridad y copias de seguridad</span><span class="remote">También a distancia</span></h3><p class="d">Revisión de seguridad, copias de seguridad, actualizaciones y contraseñas seguras.</p><a class="buy" href="/orders/?service=sec" aria-label="Pedir: Seguridad y copias de seguridad, desde 600 CZK (≈ 24 €)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">desde 600 CZK (≈ 24 €)</span></a></li>
+        <li class="tile"><h3><span class="n">Rediseño web</span><span class="remote">También a distancia</span></h3><p class="d">Convierto una web anticuada en una moderna: nuevo diseño, versión móvil, carga más rápida y seguridad básica.</p><a class="buy" href="/orders/?service=web" aria-label="Pedir: Rediseño web, desde 3.000 CZK (≈ 120 €)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">desde 3.000 CZK (≈ 120 €)</span></a></li>
+        <li class="tile"><h3><span class="n">Ayuda a distancia</span><span class="remote">También a distancia</span></h3><p class="d">Me conecto a tu ordenador por internet y soluciono problemas, ajustes o instalaciones de programas, estés donde estés.</p><a class="buy" href="/orders/?service=remote" aria-label="Pedir: Ayuda a distancia, 400 CZK / hora (≈ 16 €)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">400 CZK / hora (≈ 16 €)</span></a></li>
       </ul>
     </div>
   </section>
-  <section class="block" id="postup">
-    <div class="wrap">
-      <h2 data-i18n="p.h">Cómo funciona</h2>
+
+  <section id="postup">
+    <div class="wrap reveal">
+      <h2 class="big-h" data-i18n="p.h">Cómo funciona</h2>
       <ol class="steps">
         <li><h3 data-i18n="p.1h">Haces el pedido</h3><p data-i18n="p.1p">Rellenas un formulario corto y describes lo que necesitas.</p></li>
         <li><h3 data-i18n="p.2h">Te contacto</h3><p data-i18n="p.2p">Acordamos los detalles, el precio y la fecha.</p></li>
@@ -86,8 +95,16 @@
       </ol>
     </div>
   </section>
+
+  <section class="cta-end">
+    <div class="wrap reveal">
+      <h2 data-i18n="cta.h">Manos a la obra.</h2>
+      <p data-i18n="cta.p">Cuéntame qué necesitas. Te respondo lo antes posible.</p>
+      <a class="btn primary" href="/orders/" data-i18n="h.cta">Pedir un servicio</a>
+    </div>
+  </section>
 </main>
 <footer><div class="wrap"><span>© <span class="year">2026</span> Corphik · Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contacto</span>: <a class="mail" href="mailto:pospisilal@email.cz">pospisilal@email.cz</a></span></div></footer>
-<script src="/assets/app.js?v=2"></script>
+<script src="/assets/app.js?v=5"></script>
 </body>
 </html>
