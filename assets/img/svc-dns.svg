@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none" font-family="ui-monospace,Consolas,monospace">
+<g stroke="#4fb3cf" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="4 5">
+<path d="M200 150 L80 60"/><path d="M200 150 L320 60"/><path d="M200 150 L60 170"/><path d="M200 150 L340 170"/><path d="M200 150 L130 255"/><path d="M200 150 L280 255"/></g>
+<circle cx="200" cy="150" r="46" fill="#16323b" stroke="#4fb3cf" stroke-width="2"/>
+<ellipse cx="200" cy="150" rx="20" ry="46" stroke="#4fb3cf" stroke-opacity=".7" stroke-width="1.5"/>
+<path d="M156 135h88M156 165h88M154 150h92" stroke="#4fb3cf" stroke-opacity=".7" stroke-width="1.5"/>
+<g font-size="15" font-weight="700" text-anchor="middle">
+<rect x="50" y="44" width="60" height="30" rx="8" fill="#1d2b31" stroke="#4fb3cf"/><text x="80" y="64" fill="#8fd3e8">A</text>
+<rect x="282" y="44" width="76" height="30" rx="8" fill="#1d2b31" stroke="#4fb3cf"/><text x="320" y="64" fill="#8fd3e8">AAAA</text>
+<rect x="22" y="154" width="76" height="30" rx="8" fill="#1d2b31" stroke="#4fb3cf"/><text x="60" y="174" fill="#8fd3e8">CNAME</text>
+<rect x="310" y="154" width="60" height="30" rx="8" fill="#1d2b31" stroke="#e8b04f"/><text x="340" y="174" fill="#f0cc80">MX</text>
+<rect x="96" y="240" width="68" height="30" rx="8" fill="#1d2b31" stroke="#4fb3cf"/><text x="130" y="260" fill="#8fd3e8">TXT</text>
+<rect x="246" y="240" width="68" height="30" rx="8" fill="#1d2b31" stroke="#4fb3cf"/><text x="280" y="260" fill="#8fd3e8">NS</text></g>
+</svg>

@@ -4,24 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corphik – IT support in the Prague area</title>
-<meta name="description" content="Corphik – IT support in the Prague area and remotely: custom PC builds, Windows and Linux installs, repairs, security and website redesign.">
+<meta name="description" content="Corphik – IT support in the Prague area and remotely: custom PC builds, Windows and Linux installs, repairs, DNS setup and website redesign.">
 <link rel="canonical" href="https://corphik.eu/en/">
 <link rel="alternate" hreflang="cs" href="https://corphik.eu/">
 <link rel="alternate" hreflang="en" href="https://corphik.eu/en/">
 <link rel="alternate" hreflang="es" href="https://corphik.eu/es/">
 <link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/">
-<link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://corphik.eu/en/">
 <meta property="og:title" content="Corphik – IT support and security">
-<meta property="og:description" content="Corphik – IT support in the Prague area and remotely: custom PC builds, Windows and Linux installs, repairs, security and website redesign.">
+<meta property="og:description" content="Corphik – IT support in the Prague area and remotely: custom PC builds, Windows and Linux installs, repairs, DNS setup and website redesign.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=4">
-<link rel="stylesheet" href="/assets/home.css?v=3">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/assets/style.css?v=6">
+<link rel="stylesheet" href="/assets/home.css?v=4">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -29,7 +31,9 @@
   "name": "Corphik",
   "url": "https://corphik.eu/en/",
   "email": "ales@corphik.eu",
-  "description": "Corphik offers IT support in the Prague area and remotely: custom PC builds, Windows and Linux installation, upgrades, diagnostics and repairs, security and backups, website redesign and remote help.",
+  "logo": "https://corphik.eu/favicon-512.png",
+  "sameAs": ["https://www.instagram.com/corphik", "https://www.linkedin.com/company/corphik"],
+  "description": "Corphik offers IT support in the Prague area and remotely: custom PC builds, Windows and Linux installation, upgrades, diagnostics and repairs, domain and DNS setup, website redesign and remote help.",
   "areaServed": ["Czechia", "Spain", "Europe"],
   "knowsLanguage": [
     "cs",
@@ -77,10 +81,10 @@
       <h2 class="big-h reveal" data-i18n="s.big">Everything your computer needs. In one place.</h2>
       <ul class="bento reveal" id="svcList">
         <li class="tile t-big"><div class="strips" aria-hidden="true"><i style="background-image:url('/assets/img/pc-skrin.webp')"></i><i style="background-image:url('/assets/img/pc-kabely.webp')"></i><i style="background-image:url('/assets/img/pc-rog.webp')"></i></div><h3><span class="n">Custom PC build</span></h3><p class="d">I pick parts for your budget and needs (gaming, work, school), then build and test the PC.</p><ul class="pc-info"><li><strong>Deposit for parts up front</strong><span>I order the parts once the deposit is paid.</span></li><li><strong>Built and tested at my place</strong><span>I assemble and test the PC myself.</span></li><li><strong>Delivered to your door</strong><span>The tested PC is brought right to you. Free around Prague, further by arrangement.</span></li></ul><a class="buy" href="/orders/?service=build" aria-label="Order: Custom PC build, from CZK 1,500 (≈ €60)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 1,500 (≈ €60)</span></a></li>
-        <li class="tile"><h3><span class="n">Windows &amp; Linux installation</span></h3><p class="d">Clean OS install, drivers, updates and setup so everything works from the first boot. Windows licence not included.</p><a class="buy" href="/orders/?service=os" aria-label="Order: Windows &amp; Linux installation, from CZK 700 (≈ €28)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 700 (≈ €28)</span></a></li>
-        <li class="tile"><h3><span class="n">PC upgrade &amp; speed-up</span></h3><p class="d">New SSD, RAM or graphics card, cleaning and fresh thermal paste. Parts are paid separately.</p><a class="buy" href="/orders/?service=upgrade" aria-label="Order: PC upgrade &amp; speed-up, from CZK 500 (≈ €20)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 500 (≈ €20)</span></a></li>
-        <li class="tile"><h3><span class="n">Diagnostics &amp; repairs</span><span class="remote">Partly remote</span></h3><p class="d">PC won&#x27;t start, crashes, runs slow or loud? I&#x27;ll find the cause and fix it. The diagnostics fee is deducted from the repair price.</p><a class="buy" href="/orders/?service=fix" aria-label="Order: Diagnostics &amp; repairs, from CZK 400 (≈ €16)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 400 (≈ €16)</span></a></li>
-        <li class="tile"><h3><span class="n">Security &amp; backups</span><span class="remote">Remote available</span></h3><p class="d">Security check-up, backups, updates and safe password setup.</p><a class="buy" href="/orders/?service=sec" aria-label="Order: Security &amp; backups, from CZK 800 (≈ €32)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 800 (≈ €32)</span></a></li>
+        <li class="tile"><div class="tmedia tm-split" aria-hidden="true"><div class="tm-win" style="background-image:url('/assets/img/svc-windows.webp')"></div><div class="tm-lin"><span>Linux</span></div><svg class="tm-diag" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0"/></svg></div><h3><span class="n">Windows &amp; Linux installation</span></h3><p class="d">Clean OS install, drivers, updates and setup so everything works from the first boot. Windows licence not included.</p><a class="buy" href="/orders/?service=os" aria-label="Order: Windows &amp; Linux installation, from CZK 700 (≈ €28)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 700 (≈ €28)</span></a></li>
+        <li class="tile"><div class="tmedia tm-img tm-upgrade" aria-hidden="true"><img src="/assets/img/svc-upgrade.webp" alt="" loading="lazy"></div><h3><span class="n">PC upgrade &amp; speed-up</span></h3><p class="d">New SSD, RAM or graphics card, cleaning and fresh thermal paste. Parts are paid separately.</p><a class="buy" href="/orders/?service=upgrade" aria-label="Order: PC upgrade &amp; speed-up, from CZK 500 (≈ €20)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 500 (≈ €20)</span></a></li>
+        <li class="tile"><div class="tmedia tm-img tm-bsod" aria-hidden="true"><img src="/assets/img/svc-bsod.webp" alt="" loading="lazy"></div><h3><span class="n">Diagnostics &amp; repairs</span><span class="remote">Partly remote</span></h3><p class="d">PC won&#x27;t start, crashes, runs slow or loud? I&#x27;ll find the cause and fix it. The diagnostics fee is deducted from the repair price.</p><a class="buy" href="/orders/?service=fix" aria-label="Order: Diagnostics &amp; repairs, from CZK 400 (≈ €16)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 400 (≈ €16)</span></a></li>
+        <li class="tile"><div class="tmedia tm-img tm-dns" aria-hidden="true"><img src="/assets/img/svc-dns.svg" alt="" loading="lazy"></div><h3><span class="n">Domain &amp; DNS setup</span><span class="remote">Remote only</span></h3><p class="d">A, AAAA, CNAME, MX and TXT records (SPF, DKIM, DMARC). I&#39;ll connect your domain to your website and email.</p><a class="buy" href="/orders/?service=dns" aria-label="Order: Domain & DNS setup, from CZK 800 (≈ €32)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 800 (≈ €32)</span></a></li>
         <li class="tile"><h3><span class="n">Website redesign</span><span class="remote">Remote available</span></h3><p class="d">I turn an outdated website into a modern one: fresh design, mobile version, faster loading and basic security.</p><a class="buy" href="/orders/?service=web" aria-label="Order: Website redesign, from CZK 3,499 (≈ €140)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">from CZK 3,499 (≈ €140)</span></a></li>
         <li class="tile"><h3><span class="n">Remote help</span></h3><p class="d">I connect to your computer over the internet and sort out problems, settings or software installs – wherever you are. Billed per started 15 minutes.</p><a class="buy" href="/orders/?service=remote" aria-label="Order: Remote help, CZK 400 / hour (≈ €16)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg><span class="pr">CZK 400 / hour (≈ €16)</span></a></li>
       </ul>
@@ -106,7 +110,7 @@
     </div>
   </section>
 </main>
-<footer><div class="wrap"><span>© <span class="year">2026</span> Corphik · Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contact</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div></footer>
-<script src="/assets/app.js?v=7"></script>
+<footer><div class="wrap"><span>© <span class="year">2026</span> Corphik · Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contact</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span><span class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></span></div></footer>
+<script src="/assets/app.js?v=8"></script>
 </body>
 </html>

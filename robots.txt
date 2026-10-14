@@ -20,4 +20,4 @@ User-agent: Claude-Web
 Allow: /
 
 # Odkaz na vaši mapu stránek
-Sitemap: https://corphik.eu
+Sitemap: https://corphik.eu/sitemap.xml

@@ -33,10 +33,10 @@ ES: Soporte informático para particulares, estudiantes y pequeñas empresas en 
   Some issues can be diagnosed remotely.
   The diagnostic fee is deducted from the final repair cost when the repair goes ahead.
 
-- Security & backups / Zabezpečení a zálohy / Seguridad y copias
+- Domain & DNS setup / Nastavení domény a DNS / Configuración de dominio y DNS
   800 CZK+.
-  Security check, backup setup, system updates, password guidance, and practical protection recommendations.
-  In person or remote.
+  DNS records (A, AAAA, CNAME, MX, TXT incl. SPF, DKIM, DMARC), connecting a domain to a website and email.
+  Remote only.
 
 - Website redesign / Redesign webu / Rediseño web
   3,499 CZK+.

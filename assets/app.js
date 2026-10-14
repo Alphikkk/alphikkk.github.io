@@ -10,6 +10,8 @@ const WEB3FORMS_KEY = "2d1be97d-5752-427f-bbf3-e49d1acd0b37";
 
 /* ===== SLUŽBY A CENY – uprav podle sebe (remote:true = jde i na dálku) =====
    tag:"partial" = štítek „Částečně na dálku“, tag:false = štítek se nezobrazí (služba jde na dálku dál)
+   onlyRemote:true = jde jen na dálku (štítek „Pouze na dálku“, v objednávce nejde zvolit „Osobně“)
+   media = obrázek v pozadí dlaždice (viz TILE_MEDIA níže)
    POZOR: když tu něco změníš, uprav stejný text i v index.html, en/index.html a es/index.html */
 const SERVICES = [
  { id:"build", remote:false,
@@ -18,30 +20,30 @@ const SERVICES = [
    desc:{cs:"Vyberu komponenty podle rozpočtu a účelu (hry, práce, škola), PC sestavím a otestuju.",
          en:"I pick parts for your budget and needs (gaming, work, school), then build and test the PC.",
          es:"Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo."} },
- { id:"os", remote:false,
+ { id:"os", remote:false, media:"split",
    price:{cs:"od 700 Kč",en:"from CZK 700 (≈ €28)",es:"desde 700 CZK (≈ 28 €)"},
    name:{cs:"Instalace Windows a Linuxu",en:"Windows & Linux installation",es:"Instalación de Windows y Linux"},
    desc:{cs:"Čistá instalace systému, ovladače, aktualizace a nastavení, aby vše fungovalo od prvního spuštění. Licence Windows není v ceně.",
          en:"Clean OS install, drivers, updates and setup so everything works from the first boot. Windows licence not included.",
          es:"Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque. La licencia de Windows no está incluida."} },
- { id:"upgrade", remote:false,
+ { id:"upgrade", remote:false, media:"upgrade",
    price:{cs:"od 500 Kč",en:"from CZK 500 (≈ €20)",es:"desde 500 CZK (≈ 20 €)"},
    name:{cs:"Upgrade a zrychlení PC",en:"PC upgrade & speed-up",es:"Mejora y aceleración del PC"},
    desc:{cs:"Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Díly se platí zvlášť.",
          en:"New SSD, RAM or graphics card, cleaning and fresh thermal paste. Parts are paid separately.",
          es:"Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte."} },
- { id:"fix", remote:true, tag:"partial",
+ { id:"fix", remote:true, tag:"partial", media:"bsod",
    price:{cs:"od 400 Kč",en:"from CZK 400 (≈ €16)",es:"desde 400 CZK (≈ 16 €)"},
    name:{cs:"Diagnostika a opravy",en:"Diagnostics & repairs",es:"Diagnóstico y reparación"},
    desc:{cs:"PC nejde zapnout, padá, je pomalé nebo hlučné? Najdu příčinu a vyřeším ji. Cena diagnostiky se odečte z opravy.",
          en:"PC won't start, crashes, runs slow or loud? I'll find the cause and fix it. The diagnostics fee is deducted from the repair price.",
          es:"¿El PC no enciende, se cuelga, va lento o hace ruido? Encuentro la causa y lo soluciono. El coste del diagnóstico se descuenta de la reparación."} },
- { id:"sec", remote:true,
+ { id:"dns", remote:true, onlyRemote:true, media:"dns",
    price:{cs:"od 800 Kč",en:"from CZK 800 (≈ €32)",es:"desde 800 CZK (≈ 32 €)"},
-   name:{cs:"Zabezpečení a zálohy",en:"Security & backups",es:"Seguridad y copias de seguridad"},
-   desc:{cs:"Kontrola zabezpečení počítače, nastavení záloh, aktualizací a bezpečných hesel.",
-         en:"Security check-up, backups, updates and safe password setup.",
-         es:"Revisión de seguridad, copias de seguridad, actualizaciones y contraseñas seguras."} },
+   name:{cs:"Nastavení domény a DNS",en:"Domain & DNS setup",es:"Configuración de dominio y DNS"},
+   desc:{cs:"Záznamy A, AAAA, CNAME, MX a TXT (SPF, DKIM, DMARC). Propojím doménu s webem i e-mailem.",
+         en:"A, AAAA, CNAME, MX and TXT records (SPF, DKIM, DMARC). I'll connect your domain to your website and email.",
+         es:"Registros A, AAAA, CNAME, MX y TXT (SPF, DKIM, DMARC). Conecto tu dominio con tu web y tu correo."} },
  { id:"web", remote:true,
    price:{cs:"od 3 499 Kč",en:"from CZK 3,499 (≈ €140)",es:"desde 3.499 CZK (≈ 140 €)"},
    name:{cs:"Redesign webu",en:"Website redesign",es:"Rediseño web"},
@@ -81,7 +83,8 @@ cs:{
  "h.title":"Počítač, který prostě funguje.",
  "h.lead":"Sestavím, nainstaluju, opravím, zabezpečím a předělám web. Osobně v Praze a okolí, nebo na dálku odkudkoli.",
  "h.cta":"Objednat službu","h.cta2":"Co nabízím",
- "s.h":"Co nabízím","s.remote":"I na dálku","s.partial":"Částečně na dálku","s.order":"Objednat",
+ "s.h":"Co nabízím","s.remote":"I na dálku","s.partial":"Částečně na dálku","s.only":"Pouze na dálku",
+ "wip.h":"Web je ve výstavbě","wip.p":"Objednávky zatím řeším individuálně – v případě zájmu mě nejdřív kontaktuj: <a href=\"mailto:ales@corphik.eu\">ales@corphik.eu</a>","wip.close":"Zavřít upozornění","s.order":"Objednat",
  "p.h":"Jak to probíhá",
  "p.1h":"Objednáš","p.1p":"Vyplníš krátký formulář a popíšeš, co potřebuješ.",
  "p.2h":"Ozvu se","p.2p":"Domluvíme se na detailech, ceně a termínu.",
@@ -132,7 +135,8 @@ en:{
  "h.title":"A computer that just works.",
  "h.lead":"I build, install, repair, secure and redesign websites. In person around Prague, or remotely from anywhere.",
  "h.cta":"Order a service","h.cta2":"What I offer",
- "s.h":"What I offer","s.remote":"Remote available","s.partial":"Partly remote","s.order":"Order",
+ "s.h":"What I offer","s.remote":"Remote available","s.partial":"Partly remote","s.only":"Remote only",
+ "wip.h":"Site under construction","wip.p":"For now I handle orders individually – if you're interested, get in touch first: <a href=\"mailto:ales@corphik.eu\">ales@corphik.eu</a>","wip.close":"Close notice","s.order":"Order",
  "p.h":"How it works",
  "p.1h":"You order","p.1p":"Fill in a short form and describe what you need.",
  "p.2h":"I get back to you","p.2p":"We agree on the details, price and date.",
@@ -183,7 +187,8 @@ es:{
  "h.title":"Un ordenador que simplemente funciona.",
  "h.lead":"Monto, instalo, reparo, protejo y rediseño webs. En persona en Praga y alrededores, o a distancia desde cualquier lugar.",
  "h.cta":"Pedir un servicio","h.cta2":"Qué ofrezco",
- "s.h":"Qué ofrezco","s.remote":"También a distancia","s.partial":"Parcialmente a distancia","s.order":"Pedir",
+ "s.h":"Qué ofrezco","s.remote":"También a distancia","s.partial":"Parcialmente a distancia","s.only":"Solo a distancia",
+ "wip.h":"Web en construcción","wip.p":"Por ahora gestiono los pedidos de forma individual: si te interesa, escríbeme primero a <a href=\"mailto:ales@corphik.eu\">ales@corphik.eu</a>","wip.close":"Cerrar aviso","s.order":"Pedir",
  "p.h":"Cómo funciona",
  "p.1h":"Haces el pedido","p.1p":"Rellenas un formulario corto y describes lo que necesitas.",
  "p.2h":"Te contacto","p.2p":"Acordamos los detalles, el precio y la fecha.",
@@ -324,6 +329,13 @@ const findService = id => SERVICES.find(s => s.id === id);
 
 /* ===== Služby (úvod) – dlaždice; "build" je velká s fotkami a podmínkami ===== */
 const BUILD_IMGS = ["/assets/img/pc-skrin.webp","/assets/img/pc-kabely.webp","/assets/img/pc-rog.webp"];
+/* Obrázky v pozadí dlaždic (soubory v /assets/img/) */
+const TILE_MEDIA = {
+  split:`<div class="tmedia tm-split" aria-hidden="true"><div class="tm-win" style="background-image:url('/assets/img/svc-windows.webp')"></div><div class="tm-lin"><span>Linux</span></div><svg class="tm-diag" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0"/></svg></div>`,
+  upgrade:`<div class="tmedia tm-img tm-upgrade" aria-hidden="true"><img src="/assets/img/svc-upgrade.webp" alt="" loading="lazy"></div>`,
+  bsod:`<div class="tmedia tm-img tm-bsod" aria-hidden="true"><img src="/assets/img/svc-bsod.webp" alt="" loading="lazy"></div>`,
+  dns:`<div class="tmedia tm-img tm-dns" aria-hidden="true"><img src="/assets/img/svc-dns.svg" alt="" loading="lazy"></div>`
+};
 function renderServices(){
   const ul = $('svcList'); if(!ul) return;
   ul.innerHTML = "";
@@ -333,11 +345,12 @@ function renderServices(){
     li.className = big ? "tile t-big" : "tile";
     li.innerHTML =
       (big ? `<div class="strips" aria-hidden="true">${BUILD_IMGS.map(u=>`<i style="background-image:url('${u}')"></i>`).join("")}</div>` : "")
+      + (TILE_MEDIA[s.media] || "")
       + `<h3><span class="n"></span></h3><p class="d"></p>`
       + (big ? `<ul class="pc-info">${[1,2,3].map(i=>`<li><strong>${t("bd."+i+"h")}</strong><span>${t("bd."+i+"p")}</span></li>`).join("")}</ul>` : "")
       + `<a class="buy">${CART}<span class="pr"></span></a>`;
     li.querySelector('.n').textContent = s.name[lang];
-    if(s.remote && s.tag!==false){ const r=document.createElement('span'); r.className='remote'; r.textContent=t(s.tag==="partial" ? "s.partial" : "s.remote"); li.querySelector('h3').appendChild(r); }
+    if(s.remote && s.tag!==false){ const r=document.createElement('span'); r.className='remote'; r.textContent=t(s.onlyRemote ? "s.only" : s.tag==="partial" ? "s.partial" : "s.remote"); li.querySelector('h3').appendChild(r); }
     li.querySelector('.d').textContent = s.desc[lang];
     const a = li.querySelector('.buy');
     a.href = "/orders/?service=" + encodeURIComponent(s.id);
@@ -398,11 +411,12 @@ function updateSummary(){
   const abroad = isAbroad();
   const rem = $('modeRemote'), ons = $('modeOnsite');
   rem.disabled = !remoteOk;
-  ons.disabled = abroad;
+  const onlyRemote = !!s && !!s.onlyRemote;
+  ons.disabled = abroad || onlyRemote;
   $('remoteNa').hidden = remoteOk || abroad;
   const ab = $('abroadNote');
   if(ab){ ab.hidden = !abroad; ab.textContent = abroad ? t(remoteOk ? "ck.abroadRemote" : "ck.abroadNa") : ""; ab.classList.toggle('warn', abroad && !remoteOk); }
-  if(abroad && remoteOk) rem.checked = true;
+  if((abroad || onlyRemote) && remoteOk) rem.checked = true;
   else if(!remoteOk) ons.checked = true;
   $('addrWrap').hidden = abroad || !ons.checked;
 }
@@ -480,7 +494,7 @@ function setLang(l, remember){
   lang = T[l] ? l : "en"; root.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el=>{ el.innerHTML = t(el.dataset.i18n); });
   document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.lang===lang));
-  renderServices(); renderPortfolio(); renderCheckout(); renderThanks(); themeLabel();
+  renderServices(); renderPortfolio(); renderCheckout(); renderThanks(); renderWip(); themeLabel();
   const titles = {home:"h.area", portfolio:"pf.h", about:"ab.h", orders:"ck.title", thanks:"ck.title"};
   document.title = "Corphik – " + (PAGE==="home" ? t("h.area").split(",")[0] : t(titles[PAGE]||"h.area").replace(/<[^>]+>/g,""));
   if(remember){ try{ localStorage.setItem('lang', lang); }catch(e){} }
@@ -514,6 +528,23 @@ if(revealEls.length){
     const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }),{threshold:.12});
     revealEls.forEach(el=>io.observe(el));
   }
+}
+
+/* ===== Upozornění „Web je ve výstavbě“ (všechny stránky, dá se zavřít) ===== */
+function renderWip(){
+  let box = $('wipNote');
+  let closed = false; try{ closed = sessionStorage.getItem('wipClosed')==="1"; }catch(_){}
+  if(closed){ if(box) box.remove(); return; }
+  if(!box){
+    box = document.createElement('aside');
+    box.id = 'wipNote'; box.className = 'wip'; box.setAttribute('role','note');
+    box.innerHTML = `<button type="button" class="wip-x">×</button><strong></strong><p></p>`;
+    box.querySelector('.wip-x').addEventListener('click',()=>{ try{ sessionStorage.setItem('wipClosed',"1"); }catch(_){} box.remove(); });
+    document.body.appendChild(box);
+  }
+  box.querySelector('strong').textContent = t("wip.h");
+  box.querySelector('p').innerHTML = t("wip.p");
+  const x = box.querySelector('.wip-x'); x.setAttribute('aria-label', t("wip.close")); x.title = t("wip.close");
 }
 
 /* ===== Start ===== */

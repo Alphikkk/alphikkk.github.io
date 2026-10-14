@@ -57,6 +57,26 @@
 .pc-info strong{display:block;margin-bottom:.2rem;font-weight:700}
 .pc-info span{color:var(--muted)}
 
+/* ---------- obrázky v pozadí dlaždic ---------- */
+.tile{position:relative;overflow:hidden;isolation:isolate}
+.tile > *:not(.tmedia):not(.strips){position:relative;z-index:1}
+.tmedia{position:absolute;inset:0;z-index:0;pointer-events:none}
+.tm-img img{position:absolute;display:block}
+.tm-img::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,var(--surface) 38%,color-mix(in srgb,var(--surface) 55%,transparent) 75%,color-mix(in srgb,var(--surface) 25%,transparent))}
+.tm-upgrade img{right:-8%;bottom:-8%;width:72%;opacity:.8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tm-upgrade img{filter:invert(1) hue-rotate(180deg)}}
+:root[data-theme="dark"] .tm-upgrade img{filter:invert(1) hue-rotate(180deg)}
+.tm-bsod img{right:0;top:0;height:100%;width:60%;object-fit:cover;object-position:right center;opacity:.5}
+.tm-dns img{right:-14%;bottom:-10%;width:95%;opacity:.8}
+/* Windows / Linux: rozdělení po diagonále z levého dolního do pravého horního rohu */
+.tm-win,.tm-lin{position:absolute;inset:0}
+.tm-win{clip-path:polygon(0 0,100% 0,0 100%);background-size:cover;background-position:80% 40%;opacity:.55}
+.tm-lin{clip-path:polygon(100% 0,100% 100%,0 100%);background:#1f4a3c}
+.tm-lin span{position:absolute;right:7%;bottom:27%;font-weight:900;letter-spacing:-.03em;font-size:clamp(1.7rem,3.2vw,2.4rem);line-height:1;color:#9fe0bf;opacity:.9}
+.tm-diag{position:absolute;inset:0;width:100%;height:100%}
+.tm-diag line{stroke:var(--accent);stroke-opacity:.35;stroke-width:1;vector-effect:non-scaling-stroke}
+.tm-split::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,color-mix(in srgb,var(--surface) 85%,transparent) 25%,color-mix(in srgb,var(--surface) 15%,transparent) 60%,transparent)}
+
 /* ---------- postup ---------- */
 [data-page="home"] #postup{padding:1rem 0 1rem}
 [data-page="home"] #postup .steps{margin-top:2rem;gap:1.25rem}
@@ -111,6 +131,8 @@
   .t-big h3{font-size:1.45rem}
   .t-big .d{font-size:.92rem}
   .pc-info{gap:.35rem;margin:.6rem 0 .3rem}
+  .tm-img img{opacity:.45}
+  .tm-lin span{display:none}
   .pc-info li{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;padding:0 0 0 1.35rem;position:relative;font-size:.88rem}
   .pc-info li::before{content:"✓";position:absolute;left:0;top:0;color:var(--accent);font-weight:700}
   .pc-info strong{margin:0;font-weight:600}
