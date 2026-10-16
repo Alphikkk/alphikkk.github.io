@@ -11,8 +11,9 @@ const WEB3FORMS_KEY = "2d1be97d-5752-427f-bbf3-e49d1acd0b37";
 /* ===== SLUŽBY A CENY – uprav podle sebe (remote:true = jde i na dálku) =====
    tag:"partial" = štítek „Částečně na dálku“, tag:false = štítek se nezobrazí (služba jde na dálku dál)
    onlyRemote:true = jde jen na dálku (štítek „Pouze na dálku“, v objednávce nejde zvolit „Osobně“)
-   media = obrázek v pozadí dlaždice (viz TILE_MEDIA níže)
-   POZOR: když tu něco změníš, uprav stejný text i v index.html, en/index.html a es/index.html */
+   build = hlavní služba nahoře s fotkami (BUILD_IMGS), ostatní se vypíšou jako ceník s ikonkou (SVC_ICONS)
+   POZOR: když tu něco změníš, uprav stejný text i v index.html, en/index.html a es/index.html
+   (texty v HTML jsou pro Google; po načtení je skript stejně vykreslí znovu) */
 const SERVICES = [
  { id:"build", remote:false,
    price:{cs:"od 1 500 Kč",en:"from CZK 1,500 (≈ €60)",es:"desde 1.500 CZK (≈ 60 €)"},
@@ -20,25 +21,25 @@ const SERVICES = [
    desc:{cs:"Vyberu komponenty podle rozpočtu a účelu (hry, práce, škola), PC sestavím a otestuju.",
          en:"I pick parts for your budget and needs (gaming, work, school), then build and test the PC.",
          es:"Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo."} },
- { id:"os", remote:false, media:"split",
+ { id:"os", remote:false,
    price:{cs:"od 700 Kč",en:"from CZK 700 (≈ €28)",es:"desde 700 CZK (≈ 28 €)"},
    name:{cs:"Instalace Windows a Linuxu",en:"Windows & Linux installation",es:"Instalación de Windows y Linux"},
    desc:{cs:"Čistá instalace systému, ovladače, aktualizace a nastavení, aby vše fungovalo od prvního spuštění. Licence Windows není v ceně.",
          en:"Clean OS install, drivers, updates and setup so everything works from the first boot. Windows licence not included.",
          es:"Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque. La licencia de Windows no está incluida."} },
- { id:"upgrade", remote:false, media:"upgrade",
+ { id:"upgrade", remote:false,
    price:{cs:"od 500 Kč",en:"from CZK 500 (≈ €20)",es:"desde 500 CZK (≈ 20 €)"},
    name:{cs:"Upgrade a zrychlení PC",en:"PC upgrade & speed-up",es:"Mejora y aceleración del PC"},
    desc:{cs:"Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Díly se platí zvlášť.",
          en:"New SSD, RAM or graphics card, cleaning and fresh thermal paste. Parts are paid separately.",
          es:"Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte."} },
- { id:"fix", remote:true, tag:"partial", media:"bsod",
+ { id:"fix", remote:true, tag:"partial",
    price:{cs:"od 400 Kč",en:"from CZK 400 (≈ €16)",es:"desde 400 CZK (≈ 16 €)"},
    name:{cs:"Diagnostika a opravy",en:"Diagnostics & repairs",es:"Diagnóstico y reparación"},
    desc:{cs:"PC nejde zapnout, padá, je pomalé nebo hlučné? Najdu příčinu a vyřeším ji. Cena diagnostiky se odečte z opravy.",
          en:"PC won't start, crashes, runs slow or loud? I'll find the cause and fix it. The diagnostics fee is deducted from the repair price.",
          es:"¿El PC no enciende, se cuelga, va lento o hace ruido? Encuentro la causa y lo soluciono. El coste del diagnóstico se descuenta de la reparación."} },
- { id:"dns", remote:true, onlyRemote:true, media:"dns",
+ { id:"dns", remote:true, onlyRemote:true,
    price:{cs:"od 800 Kč",en:"from CZK 800 (≈ €32)",es:"desde 800 CZK (≈ 32 €)"},
    name:{cs:"Nastavení domény a DNS",en:"Domain & DNS setup",es:"Configuración de dominio y DNS"},
    desc:{cs:"Záznamy A, AAAA, CNAME, MX a TXT (SPF, DKIM, DMARC). Propojím doménu s webem i e-mailem.",
@@ -80,7 +81,7 @@ cs:{
  "nav.portfolio":"Portfolio","pf.h":"Portfolio","pf.all":"Vše","pf.web":"Weby","pf.pc":"Počítače","pf.wip":"Ve vývoji","pf.view":"Otevřít",
  "nav.home":"Služby","nav.about":"O mně","nav.order":"Objednat","theme.dark":"Přepnout na tmavý režim","theme.light":"Přepnout na světlý režim",
  "h.area":"IT podpora v Praze a okolí, i na dálku",
- "h.title":"Počítač, který prostě funguje.",
+ "h.title":"Výkon na oběžné dráze.",
  "h.lead":"Sestavím, nainstaluju, opravím, zabezpečím a předělám web. Osobně v Praze a okolí, nebo na dálku odkudkoli.",
  "h.cta":"Objednat službu","h.cta2":"Co nabízím",
  "s.h":"Co nabízím","s.remote":"I na dálku","s.partial":"Částečně na dálku","s.only":"Pouze na dálku",
@@ -132,7 +133,7 @@ en:{
  "nav.portfolio":"Portfolio","pf.h":"Portfolio","pf.all":"All","pf.web":"Websites","pf.pc":"PCs","pf.wip":"In progress","pf.view":"Open",
  "nav.home":"Services","nav.about":"About me","nav.order":"Order","theme.dark":"Switch to dark mode","theme.light":"Switch to light mode",
  "h.area":"IT support in the Prague area, and remotely",
- "h.title":"A computer that just works.",
+ "h.title":"Performance in orbit.",
  "h.lead":"I build, install, repair, secure and redesign websites. In person around Prague, or remotely from anywhere.",
  "h.cta":"Order a service","h.cta2":"What I offer",
  "s.h":"What I offer","s.remote":"Remote available","s.partial":"Partly remote","s.only":"Remote only",
@@ -184,7 +185,7 @@ es:{
  "nav.portfolio":"Portafolio","pf.h":"Portafolio","pf.all":"Todo","pf.web":"Webs","pf.pc":"Ordenadores","pf.wip":"En desarrollo","pf.view":"Abrir",
  "nav.home":"Servicios","nav.about":"Sobre mí","nav.order":"Pedir","theme.dark":"Cambiar a modo oscuro","theme.light":"Cambiar a modo claro",
  "h.area":"Soporte informático en Praga y alrededores, y a distancia",
- "h.title":"Un ordenador que simplemente funciona.",
+ "h.title":"Rendimiento en órbita.",
  "h.lead":"Monto, instalo, reparo, protejo y rediseño webs. En persona en Praga y alrededores, o a distancia desde cualquier lugar.",
  "h.cta":"Pedir un servicio","h.cta2":"Qué ofrezco",
  "s.h":"Qué ofrezco","s.remote":"También a distancia","s.partial":"Parcialmente a distancia","s.only":"Solo a distancia",
@@ -321,43 +322,45 @@ function preview(p){
   return `<div class="pv pv-pc">${PCICON}</div>`;
 }
 
-const CART='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg>';
-
 const $ = id => document.getElementById(id);
 const t = k => (T[lang] && T[lang][k]) ?? k;
 const findService = id => SERVICES.find(s => s.id === id);
 
-/* ===== Služby (úvod) – dlaždice; "build" je velká s fotkami a podmínkami ===== */
+/* ===== Služby (úvod) ===== */
+/*SVC_START*/
+/* Fotky u hlavní služby (sestavení PC) – soubory v /assets/img/ */
 const BUILD_IMGS = ["/assets/img/pc-skrin.webp","/assets/img/pc-kabely.webp","/assets/img/pc-rog.webp"];
-/* Obrázky v pozadí dlaždic (soubory v /assets/img/) */
-const TILE_MEDIA = {
-  split:`<div class="tmedia tm-split" aria-hidden="true"><div class="tm-win" style="background-image:url('/assets/img/svc-windows.webp')"></div><div class="tm-lin"><span>Linux</span></div><svg class="tm-diag" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0"/></svg></div>`,
-  upgrade:`<div class="tmedia tm-img tm-upgrade" aria-hidden="true"><img src="/assets/img/svc-upgrade.webp" alt="" loading="lazy"></div>`,
-  bsod:`<div class="tmedia tm-img tm-bsod" aria-hidden="true"><img src="/assets/img/svc-bsod.webp" alt="" loading="lazy"></div>`,
-  dns:`<div class="tmedia tm-img tm-dns" aria-hidden="true"><img src="/assets/img/svc-dns.svg" alt="" loading="lazy"></div>`
+/* Ikonky služeb (jednoduché čárové SVG, barva se řídí motivem) */
+const ICON_WRAP = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const SVC_ICONS = {
+  os:'<rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4M6.5 8.5l2.5 2-2.5 2M11 12.5h4"/>',
+  upgrade:'<rect x="3" y="7" width="18" height="10" rx="1.5"/><path d="M7 7V4.5M11 7V4.5M15 7V4.5M19 7V4.5M6 17v2.5M18 17v2.5M7 10.5h3v3H7zM13 10.5h4"/>',
+  fix:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+  dns:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/>',
+  web:'<rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M2.5 8.5h19M5.5 6.3h.01M8 6.3h.01M6 12h7M6 15.5h4M16 12h2.5v4H16z"/>',
+  remote:'<rect x="2.5" y="5" width="13" height="9" rx="1.5"/><path d="M6 18h6M9 14v4"/><path d="M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"/>'
 };
+const esc = x => String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function svcTag(s){
+  if(!s.remote || s.tag===false) return "";
+  return `<span class="tag">${esc(t(s.onlyRemote ? "s.only" : s.tag==="partial" ? "s.partial" : "s.remote"))}</span>`;
+}
+function featureHTML(s){
+  const steps = [1,2,3].map(i=>`<li><strong>${t("bd."+i+"h")}</strong><span>${t("bd."+i+"p")}</span></li>`).join("");
+  return `<div class="mosaic">${BUILD_IMGS.map(u=>`<img src="${u}" alt="" loading="lazy" width="480" height="640">`).join("")}</div>`
+    + `<div class="ft-body"><h3>${esc(s.name[lang])}</h3><p class="d">${esc(s.desc[lang])}</p><ol class="pc-steps">${steps}</ol>`
+    + `<div class="ft-buy"><span class="pr">${esc(s.price[lang])}</span><a class="btn primary" href="/orders/?service=${s.id}" aria-label="${esc(t("s.order")+": "+s.name[lang]+", "+s.price[lang])}">${esc(t("s.order"))}</a></div></div>`;
+}
+function rowHTML(s){
+  return `<li class="svc" id="svc-${s.id}"><span class="ic">${ICON_WRAP(SVC_ICONS[s.id]||"")}</span>`
+    + `<div><h3>${esc(s.name[lang])}${svcTag(s)}</h3><p class="d">${esc(s.desc[lang])}</p></div>`
+    + `<a class="buy" href="/orders/?service=${s.id}" aria-label="${esc(t("s.order")+": "+s.name[lang]+", "+s.price[lang])}"><span class="pr">${esc(s.price[lang])}</span><span class="go">${esc(t("s.order"))}</span></a></li>`;
+}
+/*SVC_END*/
 function renderServices(){
-  const ul = $('svcList'); if(!ul) return;
-  ul.innerHTML = "";
-  SERVICES.forEach(s=>{
-    const big = s.id === "build";
-    const li = document.createElement('li');
-    li.className = big ? "tile t-big" : "tile";
-    li.innerHTML =
-      (big ? `<div class="strips" aria-hidden="true">${BUILD_IMGS.map(u=>`<i style="background-image:url('${u}')"></i>`).join("")}</div>` : "")
-      + (TILE_MEDIA[s.media] || "")
-      + `<h3><span class="n"></span></h3><p class="d"></p>`
-      + (big ? `<ul class="pc-info">${[1,2,3].map(i=>`<li><strong>${t("bd."+i+"h")}</strong><span>${t("bd."+i+"p")}</span></li>`).join("")}</ul>` : "")
-      + `<a class="buy">${CART}<span class="pr"></span></a>`;
-    li.querySelector('.n').textContent = s.name[lang];
-    if(s.remote && s.tag!==false){ const r=document.createElement('span'); r.className='remote'; r.textContent=t(s.onlyRemote ? "s.only" : s.tag==="partial" ? "s.partial" : "s.remote"); li.querySelector('h3').appendChild(r); }
-    li.querySelector('.d').textContent = s.desc[lang];
-    const a = li.querySelector('.buy');
-    a.href = "/orders/?service=" + encodeURIComponent(s.id);
-    a.querySelector('.pr').textContent = s.price[lang];
-    a.setAttribute('aria-label', `${t("s.order")}: ${s.name[lang]}, ${s.price[lang]}`);
-    ul.appendChild(li);
-  });
+  const ft = $('svcFeature'), ul = $('svcList');
+  if(ft){ const b = findService("build"); if(b) ft.innerHTML = featureHTML(b); }
+  if(ul) ul.innerHTML = SERVICES.filter(s=>s.id!=="build").map(rowHTML).join("");
 }
 
 /* ===== Portfolio ===== */
