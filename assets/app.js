@@ -56,7 +56,7 @@ const SERVICES = [
    name:{cs:"Vzdálená pomoc",en:"Remote help",es:"Ayuda a distancia"},
    desc:{cs:"Připojím se k tvému počítači přes internet a vyřeším problém, nastavení nebo instalaci programů – ať jsi kdekoli. Účtuje se každých započatých 15 minut.",
          en:"I connect to your computer over the internet and sort out problems, settings or software installs – wherever you are. Billed per started 15 minutes.",
-         es:"Me conecto a tu ordenador por internet y soluciono problemas, ajustes o instalaciones de programas, estés donde estés. Se factura por cada 15 minutos iniciados."} }
+         es:"Me conecto a tu ordenador de forma remota para solucionar problemas, configurar ajustes e instalar programas, estés donde estés. ¡Asistencia informática rápida, cómoda y sin necesidad de desplazarte! Se factura por cada 15 minutos iniciados."} }
 ];
 
 const T = {
@@ -183,13 +183,13 @@ es:{
  "f.email":"Correo","f.phone":"Teléfono","f.mode":"Modo","f.addr":"Dirección","f.price":"Precio",
  "ft.contact":"Contacto",
  "nav.portfolio":"Portafolio","pf.h":"Portafolio","pf.all":"Todo","pf.web":"Webs","pf.pc":"Ordenadores","pf.wip":"En desarrollo","pf.view":"Abrir",
- "nav.home":"Servicios","nav.about":"Sobre mí","nav.order":"Pedir","theme.dark":"Cambiar a modo oscuro","theme.light":"Cambiar a modo claro",
+ "nav.home":"Servicios","nav.about":"Sobre mí","nav.order":"Contratar","theme.dark":"Cambiar a modo oscuro","theme.light":"Cambiar a modo claro",
  "h.area":"Soporte informático en Praga y alrededores, y a distancia",
- "h.title":"Rendimiento en órbita.",
+ "h.title":"Tu ordenador, en buenas manos.",
  "h.lead":"Monto, instalo, reparo, protejo y rediseño webs. En persona en Praga y alrededores, o a distancia desde cualquier lugar.",
- "h.cta":"Pedir un servicio","h.cta2":"Qué ofrezco",
+ "h.cta":"Contratar un servicio","h.cta2":"Qué ofrezco",
  "s.h":"Qué ofrezco","s.remote":"También a distancia","s.partial":"Parcialmente a distancia","s.only":"Solo a distancia",
- "wip.h":"Web en construcción","wip.p":"Por ahora gestiono los pedidos de forma individual: si te interesa, escríbeme primero a <a href=\"mailto:ales@corphik.eu\">ales@corphik.eu</a>","wip.close":"Cerrar aviso","s.order":"Pedir",
+ "wip.h":"Web en construcción","wip.p":"Por ahora gestiono los pedidos de forma individual: si te interesa, escríbeme primero a <a href=\"mailto:ales@corphik.eu\">ales@corphik.eu</a>","wip.close":"Cerrar aviso","s.order":"Contratar",
  "p.h":"Cómo funciona",
  "p.1h":"Haces el pedido","p.1p":"Rellenas un formulario corto y describes lo que necesitas.",
  "p.2h":"Te contacto","p.2p":"Acordamos los detalles, el precio y la fecha.",
@@ -204,7 +204,7 @@ es:{
  "ab.lead":"Antes reparaba máquinas. <strong>Ahora aprendo cómo se rompen los sistemas</strong>, y cómo protegerlos.",
  "r.1h":"Mecánico","r.1p":"Maquinaria agrícola, camiones, soldadura.",
  "r.2y":"desde 2026","r.2h":"Logística","r.2p":"Jefe de equipo y administrador en DSV, Praga.",
- "r.3y":"ahora","r.3h":"Ciberseguridad y Tandjo","r.3p":"Rumbo a las pruebas de penetración y construyendo mi propio producto.",
+ "r.3y":"ahora","r.3h":"Ciberseguridad y Tandjo","r.3p":"Me preparo para trabajar en pruebas de penetración (pentesting) y desarrollo mi propia app, Tandjo.",
  "ab.h":"Sobre mí",
  "ab.p1":"Me formé como mecánico de maquinaria agrícola y pasé unos años trabajando con las manos: reparaciones, soldadura, prensas. Aprendí a buscar por qué algo no funciona y a no rendirme hasta encontrarlo.",
  "ab.p2":"Hoy dirijo un equipo en logística, ofrezco soporte informático, construyo Tandjo y estudio ciberseguridad. Me atrae el lado ofensivo: entender un sistema tan bien como para encontrar su punto débil antes que nadie.",
@@ -257,11 +257,40 @@ Object.assign(T.es,{
  "h.r1":"Chequia: en persona o a distancia","h.r2":"España y Europa: por ahora a distancia",
  "s.big":"Todo lo que necesita tu ordenador. En un solo lugar.",
  "bd.1h":"Anticipo para los componentes","bd.1p":"Pido las piezas en cuanto se paga el anticipo.",
- "bd.2h":"Montaje y pruebas en mi casa","bd.2p":"Monto y pruebo el PC yo mismo.",
+ "bd.2h":"Montaje y pruebas","bd.2p":"Monto y pruebo el PC yo mismo.",
  "bd.3h":"Te lo llevo a casa","bd.3p":"Te entrego el equipo ya probado. Gratis en Praga y alrededores; más lejos, según acuerdo.",
  "cta.h":"Manos a la obra.","cta.p":"Cuéntame qué necesitas. Te respondo lo antes posible.",
  "ck.payHb":"Anticipo para los componentes",
  "ck.payb":"En el montaje de un PC pagas por adelantado un anticipo para los componentes, para que pueda pedirlos. El resto se paga al entregar el equipo terminado."
+});
+
+/* ===== Košík ===== */
+Object.assign(T.cs,{
+  "h.seo":"Corphik – IT podpora a stavba PC na míru",
+  "cart.add":"Do košíku","cart.added":"V košíku","nav.cart":"Košík",
+  "ck.s2":"Košík","ck.items":"Vybrané služby (můžeš přidat i odebrat)","ck.empty":"Košík je prázdný. Přidej službu tady nebo na úvodní stránce.",
+  "ck.errItems":"Vyber prosím aspoň jednu službu.","ck.mixed":"Služby, které dělám jen na dálku, vyřeším přes internet, zbytek osobně.",
+  "ck.remoteNa":"Některou z vybraných služeb dělám jen osobně.",
+  "ck.abroadNa":"Některou z vybraných služeb zatím dělám jen v Česku. Mimo Česko si nech v košíku jen služby, které jdou na dálku.",
+  "f.services":"Služby"
+});
+Object.assign(T.en,{
+  "h.seo":"Corphik – IT support and custom PC builds",
+  "cart.add":"Add to cart","cart.added":"In cart","nav.cart":"Cart",
+  "ck.s2":"Cart","ck.items":"Selected services (add or remove any)","ck.empty":"Your cart is empty. Add a service here or on the home page.",
+  "ck.errItems":"Please pick at least one service.","ck.mixed":"Remote-only services I'll handle online, the rest in person.",
+  "ck.remoteNa":"One of the selected services can only be done in person.",
+  "ck.abroadNa":"One of the selected services is only available in Czechia for now. Outside Czechia, keep only services that can be done remotely.",
+  "f.services":"Services"
+});
+Object.assign(T.es,{
+  "h.seo":"Corphik – Soporte informático y PC a medida",
+  "cart.add":"Carrito","cart.added":"En el carrito","nav.cart":"Carrito",
+  "ck.s2":"Carrito","ck.items":"Servicios elegidos (puedes añadir o quitar)","ck.empty":"El carrito está vacío. Añade un servicio aquí o en la página de inicio.",
+  "ck.errItems":"Elige al menos un servicio.","ck.mixed":"Los servicios que solo hago a distancia los resolveré online y el resto en persona.",
+  "ck.remoteNa":"Alguno de los servicios elegidos solo lo hago en persona.",
+  "ck.abroadNa":"Por ahora, alguno de los servicios elegidos solo lo ofrezco en Chequia. Fuera de Chequia, deja en el carrito solo servicios a distancia.",
+  "f.services":"Servicios"
 });
 
 const root = document.documentElement;
@@ -349,18 +378,19 @@ function featureHTML(s){
   const steps = [1,2,3].map(i=>`<li><strong>${t("bd."+i+"h")}</strong><span>${t("bd."+i+"p")}</span></li>`).join("");
   return `<div class="mosaic">${BUILD_IMGS.map(u=>`<img src="${u}" alt="" loading="lazy" width="480" height="640">`).join("")}</div>`
     + `<div class="ft-body"><h3>${esc(s.name[lang])}</h3><p class="d">${esc(s.desc[lang])}</p><ol class="pc-steps">${steps}</ol>`
-    + `<div class="ft-buy"><span class="pr">${esc(s.price[lang])}</span><a class="btn primary" href="/orders/?service=${s.id}" aria-label="${esc(t("s.order")+": "+s.name[lang]+", "+s.price[lang])}">${esc(t("s.order"))}</a></div></div>`;
+    + `<div class="ft-buy"><span class="pr">${esc(s.price[lang])}</span><button class="btn primary add" type="button" data-add="${s.id}" aria-pressed="false" aria-label="${esc(t("cart.add")+": "+s.name[lang])}"><span class="lab">${esc(t("cart.add"))}</span></button></div></div>`;
 }
 function rowHTML(s){
   return `<li class="svc" id="svc-${s.id}"><span class="ic">${ICON_WRAP(SVC_ICONS[s.id]||"")}</span>`
     + `<div><h3>${esc(s.name[lang])}${svcTag(s)}</h3><p class="d">${esc(s.desc[lang])}</p></div>`
-    + `<a class="buy" href="/orders/?service=${s.id}" aria-label="${esc(t("s.order")+": "+s.name[lang]+", "+s.price[lang])}"><span class="pr">${esc(s.price[lang])}</span><span class="go">${esc(t("s.order"))}</span></a></li>`;
+    + `<button class="buy add" type="button" data-add="${s.id}" aria-pressed="false" aria-label="${esc(t("cart.add")+": "+s.name[lang]+", "+s.price[lang])}"><span class="pr">${esc(s.price[lang])}</span><span class="go"><span class="lab">${esc(t("cart.add"))}</span></span></button></li>`;
 }
 /*SVC_END*/
 function renderServices(){
   const ft = $('svcFeature'), ul = $('svcList');
   if(ft){ const b = findService("build"); if(b) ft.innerHTML = featureHTML(b); }
   if(ul) ul.innerHTML = SERVICES.filter(s=>s.id!=="build").map(rowHTML).join("");
+  updateCartUI();
 }
 
 /* ===== Portfolio ===== */
@@ -386,41 +416,72 @@ document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>
   renderPortfolio();
 }));
 
-/* ===== Objednávka (checkout) ===== */
-function checkoutService(){ const sel=$('ckService'); return sel ? findService(sel.value) : null; }
-function renderCheckout(){
-  const sel = $('ckService'); if(!sel) return;
-  const keep = sel.value || new URLSearchParams(location.search).get('service') || SERVICES[0].id;
-  sel.innerHTML = "";
-  [...SERVICES.map(s=>[s.id, s.name[lang]]), ["other", t("o.other")]].forEach(([v,txt])=>{
-    const o=document.createElement('option'); o.value=v; o.textContent=txt; sel.appendChild(o);
+/* ===== Košík (uložený v prohlížeči návštěvníka) ===== */
+const CART_KEY = "corphikCart";
+let memCart = [];
+function getCart(){
+  let a = memCart;
+  try{ const v = JSON.parse(localStorage.getItem(CART_KEY) || "null"); if(Array.isArray(v)) a = v; }catch(_){}
+  return a.filter(id => id==="other" || findService(id));
+}
+function setCart(a){
+  const before = getCart().length;
+  memCart = [...new Set(a)];
+  try{ localStorage.setItem(CART_KEY, JSON.stringify(memCart)); }catch(_){}
+  updateCartUI(memCart.length > before);
+}
+function toggleCart(id){ const c = getCart(); setCart(c.includes(id) ? c.filter(x=>x!==id) : [...c, id]); }
+function updateCartUI(bump){
+  const c = getCart();
+  document.querySelectorAll('.cnt').forEach(el=>{
+    el.textContent = c.length; el.hidden = !c.length;
+    if(bump){ el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
   });
-  sel.value = [...sel.options].some(o=>o.value===keep) ? keep : SERVICES[0].id;
+  document.querySelectorAll('[data-add]').forEach(b=>{
+    const on = c.includes(b.dataset.add), s = findService(b.dataset.add);
+    b.classList.toggle('in', on); b.setAttribute('aria-pressed', on);
+    const lab = b.querySelector('.lab'); if(lab) lab.textContent = t(on ? "cart.added" : "cart.add");
+    if(s) b.setAttribute('aria-label', t(on ? "cart.added" : "cart.add") + ": " + s.name[lang]);
+  });
+}
+document.addEventListener('click', e=>{ const b = e.target.closest('[data-add]'); if(b) toggleCart(b.dataset.add); });
+addEventListener('storage', e=>{ if(e.key===CART_KEY){ updateCartUI(); if($('ckItems')) renderCheckout(); } });
+
+/* ===== Objednávka (checkout) ===== */
+let urlServiceAdded = false;
+function selectedIds(){ return [...document.querySelectorAll('#ckItems input:checked')].map(i=>i.value); }
+function selectedServices(){ return selectedIds().map(findService).filter(Boolean); }
+function renderCheckout(){
+  const box = $('ckItems'); if(!box) return;
+  /* starší odkazy /orders/?service=xxx přidají službu do košíku */
+  const p = new URLSearchParams(location.search).get('service');
+  if(p && !urlServiceAdded && (p==="other" || findService(p))){ urlServiceAdded = true; const c=getCart(); if(!c.includes(p)) setCart([...c, p]); }
+  const c = getCart();
+  box.innerHTML = [...SERVICES.map(s=>[s.id, s.name[lang], s.price[lang]]), ["other", t("o.other"), ""]].map(([id,n,pr]) =>
+    `<label class="pick"><input type="checkbox" value="${id}"${c.includes(id) ? " checked" : ""}><span class="pk-n">${esc(n)}</span><span class="pk-p">${esc(pr)}</span></label>`).join("");
   $('ckMsg').placeholder = t("ck.msgPh");
   $('ckWhen').placeholder = t("ck.whenPh");
   updateSummary();
 }
 function updateSummary(){
-  const s = checkoutService();
-  $('sumName').textContent = s ? s.name[lang] : t("o.other");
-  $('sumDesc').textContent = s ? s.desc[lang] : "";
-  $("sumPrice").textContent = s ? s.price[lang] : "—";
+  const ids = selectedIds(), ss = selectedServices();
+  $('sumList').innerHTML = ids.map(id=>{ const s=findService(id);
+    return `<li><span>${esc(s ? s.name[lang] : t("o.other"))}</span><b>${esc(s ? s.price[lang] : "")}</b></li>`; }).join("");
+  $('sumEmpty').hidden = ids.length > 0;
   /* Sestavení PC: záloha na komponenty předem (ostatní služby se platí až po dokončení) */
-  const dep = !!s && s.id === "build";
+  const dep = ids.includes("build");
   document.querySelectorAll('[data-i18n="ck.payH"]').forEach(el=>{ el.innerHTML = t(dep ? "ck.payHb" : "ck.payH"); });
   document.querySelectorAll('[data-i18n="ck.pay"]').forEach(el=>{ el.innerHTML = t(dep ? "ck.payb" : "ck.pay"); });
   /* Osobně jen v Česku; Španělsko a zbytek Evropy zatím jen na dálku */
-  const remoteOk = !s || s.remote;
-  const abroad = isAbroad();
+  const onsiteOnly = ss.some(s=>!s.remote), remoteOnly = ss.some(s=>s.onlyRemote), abroad = isAbroad();
   const rem = $('modeRemote'), ons = $('modeOnsite');
-  rem.disabled = !remoteOk;
-  const onlyRemote = !!s && !!s.onlyRemote;
-  ons.disabled = abroad || onlyRemote;
-  $('remoteNa').hidden = remoteOk || abroad;
+  rem.disabled = onsiteOnly;
+  ons.disabled = abroad || (remoteOnly && !onsiteOnly);
+  $('remoteNa').hidden = !onsiteOnly || abroad || remoteOnly;
+  $('mixNote').hidden = !(onsiteOnly && remoteOnly) || abroad;
   const ab = $('abroadNote');
-  if(ab){ ab.hidden = !abroad; ab.textContent = abroad ? t(remoteOk ? "ck.abroadRemote" : "ck.abroadNa") : ""; ab.classList.toggle('warn', abroad && !remoteOk); }
-  if((abroad || onlyRemote) && remoteOk) rem.checked = true;
-  else if(!remoteOk) ons.checked = true;
+  if(ab){ ab.hidden = !abroad; ab.textContent = abroad ? t(onsiteOnly ? "ck.abroadNa" : "ck.abroadRemote") : ""; ab.classList.toggle('warn', abroad && onsiteOnly); }
+  if(ons.disabled) rem.checked = true; else if(rem.disabled) ons.checked = true;
   $('addrWrap').hidden = abroad || !ons.checked;
 }
 function isAbroad(){ const c=$('ckCountry'); return !!c && c.value !== "cz"; }
@@ -432,10 +493,10 @@ function countryFromLocation(){
 }
 function collectOrder(){
   const v = id => $(id).value.trim();
-  const s = checkoutService();
+  const items = selectedIds().map(id=>{ const s=findService(id); return { id, name: s ? s.name[lang] : t("o.other"), price: s ? s.price[lang] : "" }; });
   return {
     name:v('ckName'), email:v('ckEmail'), phone:v('ckPhone'),
-    serviceId: $('ckService').value, service: s ? s.name[lang] : t("o.other"), price: s ? s.price[lang] : "",
+    items, service: items.map(i=>i.name).join(", "),
     country: $('ckCountry') ? $('ckCountry').selectedOptions[0].textContent : "",
     mode: ($('modeOnsite').checked && !isAbroad()) ? t("ck.onsite") : t("ck.remote"),
     address: ($('modeOnsite').checked && !isAbroad()) ? v('ckAddr') : "",
@@ -445,14 +506,15 @@ function collectOrder(){
 function orderText(o){
   return [
     `${t("f.name")}: ${o.name}`, `${t("f.email")}: ${o.email}`, o.phone?`${t("f.phone")}: ${o.phone}`:"",
-    `${t("f.service")}: ${o.service}${o.price?` (${o.price})`:""}`, o.country?`${t("f.country")}: ${o.country}`:"", `${t("f.mode")}: ${o.mode}`,
+    "", `${t("f.services")}:`, ...(o.items||[]).map(i=>`– ${i.name}${i.price?` (${i.price})`:""}`), "",
+    o.country?`${t("f.country")}: ${o.country}`:"", `${t("f.mode")}: ${o.mode}`,
     o.address?`${t("f.addr")}: ${o.address}`:"", o.when?`${t("f.when")}: ${o.when}`:"",
     "", `${t("f.msg")}:`, o.msg
   ].filter((x,i,a)=>x!=="" || (i>0 && a[i-1]!=="")).join("\n");
 }
 function initCheckout(){
   const form = $('ckForm'); if(!form) return;
-  $('ckService').addEventListener('change', updateSummary);
+  $('ckItems').addEventListener('change', ()=>{ setCart(selectedIds()); updateSummary(); });
   const cc = $('ckCountry');
   if(cc){ cc.value = countryFromLocation(); cc.addEventListener('change', updateSummary); }
   document.querySelectorAll('input[name="mode"]').forEach(r=>r.addEventListener('change', updateSummary));
@@ -461,7 +523,8 @@ function initCheckout(){
     const o = collectOrder(), err = $('ckErr');
     if(!o.name || !o.email || !o.msg || !$('ckConsent').checked){ err.textContent=t("ck.err"); return; }
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(o.email)){ err.textContent=t("ck.errEmail"); $('ckEmail').focus(); return; }
-    if(isAbroad() && checkoutService() && !checkoutService().remote){ err.textContent=t("ck.abroadNa"); $('ckService').focus(); return; }
+    if(!o.items.length){ err.textContent=t("ck.errItems"); $('ckItems').scrollIntoView({block:"center"}); return; }
+    if(isAbroad() && selectedServices().some(s=>!s.remote)){ err.textContent=t("ck.abroadNa"); return; }
     if($('modeOnsite').checked && !isAbroad() && !o.address){ err.textContent=t("ck.errAddr"); $('ckAddr').focus(); return; }
     if($('ckHp').value) return; // ochrana proti robotům
     err.textContent = "";
@@ -476,6 +539,7 @@ function initCheckout(){
       }catch(_){ err.textContent=t("ck.fail"); btn.disabled=false; btn.textContent=t("ck.submit"); return; }
     }
     try{ sessionStorage.setItem('corphikOrder', JSON.stringify({...o, sent})); }catch(_){}
+    setCart([]);
     location.href = "/orders/thanks/";
   });
 }
@@ -550,8 +614,116 @@ function renderWip(){
   const x = box.querySelector('.wip-x'); x.setAttribute('aria-label', t("wip.close")); x.title = t("wip.close");
 }
 
+/* ===== Úvod: nápis CORPHIK, kde „O“ je černá díra (canvas) =====
+   Díra se zhroutí, dokreslí se kolem ní disk a písmena z ní vyletí na svá místa.
+   Pak po disku pořád obíhají tečky. Písmena jsou v /assets/img/wm-c.png (C)
+   a wm-rphik.png (RPHIK + hvězda); barvu berou z motivu (--ink). */
+function initBlackHole(){
+  const cv = $('bhCanvas'); if(!cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const IMG_W = 640, IMG_H = 120, OX = 143, OY = 87;          /* střed „O“ v obrázku nápisu */
+  const ROT = -9*Math.PI/180, TAU = Math.PI*2;
+  const ease = x => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+  const imgs = ["/assets/img/wm-c.png", "/assets/img/wm-rphik.png"].map(src => { const i = new Image(); i.src = src; return i; });
+  let tinted = [], tintFor = "", ink = "", rgb = "0,0,0", dark = false;
+  let W=0, H=0, s=1, ox=0, oy=0, hx=0, hy=0, R=0, visible=true, running=false, t0=0;
+  const DOTS = Array.from({length:64}, (_,i)=>({ a: i/64*TAU + Math.random()*0.05, r: 0.97 + Math.random()*0.06 }));
+  const BIG = [{a:0.4, v:0.55, z:2.6}, {a:2.6, v:0.38, z:2}, {a:4.4, v:0.47, z:2.2}];
+  function colors(){
+    const v = getComputedStyle(root).getPropertyValue('--ink').trim() || "#000";
+    if(v === ink) return;
+    ink = v; const h = v.replace('#','');
+    const n = h.length === 3 ? h.split('').map(c=>parseInt(c+c,16)) : [0,2,4].map(i=>parseInt(h.slice(i,i+2),16));
+    rgb = n.join(','); dark = (n[0]+n[1]+n[2]) > 384;
+  }
+  function tint(){
+    if(tinted.length === 2 && tintFor === ink) return;
+    if(!imgs.every(i => i.complete && i.naturalWidth)) return;
+    /* písmena v barvě textu + kolem nich tenký okraj v barvě pozadí, aby disk šel „za“ ně jako v logu */
+    const bg = getComputedStyle(root).getPropertyValue('--bg').trim() || "#fff";
+    tinted = imgs.map(i => { const c = document.createElement('canvas'), x = c.getContext('2d'); c.width = IMG_W + 16; c.height = IMG_H + 16;
+      for(let k = 0; k < 16; k++){ const a = k/16*TAU; x.drawImage(i, 8 + Math.cos(a)*5, 8 + Math.sin(a)*5); }
+      x.globalCompositeOperation = 'source-in'; x.fillStyle = bg; x.fillRect(0,0,c.width,c.height);
+      x.globalCompositeOperation = 'source-over';
+      const m = document.createElement('canvas'), mx = m.getContext('2d'); m.width = IMG_W; m.height = IMG_H;
+      mx.drawImage(i,0,0); mx.globalCompositeOperation = 'source-in'; mx.fillStyle = ink; mx.fillRect(0,0,IMG_W,IMG_H);
+      x.drawImage(m, 8, 8); return c; });
+    tintFor = ink;
+  }
+  function size(){
+    const b = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    W = b.width; H = b.height; cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+    const wd = Math.min(W*0.86, 620, H*2.4); s = wd/IMG_W;
+    ox = (W - wd)/2; oy = H*0.56 - OY*s; hx = ox + OX*s; hy = oy + OY*s; R = 26*s;
+  }
+  const col = a => `rgba(${rgb},${a})`;
+  /* bod na disku: úhel a, poměr poloměru k */
+  function pt(a, k, rx, ry){ const x = Math.cos(a)*rx*k, y = Math.sin(a)*ry*k;
+    return [hx + x*Math.cos(ROT) - y*Math.sin(ROT), hy + x*Math.sin(ROT) + y*Math.cos(ROT)]; }
+  function frame(now){
+    colors(); tint();
+    const t = reduce ? 99 : (now - t0)/1000;
+    const eh = ease(t/0.9), ed = ease((t - 0.25)/1.3), el = ease((t - 0.55)/1.2), ea = ease((t - 0.9)/0.9);
+    const Rk = R*(0.4 + 0.6*eh), rx = R*5.4, ry = rx*0.17;
+    ctx.setTransform(Math.min(2, devicePixelRatio || 1),0,0,Math.min(2, devicePixelRatio || 1),0,0);
+    ctx.clearRect(0,0,W,H);
+    ctx.lineCap = 'round';
+    /* záře */
+    const g = ctx.createRadialGradient(hx, hy, Rk, hx, hy, R*3.4);
+    g.addColorStop(0, col(dark ? .16 : .045)); g.addColorStop(1, col(0));
+    ctx.globalAlpha = eh; ctx.fillStyle = g; ctx.fillRect(0,0,W,H); ctx.globalAlpha = 1;
+    /* zadní půlka disku */
+    ctx.strokeStyle = col(.4); ctx.lineWidth = Math.max(1, 1.3*s);
+    ctx.beginPath(); ctx.ellipse(hx, hy, rx, ry, ROT, Math.PI, Math.PI + Math.PI*ed); ctx.stroke();
+    /* obíhající tečky (zadní) */
+    const spin = t*0.35;
+    ctx.fillStyle = col(1);
+    const dots = (front) => {
+      for(const d of DOTS){ const a = (d.a + spin) % TAU, isFront = a < Math.PI; if(isFront !== front) continue;
+        const [x,y] = pt(a, d.r*0.88, rx, ry); ctx.globalAlpha = 0.45*ea; ctx.beginPath(); ctx.arc(x, y, Math.max(.7, 1*s), 0, TAU); ctx.fill(); }
+      for(const b of BIG){ const a = (b.a + t*b.v) % TAU, isFront = a < Math.PI; if(isFront !== front) continue;
+        const [x,y] = pt(a, 1, rx, ry); ctx.globalAlpha = ea; ctx.beginPath(); ctx.arc(x, y, b.z*s, 0, TAU); ctx.fill(); }
+      ctx.globalAlpha = 1;
+    };
+    dots(false);
+    /* ohnutý obraz disku nad dírou + slabý pod ní */
+    ctx.strokeStyle = col(1); ctx.lineWidth = 3.2*s;
+    ctx.beginPath(); ctx.arc(hx, hy, R*1.38, Math.PI + 0.22, Math.PI + 0.22 + (Math.PI - 0.44)*ed); ctx.stroke();
+    ctx.strokeStyle = col(.55); ctx.lineWidth = Math.max(1, 1.2*s);
+    ctx.beginPath(); ctx.arc(hx, hy, R*1.16, 0.4, 0.4 + (Math.PI - 0.8)*ed); ctx.stroke();
+    /* díra */
+    ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(hx, hy, Rk, 0, TAU); ctx.fill();
+    ctx.strokeStyle = col(dark ? .95 : .9); ctx.lineWidth = Math.max(1, 1.4*s);
+    if(dark){ ctx.shadowColor = '#fff'; ctx.shadowBlur = 10; }
+    ctx.beginPath(); ctx.arc(hx, hy, Rk*1.06, 0, TAU); ctx.stroke(); ctx.shadowBlur = 0;
+    /* přední půlka disku */
+    ctx.strokeStyle = col(1); ctx.lineWidth = 3.4*s;
+    ctx.beginPath(); ctx.ellipse(hx, hy, rx, ry, ROT, 0, Math.PI*ed); ctx.stroke();
+    dots(true);
+    /* písmena vyletí z díry */
+    if(tinted.length === 2 && el > 0){
+      ctx.save(); ctx.globalAlpha = el;
+      ctx.translate(hx, hy); ctx.rotate((1 - el)*-0.6); const k = 0.1 + 0.9*el; ctx.scale(k, k); ctx.translate(-hx, -hy);
+      for(const c of tinted) ctx.drawImage(c, ox - 8*s, oy - 8*s, (IMG_W + 16)*s, (IMG_H + 16)*s);
+      ctx.restore();
+    }
+    const busy = !reduce || tinted.length !== 2;
+    if(busy && visible && !document.hidden) requestAnimationFrame(frame); else running = false;
+  }
+  function start(){ if(running) return; running = true; requestAnimationFrame(frame); }
+  size(); t0 = performance.now(); start();
+  imgs.forEach(i => i.addEventListener('load', start));
+  let rt; addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(()=>{ size(); start(); }, 150); });
+  if('IntersectionObserver' in window) new IntersectionObserver(es=>{ visible = es[0].isIntersecting; if(visible) start(); }).observe(cv);
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) start(); });
+  new MutationObserver(start).observe(root, {attributes:true, attributeFilter:['data-theme']});
+  const mq = matchMedia('(prefers-color-scheme: dark)'); if(mq.addEventListener) mq.addEventListener('change', start);
+}
+
 /* ===== Start ===== */
 initCheckout();
+initBlackHole();
 let saved=null; try{ saved=localStorage.getItem('lang'); }catch(e){}
 if(HAS_ALT){
   /* Stránka má vlastní adresu pro každý jazyk – roboti vidí přesně to, co je v HTML.

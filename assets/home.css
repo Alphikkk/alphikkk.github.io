@@ -2,44 +2,21 @@
    Corphik – úvodní stránka
    ========================================================= */
 
-/* ---------- Hero s oběžnou dráhou z loga ---------- */
-.home-hero{position:relative;overflow:hidden;padding:clamp(72px,12vw,150px) 0 clamp(64px,10vw,130px);text-align:center}
-.home-hero .wrap{position:relative;display:flex;flex-direction:column;align-items:center}
-.ht{position:relative;display:flex;justify-content:center;width:100%}
-.orbit{position:absolute;left:50%;top:50%;width:min(1180px,128vw);height:auto;transform:translate(-50%,-50%);pointer-events:none;overflow:visible}
-.orbit .o1{fill:none;stroke:var(--orbit);stroke-width:2.4;stroke-linecap:round}
-.orbit .o2{fill:none;stroke:var(--orbit);stroke-width:1;opacity:.7;stroke-linecap:round}
-.orbit .st{fill:var(--ink);transform-box:fill-box;transform-origin:center}
-.home-hero h1{position:relative;font-size:clamp(2.1rem,8.4vw,6rem);hyphens:auto;max-width:12ch;line-height:.98}
-.home-hero .lead{position:relative;margin:24px auto 0;max-width:30ch;text-align:center}
-.regions{position:relative;list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:28px 0 0;padding:0}
-.regions li{display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;background:var(--soft);font-size:.9rem;font-weight:500}
-.regions li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink)}
-.regions li.r2::before{background:transparent;border:1.5px solid var(--muted)}
-.home-hero .links{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px}
-
-@media (max-width:640px){
-  .orbit{width:108vw}
-  .regions li{text-align:left}
-}
-
-/* Jediná animace stránky: dráha se dokreslí, pak se rozsvítí hvězda */
+/* ---------- Hero: nápis Corphik, kde „O“ je černá díra (kreslí app.js do <canvas>) ---------- */
+.home-hero{padding:clamp(28px,6vw,72px) 0 clamp(64px,9vw,112px);text-align:center}
+.home-hero .wrap{display:flex;flex-direction:column;align-items:center}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.bh-hero{position:relative;width:100%;height:clamp(220px,32vw,330px);display:grid;place-items:center}
+.bh-hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-mark{width:min(560px,86%);height:auto;filter:var(--logo-filter)}
+.home-hero .links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:clamp(16px,3vw,32px)}
 @media (prefers-reduced-motion:no-preference){
-  .orbit .o1,.orbit .o2{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.7s .15s var(--ease) forwards}
-  .orbit .o2{animation-delay:.45s;animation-duration:1.4s}
-  .orbit .st{opacity:0;transform:scale(.2) rotate(-90deg);animation:spark .7s 1.35s var(--ease) forwards}
-  .home-hero h1,.home-hero .lead,.regions,.home-hero .links{opacity:0;transform:translateY(10px);animation:rise .8s var(--ease) forwards}
-  .home-hero h1{animation-delay:.05s}
-  .home-hero .lead{animation-delay:.18s}
-  .regions{animation-delay:.28s}
-  .home-hero .links{animation-delay:.36s}
+  .home-hero .links{opacity:0;transform:translateY(12px);animation:rise .9s 1.5s var(--ease) forwards}
 }
-@keyframes draw{to{stroke-dashoffset:0}}
-@keyframes spark{to{opacity:1;transform:scale(1) rotate(0)}}
 @keyframes rise{to{opacity:1;transform:none}}
 
 /* ---------- Služby ---------- */
-.services{padding:clamp(64px,9vw,120px) 0 clamp(32px,5vw,64px);border-top:1px solid var(--line)}
+.services{padding:clamp(64px,9vw,120px) 0 clamp(64px,9vw,112px);border-top:1px solid var(--line)}
 .big-h{max-width:18ch;margin-bottom:clamp(36px,5vw,64px)}
 
 /* Hlavní služba: sestavení PC */
@@ -68,25 +45,16 @@
 .svc h3{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:1.25rem}
 .svc .tag{font-size:.74rem;font-weight:600;font-stretch:100%;letter-spacing:0;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--bg)}
 .svc .d{margin-top:6px;color:var(--muted);max-width:64ch;font-size:.98rem}
-.buy{display:flex;align-items:center;gap:16px;text-decoration:none;white-space:nowrap}
+.buy{display:flex;align-items:center;gap:16px;white-space:nowrap;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
 .buy .pr{font-weight:700;font-stretch:112%;text-align:right}
 .buy .go{display:inline-flex;align-items:center;height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--ink);font-weight:600;font-size:.92rem;transition:background .2s,color .2s}
-.buy:hover .go{background:var(--ink);color:var(--on-ink)}
+.buy:hover .go,.buy.in .go{background:var(--ink);color:var(--on-ink)}
 @media (max-width:720px){
   .svc{grid-template-columns:44px minmax(0,1fr);padding:22px 0}
   .svc:hover{background:transparent}
   .svc .ic{width:44px;height:44px;border-radius:12px;align-self:start}
   .buy{grid-column:2;justify-content:space-between;margin-top:12px}
 }
-
-/* ---------- Postup ---------- */
-#postup{padding:clamp(64px,9vw,120px) 0}
-.steps{list-style:none;counter-reset:p;margin:clamp(32px,5vw,56px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,32px)}
-.steps li{counter-increment:p;padding-top:20px;border-top:2px solid var(--ink)}
-.steps li::before{content:counter(p);display:block;font-size:clamp(3rem,6vw,4.6rem);font-weight:800;font-stretch:125%;line-height:1;color:var(--orbit);margin-bottom:18px}
-.steps h3{font-size:1.35rem;font-stretch:118%}
-.steps p{margin-top:8px;color:var(--muted)}
-@media (max-width:720px){.steps{grid-template-columns:1fr;gap:36px}}
 
 /* ---------- Závěrečná výzva ---------- */
 .cta-end{padding:0 0 clamp(24px,4vw,48px)}

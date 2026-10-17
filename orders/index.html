@@ -17,7 +17,7 @@
 <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="stylesheet" href="/assets/style.css?v=10">
+<link rel="stylesheet" href="/assets/style.css?v=15">
 </head>
 <body data-page="orders">
 <header class="nav">
@@ -27,7 +27,6 @@
       <li><a href="/" data-i18n="nav.home"></a></li>
       <li><a href="/portfolio/" data-i18n="nav.portfolio"></a></li>
       <li><a href="/about/" data-i18n="nav.about"></a></li>
-      <li class="only-sm"><a href="/orders/" data-i18n="nav.order" aria-current="page"></a></li>
     </ul>
     <div class="tools">
       <div class="lang" role="group" aria-label="Language">
@@ -36,7 +35,7 @@
         <button type="button" data-lang="es">ES</button>
       </div>
       <button class="theme" id="theme" type="button" aria-label="Theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
-      <a class="cta" href="/orders/" data-i18n="nav.order" aria-current="page"></a>
+      <a class="cta" href="/orders/" aria-current="page"><span data-i18n="nav.cart"></span><span class="cnt" hidden>0</span></a>
     </div>
   </div>
 </header>
@@ -54,7 +53,7 @@
     </section>
     <section class="panel" aria-labelledby="s2">
       <h2 id="s2"><span class="num">2</span><span data-i18n="ck.s2"></span></h2>
-      <label class="fld"><span data-i18n="ck.service"></span><select id="ckService"></select></label>
+      <fieldset class="fld picks"><legend data-i18n="ck.items"></legend><div class="pick-list" id="ckItems"></div></fieldset>
       <label class="fld"><span data-i18n="ck.msg"></span><textarea id="ckMsg" required></textarea></label>
     </section>
     <section class="panel" aria-labelledby="s3">
@@ -72,6 +71,7 @@
           <label><input type="radio" name="mode" id="modeRemote" value="remote"><span data-i18n="ck.remote"></span></label>
         </div>
         <p class="note" id="remoteNa" data-i18n="ck.remoteNa" hidden></p>
+        <p class="note" id="mixNote" data-i18n="ck.mixed" hidden></p>
         <p class="note" id="abroadNote" role="status" hidden></p>
       </div>
       <label class="fld" id="addrWrap"><span data-i18n="ck.address"></span><input id="ckAddr" autocomplete="street-address"></label>
@@ -84,8 +84,8 @@
   </form>
   <aside class="summary" aria-labelledby="sumH">
     <h2 id="sumH" data-i18n="ck.sum"></h2>
-    <div class="sum-svc"><b id="sumName"></b><p id="sumDesc"></p></div>
-    <div class="sum-price"><span data-i18n="ck.price"></span><b id="sumPrice"></b></div>
+    <ul class="sum-list" id="sumList"></ul>
+    <p class="note" id="sumEmpty" data-i18n="ck.empty"></p>
     <div class="pay"><b data-i18n="ck.payH"></b><p data-i18n="ck.pay"></p></div>
     <p class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span data-i18n="ck.secure"></span></p>
   </aside>
@@ -96,6 +96,6 @@
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact"></span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=12"></script>
+<script src="/assets/app.js?v=22"></script>
 </body>
 </html>
