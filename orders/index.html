@@ -18,6 +18,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/style.css?v=15">
+<link rel="stylesheet" href="/assets/orders.css?v=1">
 </head>
 <body data-page="orders">
 <header class="nav">
@@ -43,21 +44,22 @@
 <div class="wrap page-head"><h1 data-i18n="ck.title"></h1><p data-i18n="ck.sub"></p></div>
 <div class="wrap checkout">
   <form class="ck-form" id="ckForm" novalidate>
-    <section class="panel" aria-labelledby="s1">
-      <h2 id="s1"><span class="num">1</span><span data-i18n="ck.s1"></span></h2>
+    <section class="panel" id="ckS1" aria-labelledby="s1">
+      <h2 id="s1"><span class="num">1</span><span data-i18n="ck.step1"></span></h2>
+      <div class="pick-grid" id="ckPick"></div>
+      <p class="fld-err" id="pickErr" role="alert" hidden></p>
+    </section>
+    <section class="panel" id="ckS2" aria-labelledby="s2">
+      <h2 id="s2"><span class="num">2</span><span data-i18n="ck.step2"></span></h2>
+      <div class="opts" id="ckOpts"></div>
+    </section>
+    <section class="panel" id="ckS3" aria-labelledby="s3">
+      <h2 id="s3"><span class="num">3</span><span data-i18n="ck.step3"></span></h2>
       <label class="fld"><span data-i18n="ck.name"></span><input id="ckName" autocomplete="name" required></label>
       <div class="two">
         <label class="fld"><span data-i18n="ck.email"></span><input id="ckEmail" type="email" autocomplete="email" required></label>
         <label class="fld"><span data-i18n="ck.phone"></span><input id="ckPhone" type="tel" autocomplete="tel"></label>
       </div>
-    </section>
-    <section class="panel" aria-labelledby="s2">
-      <h2 id="s2"><span class="num">2</span><span data-i18n="ck.s2"></span></h2>
-      <fieldset class="fld picks"><legend data-i18n="ck.items"></legend><div class="pick-list" id="ckItems"></div></fieldset>
-      <label class="fld"><span data-i18n="ck.msg"></span><textarea id="ckMsg" required></textarea></label>
-    </section>
-    <section class="panel" aria-labelledby="s3">
-      <h2 id="s3"><span class="num">3</span><span data-i18n="ck.s3"></span></h2>
       <label class="fld"><span data-i18n="ck.country"></span>
         <select id="ckCountry">
           <option value="cz" data-i18n="ck.cz"></option>
@@ -76,19 +78,33 @@
       </div>
       <label class="fld" id="addrWrap"><span data-i18n="ck.address"></span><input id="ckAddr" autocomplete="street-address"></label>
       <label class="fld"><span data-i18n="ck.when"></span><input id="ckWhen"></label>
+      <label class="fld"><span id="msgLab" data-i18n="ck.msgOpt"></span><textarea id="ckMsg"></textarea></label>
     </section>
-    <label class="consent"><input type="checkbox" id="ckConsent"><span data-i18n="ck.consent"></span></label>
-    <div class="hp" aria-hidden="true"><label>Web<input id="ckHp" tabindex="-1" autocomplete="off"></label></div>
-    <p class="ck-err" id="ckErr" role="alert"></p>
-    <button class="submit" id="ckSubmit" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg><span data-i18n="ck.submit"></span></button>
+    <section class="panel" id="ckS4" aria-labelledby="s4">
+      <h2 id="s4"><span class="num">4</span><span data-i18n="ck.step4"></span></h2>
+      <p class="note" data-i18n="ck.reviewP"></p>
+      <pre class="review" id="ckReview"></pre>
+      <p class="honest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span data-i18n="ck.honest"></span></p>
+      <label class="consent"><input type="checkbox" id="ckConsent"><span data-i18n="ck.consent"></span></label>
+      <p class="fld-err" id="consentErr" hidden></p>
+      <div class="hp" aria-hidden="true"><label>Web<input id="ckHp" tabindex="-1" autocomplete="off"></label></div>
+      <p class="ck-err" id="ckErr" role="alert"></p>
+      <button class="submit" id="ckSubmit" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg><span data-i18n="ck.submit"></span></button>
+    </section>
   </form>
   <aside class="summary" aria-labelledby="sumH">
-    <h2 id="sumH" data-i18n="ck.sum"></h2>
+    <div class="sum-h"><svg class="bh-mini" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-10 32 32)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="32" cy="33" rx="30" ry="6" stroke-width="1.2" opacity=".45"/><circle cx="32" cy="32" r="17" stroke-width="7" opacity=".14"/><path d="M15 33a17 17 0 0 1 34 0" stroke-width="3.2"/><path d="M19.5 34.5a12.5 12.5 0 0 0 25 0" stroke-width="1.3" opacity=".75"/><circle cx="32" cy="32" r="11" fill="#000" stroke-width="1.3"/><path d="M2 33a30 6 0 0 0 60 0" stroke-width="2.8"/></g></svg><h2 id="sumH" data-i18n="ck.sum"></h2></div>
     <ul class="sum-list" id="sumList"></ul>
     <p class="note" id="sumEmpty" data-i18n="ck.empty"></p>
+    <div class="sum-total" id="sumTotal" hidden><span data-i18n="ck.est"></span><b id="sumEst" aria-live="polite"></b></div>
+    <p class="note" id="sumNote" data-i18n="ck.estNote" hidden></p>
     <div class="pay"><b data-i18n="ck.payH"></b><p data-i18n="ck.pay"></p></div>
     <p class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span data-i18n="ck.secure"></span></p>
   </aside>
+</div>
+<div class="ck-bar" id="ckBar" hidden>
+  <svg class="bh-mini" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-10 32 32)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="32" cy="33" rx="30" ry="6" stroke-width="1.2" opacity=".45"/><circle cx="32" cy="32" r="17" stroke-width="7" opacity=".14"/><path d="M15 33a17 17 0 0 1 34 0" stroke-width="3.2"/><path d="M19.5 34.5a12.5 12.5 0 0 0 25 0" stroke-width="1.3" opacity=".75"/><circle cx="32" cy="32" r="11" fill="#000" stroke-width="1.3"/><path d="M2 33a30 6 0 0 0 60 0" stroke-width="2.8"/></g></svg><b class="cb-n" id="barCount">0</b><span class="cb-e"><span data-i18n="ck.est"></span><b id="barEst"></b></span>
+  <a class="btn primary" href="#ckS4" data-i18n="ck.review"></a>
 </div>
 </main>
 <footer><div class="wrap">
@@ -96,6 +112,6 @@
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact"></span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=22"></script>
+<script src="/assets/app.js?v=24"></script>
 </body>
 </html>

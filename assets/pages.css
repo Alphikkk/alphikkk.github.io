@@ -1,0 +1,121 @@
+/* =========================================================
+   Corphik – Portfolio a O mně
+   Navazuje na style.css (barvy, písmo, .btn, .block, .cols, .route, .tj…).
+   ========================================================= */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- Portfolio: hlavička ---------- */
+.pf-head{padding-top:clamp(56px,9vw,120px);padding-bottom:clamp(24px,4vw,40px)}
+.pf-head h1{font-size:clamp(3rem,10vw,7.5rem);line-height:.92}
+.pf-lead{margin-top:22px;max-width:36ch;color:var(--muted);font-size:clamp(1.12rem,1.9vw,1.4rem);line-height:1.45}
+.pf-head .pf-filter{margin:clamp(28px,4vw,40px) 0 0}
+
+/* ---------- Portfolio: případové studie ---------- */
+.cases{display:flex;flex-direction:column;gap:clamp(80px,11vw,152px);padding:clamp(48px,7vw,88px) 0 clamp(80px,11vw,140px)}
+.case{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,5.5vw,88px);align-items:center;scroll-margin-top:96px}
+.case[hidden]{display:none}
+.case:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+.case:nth-child(even) .case-stage{order:2}
+.case-stage{position:relative;aspect-ratio:5/4;border-radius:var(--r-l);background:var(--soft);overflow:hidden;isolation:isolate;
+  display:grid;place-items:center;perspective:1000px}
+/* oběžná dráha za obrazem: pootočí se podle scrollu (--p 0…1 nastavuje pages.js) */
+.case-orbit{position:absolute;left:-12%;top:-12%;width:124%;height:124%;z-index:-1;overflow:visible;
+  transform:rotate(calc(-16deg + var(--p,.5)*32deg));transition:opacity .4s}
+.case-orbit ellipse{fill:none;stroke:var(--orbit);stroke-width:.6;vector-effect:non-scaling-stroke;opacity:.7}
+.case-orbit ellipse+ellipse{opacity:.4}
+.case-visual{position:relative;display:grid;place-items:center;width:100%;height:100%;
+  transform:translateY(calc((.5 - var(--p,.5))*28px)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition:transform .5s var(--ease);transform-style:preserve-3d}
+.case-stage:hover .case-orbit{opacity:1}
+/* u specifikací PC jde dráha přes text – jen naznačit */
+.case-stage:has(.v-pc) .case-orbit{opacity:.35}
+.case-body{min-width:0}
+.case-k{font-size:.92rem;font-weight:600;color:var(--muted)}
+.case-t{margin-top:10px;font-size:clamp(2.5rem,5.6vw,4.6rem);font-stretch:125%;line-height:.95;text-wrap:balance}
+.case-d{margin-top:20px;font-size:1.12rem;line-height:1.55;color:var(--muted);max-width:40ch}
+.case-facts{margin:30px 0 0;border-top:1px solid var(--line)}
+.case-facts div{display:grid;grid-template-columns:minmax(7rem,9.5rem) minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.case-facts dt{color:var(--muted);font-size:.92rem}
+.case-facts dd{margin:0;font-weight:600}
+.case-link{margin-top:28px}
+/* příchod z úvodu (/portfolio/#pf-xx): obrys karty se jednou rozsvítí */
+.case.arrived .case-stage::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  box-shadow:inset 0 0 0 2px var(--ink);animation:arrive 1.8s var(--ease) forwards}
+@keyframes arrive{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
+@media (max-width:860px){
+  .case,.case:nth-child(even){grid-template-columns:1fr}
+  .case:nth-child(even) .case-stage{order:0}
+  .case-stage{aspect-ratio:4/3}
+}
+
+/* obrazy jednotlivých projektů */
+.v-tj img{width:min(44%,240px);height:auto;border-radius:24%;border:1px solid var(--line);
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.55);transform:translateZ(40px)}
+.v-ap{place-items:center}
+.v-ap>.v-bar,.v-ap>.v-in{width:min(80%,520px)}
+.v-ap{grid-template-rows:auto auto;align-content:center;gap:0}
+.v-bar{display:flex;align-items:center;gap:6px;padding:12px 14px;border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;background:var(--bg)}
+.v-bar i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.v-bar i:nth-of-type(3){margin-right:auto}
+.v-bar span{font-size:.66rem;font-weight:700;color:var(--muted);padding:2px 6px;border-radius:999px}
+.v-bar span:first-of-type{background:var(--ink);color:var(--on-ink)}
+.v-in{display:flex;flex-direction:column;align-items:center;gap:18px;padding:clamp(28px,6vw,52px) 16px;border:1px solid var(--line);border-radius:0 0 16px 16px;
+  background:var(--bg);box-shadow:0 40px 80px -40px rgba(0,0,0,.45)}
+.v-in img{width:62%;height:auto;filter:var(--logo-filter)}
+.v-btns{display:flex;gap:8px}
+.v-btns b{width:64px;height:16px;border-radius:999px;border:1px solid var(--ink)}
+.v-btns b:first-child{background:var(--ink)}
+.v-pc{grid-template-columns:auto auto;gap:clamp(20px,4vw,40px);align-content:center;justify-content:center}
+.v-pc>svg{width:clamp(56px,9vw,96px);height:auto;color:var(--ink);stroke-width:1.2;transform:translateZ(30px)}
+.v-pc dl{margin:0;display:flex;flex-direction:column;gap:14px}
+.v-pc dt{font-size:.78rem;font-weight:600;color:var(--muted)}
+.v-pc dd{margin:2px 0 0;font-weight:800;font-stretch:118%;font-size:clamp(1.05rem,2.2vw,1.55rem);line-height:1.1}
+
+/* ---------- Závěrečná výzva (stejná jako na úvodu) ---------- */
+.end-cta{padding:0 0 clamp(24px,4vw,48px)}
+.end-cta .wrap>div{border-radius:clamp(24px,4vw,40px);background:var(--ink);color:var(--on-ink);
+  padding:clamp(48px,8vw,96px) clamp(24px,5vw,72px);text-align:center;display:flex;flex-direction:column;align-items:center}
+.end-cta .bh{width:76px;height:76px;margin-bottom:20px;overflow:visible}
+.end-cta h2{font-size:clamp(2.2rem,6vw,4.4rem)}
+.end-cta p{margin-top:16px;opacity:.7;font-size:1.12rem;max-width:36ch}
+.end-cta .btn{margin-top:32px;background:var(--on-ink);color:var(--ink);border-color:var(--on-ink)}
+.end-cta .btn:hover{opacity:.88}
+
+/* ---------- O mně ---------- */
+.ab-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:center;
+  padding-top:clamp(56px,9vw,120px);padding-bottom:clamp(56px,8vw,104px)}
+.ab-role{font-weight:700;font-stretch:115%;font-size:1rem;color:var(--muted)}
+.ab-hero h1{margin-top:14px;font-size:clamp(3rem,10vw,7.5rem);line-height:.92}
+.ab-hero .lead{margin-top:28px;max-width:34ch;font-size:clamp(1.15rem,2vw,1.45rem);line-height:1.45}
+.ab-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.ab-emblem{justify-self:center;width:min(100%,400px);aspect-ratio:1;color:var(--ink)}
+.ab-emblem svg{width:100%;height:100%;overflow:visible}
+/* disk se při scrollu lehce nakloní (--s 0…1 nastavuje pages.js) */
+.ab-emblem g>g,.ab-emblem .em-front{transform-box:view-box;transform-origin:100px 103px;transform:scaleY(calc(1 + var(--s,0)*.9))}
+.em-dot{offset-path:path("M4 103a96 19 0 1 0 192 0a96 19 0 1 0 -192 0");offset-rotate:0deg;animation:emOrbit 14s linear infinite}
+.em-dot.d2{animation-duration:9s;animation-delay:-4s;opacity:.7}
+@keyframes emOrbit{to{offset-distance:100%}}
+@media (max-width:760px){
+  .ab-hero{grid-template-columns:1fr}
+  .ab-emblem{order:-1;justify-self:start;width:150px}
+}
+.ab-do-h{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 24px;margin-bottom:clamp(28px,4vw,40px)}
+.ab-do-h h2{margin:0}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pillars article{display:flex;flex-direction:column;gap:10px;padding:clamp(22px,3vw,32px);border-radius:var(--r-m);border:1px solid var(--line);
+  transition:border-color .3s,transform .3s var(--ease)}
+.pillars article:hover{border-color:var(--ink);transform:translateY(-3px)}
+.pillars .ic{width:52px;height:52px;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center;margin-bottom:8px}
+.pillars .ic svg{width:24px;height:24px}
+.pillars h3{font-size:1.35rem;font-stretch:118%}
+.pillars p{color:var(--muted)}
+@media (max-width:860px){.pillars{grid-template-columns:1fr}}
+.ab-quote{font-size:clamp(1.3rem,2.4vw,1.8rem)!important;font-weight:700;font-stretch:112%;line-height:1.3!important;max-width:26ch!important;margin-bottom:.4em}
+.ab-quote strong{font-weight:800}
+.route{margin-top:clamp(40px,6vw,72px)}
+.route ol{margin-top:0}
+.ab-k{font-weight:700;font-stretch:112%;color:var(--muted);margin-bottom:16px}
+a.tj{color:inherit;text-decoration:none;position:relative;transition:transform .3s var(--ease)}
+a.tj:hover{transform:translateY(-3px)}
+.tj-go{margin-left:auto;align-self:center;font-weight:600;font-size:.92rem;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+@media (max-width:640px){a.tj{flex-wrap:wrap}.tj-go{margin-left:0}}

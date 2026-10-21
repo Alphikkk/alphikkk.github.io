@@ -12,46 +12,47 @@ const WEB3FORMS_KEY = "2d1be97d-5752-427f-bbf3-e49d1acd0b37";
    tag:"partial" = štítek „Částečně na dálku“, tag:false = štítek se nezobrazí (služba jde na dálku dál)
    onlyRemote:true = jde jen na dálku (štítek „Pouze na dálku“, v objednávce nejde zvolit „Osobně“)
    build = hlavní služba nahoře s fotkami (BUILD_IMGS), ostatní se vypíšou jako ceník s ikonkou (SVC_ICONS)
+   czk = číslo z ceny „od“ (jen pro orientační odhad v poptávce), hourly:true = cena za hodinu
    POZOR: když tu něco změníš, uprav stejný text i v index.html, en/index.html a es/index.html
    (texty v HTML jsou pro Google; po načtení je skript stejně vykreslí znovu) */
 const SERVICES = [
- { id:"build", remote:false,
+ { id:"build", czk:1500, remote:false,
    price:{cs:"od 1 500 Kč",en:"from CZK 1,500 (≈ €60)",es:"desde 1.500 CZK (≈ 60 €)"},
    name:{cs:"Sestavení PC na míru",en:"Custom PC build",es:"PC a medida"},
    desc:{cs:"Vyberu komponenty podle rozpočtu a účelu (hry, práce, škola), PC sestavím a otestuju.",
          en:"I pick parts for your budget and needs (gaming, work, school), then build and test the PC.",
          es:"Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo."} },
- { id:"os", remote:false,
+ { id:"os", czk:700, remote:false,
    price:{cs:"od 700 Kč",en:"from CZK 700 (≈ €28)",es:"desde 700 CZK (≈ 28 €)"},
    name:{cs:"Instalace Windows a Linuxu",en:"Windows & Linux installation",es:"Instalación de Windows y Linux"},
    desc:{cs:"Čistá instalace systému, ovladače, aktualizace a nastavení, aby vše fungovalo od prvního spuštění. Licence Windows není v ceně.",
          en:"Clean OS install, drivers, updates and setup so everything works from the first boot. Windows licence not included.",
          es:"Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque. La licencia de Windows no está incluida."} },
- { id:"upgrade", remote:false,
+ { id:"upgrade", czk:500, remote:false,
    price:{cs:"od 500 Kč",en:"from CZK 500 (≈ €20)",es:"desde 500 CZK (≈ 20 €)"},
    name:{cs:"Upgrade a zrychlení PC",en:"PC upgrade & speed-up",es:"Mejora y aceleración del PC"},
    desc:{cs:"Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Díly se platí zvlášť.",
          en:"New SSD, RAM or graphics card, cleaning and fresh thermal paste. Parts are paid separately.",
          es:"Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte."} },
- { id:"fix", remote:true, tag:"partial",
+ { id:"fix", czk:400, remote:true, tag:"partial",
    price:{cs:"od 400 Kč",en:"from CZK 400 (≈ €16)",es:"desde 400 CZK (≈ 16 €)"},
    name:{cs:"Diagnostika a opravy",en:"Diagnostics & repairs",es:"Diagnóstico y reparación"},
    desc:{cs:"PC nejde zapnout, padá, je pomalé nebo hlučné? Najdu příčinu a vyřeším ji. Cena diagnostiky se odečte z opravy.",
          en:"PC won't start, crashes, runs slow or loud? I'll find the cause and fix it. The diagnostics fee is deducted from the repair price.",
          es:"¿El PC no enciende, se cuelga, va lento o hace ruido? Encuentro la causa y lo soluciono. El coste del diagnóstico se descuenta de la reparación."} },
- { id:"dns", remote:true, onlyRemote:true,
+ { id:"dns", czk:800, remote:true, onlyRemote:true,
    price:{cs:"od 800 Kč",en:"from CZK 800 (≈ €32)",es:"desde 800 CZK (≈ 32 €)"},
    name:{cs:"Nastavení domény a DNS",en:"Domain & DNS setup",es:"Configuración de dominio y DNS"},
    desc:{cs:"Záznamy A, AAAA, CNAME, MX a TXT (SPF, DKIM, DMARC). Propojím doménu s webem i e-mailem.",
          en:"A, AAAA, CNAME, MX and TXT records (SPF, DKIM, DMARC). I'll connect your domain to your website and email.",
          es:"Registros A, AAAA, CNAME, MX y TXT (SPF, DKIM, DMARC). Conecto tu dominio con tu web y tu correo."} },
- { id:"web", remote:true,
+ { id:"web", czk:3499, remote:true,
    price:{cs:"od 3 499 Kč",en:"from CZK 3,499 (≈ €140)",es:"desde 3.499 CZK (≈ 140 €)"},
    name:{cs:"Redesign webu",en:"Website redesign",es:"Rediseño web"},
    desc:{cs:"Starý web předělám do moderní podoby: nový vzhled, mobilní verze, rychlejší načítání a základní zabezpečení.",
          en:"I turn an outdated website into a modern one: fresh design, mobile version, faster loading and basic security.",
          es:"Convierto una web anticuada en una moderna: nuevo diseño, versión móvil, carga más rápida y seguridad básica."} },
- { id:"remote", remote:true, tag:false,
+ { id:"remote", czk:400, hourly:true, remote:true, tag:false,
    price:{cs:"400 Kč / hod",en:"CZK 400 / hour (≈ €16)",es:"400 CZK / hora (≈ 16 €)"},
    name:{cs:"Vzdálená pomoc",en:"Remote help",es:"Ayuda a distancia"},
    desc:{cs:"Připojím se k tvému počítači přes internet a vyřeším problém, nastavení nebo instalaci programů – ať jsi kdekoli. Účtuje se každých započatých 15 minut.",
@@ -264,6 +265,11 @@ Object.assign(T.es,{
  "ck.payb":"En el montaje de un PC pagas por adelantado un anticipo para los componentes, para que pueda pedirlos. El resto se paga al entregar el equipo terminado."
 });
 
+/* ===== Černá díra na úvodu (rozcestník) a ukázky portfolia ===== */
+Object.assign(T.cs,{"bh.open":"Otevřít rozcestník","bh.close":"Zavřít rozcestník","pf.more":"Celé portfolio"});
+Object.assign(T.en,{"bh.open":"Open quick navigation","bh.close":"Close quick navigation","pf.more":"See the full portfolio"});
+Object.assign(T.es,{"bh.open":"Abrir navegación rápida","bh.close":"Cerrar navegación rápida","pf.more":"Ver todo el portafolio"});
+
 /* ===== Košík ===== */
 Object.assign(T.cs,{
   "h.seo":"Corphik – IT podpora a stavba PC na míru",
@@ -291,6 +297,150 @@ Object.assign(T.es,{
   "ck.remoteNa":"Alguno de los servicios elegidos solo lo hago en persona.",
   "ck.abroadNa":"Por ahora, alguno de los servicios elegidos solo lo ofrezco en Chequia. Fuera de Chequia, deja en el carrito solo servicios a distancia.",
   "f.services":"Servicios"
+});
+
+/* ===== Poptávka: kroky, volby u služeb, odhad ceny (přepisuje i starší texty „objednávky“) ===== */
+Object.assign(T.cs,{
+ "ck.title":"Poptávka","ck.sub":"Vyber služby, upřesni detaily a pošli nezávaznou poptávku. Ozvu se a domluvíme cenu i termín.",
+ "ck.step1":"Vyber služby","ck.step2":"Upřesni detaily","ck.step2e":"Detaily se objeví, jakmile vybereš službu.",
+ "ck.step3":"Kontakt a místo","ck.step4":"Zkontroluj a odešli",
+ "ck.otherP":"Cena podle domluvy","ck.otherN":"Popiš to prosím ve zprávě v kroku 3.",
+ "ck.remove":"Odebrat","ck.edit":"Upravit","ck.less":"Méně","ck.more":"Víc",
+ "ck.est":"Odhad od","ck.estNote":"Ceny jsou orientační (od). Přesnou cenu potvrdím před začátkem práce. Vzdálená pomoc se účtuje po započatých 15 minutách.",
+ "ck.msgOpt":"Ještě něco dalšího? (nepovinné)","ck.selected":"vybráno","ck.review":"Zkontrolovat",
+ "ck.reviewP":"Takhle mi poptávka dorazí:",
+ "ck.honest":"Odesláním nic neobjednáváš ani neplatíš. Ozvu se a potvrdíme cenu a termín.",
+ "ck.submit":"Odeslat poptávku","ck.consent":"Souhlasím se zpracováním uvedených údajů za účelem vyřízení poptávky.",
+ "ck.fail":"Poptávku se nepodařilo odeslat. Zkus to prosím znovu, nebo napiš na ales@corphik.eu.",
+ "ck.secure":"Údaje použiju jen k vyřízení poptávky.","ck.empty":"Zatím nic. Vyber službu v kroku 1.",
+ "ck.errName":"Vyplň prosím jméno.","ck.errEmailE":"Vyplň prosím e-mail, ať ti můžu odpovědět.",
+ "ck.errMsg":"Popiš prosím, s čím potřebuješ pomoct.","ck.errConsent":"Potvrď prosím souhlas se zpracováním údajů.",
+ "ck.errSee":"Zkontroluj prosím označená pole.",
+ "op.use":"K čemu bude počítač sloužit?","op.use.gaming":"Hry","op.use.work":"Práce","op.use.school":"Škola",
+ "op.budget":"Rozpočet na komponenty (nepovinné)","op.budget.ph":"Např. 25 000 Kč",
+ "op.have":"Díly, které už máš (nepovinné)","op.have.ph":"Např. skříň a zdroj ze starého PC",
+ "op.os":"Systém","op.os.win":"Windows","op.os.linux":"Linux","op.os.unsure":"Nevím, poraď mi",
+ "op.dev":"Počet počítačů",
+ "op.parts":"Co chceš vylepšit?","op.parts.ssd":"Disk (SSD)","op.parts.ram":"RAM","op.parts.gpu":"Grafika","op.parts.clean":"Čištění a nová pasta",
+ "op.sym":"Co se děje?","op.sym.dead":"Nejde zapnout","op.sym.crash":"Padá","op.sym.slow":"Je pomalé","op.sym.loud":"Je hlučné",
+ "op.need":"Co propojit?","op.need.site":"Web","op.need.mail":"E-mail","op.need.auth":"SPF, DKIM, DMARC",
+ "op.domain":"Doména (nepovinné)","op.domain.ph":"Např. mojefirma.cz",
+ "op.goals":"Na čem ti nejvíc záleží?","op.goals.look":"Nový vzhled","op.goals.mobile":"Mobilní verze","op.goals.speed":"Rychlejší načítání","op.goals.sec":"Základní zabezpečení",
+ "op.url":"Současný web (nepovinné)","op.url.ph":"Např. mojefirma.cz",
+ "op.hours":"Odhad hodin",
+ "th.title":"Poptávka odeslaná","th.ready":"Poptávka je připravená",
+ "th.p":"Zatím nic není objednané ani zaplacené. Ozvu se ti co nejdřív na e-mail nebo telefon a potvrdíme cenu a termín.",
+ "th.mailP":"Odešli ji ze svého e-mailu, ať mi určitě dorazí.","th.none":"Žádnou poptávku tu nevidím.","th.order":"Vytvořit poptávku",
+ "o.subj":"Poptávka IT podpory"
+});
+Object.assign(T.en,{
+ "ck.title":"Request","ck.sub":"Pick services, add the details and send a no-obligation request. I'll get back to you to agree the price and date.",
+ "ck.step1":"Choose services","ck.step2":"Add the details","ck.step2e":"Details appear once you pick a service.",
+ "ck.step3":"Contact and location","ck.step4":"Review and send",
+ "ck.otherP":"Price by arrangement","ck.otherN":"Please describe it in the message in step 3.",
+ "ck.remove":"Remove","ck.edit":"Edit","ck.less":"Fewer","ck.more":"More",
+ "ck.est":"Estimate from","ck.estNote":"Prices are starting prices. I'll confirm the exact price before I start. Remote help is billed per started 15 minutes.",
+ "ck.msgOpt":"Anything else? (optional)","ck.selected":"selected","ck.review":"Review",
+ "ck.reviewP":"This is what I'll receive:",
+ "ck.honest":"Sending this doesn't book or charge anything. I'll get back to you to confirm the price and date.",
+ "ck.submit":"Send request","ck.consent":"I agree to my details being processed to handle this request.",
+ "ck.fail":"The request couldn't be sent. Please try again or email ales@corphik.eu.",
+ "ck.secure":"Your details are only used to handle your request.","ck.empty":"Nothing yet. Pick a service in step 1.",
+ "ck.errName":"Please fill in your name.","ck.errEmailE":"Please fill in your email so I can reply.",
+ "ck.errMsg":"Please describe what you need help with.","ck.errConsent":"Please tick the consent box.",
+ "ck.errSee":"Please check the highlighted fields.",
+ "op.use":"What will the PC be used for?","op.use.gaming":"Gaming","op.use.work":"Work","op.use.school":"School",
+ "op.budget":"Budget for parts (optional)","op.budget.ph":"E.g. CZK 25,000",
+ "op.have":"Parts you already have (optional)","op.have.ph":"E.g. the case and power supply from my old PC",
+ "op.os":"System","op.os.win":"Windows","op.os.linux":"Linux","op.os.unsure":"Not sure, advise me",
+ "op.dev":"Number of computers",
+ "op.parts":"What would you like to upgrade?","op.parts.ssd":"Drive (SSD)","op.parts.ram":"RAM","op.parts.gpu":"Graphics card","op.parts.clean":"Cleaning and thermal paste",
+ "op.sym":"What's happening?","op.sym.dead":"Won't start","op.sym.crash":"Crashes","op.sym.slow":"Runs slow","op.sym.loud":"Loud",
+ "op.need":"What should I connect?","op.need.site":"Website","op.need.mail":"Email","op.need.auth":"SPF, DKIM, DMARC",
+ "op.domain":"Domain (optional)","op.domain.ph":"E.g. mybusiness.com",
+ "op.goals":"What matters most?","op.goals.look":"Fresh design","op.goals.mobile":"Mobile version","op.goals.speed":"Faster loading","op.goals.sec":"Basic security",
+ "op.url":"Current website (optional)","op.url.ph":"E.g. mybusiness.com",
+ "op.hours":"Estimated hours",
+ "th.title":"Request sent","th.ready":"Your request is ready",
+ "th.p":"Nothing is booked or paid yet. I'll get back to you by email or phone as soon as I can to confirm the price and date.",
+ "th.mailP":"Send it from your email so it definitely reaches me.","th.none":"There's no request here.","th.order":"Create a request",
+ "o.subj":"IT support request"
+});
+Object.assign(T.es,{
+ "ck.title":"Solicitud","ck.sub":"Elige servicios, añade los detalles y envía una solicitud sin compromiso. Te responderé para acordar el precio y la fecha.",
+ "ck.step1":"Elige los servicios","ck.step2":"Añade los detalles","ck.step2e":"Los detalles aparecen al elegir un servicio.",
+ "ck.step3":"Contacto y lugar","ck.step4":"Revisa y envía",
+ "ck.otherP":"Precio a convenir","ck.otherN":"Descríbelo en el mensaje del paso 3.",
+ "ck.remove":"Quitar","ck.edit":"Editar","ck.less":"Menos","ck.more":"Más",
+ "ck.est":"Estimación desde","ck.estNote":"Los precios son orientativos (desde). Confirmaré el precio exacto antes de empezar. La ayuda a distancia se factura por cada 15 minutos iniciados.",
+ "ck.msgOpt":"¿Algo más? (opcional)","ck.selected":"seleccionados","ck.review":"Revisar",
+ "ck.reviewP":"Esto es lo que me llegará:",
+ "ck.honest":"Enviar esto no reserva ni cobra nada. Te responderé para confirmar el precio y la fecha.",
+ "ck.submit":"Enviar solicitud","ck.consent":"Acepto el tratamiento de mis datos para gestionar esta solicitud.",
+ "ck.fail":"No se pudo enviar la solicitud. Inténtalo de nuevo o escribe a ales@corphik.eu.",
+ "ck.secure":"Tus datos solo se usan para gestionar tu solicitud.","ck.empty":"Todavía nada. Elige un servicio en el paso 1.",
+ "ck.errName":"Escribe tu nombre.","ck.errEmailE":"Escribe tu correo para que pueda responderte.",
+ "ck.errMsg":"Describe con qué necesitas ayuda.","ck.errConsent":"Marca la casilla de consentimiento.",
+ "ck.errSee":"Revisa los campos marcados.",
+ "op.use":"¿Para qué será el PC?","op.use.gaming":"Juegos","op.use.work":"Trabajo","op.use.school":"Estudios",
+ "op.budget":"Presupuesto para componentes (opcional)","op.budget.ph":"P. ej. 25.000 CZK",
+ "op.have":"Piezas que ya tienes (opcional)","op.have.ph":"P. ej. la caja y la fuente de mi PC antiguo",
+ "op.os":"Sistema","op.os.win":"Windows","op.os.linux":"Linux","op.os.unsure":"No lo sé, aconséjame",
+ "op.dev":"Número de ordenadores",
+ "op.parts":"¿Qué quieres mejorar?","op.parts.ssd":"Disco (SSD)","op.parts.ram":"RAM","op.parts.gpu":"Tarjeta gráfica","op.parts.clean":"Limpieza y pasta térmica",
+ "op.sym":"¿Qué le pasa?","op.sym.dead":"No enciende","op.sym.crash":"Se cuelga","op.sym.slow":"Va lento","op.sym.loud":"Hace ruido",
+ "op.need":"¿Qué conectamos?","op.need.site":"Web","op.need.mail":"Correo","op.need.auth":"SPF, DKIM, DMARC",
+ "op.domain":"Dominio (opcional)","op.domain.ph":"P. ej. miempresa.es",
+ "op.goals":"¿Qué es lo más importante?","op.goals.look":"Diseño nuevo","op.goals.mobile":"Versión móvil","op.goals.speed":"Carga más rápida","op.goals.sec":"Seguridad básica",
+ "op.url":"Web actual (opcional)","op.url.ph":"P. ej. miempresa.es",
+ "op.hours":"Horas estimadas",
+ "th.title":"Solicitud enviada","th.ready":"Tu solicitud está lista",
+ "th.p":"Todavía no hay nada reservado ni pagado. Te responderé lo antes posible por correo o teléfono para confirmar el precio y la fecha.",
+ "th.mailP":"Envíala desde tu correo para que me llegue seguro.","th.none":"Aquí no hay ninguna solicitud.","th.order":"Crear una solicitud",
+ "o.subj":"Solicitud de soporte informático"
+});
+
+/* ===== Portfolio (případové studie) a O mně (zakladatel CORPHIK) ===== */
+/* text stránky 404 (původně všechny tři jazyky naráz) */
+Object.assign(T.cs,{"nf.t":"Stránka nenalezena"}); Object.assign(T.en,{"nf.t":"Page not found"}); Object.assign(T.es,{"nf.t":"Página no encontrada"});
+Object.assign(T.cs,{
+ "pf.lead":"Projekty, na kterých jsem pracoval – weby, aplikace a počítače.",
+ "pf.k.tj":"Webová aplikace","pf.k.ap":"Web","pf.k.pc":"Sestavení PC",
+ "pf.role":"Role","pf.stack":"Technologie","pf.langs":"Jazyky","pf.status":"Stav",
+ "pf.use":"Určení","pf.useGaming":"Hraní ve vysokém rozlišení","pf.cpu":"Procesor","pf.gpu":"Grafika","pf.platform":"Platforma",
+ "ab.role":"Zakladatel CORPHIK",
+ "ab.intro":"Pod značkou CORPHIK dělám IT řešení, stavím počítače na míru a poskytuju technickou podporu – osobně v Praze a okolí, na dálku po celé Evropě.",
+ "ab.doH":"Co dělám v CORPHIK","ab.doLink":"Služby a ceny",
+ "ab.d1h":"IT řešení","ab.d1p":"Domény a DNS, e-mailové záznamy (SPF, DKIM, DMARC) a redesign webu.",
+ "ab.d2h":"Stavba PC","ab.d2p":"Sestavy na míru podle rozpočtu, upgrady a čisté instalace Windows a Linuxu.",
+ "ab.d3h":"Technická podpora","ab.d3p":"Diagnostika a opravy, osobně nebo vzdáleně přes internet.",
+ "ab.tjH":"Vlastní projekt","ab.tjLink":"Detail v portfoliu","ab.route":"Cesta"
+});
+Object.assign(T.en,{
+ "pf.lead":"Projects I've worked on – websites, apps and computers.",
+ "pf.k.tj":"Web app","pf.k.ap":"Website","pf.k.pc":"PC build",
+ "pf.role":"Role","pf.stack":"Stack","pf.langs":"Languages","pf.status":"Status",
+ "pf.use":"Built for","pf.useGaming":"High-resolution gaming","pf.cpu":"Processor","pf.gpu":"Graphics","pf.platform":"Platform",
+ "ab.role":"Founder of CORPHIK",
+ "ab.intro":"Under the CORPHIK name I deliver IT solutions, engineer custom PCs and provide technical support – in person around Prague and remotely across Europe.",
+ "ab.doH":"What I do at CORPHIK","ab.doLink":"Services and prices",
+ "ab.d1h":"IT solutions","ab.d1p":"Domains and DNS, email records (SPF, DKIM, DMARC) and website redesign.",
+ "ab.d2h":"PC engineering","ab.d2p":"Custom builds to your budget, upgrades and clean Windows and Linux installs.",
+ "ab.d3h":"Technical support","ab.d3p":"Diagnostics and repairs, in person or remotely over the internet.",
+ "ab.tjH":"My own project","ab.tjLink":"See it in the portfolio","ab.route":"Path"
+});
+Object.assign(T.es,{
+ "pf.lead":"Proyectos en los que he trabajado: webs, aplicaciones y ordenadores.",
+ "pf.k.tj":"Aplicación web","pf.k.ap":"Sitio web","pf.k.pc":"Montaje de PC",
+ "pf.role":"Rol","pf.stack":"Tecnologías","pf.langs":"Idiomas","pf.status":"Estado",
+ "pf.use":"Pensado para","pf.useGaming":"Jugar en alta resolución","pf.cpu":"Procesador","pf.gpu":"Gráfica","pf.platform":"Plataforma",
+ "ab.role":"Fundador de CORPHIK",
+ "ab.intro":"Con la marca CORPHIK ofrezco soluciones IT, monto ordenadores a medida y doy soporte técnico: en persona en Praga y alrededores, y a distancia en toda Europa.",
+ "ab.doH":"Qué hago en CORPHIK","ab.doLink":"Servicios y precios",
+ "ab.d1h":"Soluciones IT","ab.d1p":"Dominios y DNS, registros de correo (SPF, DKIM, DMARC) y rediseño web.",
+ "ab.d2h":"Ingeniería de PC","ab.d2p":"Equipos a medida según tu presupuesto, mejoras e instalaciones limpias de Windows y Linux.",
+ "ab.d3h":"Soporte técnico","ab.d3p":"Diagnóstico y reparación, en persona o a distancia por internet.",
+ "ab.tjH":"Proyecto propio","ab.tjLink":"Ver en el portafolio","ab.route":"Trayectoria"
 });
 
 const root = document.documentElement;
@@ -321,7 +471,8 @@ function langFromLocation(){
   return "en";
 }
 
-const TJLOGO="data:image/webp;base64,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";
+/* logo Tandjo v černobílé verzi (bílé písmo na černé, stejné proporce jako původní barevné) */
+const TJLOGO="data:image/webp;base64,UklGRiILAABXRUJQVlA4IBYLAACQZwCdASqQAZABPjEYikOiIaESiUxIIAMEtLd7YCRSjt6zH2A60vcR9rj2X/cDrnNH/x/5XcwPAC/G/5b/Wvys/LnOWfnn+v8HDUCvV/9n4wHjsfJ/9z7Af8V/n3/P/wHr+/6X3Ge578y/wH/L9wr+M/0L/af3z96e8t+tfsMfrUGvBqMMvHyFwy8fIXDLx8hcMvHyFwy8fIXDLx8hcMvHyFwy8fIXDLx8hcMvHyFwy8fIXDLx8hcMvHyFwy8fHzheWW9UYUg+IwZQ1vAo8AcU4+kXcgwy8fHr1rM3vKFF2gjiTxFiU/XlC3alW/jzVyvEMOrtM13XeIu4F+xacgpH++gbhLIiGU5c5/tyhnwaf7ufvKieoTK1yM+QuDpTg3epg3j5C2mC9z0S6FkfmpPGx+/z3Ory2c6e7jpIKb+IgViK9qgFokDkigXMvndWSKINRhl4JurgaYg+yHAQw/mp4iMrWdUrfdPbT0pEsAyI1E3Z0EKogHQRnfBCy8vLBURY5iQ6RGXiNA1GGXj5C4tPUPiTH6K8qWIF9fBV15y8fIXDL10upYL6mtix+kKVoYdhk68MlEA6CFUQHxmyhsW9M3gWQ6SFjdo3hnwajDLyPK0X7j5R247rwKAog9TOFXJpcMvHx7MAp/DYhsh9fXip/e6WIQEe8VzEcDCPkLhlvNoj9BltqKt4/vDINRB3Fa5tQ99A7lT32nbBEKce+NN3nKu8kKXXQn4BMxgSTTW7fULsizy8qFElrIlcMvHxPYN0DRqwHw4D2cNKU3n/INHIikDuKnEhOwNXyWr+6zWrxrZ4ypIScQe/9Xz3h6Zgy6C82S1lhw+Uu+nbanwxjTxWXj1EtsnJWqSiAc9sOYMPolWsQFRGSGMIRrL8jaJ5zdYQBamlegNOMsUCwKoYZiA6Lzj0KXbB9gtyCu8fIXDLuPt8Nsy63XFc4VpB2J53pPp+di5I5+8SnM9zEBF+ubAmyi7dSMkogHQQqh0wW9raC2SFfXBesKPG8lxilNMYU8TALpe5N2Er+n3VGv10EKogHQQqlLeMt5Yu8GV575C4ZePkLhl4+QuGXj5C4ZePkLhl4+QuGXj5C4ZePkLhl4+QuGXj3YAA/v/BbIAAAAIyKsYaoY4IJCHVfA4+I9MxkLOOk9pTArqWfSoe4xc/sE4bFEtZukoWuttLc6sq4/w+voOD/0kUMf4QP2SgTjpWb37m2AzaTc77YeBsSJ0bb6qyL8ms/vXwUndxAd3n8rB0KOj3C0YkvlDCdOZUy5UJRKfRlD7GuirS0xiJoZVSLK/ZdNM8Pp52ATblxnhTFgbWplPCZUEq0lRrWOg0u3aYuLYzvy7WLwiBIykbKYEHV2C/9rKqUfebHKWQtyAlpKKEv+MheykoWFBKiYbhFkYaKYequuJIspMDZgiYwcjoZrhUz6yGhbLEv8uT2DuyLWDoqWO2XoEt50Nco9nfWYOiQJehoFeifhX6ba88+YqgCPReLe9qNKPVCAP3/E5rgUXWw3zkrdvmToNQEpRHyDrLgG7lME2JvusdKZ1RFEppyPFlETX5ZC6OjyUJj3UwX1yiOy4oNCEeTiX/aOALtbo9YdfC7XxcrzwiuFor9wtDLhLTET5qn5FfFUuy1WLe9RY6iERUpHAfDUIMTTgbSNuWzZ48jLkb3bkl6rRMkM61/a5Wk7ohAch83S5RskuauvibKo/X6MNf30VwR96A8odqloXeHcDkT7K65OYdEx2GOrcdOvBEe6tFAH+XpZkq6h/srgIlvEkKMq5eKC2z4OsgkZmTPwNOwu+scZW0/K6ad6nDGi2Tb6PsODOXk2POqnh9JgAI8KmqFjb9vwpj+wiwQTpRaQw/fNtUmzY4/QR3b62kuowFXVstcANAQ0I7ulQSWG/3L+FyB4i+Hk3wKW7ct8bJPX95B6yGjvwTiR4RDhr9JPfaK9+rkvH8F54ONSNs1JfEzkPihxHiVIcZZA2YFAMEbFamZnuxKudGKDyzFdESQN8fm5qc+rE5tq9CFmxG3D5wfiUqxvgvW3UAPcKjK0I3UjYFTCw+r4sHqnoeI265ynISoFDvyTyZTRfGGDHdbDJStpsnernT/wqB2zK9UYp5ImetJpmfRXWI1rWa6+ye9M4pg8TwEKAO8jDSn7v8R+UyAD2gB/zDozjuoRg+wmWZqAQco3MuUkGHRahhRpfyXDnTJzWsP0b/GwLLc0Jdou0ZawNlC+1HUPlloSOSm+aiDiATZ/ipWZ2oyewy09qYhuwNWsZYCbhDqA2prhStzkwE7gt5CsHUExuRmkId0eTQGjKR8f4V1HoVwwzYAcRavIcC9QqfgGrU9lC/WebkkUrWEcufoNDwXM8F0cLctj5I9fquzvlacmXEUjojieOb2aUBenSID0xPoPc1Fb9KNFxxKLKDcY+j+rCkh/2nxjhrnTY8yvMnkh8BKQDIBwIG+kP8/1gch5fBrYXx67UBjeYyT0f8P+U44v0MouSn2mtCjm9jH/6LlL1t/0g5UNOjIYvedaQ+y75KwRoRnbo99ePPsfsaWcaMurqLNoEdLlQJVgip9g0GpXZIsLvJtQcRroB5vT0jYbJJx4d35e7Jd7WRB8dW6nK1s8NQOUDh7HK9nPdgZNzdkLq+Y8j6nth2W+xC4D9x8X3vs/y3Bv0zROetea5/xMIroeIhSBHbUq3wJyZiDPGp7oTGyI0cgfbWvzryQ+KFRh2q0mJXC7MSD5SODn2ogtO4QtrgONBv/tuRGWTY+rRMstclk8ZX61cg5zl7aEeGbZI7jvVoTzLZIclVdVOobZGzPGPG6Sr9lUEv52ddiKs3V9SVEGRDg53lOL+jEeQ5tiu6obgO61rIRe8ZhV1rjdfoFbvDCfrIl7jbDapW65jmFO/74ebyLraPkXkP+at7dR9aOHEYd8BaSWDuK7MYNRBo3A/lCEjRhqbSGb5BGfbnxNLdPtTKfUSijdAEI1qJGowcdYCp8sdeSlIlEFkLWnTc1U+kIfO3ZfwOWugDTFYgBaRIxZZPhrukwvDuI+1rdV3MisxRV9Sz5B7w01NwjZJX4mlRkTwnFuMrqjwnuuplQW9i/ZoI37E5yHU/8NK+Tk+ycRQi8KxIdju0Lraorwz5cCLDhqKKafvHA+Hb71t+Ig511BbpLbrdLlLvycbDO93Iw6RyDvOCsJgELwS91bmHASm5a5daOHr5fhN4azUcBSgh+6pD+Dly2wVhwFNcBrTgnENg0wo/qmznykItyvLDZncjK+aC+Yjm9LyXi/MyOJvk8nktCdjVTBv7kZh+aGedg2HWjIhRHrHExRdaFehLqdabiQgD+3P4rlElT4oaRyafXTlfoz6rx57Q9hPtWPwFBbXBRRwYLejk1YCHCPItin5SeAMB8Ozg/L13waCqBDHYkAAVy6kmOQG9he9LkEcWeNqGetLYyPX2IXRMnL18M3HMCRFCCU/kC4bdFykH8UBXmtNi7ZtwfoSvgUvN/eG4uXamOP7iClCGxeMJ0S7fnKzkqbfC988gPLw6/u44T7me4l7GYANfjIcaW/NGn77vhB3bcU4HSE4hz7DyztB7vblalrfpP+l0Stodz1uPzv3P1dSdRFOSI8lrzpFiv5xdQjK32zwiTKlaxegV3YpmZ13P8yVz1n6qHdT/z2BAnkv5kmOO90Mod5EMDsj5utAWlLhJnA9FevzC31TWKtc+yNVUMiEhn6xnkXTwuwIwDhK80UeemOsn6DEMTVh6uSSKxgSs8di9p0WvIf9/Kmo4QbAEaiR+VdWOAAAAAAA=";
 /* ===== PORTFOLIO – přidávej projekty (img: "" = automatický náhled, nebo vlož odkaz/data obrázku) ===== */
 const PORTFOLIO = [
  { cat:"web", pv:"tj", img:"", url:"", wip:true,
@@ -395,20 +546,44 @@ function renderServices(){
 
 /* ===== Portfolio ===== */
 let pfFilter = "all";
+/* Portfolio jako případové studie: velký obraz + fakta. Vše jen z dat PORTFOLIO a existujících textů. */
+const PF_SPECS = { pc:[["pf.cpu","Ryzen 7 5800X3D"],["pf.gpu","Radeon RX 7800 XT"],["pf.platform","AMD AM4"]] };
+function caseVisual(p){
+  if(p.pv==="tj") return `<div class="case-visual v-tj"><img src="${TJLOGO}" alt="" width="400" height="400"></div>`;
+  if(p.pv==="ap") return `<div class="case-visual v-ap"><div class="v-bar"><i></i><i></i><i></i><span>CS</span><span>EN</span><span>ES</span></div>`
+    + `<div class="v-in"><img src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"><div class="v-btns"><b></b><b></b></div></div></div>`;
+  if(p.pv==="pc") return `<div class="case-visual v-pc">${PCICON}<dl>${PF_SPECS.pc.map(([k,v])=>`<div><dt>${esc(t(k))}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>`;
+  return `<div class="case-visual">${preview(p)}</div>`;
+}
+function caseFacts(p){
+  const f = [];
+  if(p.pv==="tj") f.push([t("pf.role"), t("tj.role")]);
+  if(p.pv==="ap") f.push([t("pf.langs"), "CS, EN, ES"]);
+  if(p.pv==="pc") f.push([t("pf.use"), t("pf.useGaming")]);
+  else f.push([t("pf.stack"), p.tags.join(", ")]);
+  /* stav jen tam, kde ho data uvádějí (wip) – „dokončeno“ by si odporovalo s upozorněním „web je ve výstavbě“ */
+  if(p.wip) f.push([t("pf.status"), t("pf.wip")]);
+  return f;
+}
 function renderPortfolio(){
+  renderWorkTeaser();
   const box = $('pfList'); if(!box) return;
-  box.innerHTML = "";
-  PORTFOLIO.forEach(p=>{
-    const a = document.createElement('article');
-    a.hidden = pfFilter!=="all" && p.cat!==pfFilter;
-    a.innerHTML = preview(p) + `<h3><span class="t"></span></h3><p></p><ul class="tags"></ul>`;
-    a.querySelector('.t').textContent = p.title[lang];
-    if(p.wip){ const m=document.createElement('span'); m.className='mini'; m.textContent=t("pf.wip"); a.querySelector('h3').appendChild(m); }
-    if(p.url){ const l=document.createElement('a'); l.href=p.url; l.target="_blank"; l.rel="noopener"; l.textContent=t("pf.view"); a.querySelector('h3').appendChild(l); }
-    a.querySelector('p').textContent = p.desc[lang];
-    p.tags.forEach(x=>{ const li=document.createElement('li'); li.textContent=x; a.querySelector('.tags').appendChild(li); });
-    box.appendChild(a);
-  });
+  box.innerHTML = PORTFOLIO.map(p=>`<article class="case" id="pf-${p.pv}"${pfFilter!=="all" && p.cat!==pfFilter ? " hidden" : ""}>`
+    + `<div class="case-stage"><svg class="case-orbit" viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="100" rx="96" ry="30"/><ellipse cx="100" cy="100" rx="70" ry="21"/></svg>${caseVisual(p)}</div>`
+    + `<div class="case-body"><p class="case-k">${esc(t("pf.k."+p.pv))}</p><h2 class="case-t">${esc(p.title[lang])}</h2><p class="case-d">${esc(p.desc[lang])}</p>`
+    + `<dl class="case-facts">${caseFacts(p).map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`
+    + (p.url ? `<a class="btn case-link" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(t("pf.view"))}</a>` : "")
+    + `</div></article>`).join("");
+  /* odkaz /portfolio/#pf-xx z úvodu: karty vznikají až skriptem, tak k nim doskroluj po prvním vykreslení */
+  if(!renderPortfolio.done && location.hash){ const el = document.getElementById(location.hash.slice(1)); if(el){ el.scrollIntoView(); el.classList.add('arrived'); } }
+  renderPortfolio.done = true;
+}
+/* Ukázky portfolia na úvodu – každá vede na svou kartu v /portfolio/ */
+function renderWorkTeaser(){
+  const ul = $('pfTeaser'); if(!ul) return;
+  ul.innerHTML = PORTFOLIO.map(p=>`<li><a class="work-card" href="/portfolio/#pf-${p.pv}" data-pf="${p.pv}">${preview(p)}`
+    + `<h3><span class="t">${esc(p.title[lang])}</span>${p.wip?`<span class="mini">${esc(t("pf.wip"))}</span>`:""}</h3>`
+    + `<p>${esc(p.desc[lang])}</p></a></li>`).join("");
 }
 document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{
   pfFilter = b.dataset.f;
@@ -445,34 +620,141 @@ function updateCartUI(bump){
   });
 }
 document.addEventListener('click', e=>{ const b = e.target.closest('[data-add]'); if(b) toggleCart(b.dataset.add); });
-addEventListener('storage', e=>{ if(e.key===CART_KEY){ updateCartUI(); if($('ckItems')) renderCheckout(); } });
+addEventListener('storage', e=>{ if(e.key===CART_KEY){ updateCartUI(); if($('ckPick')) renderCheckout(); } });
 
-/* ===== Objednávka (checkout) ===== */
-let urlServiceAdded = false;
-function selectedIds(){ return [...document.querySelectorAll('#ckItems input:checked')].map(i=>i.value); }
-function selectedServices(){ return selectedIds().map(findService).filter(Boolean); }
-function renderCheckout(){
-  const box = $('ckItems'); if(!box) return;
-  /* starší odkazy /orders/?service=xxx přidají službu do košíku */
-  const p = new URLSearchParams(location.search).get('service');
-  if(p && !urlServiceAdded && (p==="other" || findService(p))){ urlServiceAdded = true; const c=getCart(); if(!c.includes(p)) setCart([...c, p]); }
-  const c = getCart();
-  box.innerHTML = [...SERVICES.map(s=>[s.id, s.name[lang], s.price[lang]]), ["other", t("o.other"), ""]].map(([id,n,pr]) =>
-    `<label class="pick"><input type="checkbox" value="${id}"${c.includes(id) ? " checked" : ""}><span class="pk-n">${esc(n)}</span><span class="pk-p">${esc(pr)}</span></label>`).join("");
-  $('ckMsg').placeholder = t("ck.msgPh");
-  $('ckWhen').placeholder = t("ck.whenPh");
-  updateSummary();
+/* ===== Poptávka (stránka /orders/): výběr služeb → detaily → kontakt → kontrola =====
+   Košík = pole id služeb (corphikCart, sdílí ho tlačítka na úvodu). Detaily ke službám jsou zvlášť (corphikOpts).
+   Ceny jsou „od“, součet je jen orientační odhad. Nic se neobjednává ani neplatí – odešle se poptávka e-mailem. */
+const OPTS_KEY = "corphikOpts";
+/* Volby u služeb – vychází jen z popisů služeb a cenu nemění (kromě hodin vzdálené pomoci).
+   multi = víc možností, one = jedna, num = počítadlo, text/area = volný text */
+const SVC_OPTS = {
+  build:[{k:"use",type:"multi",ch:["gaming","work","school"]},{k:"budget",type:"text"},{k:"have",type:"area"}],
+  os:[{k:"os",type:"one",ch:["win","linux","unsure"]},{k:"dev",type:"num",min:1,max:10}],
+  upgrade:[{k:"parts",type:"multi",ch:["ssd","ram","gpu","clean"]},{k:"dev",type:"num",min:1,max:10}],
+  fix:[{k:"sym",type:"multi",ch:["dead","crash","slow","loud"]},{k:"dev",type:"num",min:1,max:10}],
+  dns:[{k:"need",type:"multi",ch:["site","mail","auth"]},{k:"domain",type:"text"}],
+  web:[{k:"goals",type:"multi",ch:["look","mobile","speed","sec"]},{k:"url",type:"text"}],
+  remote:[{k:"hours",type:"num",min:1,max:8}]
+};
+const PICK_ICONS = {
+  build:'<rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="14" r="3"/><path d="M9 6h6M9 9h6"/>',
+  other:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.5M12 17h.01"/>'
+};
+/* malá černá díra (stejná jako v závěrečné výzvě na úvodu) – do ní „padají“ vybrané služby */
+const BH_MINI = '<svg class="bh-mini" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-10 32 32)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="32" cy="33" rx="30" ry="6" stroke-width="1.2" opacity=".45"/><circle cx="32" cy="32" r="17" stroke-width="7" opacity=".14"/><path d="M15 33a17 17 0 0 1 34 0" stroke-width="3.2"/><path d="M19.5 34.5a12.5 12.5 0 0 0 25 0" stroke-width="1.3" opacity=".75"/><circle cx="32" cy="32" r="11" fill="#000" stroke-width="1.3"/><path d="M2 33a30 6 0 0 0 60 0" stroke-width="2.8"/></g></svg>';
+let urlServiceAdded = false, memOpts = {};
+function getOpts(){
+  try{ const v = JSON.parse(localStorage.getItem(OPTS_KEY) || "null"); if(v && typeof v === "object") return v; }catch(_){}
+  return memOpts;
 }
-function updateSummary(){
-  const ids = selectedIds(), ss = selectedServices();
-  $('sumList').innerHTML = ids.map(id=>{ const s=findService(id);
-    return `<li><span>${esc(s ? s.name[lang] : t("o.other"))}</span><b>${esc(s ? s.price[lang] : "")}</b></li>`; }).join("");
+function saveOpts(o){ memOpts = o; try{ localStorage.setItem(OPTS_KEY, JSON.stringify(o)); }catch(_){} }
+/* uložené volby služby, doplněné a ořezané podle SVC_OPTS */
+function optsFor(id){
+  const o = {...(getOpts()[id] || {})};
+  (SVC_OPTS[id] || []).forEach(f=>{
+    if(f.type==="num"){ const n = parseInt(o[f.k], 10); o[f.k] = Math.min(f.max, Math.max(f.min, isNaN(n) ? f.min : n)); }
+    else if(f.type==="multi") o[f.k] = Array.isArray(o[f.k]) ? o[f.k].filter(c=>f.ch.includes(c)) : [];
+    else if(f.type==="one"){ if(!f.ch.includes(o[f.k])) o[f.k] = ""; }
+    else if(typeof o[f.k] !== "string") o[f.k] = "";
+  });
+  return o;
+}
+function setOpt(id, k, v){ const all = getOpts(); all[id] = {...optsFor(id), [k]: v}; saveOpts(all); }
+function selectedIds(){ const c = getCart(); return [...SERVICES.map(s=>s.id), "other"].filter(id=>c.includes(id)); }
+function selectedServices(){ return selectedIds().map(findService).filter(Boolean); }
+/* částky ve stejném tvaru jako ceník (CS: 1 500 Kč, EN: CZK 1,500 (≈ €60), ES: 1.500 CZK (≈ 60 €)), € = Kč / 25 jako v ceníku */
+function money(czk){
+  const g = (n, sep) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, sep), e = Math.round(czk/25);
+  if(lang==="cs") return `${g(czk," ")} Kč`;
+  if(lang==="es") return `${g(czk,".")} CZK (≈ ${e} €)`;
+  return `CZK ${g(czk,",")} (≈ €${e})`;
+}
+function itemPrice(s){ if(!s) return t("ck.otherP"); return s.hourly ? money(s.czk*optsFor(s.id).hours) : s.price[lang]; }
+function estimate(){ return selectedServices().reduce((sum, s)=>sum + (s.hourly ? s.czk*optsFor(s.id).hours : s.czk), 0); }
+/* volby jako text: krátce do souhrnu, celé (i s volným textem) do poptávky */
+function optLines(id, full){
+  const o = optsFor(id);
+  return (SVC_OPTS[id] || []).map(f=>{
+    const lab = t("op."+f.k).replace(/\s*\([^)]*\)$/, "");
+    if(f.type==="multi") return o[f.k].length ? (full ? lab.replace(/[?¿]/g, "")+": " : "") + o[f.k].map(c=>t("op."+f.k+"."+c)).join(", ") : "";
+    if(f.type==="one") return o[f.k] ? (full ? lab.replace(/[?¿]/g, "")+": " : "") + t("op."+f.k+"."+o[f.k]) : "";
+    if(f.type==="num") return `${lab}: ${o[f.k]}`;
+    return full && o[f.k].trim() ? `${lab}: ${o[f.k].trim()}` : "";
+  }).filter(Boolean);
+}
+
+function renderPick(){
+  const box = $('ckPick'); if(!box) return;
+  if(!box.dataset.ready){
+    box.innerHTML = [...SERVICES.map(s=>s.id), "other"].map(id=>
+      `<button type="button" class="pk" data-pick="${id}" aria-pressed="false"><span class="ic">${ICON_WRAP(SVC_ICONS[id] || PICK_ICONS[id] || "")}</span>`
+      + `<span class="pk-t"><b></b><span class="pk-p"></span></span><span class="pk-tag"></span><span class="pk-st" aria-hidden="true"></span></button>`).join("");
+    box.dataset.ready = "1";
+  }
+  const c = getCart();
+  box.querySelectorAll('[data-pick]').forEach(b=>{
+    const id = b.dataset.pick, s = findService(id);
+    b.setAttribute('aria-pressed', c.includes(id));
+    b.querySelector('b').textContent = s ? s.name[lang] : t("o.other");
+    b.querySelector('.pk-p').textContent = s ? s.price[lang] : t("ck.otherP");
+    b.querySelector('.pk-tag').innerHTML = s ? svcTag(s) : "";
+  });
+}
+function optHTML(id, isNew){
+  const s = findService(id), o = optsFor(id);
+  const fields = (SVC_OPTS[id] || []).map(f=>{
+    const lid = `l-${id}-${f.k}`, lab = esc(t("op."+f.k));
+    if(f.type==="multi" || f.type==="one")
+      return `<div class="op"><span class="op-l" id="${lid}">${lab}</span><div class="chips" role="group" aria-labelledby="${lid}">`
+        + f.ch.map(ch=>{ const on = f.type==="multi" ? o[f.k].includes(ch) : o[f.k]===ch;
+          return `<button type="button" class="chip" data-o="${id}|${f.k}|${ch}" aria-pressed="${on}">${esc(t("op."+f.k+"."+ch))}</button>`; }).join("")
+        + `</div></div>`;
+    if(f.type==="num")
+      return `<div class="op op-num"><span class="op-l" id="${lid}">${lab}</span><div class="stepper" role="group" aria-labelledby="${lid}">`
+        + `<button type="button" data-step="${id}|${f.k}|-1" aria-label="${esc(t("ck.less"))}"${o[f.k]<=f.min?" disabled":""}>−</button>`
+        + `<output aria-live="polite">${o[f.k]}</output>`
+        + `<button type="button" data-step="${id}|${f.k}|1" aria-label="${esc(t("ck.more"))}"${o[f.k]>=f.max?" disabled":""}>+</button></div></div>`;
+    const ph = esc(t("op."+f.k+".ph")), fid = `o-${id}-${f.k}`;
+    return `<label class="fld" for="${fid}"><span>${lab}</span>` + (f.type==="area"
+      ? `<textarea id="${fid}" data-f="${id}|${f.k}" maxlength="500" placeholder="${ph}">${esc(o[f.k])}</textarea>`
+      : `<input id="${fid}" data-f="${id}|${f.k}" maxlength="200" placeholder="${ph}" value="${esc(o[f.k])}">`) + `</label>`;
+  }).join("");
+  const note = id==="build" ? t("ck.payb") : id==="other" ? t("ck.otherN") : "";
+  return `<fieldset class="opt${isNew ? " new" : ""}" data-sid="${id}" id="opt-${id}">`
+    + `<legend>${esc(s ? s.name[lang] : t("o.other"))}</legend>`
+    + `<button type="button" class="lnk opt-rm" data-rm="${id}">${esc(t("ck.remove"))}</button>`
+    + (s ? `<p class="opt-d">${esc(s.desc[lang])}</p>` : "") + fields + (note ? `<p class="note">${esc(note)}</p>` : "") + `</fieldset>`;
+}
+function renderOpts(){
+  const box = $('ckOpts'); if(!box) return;
+  const ids = selectedIds(), had = new Set([...box.querySelectorAll('[data-sid]')].map(f=>f.dataset.sid));
+  box.innerHTML = ids.length ? ids.map(id=>optHTML(id, box.dataset.ready && !had.has(id))).join("") : `<p class="note">${esc(t("ck.step2e"))}</p>`;
+  box.dataset.ready = "1";
+}
+function renderSummary(){
+  const ul = $('sumList'); if(!ul) return;
+  const ids = selectedIds(), est = estimate();
+  ul.innerHTML = ids.map(id=>{ const s = findService(id), meta = optLines(id, false).join(", ");
+    return `<li data-sid="${id}"><div class="si"><b>${esc(s ? s.name[lang] : t("o.other"))}</b>${meta ? `<span>${esc(meta)}</span>` : ""}</div>`
+      + `<span class="sp">${esc(itemPrice(s))}</span>`
+      + `<div class="sa"><button type="button" class="lnk" data-edit="${id}">${esc(t("ck.edit"))}</button>`
+      + `<button type="button" class="lnk" data-rm="${id}">${esc(t("ck.remove"))}</button></div></li>`; }).join("");
   $('sumEmpty').hidden = ids.length > 0;
+  $('sumTotal').hidden = !est; $('sumEst').textContent = est ? money(est) : "";
+  $('sumNote').hidden = !est;
   /* Sestavení PC: záloha na komponenty předem (ostatní služby se platí až po dokončení) */
   const dep = ids.includes("build");
   document.querySelectorAll('[data-i18n="ck.payH"]').forEach(el=>{ el.innerHTML = t(dep ? "ck.payHb" : "ck.payH"); });
   document.querySelectorAll('[data-i18n="ck.pay"]').forEach(el=>{ el.innerHTML = t(dep ? "ck.payb" : "ck.pay"); });
-  /* Osobně jen v Česku; Španělsko a zbytek Evropy zatím jen na dálku */
+  /* lišta dole na mobilu */
+  const bar = $('ckBar');
+  if(bar){ bar.hidden = !ids.length; $('barCount').textContent = ids.length; $('barEst').textContent = est ? money(est) : t("ck.otherP"); }
+  document.body.classList.toggle('has-bar', ids.length > 0);
+}
+/* Osobně jen v Česku; Španělsko a zbytek Evropy zatím jen na dálku */
+function updateRules(){
+  const ss = selectedServices();
   const onsiteOnly = ss.some(s=>!s.remote), remoteOnly = ss.some(s=>s.onlyRemote), abroad = isAbroad();
   const rem = $('modeRemote'), ons = $('modeOnsite');
   rem.disabled = onsiteOnly;
@@ -480,11 +762,28 @@ function updateSummary(){
   $('remoteNa').hidden = !onsiteOnly || abroad || remoteOnly;
   $('mixNote').hidden = !(onsiteOnly && remoteOnly) || abroad;
   const ab = $('abroadNote');
-  if(ab){ ab.hidden = !abroad; ab.textContent = abroad ? t(onsiteOnly ? "ck.abroadNa" : "ck.abroadRemote") : ""; ab.classList.toggle('warn', abroad && onsiteOnly); }
+  ab.hidden = !abroad; ab.textContent = abroad ? t(onsiteOnly ? "ck.abroadNa" : "ck.abroadRemote") : ""; ab.classList.toggle('warn', abroad && onsiteOnly);
   if(ons.disabled) rem.checked = true; else if(rem.disabled) ons.checked = true;
   $('addrWrap').hidden = abroad || !ons.checked;
+  /* popis je povinný jen u „Něco jiného“ */
+  $('msgLab').textContent = t(selectedIds().includes("other") ? "ck.msg" : "ck.msgOpt");
 }
-function isAbroad(){ const c=$('ckCountry'); return !!c && c.value !== "cz"; }
+function renderReview(){
+  const pre = $('ckReview'); if(!pre) return;
+  const o = collectOrder();
+  pre.textContent = orderText({...o, name: o.name || "—", email: o.email || "—"});
+}
+function refreshCheckout(){ renderSummary(); updateRules(); renderReview(); }
+function renderCheckout(){
+  if(!$('ckPick')) return;
+  /* starší odkazy /orders/?service=xxx přidají službu do košíku */
+  const p = new URLSearchParams(location.search).get('service');
+  if(p && !urlServiceAdded && (p==="other" || findService(p))){ urlServiceAdded = true; const c = getCart(); if(!c.includes(p)) setCart([...c, p]); }
+  $('ckMsg').placeholder = t("ck.msgPh");
+  $('ckWhen').placeholder = t("ck.whenPh");
+  renderPick(); renderOpts(); refreshCheckout();
+}
+function isAbroad(){ const c = $('ckCountry'); return !!c && c.value !== "cz"; }
 function countryFromLocation(){
   let tz=""; try{ tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; }catch(e){}
   if(tz==="Europe/Prague") return "cz";
@@ -493,10 +792,12 @@ function countryFromLocation(){
 }
 function collectOrder(){
   const v = id => $(id).value.trim();
-  const items = selectedIds().map(id=>{ const s=findService(id); return { id, name: s ? s.name[lang] : t("o.other"), price: s ? s.price[lang] : "" }; });
+  const items = selectedIds().map(id=>{ const s = findService(id);
+    return { id, name: s ? s.name[lang] : t("o.other"), price: itemPrice(s), details: optLines(id, true) }; });
+  const est = estimate();
   return {
     name:v('ckName'), email:v('ckEmail'), phone:v('ckPhone'),
-    items, service: items.map(i=>i.name).join(", "),
+    items, service: items.map(i=>i.name).join(", "), estimate: est ? money(est) : "",
     country: $('ckCountry') ? $('ckCountry').selectedOptions[0].textContent : "",
     mode: ($('modeOnsite').checked && !isAbroad()) ? t("ck.onsite") : t("ck.remote"),
     address: ($('modeOnsite').checked && !isAbroad()) ? v('ckAddr') : "",
@@ -506,29 +807,116 @@ function collectOrder(){
 function orderText(o){
   return [
     `${t("f.name")}: ${o.name}`, `${t("f.email")}: ${o.email}`, o.phone?`${t("f.phone")}: ${o.phone}`:"",
-    "", `${t("f.services")}:`, ...(o.items||[]).map(i=>`– ${i.name}${i.price?` (${i.price})`:""}`), "",
+    "", `${t("f.services")}:`,
+    ...(o.items||[]).flatMap(i=>[`– ${i.name}${i.price?`: ${i.price}`:""}`, ...(i.details||[]).map(d=>`   ${d}`)]),
+    o.estimate?`${t("ck.est")}: ${o.estimate}`:"", "",
     o.country?`${t("f.country")}: ${o.country}`:"", `${t("f.mode")}: ${o.mode}`,
     o.address?`${t("f.addr")}: ${o.address}`:"", o.when?`${t("f.when")}: ${o.when}`:"",
-    "", `${t("f.msg")}:`, o.msg
-  ].filter((x,i,a)=>x!=="" || (i>0 && a[i-1]!=="")).join("\n");
+    o.msg?"":null, o.msg?`${t("f.msg")}:`:"", o.msg||""
+  ].filter(x=>x!==null).filter((x,i,a)=>x!=="" || (i>0 && a[i-1]!=="")).join("\n").trim();
+}
+/* vybraná služba „spadne“ do malé černé díry v souhrnu (na mobilu v liště dole) */
+function flyToSummary(from){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches || !from.animate) return;
+  const bar = $('ckBar'), useBar = bar && !bar.hidden && getComputedStyle(bar).display !== "none";
+  const target = (useBar ? bar : document.querySelector('.summary')).querySelector('.bh-mini');
+  if(!target) return;
+  const a = from.getBoundingClientRect(), b = target.getBoundingClientRect();
+  const pulse = () => { target.classList.remove('pull'); void target.getBoundingClientRect(); target.classList.add('pull'); };
+  if(b.bottom < 0 || b.top > innerHeight){ pulse(); return; }
+  const x0 = a.left + a.width/2, y0 = a.top + a.height/2, x1 = b.left + b.width/2, y1 = b.top + b.height/2;
+  const mx = (x0 + x1)/2, my = Math.min(y0, y1) - 70;
+  const dot = document.createElement('span'); dot.className = 'ck-fly'; document.body.appendChild(dot);
+  const frames = [0, .25, .5, .75, 1].map(k=>{ const q = 1 - k, x = q*q*x0 + 2*q*k*mx + k*k*x1, y = q*q*y0 + 2*q*k*my + k*k*y1;
+    return { transform: `translate(${x - 6}px,${y - 6}px) scale(${1 - k*0.75})`, opacity: k < 1 ? 1 : 0 }; });
+  dot.animate(frames, { duration: 600, easing: 'cubic-bezier(.55,0,.8,.2)' }).onfinish = () => { dot.remove(); pulse(); };
+}
+function removeItem(id){
+  setCart(getCart().filter(x=>x!==id));
+  renderPick(); renderOpts(); refreshCheckout();
+  const card = document.querySelector(`[data-pick="${id}"]`); if(card) card.focus({preventScroll:true});
+}
+function editItem(id){
+  const f = $('opt-' + id); if(!f) return;
+  f.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? "auto" : "smooth", block:"center"});
+  const c = f.querySelector('button.chip, .stepper button:not([disabled]), input, textarea'); if(c) c.focus({preventScroll:true});
+  f.classList.remove('flash'); void f.offsetWidth; f.classList.add('flash');
+}
+/* chyby přímo u polí */
+function fieldError(el, key){
+  const host = el.closest('.fld, .consent, .panel') || el;
+  let p = host.querySelector(':scope > .fld-err') || (host.classList.contains('consent') ? $('consentErr') : null);
+  if(!p){ p = document.createElement('p'); p.className = 'fld-err'; host.appendChild(p); }
+  p.id = p.id || ('err-' + (el.id || Math.random().toString(36).slice(2)));
+  p.textContent = t(key); p.hidden = false;
+  if(el.matches('input,textarea,select')){ el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', p.id); }
+}
+function clearError(el){
+  const host = el.closest('.fld, .consent') ; el.removeAttribute('aria-invalid');
+  const p = host && (host.querySelector(':scope > .fld-err') || (host.classList.contains('consent') ? $('consentErr') : null));
+  if(p) p.hidden = true;
 }
 function initCheckout(){
   const form = $('ckForm'); if(!form) return;
-  $('ckItems').addEventListener('change', ()=>{ setCart(selectedIds()); updateSummary(); });
+  $('ckPick').addEventListener('click', e=>{
+    const b = e.target.closest('[data-pick]'); if(!b) return;
+    const id = b.dataset.pick, on = getCart().includes(id);
+    setCart(on ? getCart().filter(x=>x!==id) : [...getCart(), id]);
+    renderPick(); renderOpts(); refreshCheckout();
+    $('pickErr').hidden = true;
+    if(!on) flyToSummary(b);
+  });
+  $('ckOpts').addEventListener('click', e=>{
+    const chip = e.target.closest('[data-o]'), st = e.target.closest('[data-step]'), rm = e.target.closest('[data-rm]');
+    if(chip){
+      const [id, k, ch] = chip.dataset.o.split("|"), f = SVC_OPTS[id].find(x=>x.k===k), o = optsFor(id);
+      if(f.type==="multi"){ const v = o[k].includes(ch) ? o[k].filter(x=>x!==ch) : [...o[k], ch]; setOpt(id, k, v); chip.setAttribute('aria-pressed', v.includes(ch)); }
+      else { const v = o[k]===ch ? "" : ch; setOpt(id, k, v); chip.parentElement.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed', x===chip && v===ch)); }
+      refreshCheckout();
+    } else if(st){
+      const [id, k, d] = st.dataset.step.split("|"), f = SVC_OPTS[id].find(x=>x.k===k);
+      const n = Math.min(f.max, Math.max(f.min, optsFor(id)[k] + Number(d))); setOpt(id, k, n);
+      const g = st.parentElement, less = g.querySelector('[data-step$="|-1"]'), more = g.querySelector('[data-step$="|1"]');
+      g.querySelector('output').textContent = n; less.disabled = n <= f.min; more.disabled = n >= f.max;
+      if(st.disabled) (st === less ? more : less).focus();
+      refreshCheckout();
+    } else if(rm) removeItem(rm.dataset.rm);
+  });
+  $('ckOpts').addEventListener('input', e=>{
+    const f = e.target.closest('[data-f]'); if(!f) return;
+    const [id, k] = f.dataset.f.split("|"); setOpt(id, k, f.value); refreshCheckout();
+  });
+  document.querySelector('.summary').addEventListener('click', e=>{
+    const rm = e.target.closest('[data-rm]'), ed = e.target.closest('[data-edit]');
+    if(rm) removeItem(rm.dataset.rm); else if(ed) editItem(ed.dataset.edit);
+  });
   const cc = $('ckCountry');
-  if(cc){ cc.value = countryFromLocation(); cc.addEventListener('change', updateSummary); }
-  document.querySelectorAll('input[name="mode"]').forEach(r=>r.addEventListener('change', updateSummary));
+  if(cc){ cc.value = countryFromLocation(); cc.addEventListener('change', refreshCheckout); }
+  document.querySelectorAll('input[name="mode"]').forEach(r=>r.addEventListener('change', refreshCheckout));
+  form.addEventListener('input', e=>{ if(e.target.matches('#ckName,#ckEmail,#ckPhone,#ckAddr,#ckWhen,#ckMsg')){ clearError(e.target); renderReview(); } });
+  $('ckConsent').addEventListener('change', e=>clearError(e.target));
   form.addEventListener('submit', async e=>{
     e.preventDefault();
-    const o = collectOrder(), err = $('ckErr');
-    if(!o.name || !o.email || !o.msg || !$('ckConsent').checked){ err.textContent=t("ck.err"); return; }
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(o.email)){ err.textContent=t("ck.errEmail"); $('ckEmail').focus(); return; }
-    if(!o.items.length){ err.textContent=t("ck.errItems"); $('ckItems').scrollIntoView({block:"center"}); return; }
-    if(isAbroad() && selectedServices().some(s=>!s.remote)){ err.textContent=t("ck.abroadNa"); return; }
-    if($('modeOnsite').checked && !isAbroad() && !o.address){ err.textContent=t("ck.errAddr"); $('ckAddr').focus(); return; }
+    const o = collectOrder(), err = $('ckErr'), bad = [];
+    const fail = (el, key) => { fieldError(el, key); bad.push([el, key]); };
+    if(!o.items.length){ const p = $('pickErr'); p.textContent = t("ck.errItems"); p.hidden = false; bad.push([$('ckPick'), "ck.errItems"]); }
+    if(!o.name) fail($('ckName'), "ck.errName");
+    if(!o.email) fail($('ckEmail'), "ck.errEmailE");
+    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(o.email)) fail($('ckEmail'), "ck.errEmail");
+    if(isAbroad() && selectedServices().some(s=>!s.remote)) fail($('ckCountry'), "ck.abroadNa");
+    if($('modeOnsite').checked && !isAbroad() && !o.address) fail($('ckAddr'), "ck.errAddr");
+    if(selectedIds().includes("other") && !o.msg) fail($('ckMsg'), "ck.errMsg");
+    if(!$('ckConsent').checked) fail($('ckConsent'), "ck.errConsent");
+    if(bad.length){
+      err.textContent = t(bad.length > 1 ? "ck.errSee" : bad[0][1]);
+      const first = bad[0][0], target = first.id === "ckPick" ? first.querySelector('button') : first;
+      first.scrollIntoView({block:"center"}); if(target) target.focus({preventScroll:true});
+      return;
+    }
     if($('ckHp').value) return; // ochrana proti robotům
     err.textContent = "";
-    const btn = $('ckSubmit'); btn.disabled = true; btn.textContent = t("ck.sending");
+    const btn = $('ckSubmit'), lab = btn.querySelector('span');
+    btn.disabled = true; lab.textContent = t("ck.sending");
     let sent = false;
     if(WEB3FORMS_KEY){
       try{
@@ -536,20 +924,21 @@ function initCheckout(){
           body:JSON.stringify({access_key:WEB3FORMS_KEY, subject:`${t("o.subj")}: ${o.service}`, from_name:"Corphik web", replyto:o.email, message:orderText(o)})});
         const j = await r.json(); sent = !!j.success;
         if(!sent) throw 0;
-      }catch(_){ err.textContent=t("ck.fail"); btn.disabled=false; btn.textContent=t("ck.submit"); return; }
+      }catch(_){ err.textContent = t("ck.fail"); btn.disabled = false; lab.textContent = t("ck.submit"); return; }
     }
     try{ sessionStorage.setItem('corphikOrder', JSON.stringify({...o, sent})); }catch(_){}
-    setCart([]);
+    setCart([]); saveOpts({});
     location.href = "/orders/thanks/";
   });
 }
 
-/* ===== Děkovací stránka ===== */
+/* ===== Děkovací stránka (poptávka odeslaná, nic není objednané ani zaplacené) ===== */
 function renderThanks(){
   const box = $('thBox'); if(!box) return;
   let o=null; try{ o = JSON.parse(sessionStorage.getItem('corphikOrder')||"null"); }catch(_){}
   $('thHas').hidden = !o; $('thNone').hidden = !!o;
   if(!o) return;
+  $('thTitle').textContent = t(o.sent ? "th.title" : "th.ready");
   $('thText').textContent = orderText(o);
   $('thMail').hidden = o.sent;
   const a = $('thMailBtn');
@@ -557,12 +946,21 @@ function renderThanks(){
 }
 
 /* ===== Jazyk ===== */
+/* Na ostatních stránkách vedou odkazy na úvod („/“, „/#sluzby“) na úvod ve zvoleném jazyce */
+const HOME_URL = {cs:"/", en:"/en/", es:"/es/"};
+function localizeHomeLinks(){
+  if(HAS_ALT) return;
+  document.querySelectorAll('a[href="/"], a[href^="/#"], a[data-home]').forEach(a=>{
+    if(a.dataset.home === undefined) a.dataset.home = a.getAttribute('href').slice(1);
+    a.setAttribute('href', (HOME_URL[lang] || "/") + a.dataset.home);
+  });
+}
 function setLang(l, remember){
   lang = T[l] ? l : "en"; root.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el=>{ el.innerHTML = t(el.dataset.i18n); });
   document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.lang===lang));
-  renderServices(); renderPortfolio(); renderCheckout(); renderThanks(); renderWip(); themeLabel();
-  const titles = {home:"h.area", portfolio:"pf.h", about:"ab.h", orders:"ck.title", thanks:"ck.title"};
+  renderServices(); renderPortfolio(); renderCheckout(); renderThanks(); renderWip(); themeLabel(); localizeHomeLinks();
+  const titles = {home:"h.area", portfolio:"pf.h", about:"nav.about", orders:"ck.title", thanks:"ck.title", notfound:"nf.t"};
   document.title = "Corphik – " + (PAGE==="home" ? t("h.area").split(",")[0] : t(titles[PAGE]||"h.area").replace(/<[^>]+>/g,""));
   if(remember){ try{ localStorage.setItem('lang', lang); }catch(e){} }
 }
@@ -571,7 +969,8 @@ document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',(
   const l = b.dataset.lang;
   if(HAS_ALT && ALT[l]){
     try{ localStorage.setItem('lang', l); }catch(e){}
-    if(l !== root.lang) location.href = ALT[l];
+    /* jen cesta z hreflang odkazu – zůstane stejná doména (corphik.eu, www, náhled) i sekce (#sluzby…) */
+    if(l !== root.lang){ const u = new URL(ALT[l], location.href); location.href = u.pathname + location.hash; }
     return;
   }
   setLang(l, true);
@@ -614,116 +1013,8 @@ function renderWip(){
   const x = box.querySelector('.wip-x'); x.setAttribute('aria-label', t("wip.close")); x.title = t("wip.close");
 }
 
-/* ===== Úvod: nápis CORPHIK, kde „O“ je černá díra (canvas) =====
-   Díra se zhroutí, dokreslí se kolem ní disk a písmena z ní vyletí na svá místa.
-   Pak po disku pořád obíhají tečky. Písmena jsou v /assets/img/wm-c.png (C)
-   a wm-rphik.png (RPHIK + hvězda); barvu berou z motivu (--ink). */
-function initBlackHole(){
-  const cv = $('bhCanvas'); if(!cv || !cv.getContext) return;
-  const ctx = cv.getContext('2d');
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const IMG_W = 640, IMG_H = 120, OX = 143, OY = 87;          /* střed „O“ v obrázku nápisu */
-  const ROT = -9*Math.PI/180, TAU = Math.PI*2;
-  const ease = x => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
-  const imgs = ["/assets/img/wm-c.png", "/assets/img/wm-rphik.png"].map(src => { const i = new Image(); i.src = src; return i; });
-  let tinted = [], tintFor = "", ink = "", rgb = "0,0,0", dark = false;
-  let W=0, H=0, s=1, ox=0, oy=0, hx=0, hy=0, R=0, visible=true, running=false, t0=0;
-  const DOTS = Array.from({length:64}, (_,i)=>({ a: i/64*TAU + Math.random()*0.05, r: 0.97 + Math.random()*0.06 }));
-  const BIG = [{a:0.4, v:0.55, z:2.6}, {a:2.6, v:0.38, z:2}, {a:4.4, v:0.47, z:2.2}];
-  function colors(){
-    const v = getComputedStyle(root).getPropertyValue('--ink').trim() || "#000";
-    if(v === ink) return;
-    ink = v; const h = v.replace('#','');
-    const n = h.length === 3 ? h.split('').map(c=>parseInt(c+c,16)) : [0,2,4].map(i=>parseInt(h.slice(i,i+2),16));
-    rgb = n.join(','); dark = (n[0]+n[1]+n[2]) > 384;
-  }
-  function tint(){
-    if(tinted.length === 2 && tintFor === ink) return;
-    if(!imgs.every(i => i.complete && i.naturalWidth)) return;
-    /* písmena v barvě textu + kolem nich tenký okraj v barvě pozadí, aby disk šel „za“ ně jako v logu */
-    const bg = getComputedStyle(root).getPropertyValue('--bg').trim() || "#fff";
-    tinted = imgs.map(i => { const c = document.createElement('canvas'), x = c.getContext('2d'); c.width = IMG_W + 16; c.height = IMG_H + 16;
-      for(let k = 0; k < 16; k++){ const a = k/16*TAU; x.drawImage(i, 8 + Math.cos(a)*5, 8 + Math.sin(a)*5); }
-      x.globalCompositeOperation = 'source-in'; x.fillStyle = bg; x.fillRect(0,0,c.width,c.height);
-      x.globalCompositeOperation = 'source-over';
-      const m = document.createElement('canvas'), mx = m.getContext('2d'); m.width = IMG_W; m.height = IMG_H;
-      mx.drawImage(i,0,0); mx.globalCompositeOperation = 'source-in'; mx.fillStyle = ink; mx.fillRect(0,0,IMG_W,IMG_H);
-      x.drawImage(m, 8, 8); return c; });
-    tintFor = ink;
-  }
-  function size(){
-    const b = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
-    W = b.width; H = b.height; cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
-    const wd = Math.min(W*0.86, 620, H*2.4); s = wd/IMG_W;
-    ox = (W - wd)/2; oy = H*0.56 - OY*s; hx = ox + OX*s; hy = oy + OY*s; R = 26*s;
-  }
-  const col = a => `rgba(${rgb},${a})`;
-  /* bod na disku: úhel a, poměr poloměru k */
-  function pt(a, k, rx, ry){ const x = Math.cos(a)*rx*k, y = Math.sin(a)*ry*k;
-    return [hx + x*Math.cos(ROT) - y*Math.sin(ROT), hy + x*Math.sin(ROT) + y*Math.cos(ROT)]; }
-  function frame(now){
-    colors(); tint();
-    const t = reduce ? 99 : (now - t0)/1000;
-    const eh = ease(t/0.9), ed = ease((t - 0.25)/1.3), el = ease((t - 0.55)/1.2), ea = ease((t - 0.9)/0.9);
-    const Rk = R*(0.4 + 0.6*eh), rx = R*5.4, ry = rx*0.17;
-    ctx.setTransform(Math.min(2, devicePixelRatio || 1),0,0,Math.min(2, devicePixelRatio || 1),0,0);
-    ctx.clearRect(0,0,W,H);
-    ctx.lineCap = 'round';
-    /* záře */
-    const g = ctx.createRadialGradient(hx, hy, Rk, hx, hy, R*3.4);
-    g.addColorStop(0, col(dark ? .16 : .045)); g.addColorStop(1, col(0));
-    ctx.globalAlpha = eh; ctx.fillStyle = g; ctx.fillRect(0,0,W,H); ctx.globalAlpha = 1;
-    /* zadní půlka disku */
-    ctx.strokeStyle = col(.4); ctx.lineWidth = Math.max(1, 1.3*s);
-    ctx.beginPath(); ctx.ellipse(hx, hy, rx, ry, ROT, Math.PI, Math.PI + Math.PI*ed); ctx.stroke();
-    /* obíhající tečky (zadní) */
-    const spin = t*0.35;
-    ctx.fillStyle = col(1);
-    const dots = (front) => {
-      for(const d of DOTS){ const a = (d.a + spin) % TAU, isFront = a < Math.PI; if(isFront !== front) continue;
-        const [x,y] = pt(a, d.r*0.88, rx, ry); ctx.globalAlpha = 0.45*ea; ctx.beginPath(); ctx.arc(x, y, Math.max(.7, 1*s), 0, TAU); ctx.fill(); }
-      for(const b of BIG){ const a = (b.a + t*b.v) % TAU, isFront = a < Math.PI; if(isFront !== front) continue;
-        const [x,y] = pt(a, 1, rx, ry); ctx.globalAlpha = ea; ctx.beginPath(); ctx.arc(x, y, b.z*s, 0, TAU); ctx.fill(); }
-      ctx.globalAlpha = 1;
-    };
-    dots(false);
-    /* ohnutý obraz disku nad dírou + slabý pod ní */
-    ctx.strokeStyle = col(1); ctx.lineWidth = 3.2*s;
-    ctx.beginPath(); ctx.arc(hx, hy, R*1.38, Math.PI + 0.22, Math.PI + 0.22 + (Math.PI - 0.44)*ed); ctx.stroke();
-    ctx.strokeStyle = col(.55); ctx.lineWidth = Math.max(1, 1.2*s);
-    ctx.beginPath(); ctx.arc(hx, hy, R*1.16, 0.4, 0.4 + (Math.PI - 0.8)*ed); ctx.stroke();
-    /* díra */
-    ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(hx, hy, Rk, 0, TAU); ctx.fill();
-    ctx.strokeStyle = col(dark ? .95 : .9); ctx.lineWidth = Math.max(1, 1.4*s);
-    if(dark){ ctx.shadowColor = '#fff'; ctx.shadowBlur = 10; }
-    ctx.beginPath(); ctx.arc(hx, hy, Rk*1.06, 0, TAU); ctx.stroke(); ctx.shadowBlur = 0;
-    /* přední půlka disku */
-    ctx.strokeStyle = col(1); ctx.lineWidth = 3.4*s;
-    ctx.beginPath(); ctx.ellipse(hx, hy, rx, ry, ROT, 0, Math.PI*ed); ctx.stroke();
-    dots(true);
-    /* písmena vyletí z díry */
-    if(tinted.length === 2 && el > 0){
-      ctx.save(); ctx.globalAlpha = el;
-      ctx.translate(hx, hy); ctx.rotate((1 - el)*-0.6); const k = 0.1 + 0.9*el; ctx.scale(k, k); ctx.translate(-hx, -hy);
-      for(const c of tinted) ctx.drawImage(c, ox - 8*s, oy - 8*s, (IMG_W + 16)*s, (IMG_H + 16)*s);
-      ctx.restore();
-    }
-    const busy = !reduce || tinted.length !== 2;
-    if(busy && visible && !document.hidden) requestAnimationFrame(frame); else running = false;
-  }
-  function start(){ if(running) return; running = true; requestAnimationFrame(frame); }
-  size(); t0 = performance.now(); start();
-  imgs.forEach(i => i.addEventListener('load', start));
-  let rt; addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(()=>{ size(); start(); }, 150); });
-  if('IntersectionObserver' in window) new IntersectionObserver(es=>{ visible = es[0].isIntersecting; if(visible) start(); }).observe(cv);
-  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) start(); });
-  new MutationObserver(start).observe(root, {attributes:true, attributeFilter:['data-theme']});
-  const mq = matchMedia('(prefers-color-scheme: dark)'); if(mq.addEventListener) mq.addEventListener('change', start);
-}
-
 /* ===== Start ===== */
 initCheckout();
-initBlackHole();
 let saved=null; try{ saved=localStorage.getItem('lang'); }catch(e){}
 if(HAS_ALT){
   /* Stránka má vlastní adresu pro každý jazyk – roboti vidí přesně to, co je v HTML.

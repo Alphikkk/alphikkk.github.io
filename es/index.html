@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/home.css?v=23">
+<link rel="stylesheet" href="/assets/home.css?v=25">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -71,13 +71,22 @@
   </div>
 </header>
 <main>
+  <svg class="bh-path" id="bhPath" aria-hidden="true" focusable="false"></svg>
+  <div class="bh-travel" id="bhTravel" aria-hidden="true"><canvas></canvas></div>
   <section class="home-hero">
     <div class="wrap">
       <h1 class="sr-only" data-i18n="h.seo">Corphik – Soporte informático y PC a medida</h1>
-      <div class="bh-hero" aria-hidden="true">
-        <canvas id="bhCanvas"></canvas>
+      <div class="bh-hero">
+        <canvas id="bhCanvas" aria-hidden="true"></canvas>
+        <button class="bh-core" id="bhCore" type="button" aria-expanded="false" aria-controls="bhMenu" hidden></button>
+        <ul class="bh-menu" id="bhMenu" hidden>
+          <li><a href="#sluzby" data-i18n="nav.home">Servicios</a></li>
+          <li><a href="#prace" data-i18n="nav.portfolio">Portafolio</a></li>
+          <li><a href="#kontakt" data-i18n="ft.contact">Contacto</a></li>
+        </ul>
         <noscript><img class="hero-mark" src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"></noscript>
       </div>
+      <p class="hero-line" lang="en">IT SOLUTIONS<span class="sl"> / </span>PC ENGINEERING</p>
       <div class="links">
         <a class="btn primary" href="/orders/" data-i18n="h.cta">Contratar un servicio</a>
         <a class="btn" href="#sluzby" data-i18n="h.cta2">Qué ofrezco</a>
@@ -101,7 +110,19 @@
   </section>
 
 
-  <section class="cta-end">
+  <section class="work" id="prace">
+    <div class="wrap">
+      <h2 class="big-h" data-i18n="pf.h">Portafolio</h2>
+      <ul class="work-list" id="pfTeaser">
+<li><a class="work-card" href="/portfolio/#pf-tj" data-pf="tj"><h3><span class="t">Tandjo</span></h3><p>Una app web para parejas: calendario, galería, lugares, planes y juegos para dos.</p></a></li>
+<li><a class="work-card" href="/portfolio/#pf-ap" data-pf="ap"><h3><span class="t">Esta web</span></h3><p>Una web de empresa en tres idiomas con lista de precios y formulario de pedido.</p></a></li>
+<li><a class="work-card" href="/portfolio/#pf-pc" data-pf="pc"><h3><span class="t">PC gaming</span></h3><p>Un equipo con Ryzen 7 5800X3D y Radeon RX 7800 XT para jugar en alta resolución.</p></a></li>
+      </ul>
+      <a class="btn work-more" href="/portfolio/" data-i18n="pf.more">Ver todo el portafolio</a>
+    </div>
+  </section>
+
+  <section class="cta-end" id="kontakt">
     <div class="wrap"><div>
       <svg class="bh" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-10 32 32)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="32" cy="33" rx="30" ry="6" stroke-width="1.2" opacity=".45"/><circle cx="32" cy="32" r="17" stroke-width="7" opacity=".14"/><path d="M15 33a17 17 0 0 1 34 0" stroke-width="3.2"/><path d="M19.5 34.5a12.5 12.5 0 0 0 25 0" stroke-width="1.3" opacity=".75"/><circle cx="32" cy="32" r="11" fill="var(--ink)" stroke-width="1.3"/><path d="M2 33a30 6 0 0 0 60 0" stroke-width="2.8"/></g></svg>
       <h2 data-i18n="cta.h">Manos a la obra.</h2>
@@ -115,6 +136,7 @@
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contacto</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=22"></script>
+<script src="/assets/app.js?v=24"></script>
+<script src="/assets/blackhole.js?v=1"></script>
 </body>
 </html>

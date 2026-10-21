@@ -1,0 +1,111 @@
+/* =========================================================
+   Corphik – poptávka (/orders/ a /orders/thanks/)
+   Navazuje na style.css (barvy, písmo, .panel, .fld, .summary…).
+   ========================================================= */
+
+/* ---------- 1) Výběr služeb ---------- */
+.pick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px}
+.pk{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 14px;align-items:start;text-align:left;
+  padding:16px 44px 16px 16px;border-radius:var(--r-m);border:1px solid var(--line);background:var(--bg);color:var(--ink);
+  font:inherit;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .2s var(--ease)}
+.pk:hover{border-color:var(--ink)}
+.pk,.chip,.stepper button,.lnk{-webkit-tap-highlight-color:transparent}
+.pk:active{transform:scale(.985)}
+.pk .ic{grid-row:1/3;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;transition:border-color .25s}
+.pk .ic svg{width:22px;height:22px}
+.pk-t b{display:block;font-weight:700;line-height:1.25}
+.pk-p{display:block;margin-top:3px;font-size:.88rem;color:var(--muted);transition:color .25s}
+.pk-tag{grid-column:2}
+.pk-tag:empty{display:none}
+.pk .tag{display:inline-block;margin-top:6px;font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pk-st{position:absolute;top:14px;right:14px;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);transition:background .25s,border-color .25s}
+.pk[aria-pressed="true"]{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.pk[aria-pressed="true"] .ic{border-color:color-mix(in srgb,var(--on-ink) 30%,transparent)}
+.pk[aria-pressed="true"] .pk-p,.pk[aria-pressed="true"] .tag{color:color-mix(in srgb,var(--on-ink) 72%,transparent);border-color:color-mix(in srgb,var(--on-ink) 30%,transparent)}
+.pk[aria-pressed="true"] .pk-st{border-color:var(--on-ink);background:var(--on-ink)}
+.pk[aria-pressed="true"] .pk-st::after{content:"";position:absolute;inset:3px;background:var(--ink);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4.5 12.5 5 5 10-11'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4.5 12.5 5 5 10-11'/%3E%3C/svg%3E") center/contain no-repeat}
+
+/* ---------- 2) Detaily ke službám ---------- */
+.opts{display:flex;flex-direction:column;gap:14px}
+.opt{position:relative;margin:0;min-width:0;padding:18px 20px 20px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--bg);display:flex;flex-direction:column;gap:14px}
+.opt legend{float:left;width:100%;padding:0 84px 0 0;font-weight:750;font-stretch:112%;font-size:1.1rem;line-height:1.25}
+.opt legend+*{clear:both}
+.opt-rm{position:absolute;top:16px;right:18px}
+.opt-d{color:var(--muted);font-size:.92rem;margin-top:-6px}
+.opt.new{animation:optIn .45s var(--ease)}
+.opt.flash{animation:optFlash 1.2s var(--ease)}
+@keyframes optIn{from{opacity:0;transform:translateY(10px)}}
+@keyframes optFlash{0%,40%{border-color:var(--ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--ink) 14%,transparent)}}
+.op-l{display:block;font-size:.88rem;font-weight:600;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:40px;padding:0 15px;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink);
+  font:inherit;font-size:.92rem;font-weight:600;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.stepper{display:inline-flex;align-items:center;gap:4px;padding:4px;border-radius:999px;border:1px solid var(--line);background:var(--soft)}
+.stepper button{width:38px;height:38px;border-radius:50%;border:0;background:var(--bg);color:var(--ink);font:inherit;font-size:1.25rem;line-height:1;cursor:pointer}
+.stepper button:disabled{opacity:.3;cursor:not-allowed}
+.stepper output{min-width:34px;text-align:center;font-weight:800;font-variant-numeric:tabular-nums}
+.lnk{border:0;background:none;padding:6px 0;min-height:32px;font:inherit;font-size:.86rem;font-weight:600;color:var(--muted);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.lnk:hover{color:var(--ink)}
+
+/* ---------- 3) Chyby u polí ---------- */
+.fld-err{margin:0;color:var(--warn);font-size:.86rem;font-weight:600}
+.fld-err[hidden]{display:none}
+.fld [aria-invalid="true"]{border-color:var(--warn)}
+
+/* ---------- 4) Kontrola ---------- */
+.review{margin:0;max-height:360px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:.9rem;line-height:1.6;
+  padding:16px 18px;border-radius:var(--r-m);border:1px solid var(--line);background:var(--bg);color:var(--muted)}
+.honest{display:flex;gap:10px;align-items:flex-start;font-size:.92rem}
+.honest svg{width:18px;height:18px;flex:none;margin-top:2px}
+
+/* ---------- Souhrn ---------- */
+.sum-h{display:flex;align-items:center;gap:12px}
+.bh-mini{width:34px;height:34px;flex:none;color:var(--ink);overflow:visible}
+.bh-mini.pull{animation:bhPull .7s var(--ease)}
+@keyframes bhPull{35%{transform:scale(1.28) rotate(-8deg)}}
+.sum-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.sum-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:6px 14px;padding:14px 0;border-top:1px solid var(--line);animation:optIn .35s var(--ease)}
+.sum-list li:first-child{border-top:0;padding-top:0}
+.si b{display:block;font-weight:700;line-height:1.3}
+.si span{display:block;margin-top:3px;font-size:.86rem;color:var(--muted)}
+.si{grid-column:1/-1}
+.sp{font-weight:700;font-stretch:108%}
+.sa{display:flex;gap:14px}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sum-total[hidden]{display:none}
+.sum-total span{color:var(--muted);font-size:.92rem}
+.sum-total b{font-size:1.25rem;font-weight:800;font-stretch:112%;text-align:right;font-variant-numeric:tabular-nums}
+
+/* tečka, která po výběru „spadne“ do černé díry v souhrnu */
+.ck-fly{position:fixed;left:0;top:0;z-index:80;width:12px;height:12px;border-radius:50%;pointer-events:none;
+  background:var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--ink) 16%,transparent)}
+
+/* ---------- Mobil: souhrn pod formulářem + lišta dole ---------- */
+.ck-bar{display:none}
+@media (max-width:900px){
+  .checkout .summary{order:0}
+  .ck-bar{display:flex;align-items:center;gap:12px;position:fixed;left:0;right:0;bottom:0;z-index:55;
+    padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+    background:var(--nav);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);animation:barIn .35s var(--ease)}
+  .ck-bar[hidden]{display:none}
+  .ck-bar .bh-mini{width:32px;height:32px}
+  .cb-n{margin-left:-14px;align-self:flex-start;min-width:20px;height:20px;padding:0 6px;border-radius:999px;display:grid;place-items:center;
+    background:var(--ink);color:var(--on-ink);font-size:.72rem;font-variant-numeric:tabular-nums}
+  .cb-e{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+  .cb-e span{font-size:.78rem;color:var(--muted)}
+  .cb-e b{font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ck-bar .btn{min-height:44px;padding:0 18px;flex:none}
+  .has-bar main{padding-bottom:84px}
+  .has-bar .wip{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+}
+@keyframes barIn{from{transform:translateY(100%)}}
+
+/* ---------- Díky: černá díra se usadí ---------- */
+.th-bh{width:84px;height:84px;margin-bottom:26px}
+.th-bh .bh-mini{width:100%;height:100%;animation:thSettle 1.1s var(--ease)}
+@keyframes thSettle{from{opacity:0;transform:translateX(70px) scale(.55) rotate(18deg)}60%{opacity:1}}
