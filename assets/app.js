@@ -597,7 +597,7 @@ function areaItem(area, s){
 }
 function areaHTML(a, i){
   const list = a.ids.map(findService).filter(Boolean);
-  const photo = a.id==="pc" ? `<figure class="area-photo"><img ${PC_IMG("pc-build-finished-rgb","(max-width: 860px) 100vw, 480px")} alt="${esc(t("pf.alt.finished"))}" width="1152" height="1536" loading="lazy" decoding="async"></figure>` : "";
+  const photo = a.id==="pc" ? `<figure class="area-photo"><img ${PC_IMG("pc-build-finished-rgb-clean","(max-width: 860px) 100vw, 480px")} alt="${esc(t("pf.alt.finished"))}" width="1152" height="1536" loading="lazy" decoding="async"></figure>` : "";
   return `<section class="area area-${a.id}" id="obl-${a.id}" aria-labelledby="obl-${a.id}-h">${photo}`
     + `<header class="area-head"><p class="area-n">${pfNum(i)}</p><h3 id="obl-${a.id}-h">${esc(t("s.a."+a.id))}</h3><p class="area-d">${esc(t("s.a."+a.id+".d"))}</p></header>`
     + `<ul class="area-list">${list.map(s=>areaItem(a.id, s)).join("")}</ul></section>`;
@@ -624,7 +624,7 @@ const PF_SPECS = { pc:[["pf.cpu","Ryzen 7 5800X3D"],["pf.gpu","Radeon RX 7800 XT
 /* fotky sestavy: soubor v /assets/img/ (bez „-šířka.webp“), uložené šířky, rozměr originálu, klíč popisku (pf.fig.* a pf.alt.*), sizes
    pořadí = kompozice: velká hotová sestava, vedle ní detail chlazení a pod ním specifikace */
 const PF_PHOTOS = { pc:[
-  ["pc-build-finished-rgb",[640,1152],1152,1536,"finished","(max-width: 600px) 100vw, (max-width: 1180px) 56vw, 640px"],
+  ["pc-build-finished-rgb-clean",[640,1152],1152,1536,"finished","(max-width: 600px) 100vw, (max-width: 1180px) 56vw, 640px"],
   ["pc-build-cooling-detail",[640,1152],1152,1536,"cooling","(max-width: 600px) 100vw, (max-width: 1180px) 36vw, 420px"]
 ]};
 function pfFig([file, ws, w, h, k, sizes], n){
