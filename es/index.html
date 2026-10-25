@@ -11,10 +11,22 @@
 <link rel="alternate" hreflang="es" href="https://corphik.eu/es/">
 <link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Corphik">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="cs_CZ">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://corphik.eu/es/">
-<meta property="og:title" content="Corphik – Soporte informático y seguridad">
+<meta property="og:title" content="Corphik – Soporte informático, PC a medida y webs">
 <meta property="og:description" content="Corphik – soporte informático en Praga y alrededores y a distancia: montaje de PC a medida, instalación de Windows y Linux, reparaciones, configuración DNS y rediseño web.">
 <meta property="og:image" content="https://corphik.eu/assets/img/og-corphik.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logotipo de Corphik – Reliable IT support &amp; custom PCs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Corphik – Soporte informático, PC a medida y webs">
+<meta name="twitter:description" content="Corphik – soporte informático en Praga y alrededores y a distancia: montaje de PC a medida, instalación de Windows y Linux, reparaciones, configuración DNS y rediseño web.">
+<meta name="twitter:image" content="https://corphik.eu/assets/img/og-corphik.png">
+<meta name="twitter:image:alt" content="Logotipo de Corphik – Reliable IT support &amp; custom PCs">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,27 +38,212 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/home.css?v=25">
+<link rel="stylesheet" href="/assets/home.css?v=29">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Corphik",
-  "url": "https://corphik.eu/es/",
-  "email": "ales@corphik.eu",
-  "logo": "https://corphik.eu/favicon-512.png",
-  "sameAs": ["https://www.instagram.com/corphik", "https://www.linkedin.com/company/corphik"],
-  "description": "Corphik ofrece soporte informático en Praga y alrededores y a distancia: montaje de PC a medida, instalación de Windows y Linux, mejoras, diagnóstico y reparación, configuración de dominio y DNS, rediseño web y ayuda a distancia.",
-  "areaServed": ["Chequia", "España", "Europa"],
-  "knowsLanguage": [
-    "cs",
-    "en",
-    "es"
-  ],
-  "founder": {
-    "@type": "Person",
-    "name": "Aleš Pospíšil"
-  }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://corphik.eu/#organization",
+      "name": "Corphik",
+      "alternateName": "CORPHIK",
+      "url": "https://corphik.eu/",
+      "email": "ales@corphik.eu",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://corphik.eu/favicon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://corphik.eu/assets/img/og-corphik.png",
+      "description": "Corphik ofrece soporte informático en Praga y alrededores y a distancia: montaje de PC a medida, instalación de Windows y Linux, mejoras, diagnóstico y reparación, configuración de dominio y DNS, rediseño web y ayuda a distancia.",
+      "founder": {
+        "@id": "https://corphik.eu/#founder"
+      },
+      "areaServed": [
+        "Chequia",
+        "España",
+        "Europa"
+      ],
+      "knowsLanguage": [
+        "cs",
+        "en",
+        "es"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/corphik",
+        "https://www.linkedin.com/company/corphik"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://corphik.eu/#website",
+      "name": "Corphik",
+      "url": "https://corphik.eu/",
+      "inLanguage": [
+        "cs",
+        "en",
+        "es"
+      ],
+      "publisher": {
+        "@id": "https://corphik.eu/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://corphik.eu/#founder",
+      "name": "Aleš Pospíšil"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/es/#service-build",
+      "name": "PC a medida",
+      "description": "Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo.",
+      "category": "Ingeniería de PC",
+      "url": "https://corphik.eu/es/#svc-build",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/es/orders/?service=build",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 1500,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/es/#service-os",
+      "name": "Instalación de Windows y Linux",
+      "description": "Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque. La licencia de Windows no está incluida.",
+      "category": "Soporte informático",
+      "url": "https://corphik.eu/es/#svc-os",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/es/orders/?service=os",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 700,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/es/#service-upgrade",
+      "name": "Mejora y aceleración del PC",
+      "description": "Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte.",
+      "category": "Ingeniería de PC",
+      "url": "https://corphik.eu/es/#svc-upgrade",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/es/orders/?service=upgrade",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 500,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/es/#service-fix",
+      "name": "Diagnóstico y reparación",
+      "description": "¿El PC no enciende, se cuelga, va lento o hace ruido? Encuentro la causa y lo soluciono. El coste del diagnóstico se descuenta de la reparación.",
+      "category": "Soporte informático",
+      "url": "https://corphik.eu/es/#svc-fix",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/es/orders/?service=fix",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 400,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/es/#service-dns",
+      "name": "Configuración de dominio y DNS",
+      "description": "Registros A, AAAA, CNAME, MX y TXT (SPF, DKIM, DMARC). Conecto tu dominio con tu web y tu correo.",
+      "category": "Desarrollo web",
+      "url": "https://corphik.eu/es/#svc-dns",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/es/orders/?service=dns",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 800,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/es/#service-web",
+      "name": "Rediseño web",
+      "description": "Convierto una web anticuada en una moderna: nuevo diseño, versión móvil, carga más rápida y seguridad básica.",
+      "category": "Desarrollo web",
+      "url": "https://corphik.eu/es/#svc-web",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/es/orders/?service=web",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 3499,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/es/#service-remote",
+      "name": "Ayuda a distancia",
+      "description": "Me conecto a tu ordenador de forma remota para solucionar problemas, configurar ajustes e instalar programas, estés donde estés. ¡Asistencia informática rápida, cómoda y sin necesidad de desplazarte! Se factura por cada 15 minutos iniciados.",
+      "category": "Soporte informático",
+      "url": "https://corphik.eu/es/#svc-remote",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/es/orders/?service=remote",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": 400,
+          "priceCurrency": "CZK",
+          "unitCode": "HUR"
+        }
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -56,8 +253,8 @@
     <a class="brand" href="/es/" aria-label="Corphik"><img src="/assets/img/corphik-wordmark.png" alt="Corphik" width="117" height="22"></a>
     <ul class="links">
       <li><a href="/es/" data-i18n="nav.home" aria-current="page">Servicios</a></li>
-      <li><a href="/portfolio/" data-i18n="nav.portfolio">Portafolio</a></li>
-      <li><a href="/about/" data-i18n="nav.about">Sobre mí</a></li>
+      <li><a href="/es/portfolio/" data-i18n="nav.portfolio">Portafolio</a></li>
+      <li><a href="/es/about/" data-i18n="nav.about">Sobre mí</a></li>
     </ul>
     <div class="tools">
       <div class="lang" role="group" aria-label="Language">
@@ -66,7 +263,7 @@
         <button type="button" data-lang="es">ES</button>
       </div>
       <button class="theme" id="theme" type="button" aria-label="Theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
-      <a class="cta" href="/orders/"><span data-i18n="nav.cart"></span><span class="cnt" hidden>0</span></a>
+      <a class="cta" href="/es/orders/"><span data-i18n="nav.cart"></span><span class="cnt" hidden>0</span></a>
     </div>
   </div>
 </header>
@@ -74,38 +271,53 @@
   <svg class="bh-path" id="bhPath" aria-hidden="true" focusable="false"></svg>
   <div class="bh-travel" id="bhTravel" aria-hidden="true"><canvas></canvas></div>
   <section class="home-hero">
-    <div class="wrap">
-      <h1 class="sr-only" data-i18n="h.seo">Corphik – Soporte informático y PC a medida</h1>
-      <div class="bh-hero">
-        <canvas id="bhCanvas" aria-hidden="true"></canvas>
-        <button class="bh-core" id="bhCore" type="button" aria-expanded="false" aria-controls="bhMenu" hidden></button>
-        <ul class="bh-menu" id="bhMenu" hidden>
-          <li><a href="#sluzby" data-i18n="nav.home">Servicios</a></li>
-          <li><a href="#prace" data-i18n="nav.portfolio">Portafolio</a></li>
-          <li><a href="#kontakt" data-i18n="ft.contact">Contacto</a></li>
-        </ul>
-        <noscript><img class="hero-mark" src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"></noscript>
-      </div>
+    <div class="bh-hero">
+      <canvas id="bhCanvas" aria-hidden="true"></canvas>
+      <button class="bh-core" id="bhCore" type="button" aria-expanded="false" aria-controls="bhMenu" hidden></button>
+      <ul class="bh-menu" id="bhMenu" hidden>
+        <li><a href="#sluzby" data-i18n="nav.home">Servicios</a></li>
+        <li><a href="#prace" data-i18n="nav.portfolio">Portafolio</a></li>
+        <li><a href="#kontakt" data-i18n="ft.contact">Contacto</a></li>
+      </ul>
+      <noscript><img class="hero-mark" src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"></noscript>
+    </div>
+    <div class="wrap hero-body">
       <p class="hero-line" lang="en">IT SOLUTIONS<span class="sl"> / </span>PC ENGINEERING</p>
-      <div class="links">
-        <a class="btn primary" href="/orders/" data-i18n="h.cta">Contratar un servicio</a>
-        <a class="btn" href="#sluzby" data-i18n="h.cta2">Qué ofrezco</a>
+      <h1 class="hero-h"><span class="sr-only">Corphik – </span><span data-i18n="h.lead">Soporte informático y PC a medida.</span></h1>
+      <p class="hero-sub" data-i18n="h.sub">Montaje y mejora de PC, instalación de Windows y Linux, diagnóstico y reparación, dominios, DNS y webs.</p>
+      <div class="hero-side">
+        <div class="hero-act">
+          <a class="btn primary" href="/es/orders/" data-i18n="h.cta">Contratar un servicio</a>
+          <a class="hero-more" href="#sluzby"><span data-i18n="h.cta2">Qué ofrezco</span></a>
+        </div>
+        <ul class="hero-reach">
+          <li data-i18n="h.r1">Chequia: en persona o a distancia</li>
+          <li data-i18n="h.r2">España y Europa: por ahora a distancia</li>
+        </ul>
       </div>
     </div>
   </section>
 
   <section class="services" id="sluzby">
     <div class="wrap">
-      <h2 class="big-h" data-i18n="s.big">Todo lo que necesita tu ordenador. En un solo lugar.</h2>
-      <article class="feature" id="svcFeature"><div class="mosaic"><img src="/assets/img/pc-skrin.webp" alt="" loading="lazy" width="480" height="640"><img src="/assets/img/pc-kabely.webp" alt="" loading="lazy" width="480" height="640"><img src="/assets/img/pc-rog.webp" alt="" loading="lazy" width="480" height="640"></div><div class="ft-body"><h3>PC a medida</h3><p class="d">Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo.</p><ol class="pc-steps"><li><strong>Anticipo para los componentes</strong><span>Pido las piezas en cuanto se paga el anticipo.</span></li><li><strong>Montaje y pruebas</strong><span>Monto y pruebo el PC yo mismo.</span></li><li><strong>Te lo llevo a casa</strong><span>Te entrego el equipo ya probado. Gratis en Praga y alrededores; más lejos, según acuerdo.</span></li></ol><div class="ft-buy"><span class="pr">desde 1.500 CZK (≈ 60 €)</span><button class="btn primary add" type="button" data-add="build" aria-pressed="false" aria-label="Carrito: PC a medida"><span class="lab">Carrito</span></button></div></div></article>
-      <ul class="svc-list" id="svcList">
-<li class="svc" id="svc-os"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4M6.5 8.5l2.5 2-2.5 2M11 12.5h4"/></svg></span><div><h3>Instalación de Windows y Linux</h3><p class="d">Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque. La licencia de Windows no está incluida.</p></div><button class="buy add" type="button" data-add="os" aria-pressed="false" aria-label="Carrito: Instalación de Windows y Linux, desde 700 CZK (≈ 28 €)"><span class="pr">desde 700 CZK (≈ 28 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
-<li class="svc" id="svc-upgrade"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="1.5"/><path d="M7 7V4.5M11 7V4.5M15 7V4.5M19 7V4.5M6 17v2.5M18 17v2.5M7 10.5h3v3H7zM13 10.5h4"/></svg></span><div><h3>Mejora y aceleración del PC</h3><p class="d">Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte.</p></div><button class="buy add" type="button" data-add="upgrade" aria-pressed="false" aria-label="Carrito: Mejora y aceleración del PC, desde 500 CZK (≈ 20 €)"><span class="pr">desde 500 CZK (≈ 20 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
-<li class="svc" id="svc-fix"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><div><h3>Diagnóstico y reparación<span class="tag">Parcialmente a distancia</span></h3><p class="d">¿El PC no enciende, se cuelga, va lento o hace ruido? Encuentro la causa y lo soluciono. El coste del diagnóstico se descuenta de la reparación.</p></div><button class="buy add" type="button" data-add="fix" aria-pressed="false" aria-label="Carrito: Diagnóstico y reparación, desde 400 CZK (≈ 16 €)"><span class="pr">desde 400 CZK (≈ 16 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
-<li class="svc" id="svc-dns"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg></span><div><h3>Configuración de dominio y DNS<span class="tag">Solo a distancia</span></h3><p class="d">Registros A, AAAA, CNAME, MX y TXT (SPF, DKIM, DMARC). Conecto tu dominio con tu web y tu correo.</p></div><button class="buy add" type="button" data-add="dns" aria-pressed="false" aria-label="Carrito: Configuración de dominio y DNS, desde 800 CZK (≈ 32 €)"><span class="pr">desde 800 CZK (≈ 32 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
-<li class="svc" id="svc-web"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M2.5 8.5h19M5.5 6.3h.01M8 6.3h.01M6 12h7M6 15.5h4M16 12h2.5v4H16z"/></svg></span><div><h3>Rediseño web<span class="tag">También a distancia</span></h3><p class="d">Convierto una web anticuada en una moderna: nuevo diseño, versión móvil, carga más rápida y seguridad básica.</p></div><button class="buy add" type="button" data-add="web" aria-pressed="false" aria-label="Carrito: Rediseño web, desde 3.499 CZK (≈ 140 €)"><span class="pr">desde 3.499 CZK (≈ 140 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
-<li class="svc" id="svc-remote"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="13" height="9" rx="1.5"/><path d="M6 18h6M9 14v4"/><path d="M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"/></svg></span><div><h3>Ayuda a distancia</h3><p class="d">Me conecto a tu ordenador de forma remota para solucionar problemas, configurar ajustes e instalar programas, estés donde estés. ¡Asistencia informática rápida, cómoda y sin necesidad de desplazarte! Se factura por cada 15 minutos iniciados.</p></div><button class="buy add" type="button" data-add="remote" aria-pressed="false" aria-label="Carrito: Ayuda a distancia, 400 CZK / hora (≈ 16 €)"><span class="pr">400 CZK / hora (≈ 16 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
-      </ul>
+      <div class="svc-head">
+        <h2 class="big-h" data-i18n="s.big">Todo lo que necesita tu ordenador. En un solo lugar.</h2>
+        <nav class="svc-index" id="svcIndex" aria-label="Áreas de servicio"><ol><li><a href="#obl-it"><span class="n">01</span> <span class="t">Soporte informático</span> <span class="c">3 servicios</span></a></li><li><a href="#obl-pc"><span class="n">02</span> <span class="t">Ingeniería de PC</span> <span class="c">2 servicios</span></a></li><li><a href="#obl-web"><span class="n">03</span> <span class="t">Desarrollo web</span> <span class="c">2 servicios</span></a></li></ol></nav>
+      </div>
+      <div class="svc-areas" id="svcList">
+<section class="area area-it" id="obl-it" aria-labelledby="obl-it-h"><header class="area-head"><p class="area-n">01</p><h3 id="obl-it-h">Soporte informático</h3><p class="area-d">Cuando algo deja de funcionar: en persona en Praga y alrededores, o a distancia.</p></header><ul class="area-list">
+<li class="svc" id="svc-fix"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"></path></svg></span><div class="svc-t"><h4>Diagnóstico y reparación</h4><span class="tag">Parcialmente a distancia</span></div><p class="d">¿El PC no enciende, se cuelga, va lento o hace ruido? Encuentro la causa y lo soluciono. El coste del diagnóstico se descuenta de la reparación.</p><button class="buy add" type="button" data-add="fix" aria-pressed="false" aria-label="Carrito: Diagnóstico y reparación, desde 400 CZK (≈ 16 €)"><span class="pr">desde 400 CZK (≈ 16 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
+<li class="svc" id="svc-remote"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="13" height="9" rx="1.5"></rect><path d="M6 18h6M9 14v4"></path><path d="M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"></path></svg></span><div class="svc-t"><h4>Ayuda a distancia</h4></div><p class="d">Me conecto a tu ordenador de forma remota para solucionar problemas, configurar ajustes e instalar programas, estés donde estés. ¡Asistencia informática rápida, cómoda y sin necesidad de desplazarte! Se factura por cada 15 minutos iniciados.</p><button class="buy add" type="button" data-add="remote" aria-pressed="false" aria-label="Carrito: Ayuda a distancia, 400 CZK / hora (≈ 16 €)"><span class="pr">400 CZK / hora (≈ 16 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
+<li class="svc" id="svc-os"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2"></rect><path d="M8 21h8M12 17v4M6.5 8.5l2.5 2-2.5 2M11 12.5h4"></path></svg></span><div class="svc-t"><h4>Instalación de Windows y Linux</h4></div><p class="d">Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque. La licencia de Windows no está incluida.</p><button class="buy add" type="button" data-add="os" aria-pressed="false" aria-label="Carrito: Instalación de Windows y Linux, desde 700 CZK (≈ 28 €)"><span class="pr">desde 700 CZK (≈ 28 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li></ul></section>
+
+<section class="area area-pc" id="obl-pc" aria-labelledby="obl-pc-h"><figure class="area-photo"><img src="/assets/img/pc-build-finished-rgb-640.webp" srcset="/assets/img/pc-build-finished-rgb-640.webp 640w, /assets/img/pc-build-finished-rgb-1152.webp 1152w" sizes="(max-width: 860px) 100vw, 480px" alt="El equipo terminado en una caja blanca con iluminación RGB morada y azul: refrigeración líquida con pantalla redonda sobre el procesador, ventiladores y una tarjeta gráfica con cables blancos" width="1152" height="1536" loading="lazy" decoding="async"></figure><header class="area-head"><p class="area-n">02</p><h3 id="obl-pc-h">Ingeniería de PC</h3><p class="area-d">Equipos a medida y mejoras, montados y probados por mí.</p></header><ul class="area-list">
+<li class="svc" id="svc-build"><div class="svc-t"><h4>PC a medida</h4></div><p class="d">Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo.</p><ol class="pc-steps"><li><strong>Anticipo para los componentes</strong><span>Pido las piezas en cuanto se paga el anticipo.</span></li><li><strong>Montaje y pruebas</strong><span>Monto y pruebo el PC yo mismo.</span></li><li><strong>Te lo llevo a casa</strong><span>Te entrego el equipo ya probado. Gratis en Praga y alrededores; más lejos, según acuerdo.</span></li></ol><button class="buy add" type="button" data-add="build" aria-pressed="false" aria-label="Carrito: PC a medida, desde 1.500 CZK (≈ 60 €)"><span class="pr">desde 1.500 CZK (≈ 60 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
+<li class="svc" id="svc-upgrade"><div class="svc-t"><h4>Mejora y aceleración del PC</h4></div><p class="d">Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte.</p><button class="buy add" type="button" data-add="upgrade" aria-pressed="false" aria-label="Carrito: Mejora y aceleración del PC, desde 500 CZK (≈ 20 €)"><span class="pr">desde 500 CZK (≈ 20 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li></ul></section>
+
+<section class="area area-web" id="obl-web" aria-labelledby="obl-web-h"><header class="area-head"><p class="area-n">03</p><h3 id="obl-web-h">Desarrollo web</h3><p class="area-d">Rediseño web, dominio y correo. Ambos se pueden hacer a distancia.</p></header><ul class="area-list">
+<li class="svc" id="svc-web"><div class="svc-t"><h4>Rediseño web</h4><span class="tag">También a distancia</span></div><p class="d">Convierto una web anticuada en una moderna: nuevo diseño, versión móvil, carga más rápida y seguridad básica.</p><button class="buy add" type="button" data-add="web" aria-pressed="false" aria-label="Carrito: Rediseño web, desde 3.499 CZK (≈ 140 €)"><span class="pr">desde 3.499 CZK (≈ 140 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
+<li class="svc" id="svc-dns"><div class="svc-t"><h4>Configuración de dominio y DNS</h4><span class="tag">Solo a distancia</span></div><p class="d">Registros A, AAAA, CNAME, MX y TXT (SPF, DKIM, DMARC). Conecto tu dominio con tu web y tu correo.</p><p class="dns-recs" aria-hidden="true"><span>A</span><span>AAAA</span><span>CNAME</span><span>MX</span><span>TXT</span></p><button class="buy add" type="button" data-add="dns" aria-pressed="false" aria-label="Carrito: Configuración de dominio y DNS, desde 800 CZK (≈ 32 €)"><span class="pr">desde 800 CZK (≈ 32 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li></ul></section>
+</div>
     </div>
   </section>
 
@@ -114,11 +326,11 @@
     <div class="wrap">
       <h2 class="big-h" data-i18n="pf.h">Portafolio</h2>
       <ul class="work-list" id="pfTeaser">
-<li><a class="work-card" href="/portfolio/#pf-tj" data-pf="tj"><h3><span class="t">Tandjo</span></h3><p>Una app web para parejas: calendario, galería, lugares, planes y juegos para dos.</p></a></li>
-<li><a class="work-card" href="/portfolio/#pf-ap" data-pf="ap"><h3><span class="t">Esta web</span></h3><p>Una web de empresa en tres idiomas con lista de precios y formulario de pedido.</p></a></li>
-<li><a class="work-card" href="/portfolio/#pf-pc" data-pf="pc"><h3><span class="t">PC gaming</span></h3><p>Un equipo con Ryzen 7 5800X3D y Radeon RX 7800 XT para jugar en alta resolución.</p></a></li>
+<li><a class="work-card" href="/es/portfolio/#pf-tj" data-pf="tj"><h3><span class="t">Tandjo</span></h3><p>Una app web para parejas: calendario, galería, lugares, planes y juegos para dos.</p></a></li>
+<li><a class="work-card" href="/es/portfolio/#pf-ap" data-pf="ap"><h3><span class="t">Esta web</span></h3><p>Una web de empresa en tres idiomas con lista de precios y formulario de pedido.</p></a></li>
+<li><a class="work-card" href="/es/portfolio/#pf-pc" data-pf="pc"><h3><span class="t">PC gaming</span></h3><p>Un equipo con Ryzen 7 5800X3D y Radeon RX 7800 XT para jugar en alta resolución.</p></a></li>
       </ul>
-      <a class="btn work-more" href="/portfolio/" data-i18n="pf.more">Ver todo el portafolio</a>
+      <a class="btn work-more" href="/es/portfolio/" data-i18n="pf.more">Ver todo el portafolio</a>
     </div>
   </section>
 
@@ -127,16 +339,16 @@
       <svg class="bh" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-10 32 32)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="32" cy="33" rx="30" ry="6" stroke-width="1.2" opacity=".45"/><circle cx="32" cy="32" r="17" stroke-width="7" opacity=".14"/><path d="M15 33a17 17 0 0 1 34 0" stroke-width="3.2"/><path d="M19.5 34.5a12.5 12.5 0 0 0 25 0" stroke-width="1.3" opacity=".75"/><circle cx="32" cy="32" r="11" fill="var(--ink)" stroke-width="1.3"/><path d="M2 33a30 6 0 0 0 60 0" stroke-width="2.8"/></g></svg>
       <h2 data-i18n="cta.h">Manos a la obra.</h2>
       <p data-i18n="cta.p">Cuéntame qué necesitas. Te respondo lo antes posible.</p>
-      <a class="btn" href="/orders/" data-i18n="h.cta">Contratar un servicio</a>
+      <a class="btn" href="/es/orders/" data-i18n="h.cta">Contratar un servicio</a>
     </div></div>
   </section>
 </main>
 <footer><div class="wrap">
-  <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – Reliable IT support &amp; custom PCs" width="150" height="61" loading="lazy">
+  <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – soporte informático fiable y PC a medida" width="150" height="61" loading="lazy">
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contacto</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=24"></script>
-<script src="/assets/blackhole.js?v=1"></script>
+<script src="/assets/app.js?v=30"></script>
+<script src="/assets/blackhole.js?v=3"></script>
 </body>
 </html>

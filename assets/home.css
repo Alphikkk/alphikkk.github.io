@@ -2,65 +2,190 @@
    Corphik – úvodní stránka
    ========================================================= */
 
-/* ---------- Hero: nápis Corphik, kde „O“ je černá díra (kreslí app.js do <canvas>) ---------- */
-.home-hero{padding:clamp(28px,6vw,72px) 0 clamp(64px,9vw,112px);text-align:center;overflow:hidden}
-.home-hero .wrap{display:flex;flex-direction:column;align-items:center}
+/* ---------- Hero: tmavá scéna v obou motivech ----------
+   Nahoře nápis CORPHIK, kde „O“ je černá díra (kreslí blackhole.js do <canvas>), pod ním nabídka, popis a výzvy.
+   Tokeny se tu přepíšou, takže plátno (čte je z <canvas>), tlačítka i rozcestník berou tmavé barvy.
+   --glow-a/--glow-b = tlumené fialové a modré světlo za dírou. */
+.home-hero{--bg:#050507;--ink:#f3f3f6;--soft:#121217;--muted:#9d9daa;--line:#24242c;--orbit:#585866;--on-ink:#050507;
+  --logo-filter:invert(1);--glow-a:#6a4cff;--glow-b:#2c64ff;
+  color-scheme:dark;position:relative;overflow:hidden;background:var(--bg);color:var(--ink);padding-bottom:clamp(56px,8vw,104px);
+  border-radius:0 0 clamp(24px,4vw,44px) clamp(24px,4vw,44px);box-shadow:0 1px 0 var(--line)}
+/* scéna končí zaoblenou hranou (jako závěrečná výzva), služby pod ní už vlastní čáru nepotřebují */
+.home-hero+.services{border-top:0}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 /* plátno přes celou šířku okna, aby díra mohla vlétnout zprava od okraje */
-.bh-hero{position:relative;align-self:stretch;margin:0 calc(50% - 50vw);height:clamp(220px,32vw,330px);display:grid;place-items:center}
+.bh-hero{position:relative;height:clamp(200px,29vw,390px);display:grid;place-items:center}
 .bh-hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hero-mark{width:min(560px,86%);height:auto;filter:var(--logo-filter)}
-.home-hero .links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:clamp(16px,3vw,32px)}
-/* hlavní nadpis pod nápisem – stejný ve všech jazycích */
-.hero-line{margin-top:clamp(4px,1vw,12px);font-weight:800;font-stretch:125%;font-size:clamp(1rem,2.5vw,1.7rem);
-  letter-spacing:.16em;line-height:1.25;text-align:center}
-.hero-line .sl{font-weight:300;color:var(--orbit);white-space:pre}
-@media (max-width:560px){.hero-line .sl{display:block;height:0;overflow:hidden}}
-@media (prefers-reduced-motion:no-preference){
-  .home-hero .links{opacity:0;transform:translateY(12px);animation:rise .9s 1.5s var(--ease) forwards}
-  .hero-line{opacity:0;transform:translateY(10px);animation:rise .9s 1.25s var(--ease) forwards}
+.hero-mark{width:min(640px,86%);height:auto;filter:var(--logo-filter)}
+
+/* text pod nápisem: štítek a nadpis přes celou šířku, pod nimi vlevo popis, vpravo výzvy a dosah */
+.hero-body{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"line line" "head head" "sub side";
+  gap:clamp(18px,2.4vw,28px) clamp(32px,6vw,96px);align-items:end;padding-top:clamp(18px,2.6vw,30px)}
+/* vlasová čára mezi scénou a textem */
+.hero-body::before{content:"";position:absolute;top:0;left:var(--gut);right:var(--gut);height:1px;background:var(--line);transform-origin:left}
+.hero-line{grid-area:line;margin:0;font-size:.76rem;font-weight:650;font-stretch:75%;letter-spacing:.2em;line-height:1.3;color:var(--muted)}
+.hero-line .sl{color:var(--orbit);white-space:pre}
+.hero-h{grid-area:head;font-size:clamp(2.4rem,5.6vw,5rem);line-height:.98;letter-spacing:-.025em;max-width:18ch}
+.hero-side{grid-area:side;display:flex;flex-direction:column;gap:22px;container-type:inline-size}
+.hero-sub{grid-area:sub;align-self:start;color:var(--muted);font-size:clamp(1rem,1.35vw,1.12rem);line-height:1.55;max-width:42ch}
+.hero-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+.hero-act .btn.primary{min-height:52px;padding:0 1.7em;white-space:nowrap;transition:box-shadow .35s var(--ease),transform .2s var(--ease)}
+.hero-act .btn.primary:hover{opacity:1;box-shadow:0 12px 40px -10px color-mix(in srgb,var(--glow-a) 75%,transparent),0 0 0 1px color-mix(in srgb,var(--glow-b) 40%,transparent)}
+/* vedlejší výzva jako textový odkaz se šipkou, ne další tlačítko */
+.hero-more{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:6px 0;font-weight:600;text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .25s}
+.hero-more::after{content:"";width:16px;height:16px;flex:none;background:currentColor;transition:transform .3s var(--ease);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2.5v11M3.5 9 8 13.5 12.5 9'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2.5v11M3.5 9 8 13.5 12.5 9'/%3E%3C/svg%3E") center/contain no-repeat}
+.hero-more:hover{border-color:var(--ink)}
+.hero-more:hover::after{transform:translateY(3px)}
+/* kde pomáhám: plná tečka = osobně i na dálku, prázdná = zatím jen na dálku */
+.hero-reach{list-style:none;margin:0;padding:16px 0 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 24px;font-size:.84rem;color:var(--muted)}
+.hero-reach li{display:flex;align-items:center;gap:9px}
+.hero-reach li::before{content:"";width:7px;height:7px;border-radius:50%;flex:none;background:var(--ink)}
+.hero-reach li+li::before{background:transparent;box-shadow:inset 0 0 0 1.4px var(--muted)}
+/* úzký sloupec (telefon, tablet, dlouhé španělské popisky): tlačítko přes celou šířku, odkaz pod ním */
+@container (max-width:420px){
+  .hero-act{flex-direction:column;align-items:stretch;gap:16px}
+  .hero-act .btn.primary{width:100%}
+  .hero-more{align-self:flex-start}
 }
-@keyframes rise{to{opacity:1;transform:none}}
+@media (max-width:760px){
+  .hero-body{grid-template-columns:minmax(0,1fr);grid-template-areas:"line" "head" "sub" "side";align-items:start}
+}
+/* nástup: vlasová čára se natáhne, texty vyjedou postupně (černá díra mezitím přilétá) */
+@media (prefers-reduced-motion:no-preference){
+  .hero-body::before{animation:heroLine 1.2s .25s var(--ease) both}
+  .hero-line,.hero-sub,.hero-act,.hero-reach{animation:heroRise .9s var(--ease) both}
+  .hero-h{animation:heroFocus 1.1s .45s var(--ease) both}
+  .hero-line{animation-delay:.3s}
+  .hero-sub{animation-delay:.7s}
+  .hero-act{animation-delay:.85s}
+  .hero-reach{animation-delay:1s}
+}
+@keyframes heroLine{from{transform:scaleX(0)}}
+@keyframes heroRise{from{opacity:0;transform:translateY(14px)}}
+@keyframes heroFocus{from{opacity:0;transform:translateY(.22em);filter:blur(8px)}}
 
-/* ---------- Služby ---------- */
-.services{padding:clamp(64px,9vw,120px) 0 clamp(64px,9vw,112px);border-top:1px solid var(--line)}
+/* ---------- Navigace nad tmavou scénou (jen úvod) ----------
+   Dokud je pod navigací scéna, dostane navigace tmavé tokeny; po odscrollování se vrátí do motivu stránky.
+   Pozadí je plné: navigace nahoře leží nad bílým pozadím stránky, průhledná by zšedla.
+   Třídu .on-dark přepíná blackhole.js. */
+.nav{transition:background-color .35s var(--ease),border-color .35s var(--ease)}
+.nav .brand img{transition:filter .35s var(--ease)}
+.nav.on-dark{--nav:#050507;--bg:#050507;--ink:#f3f3f6;--soft:#17171d;--muted:#9d9daa;--line:#1c1c22;--on-ink:#050507;
+  --logo-filter:invert(1);color-scheme:dark;color:var(--ink)}
+.nav.on-dark .lang button[aria-pressed="true"]{box-shadow:0 0 0 1px var(--line)}
+
+/* ---------- Služby: tři oblasti, každá s vlastní kompozicí ----------
+   01 IT podpora – tři sloupce oddělené vlasovou čarou, 02 Stavba PC – tmavý panel s fotkou sestavy,
+   03 Weby a domény – nadpis vlevo, služby jako specifikace vpravo. Obsah vykresluje app.js (SVC_AREAS).
+   --acc/--acc-2 = tlumená fialová a modrá pro čísla oblastí, stav „v košíku“ a detaily. */
+.services{--acc:#5a3fe0;--acc-2:#2b5fd9;padding:clamp(64px,9vw,120px) 0 clamp(64px,9vw,112px);border-top:1px solid var(--line)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .services{--acc:#a594ff;--acc-2:#7ea4ff}}
+:root[data-theme="dark"] .services{--acc:#a594ff;--acc-2:#7ea4ff}
 .big-h{max-width:18ch;margin-bottom:clamp(36px,5vw,64px)}
+.svc-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px clamp(32px,6vw,96px);align-items:end;margin-bottom:clamp(56px,7vw,96px)}
+.svc-head .big-h{margin:0}
+/* rejstřík oblastí (stejný „štítkový“ styl jako rejstřík portfolia) */
+.svc-index ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.svc-index a{display:grid;grid-template-columns:2.4rem minmax(0,1fr) auto;align-items:baseline;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.svc-index .n,.svc-index .c,.area-n,.svc .tag{font-stretch:75%;font-weight:650;text-transform:uppercase;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.svc-index .n{font-size:.8rem;color:var(--acc)}
+.svc-index .t{font-weight:750;font-stretch:112%;font-size:1.05rem}
+.svc-index .c{font-size:.72rem;color:var(--muted)}
+.svc-index a:hover .t{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+@media (max-width:860px){.svc-head{grid-template-columns:minmax(0,1fr)}}
 
-/* Hlavní služba: sestavení PC */
-.feature{position:relative;overflow:hidden;isolation:isolate;border-radius:var(--r-l);background:var(--soft);padding:clamp(28px,5vw,64px);margin-bottom:clamp(56px,8vw,96px)}
-.mosaic{position:absolute;inset:0;z-index:-1;display:grid;grid-template-columns:repeat(3,1fr);opacity:.32;
-  -webkit-mask-image:linear-gradient(90deg,transparent 22%,#000 78%);mask-image:linear-gradient(90deg,transparent 22%,#000 78%)}
-.mosaic img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35)}
-.ft-body{position:relative;max-width:560px}
-.ft-body h3{font-size:clamp(1.9rem,3.6vw,2.7rem);font-stretch:125%;font-weight:800;letter-spacing:-.02em;line-height:1.02}
-.ft-body .d{margin-top:16px;color:var(--muted);font-size:1.08rem;max-width:44ch}
-.pc-steps{list-style:none;counter-reset:s;margin:28px 0 0;padding:0;display:flex;flex-direction:column}
-.pc-steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:2px 14px;padding:14px 0;border-top:1px solid var(--line)}
-.pc-steps li::before{content:counter(s);grid-row:1/3;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font-size:.82rem;font-weight:700}
+.svc-areas{display:flex;flex-direction:column;gap:clamp(80px,10vw,136px)}
+.area{scroll-margin-top:96px}
+.area-list{list-style:none;margin:0;padding:0}
+.area-n{margin:0;font-size:.8rem;color:var(--acc)}
+.area-head h3{margin-top:10px;font-size:clamp(2rem,4.2vw,3.3rem);font-stretch:125%;font-weight:800;letter-spacing:-.02em;line-height:1}
+.area-d{margin-top:14px;color:var(--muted);font-size:1.05rem;max-width:40ch}
+.svc{min-width:0}
+.svc-t{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.svc h4{margin:0;font-size:1.22rem;font-weight:750;font-stretch:112%;letter-spacing:-.01em;line-height:1.2;text-wrap:balance}
+.svc .tag{font-size:.68rem;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.svc .d{margin-top:8px;color:var(--muted);font-size:.97rem;max-width:58ch}
+/* cena + tlačítko do košíku; ve stavu „v košíku“ fialová, aby šel výběr poznat na první pohled */
+.buy{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
+.buy .pr{font-weight:750;font-stretch:112%;white-space:nowrap}
+.buy .go{display:inline-flex;align-items:center;height:40px;white-space:nowrap;padding:0 16px;border-radius:999px;border:1px solid var(--ink);font-weight:600;font-size:.9rem;
+  transition:background .2s,color .2s,border-color .2s}
+.buy:hover .go{background:var(--ink);color:var(--on-ink)}
+.buy.in .go{background:var(--acc);border-color:var(--acc);color:#fff}
+.buy:focus-visible{outline:none}
+.buy:focus-visible .go{outline:2px solid var(--ink);outline-offset:3px}
+
+/* 01 – IT podpora: nadpis vlevo, popis vpravo, služby ve třech sloupcích s cenou dole */
+.area-it .area-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:0 clamp(32px,6vw,96px);align-items:end}
+.area-it .area-n{grid-column:1/-1}
+.area-it .area-d{margin:0;padding-bottom:.3em}
+.area-it .area-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(28px,3.5vw,44px);border-top:1px solid var(--ink)}
+.area-it .svc{display:flex;flex-direction:column;padding:26px clamp(16px,2.4vw,32px) 4px;border-left:1px solid var(--line)}
+.area-it .svc:first-child{padding-left:0;border-left:0}
+.area-it .svc:last-child{padding-right:0}
+.area-it .ic{color:var(--acc);margin-bottom:18px}
+.area-it .ic svg{width:28px;height:28px;display:block}
+.area-it .buy{align-self:stretch;margin-top:auto;padding-top:22px;justify-content:space-between}
+.area-it .buy .pr{font-size:1.1rem}
+@media (max-width:980px){
+  .area-it .area-list{grid-template-columns:1fr}
+  .area-it .svc{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:4px 20px;align-items:start;padding:24px 0;border-left:0;border-bottom:1px solid var(--line)}
+  .area-it .ic{grid-row:1/3;margin:2px 0 0}
+  .area-it .svc-t,.area-it .d{grid-column:2}
+  .area-it .buy{grid-column:3;grid-row:1/3;align-self:center;margin:0;padding:0}
+}
+@media (max-width:640px){
+  .area-it .area-head{grid-template-columns:1fr}
+  .area-it .area-d{margin-top:14px;padding:0}
+  .area-it .svc{grid-template-columns:36px minmax(0,1fr)}
+  .area-it .buy{grid-column:2;grid-row:auto;justify-content:space-between;margin-top:12px}
+}
+
+/* 02 – Stavba PC: tmavý panel v obou motivech (jako scéna nahoře), vlevo fotka hotové sestavy */
+.area-pc{--bg:#09090b;--ink:#f3f3f6;--soft:#15151a;--muted:#a1a1ab;--line:#26262d;--on-ink:#09090b;--acc:#a594ff;--acc-2:#7ea4ff;
+  color-scheme:dark;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-l);
+  display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);grid-template-areas:"photo head" "photo list";
+  gap:clamp(20px,3vw,32px) clamp(28px,4.5vw,64px);padding:clamp(16px,2vw,24px) clamp(24px,4vw,56px) clamp(24px,4vw,48px) clamp(16px,2vw,24px)}
+.area-photo{grid-area:photo;margin:0;position:relative;border-radius:calc(var(--r-l) - 8px);overflow:hidden;background:var(--soft);min-height:320px}
+.area-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transition:transform 1.2s var(--ease)}
+.area-pc:hover .area-photo img{transform:scale(1.03)}
+.area-pc .area-head{grid-area:head;padding-top:clamp(12px,2vw,28px)}
+.area-pc .area-list{grid-area:list;display:flex;flex-direction:column}
+#svc-build h4{font-size:clamp(1.6rem,2.6vw,2.2rem);font-stretch:125%;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+#svc-build .d{font-size:1.02rem}
+.pc-steps{list-style:none;counter-reset:s;margin:22px 0 0;padding:0;display:flex;flex-direction:column}
+.pc-steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:2px 14px;padding:13px 0;border-top:1px solid var(--line)}
+.pc-steps li::before{content:counter(s);grid-row:1/3;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--acc);color:var(--acc);display:grid;place-items:center;font-size:.82rem;font-weight:700}
 .pc-steps strong{font-weight:650}
 .pc-steps span{color:var(--muted);font-size:.94rem}
-.ft-buy{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:28px}
-.ft-buy .pr{font-size:1.5rem;font-weight:800;font-stretch:118%}
-@media (max-width:860px){.mosaic{opacity:.16;-webkit-mask-image:linear-gradient(180deg,transparent 30%,#000 100%);mask-image:linear-gradient(180deg,transparent 30%,#000 100%)}}
+#svc-build .buy{margin-top:22px}
+/* cena se na úzkém telefonu (360 px) zmenší, ať se delší španělský tvar vejde do panelu; na desktopu zůstává 1.45rem */
+#svc-build .buy .pr{font-size:clamp(1.15rem,5.2vw,1.45rem);font-weight:800;font-stretch:118%}
+/* upgrade: menší řádek pod sestavou */
+#svc-upgrade{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+#svc-upgrade .d{margin-top:6px;font-size:.94rem}
+#svc-upgrade .buy{margin-top:16px}
+@media (max-width:860px){
+  .area-pc{grid-template-columns:minmax(0,1fr);grid-template-areas:"photo" "head" "list";padding:clamp(12px,3vw,20px) clamp(16px,4vw,32px) clamp(24px,5vw,36px)}
+  .area-photo{min-height:0;aspect-ratio:16/10;margin:0 calc(-1*clamp(4px,1vw,12px))}
+}
 
-/* Ostatní služby jako ceník */
-.svc-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.svc{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:6px 22px;align-items:center;padding:26px 8px;border-bottom:1px solid var(--line);transition:background .25s}
-.svc:hover{background:var(--soft)}
-.svc .ic{width:52px;height:52px;border-radius:14px;border:1px solid var(--line);background:var(--bg);display:grid;place-items:center}
-.svc .ic svg{width:24px;height:24px}
-.svc h3{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:1.25rem}
-.svc .tag{font-size:.74rem;font-weight:600;font-stretch:100%;letter-spacing:0;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--bg)}
-.svc .d{margin-top:6px;color:var(--muted);max-width:64ch;font-size:.98rem}
-.buy{display:flex;align-items:center;gap:16px;white-space:nowrap;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
-.buy .pr{font-weight:700;font-stretch:112%;text-align:right}
-.buy .go{display:inline-flex;align-items:center;height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--ink);font-weight:600;font-size:.92rem;transition:background .2s,color .2s}
-.buy:hover .go,.buy.in .go{background:var(--ink);color:var(--on-ink)}
-@media (max-width:720px){
-  .svc{grid-template-columns:44px minmax(0,1fr);padding:22px 0}
-  .svc:hover{background:transparent}
-  .svc .ic{width:44px;height:44px;border-radius:12px;align-self:start}
-  .buy{grid-column:2;justify-content:space-between;margin-top:12px;flex-wrap:wrap;row-gap:10px}
+/* 03 – Weby a domény: nadpis vlevo (při scrollu zůstává), služby vpravo jako specifikace */
+.area-web{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);gap:28px clamp(32px,6vw,96px);align-items:start}
+.area-web .area-head{position:sticky;top:96px}
+.area-web .svc{padding:26px 0 30px;border-top:1px solid var(--ink)}
+.area-web .svc:last-child{border-bottom:1px solid var(--line)}
+.area-web .buy{margin-top:20px}
+.area-web .svc h4{font-size:clamp(1.35rem,2.2vw,1.7rem);font-stretch:118%}
+.dns-recs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+.dns-recs span{padding:5px 9px;border:1px solid var(--line);border-radius:6px;font:600 .74rem/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--muted);
+  transition:border-color .25s,color .25s}
+.area-web .svc:hover .dns-recs span{border-color:var(--acc-2);color:var(--ink)}
+@media (max-width:860px){
+  .area-web{grid-template-columns:minmax(0,1fr)}
+  .area-web .area-head{position:static}
 }
 
 /* ---------- Závěrečná výzva ---------- */

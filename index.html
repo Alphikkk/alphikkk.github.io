@@ -11,10 +11,22 @@
 <link rel="alternate" hreflang="es" href="https://corphik.eu/es/">
 <link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Corphik">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
 <meta property="og:url" content="https://corphik.eu/">
-<meta property="og:title" content="Corphik – IT podpora a zabezpečení">
+<meta property="og:title" content="Corphik – IT podpora, stavba PC a weby">
 <meta property="og:description" content="Corphik – IT podpora v Praze a okolí i na dálku: sestavení PC, instalace Windows a Linuxu, opravy, nastavení DNS a redesign webu.">
 <meta property="og:image" content="https://corphik.eu/assets/img/og-corphik.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo Corphik – Reliable IT support &amp; custom PCs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Corphik – IT podpora, stavba PC a weby">
+<meta name="twitter:description" content="Corphik – IT podpora v Praze a okolí i na dálku: sestavení PC, instalace Windows a Linuxu, opravy, nastavení DNS a redesign webu.">
+<meta name="twitter:image" content="https://corphik.eu/assets/img/og-corphik.png">
+<meta name="twitter:image:alt" content="Logo Corphik – Reliable IT support &amp; custom PCs">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,27 +38,212 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/home.css?v=25">
+<link rel="stylesheet" href="/assets/home.css?v=29">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Corphik",
-  "url": "https://corphik.eu/",
-  "email": "ales@corphik.eu",
-  "logo": "https://corphik.eu/favicon-512.png",
-  "sameAs": ["https://www.instagram.com/corphik", "https://www.linkedin.com/company/corphik"],
-  "description": "Corphik je IT podpora v Praze a okolí i na dálku: sestavení PC na míru, instalace Windows a Linuxu, upgrade, diagnostika a opravy, nastavení domény a DNS, redesign webu a vzdálená pomoc.",
-  "areaServed": ["Česko", "Španělsko", "Evropa"],
-  "knowsLanguage": [
-    "cs",
-    "en",
-    "es"
-  ],
-  "founder": {
-    "@type": "Person",
-    "name": "Aleš Pospíšil"
-  }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://corphik.eu/#organization",
+      "name": "Corphik",
+      "alternateName": "CORPHIK",
+      "url": "https://corphik.eu/",
+      "email": "ales@corphik.eu",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://corphik.eu/favicon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://corphik.eu/assets/img/og-corphik.png",
+      "description": "Corphik je IT podpora v Praze a okolí i na dálku: sestavení PC na míru, instalace Windows a Linuxu, upgrade, diagnostika a opravy, nastavení domény a DNS, redesign webu a vzdálená pomoc.",
+      "founder": {
+        "@id": "https://corphik.eu/#founder"
+      },
+      "areaServed": [
+        "Česko",
+        "Španělsko",
+        "Evropa"
+      ],
+      "knowsLanguage": [
+        "cs",
+        "en",
+        "es"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/corphik",
+        "https://www.linkedin.com/company/corphik"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://corphik.eu/#website",
+      "name": "Corphik",
+      "url": "https://corphik.eu/",
+      "inLanguage": [
+        "cs",
+        "en",
+        "es"
+      ],
+      "publisher": {
+        "@id": "https://corphik.eu/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://corphik.eu/#founder",
+      "name": "Aleš Pospíšil"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/#service-build",
+      "name": "Sestavení PC na míru",
+      "description": "Vyberu komponenty podle rozpočtu a účelu (hry, práce, škola), PC sestavím a otestuju.",
+      "category": "Stavba PC",
+      "url": "https://corphik.eu/#svc-build",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/orders/?service=build",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 1500,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/#service-os",
+      "name": "Instalace Windows a Linuxu",
+      "description": "Čistá instalace systému, ovladače, aktualizace a nastavení, aby vše fungovalo od prvního spuštění. Licence Windows není v ceně.",
+      "category": "IT podpora",
+      "url": "https://corphik.eu/#svc-os",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/orders/?service=os",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 700,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/#service-upgrade",
+      "name": "Upgrade a zrychlení PC",
+      "description": "Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Díly se platí zvlášť.",
+      "category": "Stavba PC",
+      "url": "https://corphik.eu/#svc-upgrade",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/orders/?service=upgrade",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 500,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/#service-fix",
+      "name": "Diagnostika a opravy",
+      "description": "PC nejde zapnout, padá, je pomalé nebo hlučné? Najdu příčinu a vyřeším ji. Cena diagnostiky se odečte z opravy.",
+      "category": "IT podpora",
+      "url": "https://corphik.eu/#svc-fix",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/orders/?service=fix",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 400,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/#service-dns",
+      "name": "Nastavení domény a DNS",
+      "description": "Záznamy A, AAAA, CNAME, MX a TXT (SPF, DKIM, DMARC). Propojím doménu s webem i e-mailem.",
+      "category": "Weby a domény",
+      "url": "https://corphik.eu/#svc-dns",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/orders/?service=dns",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 800,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/#service-web",
+      "name": "Redesign webu",
+      "description": "Starý web předělám do moderní podoby: nový vzhled, mobilní verze, rychlejší načítání a základní zabezpečení.",
+      "category": "Weby a domény",
+      "url": "https://corphik.eu/#svc-web",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/orders/?service=web",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 3499,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/#service-remote",
+      "name": "Vzdálená pomoc",
+      "description": "Připojím se k tvému počítači přes internet a vyřeším problém, nastavení nebo instalaci programů – ať jsi kdekoli. Účtuje se každých započatých 15 minut.",
+      "category": "IT podpora",
+      "url": "https://corphik.eu/#svc-remote",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/orders/?service=remote",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": 400,
+          "priceCurrency": "CZK",
+          "unitCode": "HUR"
+        }
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -74,38 +271,53 @@
   <svg class="bh-path" id="bhPath" aria-hidden="true" focusable="false"></svg>
   <div class="bh-travel" id="bhTravel" aria-hidden="true"><canvas></canvas></div>
   <section class="home-hero">
-    <div class="wrap">
-      <h1 class="sr-only" data-i18n="h.seo">Corphik – IT podpora a stavba PC na míru</h1>
-      <div class="bh-hero">
-        <canvas id="bhCanvas" aria-hidden="true"></canvas>
-        <button class="bh-core" id="bhCore" type="button" aria-expanded="false" aria-controls="bhMenu" hidden></button>
-        <ul class="bh-menu" id="bhMenu" hidden>
-          <li><a href="#sluzby" data-i18n="nav.home">Služby</a></li>
-          <li><a href="#prace" data-i18n="nav.portfolio">Portfolio</a></li>
-          <li><a href="#kontakt" data-i18n="ft.contact">Kontakt</a></li>
-        </ul>
-        <noscript><img class="hero-mark" src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"></noscript>
-      </div>
+    <div class="bh-hero">
+      <canvas id="bhCanvas" aria-hidden="true"></canvas>
+      <button class="bh-core" id="bhCore" type="button" aria-expanded="false" aria-controls="bhMenu" hidden></button>
+      <ul class="bh-menu" id="bhMenu" hidden>
+        <li><a href="#sluzby" data-i18n="nav.home">Služby</a></li>
+        <li><a href="#prace" data-i18n="nav.portfolio">Portfolio</a></li>
+        <li><a href="#kontakt" data-i18n="ft.contact">Kontakt</a></li>
+      </ul>
+      <noscript><img class="hero-mark" src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"></noscript>
+    </div>
+    <div class="wrap hero-body">
       <p class="hero-line" lang="en">IT SOLUTIONS<span class="sl"> / </span>PC ENGINEERING</p>
-      <div class="links">
-        <a class="btn primary" href="/orders/" data-i18n="h.cta">Objednat službu</a>
-        <a class="btn" href="#sluzby" data-i18n="h.cta2">Co nabízím</a>
+      <h1 class="hero-h"><span class="sr-only">Corphik – </span><span data-i18n="h.lead">IT podpora a stavba PC na míru.</span></h1>
+      <p class="hero-sub" data-i18n="h.sub">Sestavení a upgrady PC, instalace Windows a Linuxu, diagnostika a opravy, domény, DNS a weby.</p>
+      <div class="hero-side">
+        <div class="hero-act">
+          <a class="btn primary" href="/orders/" data-i18n="h.cta">Objednat službu</a>
+          <a class="hero-more" href="#sluzby"><span data-i18n="h.cta2">Co nabízím</span></a>
+        </div>
+        <ul class="hero-reach">
+          <li data-i18n="h.r1">Česko: osobně i na dálku</li>
+          <li data-i18n="h.r2">Španělsko a zbytek Evropy: zatím na dálku</li>
+        </ul>
       </div>
     </div>
   </section>
 
   <section class="services" id="sluzby">
     <div class="wrap">
-      <h2 class="big-h" data-i18n="s.big">Všechno kolem počítače. Na jednom místě.</h2>
-      <article class="feature" id="svcFeature"><div class="mosaic"><img src="/assets/img/pc-skrin.webp" alt="" loading="lazy" width="480" height="640"><img src="/assets/img/pc-kabely.webp" alt="" loading="lazy" width="480" height="640"><img src="/assets/img/pc-rog.webp" alt="" loading="lazy" width="480" height="640"></div><div class="ft-body"><h3>Sestavení PC na míru</h3><p class="d">Vyberu komponenty podle rozpočtu a účelu (hry, práce, škola), PC sestavím a otestuju.</p><ol class="pc-steps"><li><strong>Záloha na komponenty předem</strong><span>Díly objednám až po zaplacení zálohy.</span></li><li><strong>Stavba a testy u mě doma</strong><span>Počítač sestavím a otestuju u sebe.</span></li><li><strong>Dovoz hotového PC až k tobě</strong><span>Otestovanou sestavu ti přivezu. Po Praze a okolí v ceně, dál podle domluvy.</span></li></ol><div class="ft-buy"><span class="pr">od 1 500 Kč</span><button class="btn primary add" type="button" data-add="build" aria-pressed="false" aria-label="Do košíku: Sestavení PC na míru"><span class="lab">Do košíku</span></button></div></div></article>
-      <ul class="svc-list" id="svcList">
-<li class="svc" id="svc-os"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4M6.5 8.5l2.5 2-2.5 2M11 12.5h4"/></svg></span><div><h3>Instalace Windows a Linuxu</h3><p class="d">Čistá instalace systému, ovladače, aktualizace a nastavení, aby vše fungovalo od prvního spuštění. Licence Windows není v ceně.</p></div><button class="buy add" type="button" data-add="os" aria-pressed="false" aria-label="Do košíku: Instalace Windows a Linuxu, od 700 Kč"><span class="pr">od 700 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
-<li class="svc" id="svc-upgrade"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="1.5"/><path d="M7 7V4.5M11 7V4.5M15 7V4.5M19 7V4.5M6 17v2.5M18 17v2.5M7 10.5h3v3H7zM13 10.5h4"/></svg></span><div><h3>Upgrade a zrychlení PC</h3><p class="d">Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Díly se platí zvlášť.</p></div><button class="buy add" type="button" data-add="upgrade" aria-pressed="false" aria-label="Do košíku: Upgrade a zrychlení PC, od 500 Kč"><span class="pr">od 500 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
-<li class="svc" id="svc-fix"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><div><h3>Diagnostika a opravy<span class="tag">Částečně na dálku</span></h3><p class="d">PC nejde zapnout, padá, je pomalé nebo hlučné? Najdu příčinu a vyřeším ji. Cena diagnostiky se odečte z opravy.</p></div><button class="buy add" type="button" data-add="fix" aria-pressed="false" aria-label="Do košíku: Diagnostika a opravy, od 400 Kč"><span class="pr">od 400 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
-<li class="svc" id="svc-dns"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg></span><div><h3>Nastavení domény a DNS<span class="tag">Pouze na dálku</span></h3><p class="d">Záznamy A, AAAA, CNAME, MX a TXT (SPF, DKIM, DMARC). Propojím doménu s webem i e-mailem.</p></div><button class="buy add" type="button" data-add="dns" aria-pressed="false" aria-label="Do košíku: Nastavení domény a DNS, od 800 Kč"><span class="pr">od 800 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
-<li class="svc" id="svc-web"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M2.5 8.5h19M5.5 6.3h.01M8 6.3h.01M6 12h7M6 15.5h4M16 12h2.5v4H16z"/></svg></span><div><h3>Redesign webu<span class="tag">I na dálku</span></h3><p class="d">Starý web předělám do moderní podoby: nový vzhled, mobilní verze, rychlejší načítání a základní zabezpečení.</p></div><button class="buy add" type="button" data-add="web" aria-pressed="false" aria-label="Do košíku: Redesign webu, od 3 499 Kč"><span class="pr">od 3 499 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
-<li class="svc" id="svc-remote"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="13" height="9" rx="1.5"/><path d="M6 18h6M9 14v4"/><path d="M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"/></svg></span><div><h3>Vzdálená pomoc</h3><p class="d">Připojím se k tvému počítači přes internet a vyřeším problém, nastavení nebo instalaci programů – ať jsi kdekoli. Účtuje se každých započatých 15 minut.</p></div><button class="buy add" type="button" data-add="remote" aria-pressed="false" aria-label="Do košíku: Vzdálená pomoc, 400 Kč / hod"><span class="pr">400 Kč / hod</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
-      </ul>
+      <div class="svc-head">
+        <h2 class="big-h" data-i18n="s.big">Všechno kolem počítače. Na jednom místě.</h2>
+        <nav class="svc-index" id="svcIndex" aria-label="Oblasti služeb"><ol><li><a href="#obl-it"><span class="n">01</span> <span class="t">IT podpora</span> <span class="c">3 služby</span></a></li><li><a href="#obl-pc"><span class="n">02</span> <span class="t">Stavba PC</span> <span class="c">2 služby</span></a></li><li><a href="#obl-web"><span class="n">03</span> <span class="t">Weby a domény</span> <span class="c">2 služby</span></a></li></ol></nav>
+      </div>
+      <div class="svc-areas" id="svcList">
+<section class="area area-it" id="obl-it" aria-labelledby="obl-it-h"><header class="area-head"><p class="area-n">01</p><h3 id="obl-it-h">IT podpora</h3><p class="area-d">Když něco nefunguje: osobně v Praze a okolí, nebo na dálku.</p></header><ul class="area-list">
+<li class="svc" id="svc-fix"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"></path></svg></span><div class="svc-t"><h4>Diagnostika a opravy</h4><span class="tag">Částečně na dálku</span></div><p class="d">PC nejde zapnout, padá, je pomalé nebo hlučné? Najdu příčinu a vyřeším ji. Cena diagnostiky se odečte z opravy.</p><button class="buy add" type="button" data-add="fix" aria-pressed="false" aria-label="Do košíku: Diagnostika a opravy, od 400 Kč"><span class="pr">od 400 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
+<li class="svc" id="svc-remote"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="13" height="9" rx="1.5"></rect><path d="M6 18h6M9 14v4"></path><path d="M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"></path></svg></span><div class="svc-t"><h4>Vzdálená pomoc</h4></div><p class="d">Připojím se k tvému počítači přes internet a vyřeším problém, nastavení nebo instalaci programů – ať jsi kdekoli. Účtuje se každých započatých 15 minut.</p><button class="buy add" type="button" data-add="remote" aria-pressed="false" aria-label="Do košíku: Vzdálená pomoc, 400 Kč / hod"><span class="pr">400 Kč / hod</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
+<li class="svc" id="svc-os"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2"></rect><path d="M8 21h8M12 17v4M6.5 8.5l2.5 2-2.5 2M11 12.5h4"></path></svg></span><div class="svc-t"><h4>Instalace Windows a Linuxu</h4></div><p class="d">Čistá instalace systému, ovladače, aktualizace a nastavení, aby vše fungovalo od prvního spuštění. Licence Windows není v ceně.</p><button class="buy add" type="button" data-add="os" aria-pressed="false" aria-label="Do košíku: Instalace Windows a Linuxu, od 700 Kč"><span class="pr">od 700 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li></ul></section>
+
+<section class="area area-pc" id="obl-pc" aria-labelledby="obl-pc-h"><figure class="area-photo"><img src="/assets/img/pc-build-finished-rgb-640.webp" srcset="/assets/img/pc-build-finished-rgb-640.webp 640w, /assets/img/pc-build-finished-rgb-1152.webp 1152w" sizes="(max-width: 860px) 100vw, 480px" alt="Hotová sestava v bílé skříni s fialovým a modrým RGB podsvícením: vodní chlazení s kulatým displejem na procesoru, ventilátory a grafická karta s bílými kabely" width="1152" height="1536" loading="lazy" decoding="async"></figure><header class="area-head"><p class="area-n">02</p><h3 id="obl-pc-h">Stavba PC</h3><p class="area-d">Počítače na míru a upgrady. Sestavím a otestuju je sám.</p></header><ul class="area-list">
+<li class="svc" id="svc-build"><div class="svc-t"><h4>Sestavení PC na míru</h4></div><p class="d">Vyberu komponenty podle rozpočtu a účelu (hry, práce, škola), PC sestavím a otestuju.</p><ol class="pc-steps"><li><strong>Záloha na komponenty předem</strong><span>Díly objednám až po zaplacení zálohy.</span></li><li><strong>Stavba a testy u mě doma</strong><span>Počítač sestavím a otestuju u sebe.</span></li><li><strong>Dovoz hotového PC až k tobě</strong><span>Otestovanou sestavu ti přivezu. Po Praze a okolí v ceně, dál podle domluvy.</span></li></ol><button class="buy add" type="button" data-add="build" aria-pressed="false" aria-label="Do košíku: Sestavení PC na míru, od 1 500 Kč"><span class="pr">od 1 500 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
+<li class="svc" id="svc-upgrade"><div class="svc-t"><h4>Upgrade a zrychlení PC</h4></div><p class="d">Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Díly se platí zvlášť.</p><button class="buy add" type="button" data-add="upgrade" aria-pressed="false" aria-label="Do košíku: Upgrade a zrychlení PC, od 500 Kč"><span class="pr">od 500 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li></ul></section>
+
+<section class="area area-web" id="obl-web" aria-labelledby="obl-web-h"><header class="area-head"><p class="area-n">03</p><h3 id="obl-web-h">Weby a domény</h3><p class="area-d">Redesign webu, doména a e-mail. Obojí jde na dálku.</p></header><ul class="area-list">
+<li class="svc" id="svc-web"><div class="svc-t"><h4>Redesign webu</h4><span class="tag">I na dálku</span></div><p class="d">Starý web předělám do moderní podoby: nový vzhled, mobilní verze, rychlejší načítání a základní zabezpečení.</p><button class="buy add" type="button" data-add="web" aria-pressed="false" aria-label="Do košíku: Redesign webu, od 3 499 Kč"><span class="pr">od 3 499 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li>
+<li class="svc" id="svc-dns"><div class="svc-t"><h4>Nastavení domény a DNS</h4><span class="tag">Pouze na dálku</span></div><p class="d">Záznamy A, AAAA, CNAME, MX a TXT (SPF, DKIM, DMARC). Propojím doménu s webem i e-mailem.</p><p class="dns-recs" aria-hidden="true"><span>A</span><span>AAAA</span><span>CNAME</span><span>MX</span><span>TXT</span></p><button class="buy add" type="button" data-add="dns" aria-pressed="false" aria-label="Do košíku: Nastavení domény a DNS, od 800 Kč"><span class="pr">od 800 Kč</span><span class="go"><span class="lab">Do košíku</span></span></button></li></ul></section>
+</div>
     </div>
   </section>
 
@@ -132,11 +344,11 @@
   </section>
 </main>
 <footer><div class="wrap">
-  <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – Reliable IT support &amp; custom PCs" width="150" height="61" loading="lazy">
+  <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – spolehlivá IT podpora a počítače na míru" width="150" height="61" loading="lazy">
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Kontakt</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=24"></script>
-<script src="/assets/blackhole.js?v=1"></script>
+<script src="/assets/app.js?v=30"></script>
+<script src="/assets/blackhole.js?v=3"></script>
 </body>
 </html>

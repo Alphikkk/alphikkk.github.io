@@ -56,11 +56,25 @@ ES: Soporte informático para particulares, estudiantes y pequeñas empresas en 
 
 ## Links / Odkazy / Enlaces
 
-- [CS](https://corphik.eu/)
-- [EN](https://corphik.eu/en/)
-- [ES](https://corphik.eu/es/)
-- [Order / Objednat / Pedir](https://corphik.eu/orders/)
-- [About](https://corphik.eu/about/)
+### Čeština (CS)
+- [Úvod a služby](https://corphik.eu/)
+- [Portfolio](https://corphik.eu/portfolio/)
+- [O mně](https://corphik.eu/about/)
+- [Poptávka](https://corphik.eu/orders/)
+
+### English (EN)
+- [Home and services](https://corphik.eu/en/)
+- [Portfolio](https://corphik.eu/en/portfolio/)
+- [About me](https://corphik.eu/en/about/)
+- [Request a service](https://corphik.eu/en/orders/)
+
+### Español (ES)
+- [Inicio y servicios](https://corphik.eu/es/)
+- [Portafolio](https://corphik.eu/es/portfolio/)
+- [Sobre mí](https://corphik.eu/es/about/)
+- [Solicitar un servicio](https://corphik.eu/es/orders/)
+
+Sitemap: https://corphik.eu/sitemap.xml
 
 Contact:
 ales@corphik.eu

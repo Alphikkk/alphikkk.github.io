@@ -8,6 +8,17 @@
    Jen <canvas> a SVG, bez knihoven. Při prefers-reduced-motion díra zůstane v klidu v nápisu.
    Potřebuje app.js (texty přes t()) – načítá se až po něm.
    ========================================================= */
+/* Navigace nad tmavou scénou: dokud je pod ní úvod, dostane třídu .on-dark (vzhled v home.css) */
+(() => {
+const nav = document.querySelector('.nav'), hero = document.querySelector('.home-hero');
+if(!nav || !hero) return;
+let ticking = false;
+const update = () => { ticking = false; nav.classList.toggle('on-dark', hero.getBoundingClientRect().bottom > nav.offsetHeight); };
+const request = () => { if(!ticking){ ticking = true; requestAnimationFrame(update); } };
+addEventListener('scroll', request, {passive: true}); addEventListener('resize', request);
+update();
+})();
+
 (() => {
 const cv = document.getElementById('bhCanvas');
 if(!cv || !cv.getContext) return;
@@ -27,15 +38,22 @@ const say = k => (typeof t === "function" ? t(k) : k);
 /* ---------- Barvy z motivu, písmena nápisu ---------- */
 const imgs = ["/assets/img/wm-c.png", "/assets/img/wm-rphik.png"].map(src => { const i = new Image(); i.src = src; return i; });
 let letters = null, lettersFor = "";
-let ink = "", bg = "", dark = false;
+/* barvy úvodu se čtou z plátna (úvod má vlastní tmavou scénu, i ve světlém motivu),
+   putující díra letí přes zbytek stránky, proto bere barvy stránky */
+let ink = "", bg = "", dark = false, glowA = "", glowB = "";
+const page = { ink: "#000", dark: false };
+const rgb = c => {
+  const h = c.replace('#','');
+  return h.length === 3 ? h.split('').map(c => parseInt(c + c, 16)) : [0,2,4].map(k => parseInt(h.slice(k, k + 2), 16));
+};
+const light = c => { const n = rgb(c); return n[0] + n[1] + n[2] > 384; };
 function readColors(){
-  const cs = getComputedStyle(root);
-  const i = cs.getPropertyValue('--ink').trim() || "#000", b = cs.getPropertyValue('--bg').trim() || "#fff";
+  const ps = getComputedStyle(root), hs = getComputedStyle(cv);
+  page.ink = ps.getPropertyValue('--ink').trim() || "#000"; page.dark = light(page.ink);
+  glowA = hs.getPropertyValue('--glow-a').trim(); glowB = hs.getPropertyValue('--glow-b').trim();
+  const i = hs.getPropertyValue('--ink').trim() || "#000", b = hs.getPropertyValue('--bg').trim() || "#fff";
   if(i === ink && b === bg) return;
-  ink = i; bg = b;
-  const h = i.replace('#','');
-  const n = h.length === 3 ? h.split('').map(c => parseInt(c + c, 16)) : [0,2,4].map(k => parseInt(h.slice(k, k + 2), 16));
-  dark = n[0] + n[1] + n[2] > 384;
+  ink = i; bg = b; dark = light(i);
 }
 /* písmena v barvě textu + tenký okraj v barvě pozadí, aby disk šel „za“ ně jako v logu */
 function tint(){
@@ -54,7 +72,8 @@ function tint(){
 
 /* ---------- Kreslení díry (sdílí úvod i putující díra) ----------
    (x,y) střed, R poloměr horizontu; o.spin čas obíhání, o.tx/o.ty náklon (−1…1),
-   o.boost záblesk prstence (0…1), o.wave rázová vlna (0…1, 1 = žádná), o.alpha průhlednost */
+   o.boost záblesk prstence (0…1), o.wave rázová vlna (0…1, 1 = žádná), o.alpha průhlednost,
+   o.ink/o.dark barvy podkladu (bez nich barvy úvodu) */
 const DOTS = Array.from({length: COARSE ? 70 : 120}, () => {
   const k = 0.55 + Math.random()*0.5;
   return { a: Math.random()*TAU, k, v: 0.42/Math.pow(k, 1.5), z: Math.random() < 0.08 ? 2.2 : 1 };
@@ -64,18 +83,19 @@ const RINGS = [[0.6, 3.4, 1], [0.78, 1.8, 0.6], [1, 1.1, 0.38]];   /* [poloměr,
 function drawHole(c, x, y, R, o){
   const A = o.alpha == null ? 1 : o.alpha;
   if(A <= 0.01) return;
+  const dk = o.dark == null ? dark : o.dark, ik = o.ink || ink;
   const sc = R/26, rot = ROT + o.tx*0.08, rx = R*5.4, ry = rx*(0.17 + o.ty*0.05);
   const cr = Math.cos(rot), sr = Math.sin(rot);
   const pt = (a, k) => { const X = Math.cos(a)*rx*k, Y = Math.sin(a)*ry*k; return [x + X*cr - Y*sr, y + X*sr + Y*cr]; };
   c.save(); c.lineCap = 'round';
   /* záře; ve světlém motivu tmavá koróna, na které je bílý prstenec vidět */
-  const gr = R*(dark ? 3.6 : 1.9), g = c.createRadialGradient(x, y, R*0.9, x, y, gr);
-  if(dark){ g.addColorStop(0, `rgba(255,255,255,${0.13 + o.boost*0.12})`); g.addColorStop(1, 'rgba(255,255,255,0)'); }
+  const gr = R*(dk ? 3.6 : 1.9), g = c.createRadialGradient(x, y, R*0.9, x, y, gr);
+  if(dk){ g.addColorStop(0, `rgba(255,255,255,${0.13 + o.boost*0.12})`); g.addColorStop(1, 'rgba(255,255,255,0)'); }
   else { g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(0.45, 'rgba(0,0,0,.85)'); g.addColorStop(1, 'rgba(0,0,0,0)'); }
   c.globalAlpha = A; c.fillStyle = g; c.beginPath(); c.arc(x, y, gr, 0, TAU); c.fill();
   /* disk je u díry bílý, dál přechází do barvy textu (bílý disk by na bílém pozadí zmizel) */
   let st = '#fff';
-  if(!dark){ st = c.createRadialGradient(x, y, R*1.15, x, y, R*1.9); st.addColorStop(0, '#fff'); st.addColorStop(1, ink); }
+  if(!dk){ st = c.createRadialGradient(x, y, R*1.15, x, y, R*1.9); st.addColorStop(0, '#fff'); st.addColorStop(1, ik); }
   const N = 36;
   const disk = front => {
     c.strokeStyle = st; c.fillStyle = st;
@@ -117,7 +137,7 @@ function drawHole(c, x, y, R, o){
   disk(true);
   /* rázová vlna po kliknutí */
   if(o.wave < 1){
-    c.globalAlpha = A*(1 - o.wave)*0.7; c.strokeStyle = dark ? '#fff' : ink; c.lineWidth = Math.max(1, 1.6*sc);
+    c.globalAlpha = A*(1 - o.wave)*0.7; c.strokeStyle = dk ? '#fff' : ik; c.lineWidth = Math.max(1, 1.6*sc);
     c.beginPath(); c.arc(x, y, R*(1.2 + o.wave*4.5), 0, TAU); c.stroke();
   }
   c.restore();
@@ -135,8 +155,8 @@ function size(){
   const b = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
   W = b.width; H = b.height; cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
   const wrap = document.querySelector('.home-hero .wrap'), wrapW = wrap ? Math.min(W, wrap.clientWidth) : W;
-  const wd = Math.min(wrapW*0.86, 620, H*2.4); s = wd/IMG_W;
-  ox = (W - wd)/2; oy = H*0.56 - OY*s; hx = ox + OX*s; hy = oy + OY*s; R = 26*s;
+  const wd = Math.min(wrapW*0.9, 760, H*2.3); s = wd/IMG_W;
+  ox = (W - wd)/2; oy = H*0.54 - OY*s; hx = ox + OX*s; hy = oy + OY*s; R = 26*s;
   const n = Math.round(clamp(W*H/5200, 30, 220)); let q = 11;
   const rnd = () => (q = q*16807 % 2147483647)/2147483647;
   stars = Array.from({length: n}, () => ({ x: rnd()*W, y: rnd()*H, z: rnd(), p: rnd()*TAU }));
@@ -222,8 +242,18 @@ if(hero){
   hero.addEventListener('pointerleave', () => { presT = 0; });
 }
 
+/* světlo za dírou: tlumená fialová a modrá (--glow-a, --glow-b) roztažená v rovině disku;
+   rozsvítí se s příletem a zesílí při dopadu, kliknutí a najetí myší */
+function drawGlow(X, Y, k){
+  if(!glowA || k <= 0) return;
+  ctx.save(); ctx.translate(X, Y); ctx.rotate(ROT); ctx.scale(1.9, 1);
+  const r = R*3, g = ctx.createRadialGradient(0, 0, R*0.9, 0, 0, r);
+  g.addColorStop(0, glowA); g.addColorStop(0.4, glowB || glowA); g.addColorStop(1, `rgba(${rgb(glowB || glowA).join(',')},0)`);   /* do průhledné modré, ne černé – jinak tmavý okraj */
+  ctx.globalAlpha = k*(0.17 + boost*0.23); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, r, 0, TAU); ctx.fill();
+  ctx.restore();
+}
 function heroFrame(now, dt){
-  readColors(); tint();
+  tint();
   const f = dt/16.67, T = REDUCE ? 99 : (now - t0)/1000;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
   /* přílet zprava po mírném oblouku, na konci drobné dokmitání */
@@ -241,6 +271,7 @@ function heroFrame(now, dt){
   tiltY = lerp(tiltY, presT ? clamp((my - hy)/H, -1, 1) : 0, Math.min(1, 0.05*f));
   const X = x + offX*e, Y = y + offY*e; HX = X; HY = Y;
   const home = !tr.on;
+  if(home) drawGlow(X, Y, e);
   drawStars(X, Y, T, home);
   /* světelná stopa za přilétající dírou */
   if(!REDUCE){
@@ -407,7 +438,7 @@ function updateTravel(){
 function drawTravel(dt){
   tr.boost = Math.max(0, tr.boost - dt/900);
   tctx.setTransform(dpr, 0, 0, dpr, 0, 0); tctx.clearRect(0, 0, TW, TH);
-  drawHole(tctx, TW/2, TH/2, tr.R, { spin: spin*0.35, tx: clamp(tr.vx*0.08, -1, 1), ty: clamp(tr.vy*0.01, -0.6, 0.6), boost: tr.boost, wave: 1 });
+  drawHole(tctx, TW/2, TH/2, tr.R, { spin: spin*0.35, tx: clamp(tr.vx*0.08, -1, 1), ty: clamp(tr.vy*0.01, -0.6, 0.6), boost: tr.boost, wave: 1, ink: page.ink, dark: page.dark });
 }
 
 /* ---------- Projekt z portfolia: karta spadne do díry, obraz se zavře do černé ---------- */
@@ -439,7 +470,7 @@ function loop(now){
   entered = REDUCE || (now - t0)/1000 > ENTER + 0.3;
   boost = Math.max(hoverCore ? 0.35 : 0, boost - dt/900);
   if(wave < 1) wave = Math.min(1, wave + dt/900);
-  updateTravel();
+  readColors(); updateTravel();
   if(heroVisible) heroFrame(now, dt);
   if(tr.on) drawTravel(dt);
   if(!REDUCE && !document.hidden && (heroVisible || tr.on)) requestAnimationFrame(loop);

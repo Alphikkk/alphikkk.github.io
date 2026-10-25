@@ -1,39 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://corphik.eu/</loc>
-    <lastmod>2026-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/"/>
   </url>
   <url>
     <loc>https://corphik.eu/en/</loc>
-    <lastmod>2026-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/"/>
   </url>
   <url>
     <loc>https://corphik.eu/es/</loc>
-    <lastmod>2026-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/"/>
   </url>
   <url>
     <loc>https://corphik.eu/about/</loc>
-    <lastmod>2026-10-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/about/"/>
   </url>
   <url>
-    <loc>https://corphik.eu/orders/</loc>
-    <lastmod>2026-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://corphik.eu/en/about/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/about/"/>
+  </url>
+  <url>
+    <loc>https://corphik.eu/es/about/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/about/"/>
   </url>
   <url>
     <loc>https://corphik.eu/portfolio/</loc>
-    <lastmod>2026-10-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/portfolio/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/portfolio/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/portfolio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/portfolio/"/>
+  </url>
+  <url>
+    <loc>https://corphik.eu/en/portfolio/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/portfolio/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/portfolio/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/portfolio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/portfolio/"/>
+  </url>
+  <url>
+    <loc>https://corphik.eu/es/portfolio/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/portfolio/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/portfolio/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/portfolio/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/portfolio/"/>
+  </url>
+  <url>
+    <loc>https://corphik.eu/orders/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/orders/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/orders/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/orders/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/orders/"/>
+  </url>
+  <url>
+    <loc>https://corphik.eu/en/orders/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/orders/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/orders/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/orders/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/orders/"/>
+  </url>
+  <url>
+    <loc>https://corphik.eu/es/orders/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/orders/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/orders/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/orders/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/orders/"/>
   </url>
 </urlset>

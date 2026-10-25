@@ -11,10 +11,22 @@
 <link rel="alternate" hreflang="es" href="https://corphik.eu/es/">
 <link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Corphik">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="cs_CZ">
+<meta property="og:locale:alternate" content="es_ES">
 <meta property="og:url" content="https://corphik.eu/en/">
-<meta property="og:title" content="Corphik – IT support and security">
+<meta property="og:title" content="Corphik – IT support, custom PCs and websites">
 <meta property="og:description" content="Corphik – IT support in the Prague area and remotely: custom PC builds, Windows and Linux installs, repairs, DNS setup and website redesign.">
 <meta property="og:image" content="https://corphik.eu/assets/img/og-corphik.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Corphik logo – Reliable IT support &amp; custom PCs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Corphik – IT support, custom PCs and websites">
+<meta name="twitter:description" content="Corphik – IT support in the Prague area and remotely: custom PC builds, Windows and Linux installs, repairs, DNS setup and website redesign.">
+<meta name="twitter:image" content="https://corphik.eu/assets/img/og-corphik.png">
+<meta name="twitter:image:alt" content="Corphik logo – Reliable IT support &amp; custom PCs">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,27 +38,212 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/home.css?v=25">
+<link rel="stylesheet" href="/assets/home.css?v=29">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Corphik",
-  "url": "https://corphik.eu/en/",
-  "email": "ales@corphik.eu",
-  "logo": "https://corphik.eu/favicon-512.png",
-  "sameAs": ["https://www.instagram.com/corphik", "https://www.linkedin.com/company/corphik"],
-  "description": "Corphik offers IT support in the Prague area and remotely: custom PC builds, Windows and Linux installation, upgrades, diagnostics and repairs, domain and DNS setup, website redesign and remote help.",
-  "areaServed": ["Czechia", "Spain", "Europe"],
-  "knowsLanguage": [
-    "cs",
-    "en",
-    "es"
-  ],
-  "founder": {
-    "@type": "Person",
-    "name": "Aleš Pospíšil"
-  }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://corphik.eu/#organization",
+      "name": "Corphik",
+      "alternateName": "CORPHIK",
+      "url": "https://corphik.eu/",
+      "email": "ales@corphik.eu",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://corphik.eu/favicon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://corphik.eu/assets/img/og-corphik.png",
+      "description": "Corphik offers IT support in the Prague area and remotely: custom PC builds, Windows and Linux installation, upgrades, diagnostics and repairs, domain and DNS setup, website redesign and remote help.",
+      "founder": {
+        "@id": "https://corphik.eu/#founder"
+      },
+      "areaServed": [
+        "Czechia",
+        "Spain",
+        "Europe"
+      ],
+      "knowsLanguage": [
+        "cs",
+        "en",
+        "es"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/corphik",
+        "https://www.linkedin.com/company/corphik"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://corphik.eu/#website",
+      "name": "Corphik",
+      "url": "https://corphik.eu/",
+      "inLanguage": [
+        "cs",
+        "en",
+        "es"
+      ],
+      "publisher": {
+        "@id": "https://corphik.eu/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://corphik.eu/#founder",
+      "name": "Aleš Pospíšil"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/en/#service-build",
+      "name": "Custom PC build",
+      "description": "I pick parts for your budget and needs (gaming, work, school), then build and test the PC.",
+      "category": "PC engineering",
+      "url": "https://corphik.eu/en/#svc-build",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/en/orders/?service=build",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 1500,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/en/#service-os",
+      "name": "Windows & Linux installation",
+      "description": "Clean OS install, drivers, updates and setup so everything works from the first boot. Windows licence not included.",
+      "category": "IT support",
+      "url": "https://corphik.eu/en/#svc-os",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/en/orders/?service=os",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 700,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/en/#service-upgrade",
+      "name": "PC upgrade & speed-up",
+      "description": "New SSD, RAM or graphics card, cleaning and fresh thermal paste. Parts are paid separately.",
+      "category": "PC engineering",
+      "url": "https://corphik.eu/en/#svc-upgrade",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/en/orders/?service=upgrade",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 500,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/en/#service-fix",
+      "name": "Diagnostics & repairs",
+      "description": "PC won't start, crashes, runs slow or loud? I'll find the cause and fix it. The diagnostics fee is deducted from the repair price.",
+      "category": "IT support",
+      "url": "https://corphik.eu/en/#svc-fix",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/en/orders/?service=fix",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 400,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/en/#service-dns",
+      "name": "Domain & DNS setup",
+      "description": "A, AAAA, CNAME, MX and TXT records (SPF, DKIM, DMARC). I'll connect your domain to your website and email.",
+      "category": "Web development",
+      "url": "https://corphik.eu/en/#svc-dns",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/en/orders/?service=dns",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 800,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/en/#service-web",
+      "name": "Website redesign",
+      "description": "I turn an outdated website into a modern one: fresh design, mobile version, faster loading and basic security.",
+      "category": "Web development",
+      "url": "https://corphik.eu/en/#svc-web",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/en/orders/?service=web",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 3499,
+          "priceCurrency": "CZK"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://corphik.eu/en/#service-remote",
+      "name": "Remote help",
+      "description": "I connect to your computer over the internet and sort out problems, settings or software installs – wherever you are. Billed per started 15 minutes.",
+      "category": "IT support",
+      "url": "https://corphik.eu/en/#svc-remote",
+      "provider": {
+        "@id": "https://corphik.eu/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://corphik.eu/en/orders/?service=remote",
+        "priceCurrency": "CZK",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": 400,
+          "priceCurrency": "CZK",
+          "unitCode": "HUR"
+        }
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -56,8 +253,8 @@
     <a class="brand" href="/en/" aria-label="Corphik"><img src="/assets/img/corphik-wordmark.png" alt="Corphik" width="117" height="22"></a>
     <ul class="links">
       <li><a href="/en/" data-i18n="nav.home" aria-current="page">Services</a></li>
-      <li><a href="/portfolio/" data-i18n="nav.portfolio">Portfolio</a></li>
-      <li><a href="/about/" data-i18n="nav.about">About me</a></li>
+      <li><a href="/en/portfolio/" data-i18n="nav.portfolio">Portfolio</a></li>
+      <li><a href="/en/about/" data-i18n="nav.about">About me</a></li>
     </ul>
     <div class="tools">
       <div class="lang" role="group" aria-label="Language">
@@ -66,7 +263,7 @@
         <button type="button" data-lang="es">ES</button>
       </div>
       <button class="theme" id="theme" type="button" aria-label="Theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
-      <a class="cta" href="/orders/"><span data-i18n="nav.cart"></span><span class="cnt" hidden>0</span></a>
+      <a class="cta" href="/en/orders/"><span data-i18n="nav.cart"></span><span class="cnt" hidden>0</span></a>
     </div>
   </div>
 </header>
@@ -74,38 +271,53 @@
   <svg class="bh-path" id="bhPath" aria-hidden="true" focusable="false"></svg>
   <div class="bh-travel" id="bhTravel" aria-hidden="true"><canvas></canvas></div>
   <section class="home-hero">
-    <div class="wrap">
-      <h1 class="sr-only" data-i18n="h.seo">Corphik – IT support and custom PC builds</h1>
-      <div class="bh-hero">
-        <canvas id="bhCanvas" aria-hidden="true"></canvas>
-        <button class="bh-core" id="bhCore" type="button" aria-expanded="false" aria-controls="bhMenu" hidden></button>
-        <ul class="bh-menu" id="bhMenu" hidden>
-          <li><a href="#sluzby" data-i18n="nav.home">Services</a></li>
-          <li><a href="#prace" data-i18n="nav.portfolio">Portfolio</a></li>
-          <li><a href="#kontakt" data-i18n="ft.contact">Contact</a></li>
-        </ul>
-        <noscript><img class="hero-mark" src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"></noscript>
-      </div>
+    <div class="bh-hero">
+      <canvas id="bhCanvas" aria-hidden="true"></canvas>
+      <button class="bh-core" id="bhCore" type="button" aria-expanded="false" aria-controls="bhMenu" hidden></button>
+      <ul class="bh-menu" id="bhMenu" hidden>
+        <li><a href="#sluzby" data-i18n="nav.home">Services</a></li>
+        <li><a href="#prace" data-i18n="nav.portfolio">Portfolio</a></li>
+        <li><a href="#kontakt" data-i18n="ft.contact">Contact</a></li>
+      </ul>
+      <noscript><img class="hero-mark" src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"></noscript>
+    </div>
+    <div class="wrap hero-body">
       <p class="hero-line" lang="en">IT SOLUTIONS<span class="sl"> / </span>PC ENGINEERING</p>
-      <div class="links">
-        <a class="btn primary" href="/orders/" data-i18n="h.cta">Order a service</a>
-        <a class="btn" href="#sluzby" data-i18n="h.cta2">What I offer</a>
+      <h1 class="hero-h"><span class="sr-only">Corphik – </span><span data-i18n="h.lead">IT support and custom PC builds.</span></h1>
+      <p class="hero-sub" data-i18n="h.sub">PC builds and upgrades, Windows and Linux installs, diagnostics and repairs, domains, DNS and websites.</p>
+      <div class="hero-side">
+        <div class="hero-act">
+          <a class="btn primary" href="/en/orders/" data-i18n="h.cta">Order a service</a>
+          <a class="hero-more" href="#sluzby"><span data-i18n="h.cta2">What I offer</span></a>
+        </div>
+        <ul class="hero-reach">
+          <li data-i18n="h.r1">Czechia: in person or remotely</li>
+          <li data-i18n="h.r2">Spain and Europe: remote for now</li>
+        </ul>
       </div>
     </div>
   </section>
 
   <section class="services" id="sluzby">
     <div class="wrap">
-      <h2 class="big-h" data-i18n="s.big">Everything your computer needs. In one place.</h2>
-      <article class="feature" id="svcFeature"><div class="mosaic"><img src="/assets/img/pc-skrin.webp" alt="" loading="lazy" width="480" height="640"><img src="/assets/img/pc-kabely.webp" alt="" loading="lazy" width="480" height="640"><img src="/assets/img/pc-rog.webp" alt="" loading="lazy" width="480" height="640"></div><div class="ft-body"><h3>Custom PC build</h3><p class="d">I pick parts for your budget and needs (gaming, work, school), then build and test the PC.</p><ol class="pc-steps"><li><strong>Deposit for parts up front</strong><span>I order the parts once the deposit is paid.</span></li><li><strong>Built and tested at my place</strong><span>I assemble and test the PC myself.</span></li><li><strong>Delivered to your door</strong><span>The tested PC is brought right to you. Free around Prague, further by arrangement.</span></li></ol><div class="ft-buy"><span class="pr">from CZK 1,500 (≈ €60)</span><button class="btn primary add" type="button" data-add="build" aria-pressed="false" aria-label="Add to cart: Custom PC build"><span class="lab">Add to cart</span></button></div></div></article>
-      <ul class="svc-list" id="svcList">
-<li class="svc" id="svc-os"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4M6.5 8.5l2.5 2-2.5 2M11 12.5h4"/></svg></span><div><h3>Windows &amp; Linux installation</h3><p class="d">Clean OS install, drivers, updates and setup so everything works from the first boot. Windows licence not included.</p></div><button class="buy add" type="button" data-add="os" aria-pressed="false" aria-label="Add to cart: Windows &amp; Linux installation, from CZK 700 (≈ €28)"><span class="pr">from CZK 700 (≈ €28)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
-<li class="svc" id="svc-upgrade"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="1.5"/><path d="M7 7V4.5M11 7V4.5M15 7V4.5M19 7V4.5M6 17v2.5M18 17v2.5M7 10.5h3v3H7zM13 10.5h4"/></svg></span><div><h3>PC upgrade &amp; speed-up</h3><p class="d">New SSD, RAM or graphics card, cleaning and fresh thermal paste. Parts are paid separately.</p></div><button class="buy add" type="button" data-add="upgrade" aria-pressed="false" aria-label="Add to cart: PC upgrade &amp; speed-up, from CZK 500 (≈ €20)"><span class="pr">from CZK 500 (≈ €20)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
-<li class="svc" id="svc-fix"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><div><h3>Diagnostics &amp; repairs<span class="tag">Partly remote</span></h3><p class="d">PC won't start, crashes, runs slow or loud? I'll find the cause and fix it. The diagnostics fee is deducted from the repair price.</p></div><button class="buy add" type="button" data-add="fix" aria-pressed="false" aria-label="Add to cart: Diagnostics &amp; repairs, from CZK 400 (≈ €16)"><span class="pr">from CZK 400 (≈ €16)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
-<li class="svc" id="svc-dns"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg></span><div><h3>Domain &amp; DNS setup<span class="tag">Remote only</span></h3><p class="d">A, AAAA, CNAME, MX and TXT records (SPF, DKIM, DMARC). I'll connect your domain to your website and email.</p></div><button class="buy add" type="button" data-add="dns" aria-pressed="false" aria-label="Add to cart: Domain &amp; DNS setup, from CZK 800 (≈ €32)"><span class="pr">from CZK 800 (≈ €32)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
-<li class="svc" id="svc-web"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M2.5 8.5h19M5.5 6.3h.01M8 6.3h.01M6 12h7M6 15.5h4M16 12h2.5v4H16z"/></svg></span><div><h3>Website redesign<span class="tag">Remote available</span></h3><p class="d">I turn an outdated website into a modern one: fresh design, mobile version, faster loading and basic security.</p></div><button class="buy add" type="button" data-add="web" aria-pressed="false" aria-label="Add to cart: Website redesign, from CZK 3,499 (≈ €140)"><span class="pr">from CZK 3,499 (≈ €140)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
-<li class="svc" id="svc-remote"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="13" height="9" rx="1.5"/><path d="M6 18h6M9 14v4"/><path d="M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"/></svg></span><div><h3>Remote help</h3><p class="d">I connect to your computer over the internet and sort out problems, settings or software installs – wherever you are. Billed per started 15 minutes.</p></div><button class="buy add" type="button" data-add="remote" aria-pressed="false" aria-label="Add to cart: Remote help, CZK 400 / hour (≈ €16)"><span class="pr">CZK 400 / hour (≈ €16)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
-      </ul>
+      <div class="svc-head">
+        <h2 class="big-h" data-i18n="s.big">Everything your computer needs. In one place.</h2>
+        <nav class="svc-index" id="svcIndex" aria-label="Service areas"><ol><li><a href="#obl-it"><span class="n">01</span> <span class="t">IT support</span> <span class="c">3 services</span></a></li><li><a href="#obl-pc"><span class="n">02</span> <span class="t">PC engineering</span> <span class="c">2 services</span></a></li><li><a href="#obl-web"><span class="n">03</span> <span class="t">Web development</span> <span class="c">2 services</span></a></li></ol></nav>
+      </div>
+      <div class="svc-areas" id="svcList">
+<section class="area area-it" id="obl-it" aria-labelledby="obl-it-h"><header class="area-head"><p class="area-n">01</p><h3 id="obl-it-h">IT support</h3><p class="area-d">When something stops working: in person around Prague, or remotely.</p></header><ul class="area-list">
+<li class="svc" id="svc-fix"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"></path></svg></span><div class="svc-t"><h4>Diagnostics &amp; repairs</h4><span class="tag">Partly remote</span></div><p class="d">PC won't start, crashes, runs slow or loud? I'll find the cause and fix it. The diagnostics fee is deducted from the repair price.</p><button class="buy add" type="button" data-add="fix" aria-pressed="false" aria-label="Add to cart: Diagnostics &amp; repairs, from CZK 400 (≈ €16)"><span class="pr">from CZK 400 (≈ €16)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
+<li class="svc" id="svc-remote"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="13" height="9" rx="1.5"></rect><path d="M6 18h6M9 14v4"></path><path d="M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"></path></svg></span><div class="svc-t"><h4>Remote help</h4></div><p class="d">I connect to your computer over the internet and sort out problems, settings or software installs – wherever you are. Billed per started 15 minutes.</p><button class="buy add" type="button" data-add="remote" aria-pressed="false" aria-label="Add to cart: Remote help, CZK 400 / hour (≈ €16)"><span class="pr">CZK 400 / hour (≈ €16)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
+<li class="svc" id="svc-os"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2"></rect><path d="M8 21h8M12 17v4M6.5 8.5l2.5 2-2.5 2M11 12.5h4"></path></svg></span><div class="svc-t"><h4>Windows &amp; Linux installation</h4></div><p class="d">Clean OS install, drivers, updates and setup so everything works from the first boot. Windows licence not included.</p><button class="buy add" type="button" data-add="os" aria-pressed="false" aria-label="Add to cart: Windows &amp; Linux installation, from CZK 700 (≈ €28)"><span class="pr">from CZK 700 (≈ €28)</span><span class="go"><span class="lab">Add to cart</span></span></button></li></ul></section>
+
+<section class="area area-pc" id="obl-pc" aria-labelledby="obl-pc-h"><figure class="area-photo"><img src="/assets/img/pc-build-finished-rgb-640.webp" srcset="/assets/img/pc-build-finished-rgb-640.webp 640w, /assets/img/pc-build-finished-rgb-1152.webp 1152w" sizes="(max-width: 860px) 100vw, 480px" alt="The finished build in a white case with purple and blue RGB lighting: a liquid cooler with a round display on the CPU, fans and a graphics card with white cables" width="1152" height="1536" loading="lazy" decoding="async"></figure><header class="area-head"><p class="area-n">02</p><h3 id="obl-pc-h">PC engineering</h3><p class="area-d">Custom builds and upgrades, assembled and tested by me.</p></header><ul class="area-list">
+<li class="svc" id="svc-build"><div class="svc-t"><h4>Custom PC build</h4></div><p class="d">I pick parts for your budget and needs (gaming, work, school), then build and test the PC.</p><ol class="pc-steps"><li><strong>Deposit for parts up front</strong><span>I order the parts once the deposit is paid.</span></li><li><strong>Built and tested at my place</strong><span>I assemble and test the PC myself.</span></li><li><strong>Delivered to your door</strong><span>The tested PC is brought right to you. Free around Prague, further by arrangement.</span></li></ol><button class="buy add" type="button" data-add="build" aria-pressed="false" aria-label="Add to cart: Custom PC build, from CZK 1,500 (≈ €60)"><span class="pr">from CZK 1,500 (≈ €60)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
+<li class="svc" id="svc-upgrade"><div class="svc-t"><h4>PC upgrade &amp; speed-up</h4></div><p class="d">New SSD, RAM or graphics card, cleaning and fresh thermal paste. Parts are paid separately.</p><button class="buy add" type="button" data-add="upgrade" aria-pressed="false" aria-label="Add to cart: PC upgrade &amp; speed-up, from CZK 500 (≈ €20)"><span class="pr">from CZK 500 (≈ €20)</span><span class="go"><span class="lab">Add to cart</span></span></button></li></ul></section>
+
+<section class="area area-web" id="obl-web" aria-labelledby="obl-web-h"><header class="area-head"><p class="area-n">03</p><h3 id="obl-web-h">Web development</h3><p class="area-d">Website redesign, domain and email. Both can be done remotely.</p></header><ul class="area-list">
+<li class="svc" id="svc-web"><div class="svc-t"><h4>Website redesign</h4><span class="tag">Remote available</span></div><p class="d">I turn an outdated website into a modern one: fresh design, mobile version, faster loading and basic security.</p><button class="buy add" type="button" data-add="web" aria-pressed="false" aria-label="Add to cart: Website redesign, from CZK 3,499 (≈ €140)"><span class="pr">from CZK 3,499 (≈ €140)</span><span class="go"><span class="lab">Add to cart</span></span></button></li>
+<li class="svc" id="svc-dns"><div class="svc-t"><h4>Domain &amp; DNS setup</h4><span class="tag">Remote only</span></div><p class="d">A, AAAA, CNAME, MX and TXT records (SPF, DKIM, DMARC). I'll connect your domain to your website and email.</p><p class="dns-recs" aria-hidden="true"><span>A</span><span>AAAA</span><span>CNAME</span><span>MX</span><span>TXT</span></p><button class="buy add" type="button" data-add="dns" aria-pressed="false" aria-label="Add to cart: Domain &amp; DNS setup, from CZK 800 (≈ €32)"><span class="pr">from CZK 800 (≈ €32)</span><span class="go"><span class="lab">Add to cart</span></span></button></li></ul></section>
+</div>
     </div>
   </section>
 
@@ -114,11 +326,11 @@
     <div class="wrap">
       <h2 class="big-h" data-i18n="pf.h">Portfolio</h2>
       <ul class="work-list" id="pfTeaser">
-<li><a class="work-card" href="/portfolio/#pf-tj" data-pf="tj"><h3><span class="t">Tandjo</span></h3><p>A web app for couples: calendar, gallery, places, plans and games for two.</p></a></li>
-<li><a class="work-card" href="/portfolio/#pf-ap" data-pf="ap"><h3><span class="t">This website</span></h3><p>A business site in three languages with a price list and order form.</p></a></li>
-<li><a class="work-card" href="/portfolio/#pf-pc" data-pf="pc"><h3><span class="t">Gaming PC</span></h3><p>A build with Ryzen 7 5800X3D and Radeon RX 7800 XT for high-resolution gaming.</p></a></li>
+<li><a class="work-card" href="/en/portfolio/#pf-tj" data-pf="tj"><h3><span class="t">Tandjo</span></h3><p>A web app for couples: calendar, gallery, places, plans and games for two.</p></a></li>
+<li><a class="work-card" href="/en/portfolio/#pf-ap" data-pf="ap"><h3><span class="t">This website</span></h3><p>A business site in three languages with a price list and order form.</p></a></li>
+<li><a class="work-card" href="/en/portfolio/#pf-pc" data-pf="pc"><h3><span class="t">Gaming PC</span></h3><p>A build with Ryzen 7 5800X3D and Radeon RX 7800 XT for high-resolution gaming.</p></a></li>
       </ul>
-      <a class="btn work-more" href="/portfolio/" data-i18n="pf.more">See the full portfolio</a>
+      <a class="btn work-more" href="/en/portfolio/" data-i18n="pf.more">See the full portfolio</a>
     </div>
   </section>
 
@@ -127,16 +339,16 @@
       <svg class="bh" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-10 32 32)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="32" cy="33" rx="30" ry="6" stroke-width="1.2" opacity=".45"/><circle cx="32" cy="32" r="17" stroke-width="7" opacity=".14"/><path d="M15 33a17 17 0 0 1 34 0" stroke-width="3.2"/><path d="M19.5 34.5a12.5 12.5 0 0 0 25 0" stroke-width="1.3" opacity=".75"/><circle cx="32" cy="32" r="11" fill="var(--ink)" stroke-width="1.3"/><path d="M2 33a30 6 0 0 0 60 0" stroke-width="2.8"/></g></svg>
       <h2 data-i18n="cta.h">Let's get it done.</h2>
       <p data-i18n="cta.p">Tell me what you need. I'll get back to you as soon as I can.</p>
-      <a class="btn" href="/orders/" data-i18n="h.cta">Order a service</a>
+      <a class="btn" href="/en/orders/" data-i18n="h.cta">Order a service</a>
     </div></div>
   </section>
 </main>
 <footer><div class="wrap">
-  <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – Reliable IT support &amp; custom PCs" width="150" height="61" loading="lazy">
+  <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – reliable IT support and custom PCs" width="150" height="61" loading="lazy">
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contact</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=24"></script>
-<script src="/assets/blackhole.js?v=1"></script>
+<script src="/assets/app.js?v=30"></script>
+<script src="/assets/blackhole.js?v=3"></script>
 </body>
 </html>

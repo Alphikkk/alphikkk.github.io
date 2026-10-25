@@ -11,7 +11,7 @@ const WEB3FORMS_KEY = "2d1be97d-5752-427f-bbf3-e49d1acd0b37";
 /* ===== SLUŽBY A CENY – uprav podle sebe (remote:true = jde i na dálku) =====
    tag:"partial" = štítek „Částečně na dálku“, tag:false = štítek se nezobrazí (služba jde na dálku dál)
    onlyRemote:true = jde jen na dálku (štítek „Pouze na dálku“, v objednávce nejde zvolit „Osobně“)
-   build = hlavní služba nahoře s fotkami (BUILD_IMGS), ostatní se vypíšou jako ceník s ikonkou (SVC_ICONS)
+   na úvodu se služby řadí do tří oblastí (SVC_AREAS) – novou službu přidej i tam
    czk = číslo z ceny „od“ (jen pro orientační odhad v poptávce), hourly:true = cena za hodinu
    POZOR: když tu něco změníš, uprav stejný text i v index.html, en/index.html a es/index.html
    (texty v HTML jsou pro Google; po načtení je skript stejně vykreslí znovu) */
@@ -225,8 +225,13 @@ Object.assign(T.cs,{
  "ck.abroadNa":"Tuhle službu zatím dělám jen v Česku. Mimo Česko si vyber službu, která jde na dálku.",
  "f.country":"Země",
  "h.lead":"IT podpora a stavba PC na míru.",
+ "h.sub":"Sestavení a upgrady PC, instalace Windows a Linuxu, diagnostika a opravy, domény, DNS a weby.",
  "h.r1":"Česko: osobně i na dálku","h.r2":"Španělsko a zbytek Evropy: zatím na dálku",
  "s.big":"Všechno kolem počítače. Na jednom místě.",
+ "s.areas":"Oblasti služeb","s.count":"{n} služby",
+ "s.a.it":"IT podpora","s.a.it.d":"Když něco nefunguje: osobně v Praze a okolí, nebo na dálku.",
+ "s.a.pc":"Stavba PC","s.a.pc.d":"Počítače na míru a upgrady. Sestavím a otestuju je sám.",
+ "s.a.web":"Weby a domény","s.a.web.d":"Redesign webu, doména a e-mail. Obojí jde na dálku.",
  "bd.1h":"Záloha na komponenty předem","bd.1p":"Díly objednám až po zaplacení zálohy.",
  "bd.2h":"Stavba a testy u mě doma","bd.2p":"Počítač sestavím a otestuju u sebe.",
  "bd.3h":"Dovoz hotového PC až k tobě","bd.3p":"Otestovanou sestavu ti přivezu. Po Praze a okolí v ceně, dál podle domluvy.",
@@ -240,8 +245,13 @@ Object.assign(T.en,{
  "ck.abroadNa":"For now I only offer this service in Czechia. Outside Czechia, please pick a service that can be done remotely.",
  "f.country":"Country",
  "h.lead":"IT support and custom PC builds.",
+ "h.sub":"PC builds and upgrades, Windows and Linux installs, diagnostics and repairs, domains, DNS and websites.",
  "h.r1":"Czechia: in person or remotely","h.r2":"Spain and Europe: remote for now",
  "s.big":"Everything your computer needs. In one place.",
+ "s.areas":"Service areas","s.count":"{n} services",
+ "s.a.it":"IT support","s.a.it.d":"When something stops working: in person around Prague, or remotely.",
+ "s.a.pc":"PC engineering","s.a.pc.d":"Custom builds and upgrades, assembled and tested by me.",
+ "s.a.web":"Web development","s.a.web.d":"Website redesign, domain and email. Both can be done remotely.",
  "bd.1h":"Deposit for parts up front","bd.1p":"I order the parts once the deposit is paid.",
  "bd.2h":"Built and tested at my place","bd.2p":"I assemble and test the PC myself.",
  "bd.3h":"Delivered to your door","bd.3p":"The tested PC is brought right to you. Free around Prague, further by arrangement.",
@@ -255,8 +265,13 @@ Object.assign(T.es,{
  "ck.abroadNa":"Por ahora este servicio solo lo ofrezco en Chequia. Fuera de Chequia, elige un servicio que se pueda hacer a distancia.",
  "f.country":"País",
  "h.lead":"Soporte informático y PC a medida.",
+ "h.sub":"Montaje y mejora de PC, instalación de Windows y Linux, diagnóstico y reparación, dominios, DNS y webs.",
  "h.r1":"Chequia: en persona o a distancia","h.r2":"España y Europa: por ahora a distancia",
  "s.big":"Todo lo que necesita tu ordenador. En un solo lugar.",
+ "s.areas":"Áreas de servicio","s.count":"{n} servicios",
+ "s.a.it":"Soporte informático","s.a.it.d":"Cuando algo deja de funcionar: en persona en Praga y alrededores, o a distancia.",
+ "s.a.pc":"Ingeniería de PC","s.a.pc.d":"Equipos a medida y mejoras, montados y probados por mí.",
+ "s.a.web":"Desarrollo web","s.a.web.d":"Rediseño web, dominio y correo. Ambos se pueden hacer a distancia.",
  "bd.1h":"Anticipo para los componentes","bd.1p":"Pido las piezas en cuanto se paga el anticipo.",
  "bd.2h":"Montaje y pruebas","bd.2p":"Monto y pruebo el PC yo mismo.",
  "bd.3h":"Te lo llevo a casa","bd.3p":"Te entrego el equipo ya probado. Gratis en Praga y alrededores; más lejos, según acuerdo.",
@@ -403,6 +418,32 @@ Object.assign(T.es,{
 /* ===== Portfolio (případové studie) a O mně (zakladatel CORPHIK) ===== */
 /* text stránky 404 (původně všechny tři jazyky naráz) */
 Object.assign(T.cs,{"nf.t":"Stránka nenalezena"}); Object.assign(T.en,{"nf.t":"Page not found"}); Object.assign(T.es,{"nf.t":"Página no encontrada"});
+/* alt loga v patičce (na stránkách s jednou adresou ho přepíná setLang) */
+Object.assign(T.cs,{"ft.logoAlt":"Corphik – spolehlivá IT podpora a počítače na míru"});
+Object.assign(T.en,{"ft.logoAlt":"Corphik – reliable IT support and custom PCs"});
+Object.assign(T.es,{"ft.logoAlt":"Corphik – soporte informático fiable y PC a medida"});
+/* portfolio: rejstřík, popisky fotek ze stavby PC a snímků webu */
+Object.assign(T.cs,{
+ "pf.index":"Projekty","pf.features":"Funkce","pf.featuresAp":"Ceník, košík, poptávkový formulář, tmavý režim",
+ "pf.fig.finished":"Hotová sestava","pf.fig.cooling":"Chlazení",
+ "pf.alt.finished":"Hotová sestava v bílé skříni s fialovým a modrým RGB podsvícením: vodní chlazení s kulatým displejem na procesoru, ventilátory a grafická karta s bílými kabely",
+ "pf.alt.cooling":"Detail čerpadla vodního chlazení s kulatým displejem v modrém světle, vlevo podsvícené logo ROG na základní desce",
+ "pf.alt.webD":"Úvodní stránka corphik.eu na počítači","pf.alt.webM":"Úvodní stránka corphik.eu na telefonu"
+});
+Object.assign(T.en,{
+ "pf.index":"Projects","pf.features":"Features","pf.featuresAp":"Price list, cart, order form, dark mode",
+ "pf.fig.finished":"Finished build","pf.fig.cooling":"Cooling",
+ "pf.alt.finished":"The finished build in a white case with purple and blue RGB lighting: a liquid cooler with a round display on the CPU, fans and a graphics card with white cables",
+ "pf.alt.cooling":"Close-up of the liquid cooler pump head with its round display in blue light, with the illuminated ROG logo of the motherboard on the left",
+ "pf.alt.webD":"The corphik.eu homepage on a desktop","pf.alt.webM":"The corphik.eu homepage on a phone"
+});
+Object.assign(T.es,{
+ "pf.index":"Proyectos","pf.features":"Funciones","pf.featuresAp":"Lista de precios, carrito, formulario de pedido, modo oscuro",
+ "pf.fig.finished":"Equipo terminado","pf.fig.cooling":"Refrigeración",
+ "pf.alt.finished":"El equipo terminado en una caja blanca con iluminación RGB morada y azul: refrigeración líquida con pantalla redonda sobre el procesador, ventiladores y una tarjeta gráfica con cables blancos",
+ "pf.alt.cooling":"Detalle de la bomba de la refrigeración líquida con su pantalla redonda bajo luz azul y, a la izquierda, el logotipo ROG iluminado de la placa base",
+ "pf.alt.webD":"La página de inicio de corphik.eu en un ordenador","pf.alt.webM":"La página de inicio de corphik.eu en un móvil"
+});
 Object.assign(T.cs,{
  "pf.lead":"Projekty, na kterých jsem pracoval – weby, aplikace a počítače.",
  "pf.k.tj":"Webová aplikace","pf.k.ap":"Web","pf.k.pc":"Sestavení PC",
@@ -508,8 +549,18 @@ const findService = id => SERVICES.find(s => s.id === id);
 
 /* ===== Služby (úvod) ===== */
 /*SVC_START*/
-/* Fotky u hlavní služby (sestavení PC) – soubory v /assets/img/ */
-const BUILD_IMGS = ["/assets/img/pc-skrin.webp","/assets/img/pc-kabely.webp","/assets/img/pc-rog.webp"];
+/* Služby na úvodu ve třech oblastech, každá má vlastní kompozici (viz home.css):
+   IT podpora = tři sloupce, Stavba PC = tmavý panel se skutečnou fotkou sestavy, Weby a domény = specifikace vpravo.
+   Každá služba z SERVICES musí být v jedné oblasti (pořadí v oblasti = pořadí zobrazení). */
+const SVC_AREAS = [
+  { id:"it", ids:["fix","remote","os"] },
+  { id:"pc", ids:["build","upgrade"] },
+  { id:"web", ids:["web","dns"] }
+];
+/* fotka hotové sestavy (stejné soubory jako v portfoliu) */
+const PC_IMG = (f, sizes) => `src="/assets/img/${f}-640.webp" srcset="/assets/img/${f}-640.webp 640w, /assets/img/${f}-1152.webp 1152w" sizes="${sizes}"`;
+/* typy záznamů z popisu služby DNS – jen jako typografický detail (aria-hidden, popis je čte celé) */
+const DNS_RECORDS = ["A","AAAA","CNAME","MX","TXT"];
 /* Ikonky služeb (jednoduché čárové SVG, barva se řídí motivem) */
 const ICON_WRAP = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const SVC_ICONS = {
@@ -520,47 +571,83 @@ const SVC_ICONS = {
   web:'<rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M2.5 8.5h19M5.5 6.3h.01M8 6.3h.01M6 12h7M6 15.5h4M16 12h2.5v4H16z"/>',
   remote:'<rect x="2.5" y="5" width="13" height="9" rx="1.5"/><path d="M6 18h6M9 14v4"/><path d="M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"/>'
 };
+const pfNum = i => String(i + 1).padStart(2, "0");   /* 01, 02… (služby i portfolio) */
 const esc = x => String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 function svcTag(s){
   if(!s.remote || s.tag===false) return "";
   return `<span class="tag">${esc(t(s.onlyRemote ? "s.only" : s.tag==="partial" ? "s.partial" : "s.remote"))}</span>`;
 }
-function featureHTML(s){
-  const steps = [1,2,3].map(i=>`<li><strong>${t("bd."+i+"h")}</strong><span>${t("bd."+i+"p")}</span></li>`).join("");
-  return `<div class="mosaic">${BUILD_IMGS.map(u=>`<img src="${u}" alt="" loading="lazy" width="480" height="640">`).join("")}</div>`
-    + `<div class="ft-body"><h3>${esc(s.name[lang])}</h3><p class="d">${esc(s.desc[lang])}</p><ol class="pc-steps">${steps}</ol>`
-    + `<div class="ft-buy"><span class="pr">${esc(s.price[lang])}</span><button class="btn primary add" type="button" data-add="${s.id}" aria-pressed="false" aria-label="${esc(t("cart.add")+": "+s.name[lang])}"><span class="lab">${esc(t("cart.add"))}</span></button></div></div>`;
+function buyHTML(s){
+  return `<button class="buy add" type="button" data-add="${s.id}" aria-pressed="false" aria-label="${esc(t("cart.add")+": "+s.name[lang]+", "+s.price[lang])}">`
+    + `<span class="pr">${esc(s.price[lang])}</span><span class="go"><span class="lab">${esc(t("cart.add"))}</span></span></button>`;
 }
-function rowHTML(s){
-  return `<li class="svc" id="svc-${s.id}"><span class="ic">${ICON_WRAP(SVC_ICONS[s.id]||"")}</span>`
-    + `<div><h3>${esc(s.name[lang])}${svcTag(s)}</h3><p class="d">${esc(s.desc[lang])}</p></div>`
-    + `<button class="buy add" type="button" data-add="${s.id}" aria-pressed="false" aria-label="${esc(t("cart.add")+": "+s.name[lang]+", "+s.price[lang])}"><span class="pr">${esc(s.price[lang])}</span><span class="go"><span class="lab">${esc(t("cart.add"))}</span></span></button></li>`;
+/* jedna služba: název (+ štítek), popis, případný doplněk, cena s tlačítkem do košíku */
+function svcHTML(s, before = "", extra = ""){
+  return `<li class="svc" id="svc-${s.id}">${before}<div class="svc-t"><h4>${esc(s.name[lang])}</h4>${svcTag(s)}</div>`
+    + `<p class="d">${esc(s.desc[lang])}</p>${extra}${buyHTML(s)}</li>`;
+}
+function areaItem(area, s){
+  if(area==="it") return svcHTML(s, `<span class="ic">${ICON_WRAP(SVC_ICONS[s.id]||"")}</span>`);
+  if(s.id==="build"){
+    const steps = [1,2,3].map(i=>`<li><strong>${t("bd."+i+"h")}</strong><span>${t("bd."+i+"p")}</span></li>`).join("");
+    return svcHTML(s, "", `<ol class="pc-steps">${steps}</ol>`);
+  }
+  if(s.id==="dns") return svcHTML(s, "", `<p class="dns-recs" aria-hidden="true">${DNS_RECORDS.map(r=>`<span>${r}</span>`).join("")}</p>`);
+  return svcHTML(s);
+}
+function areaHTML(a, i){
+  const list = a.ids.map(findService).filter(Boolean);
+  const photo = a.id==="pc" ? `<figure class="area-photo"><img ${PC_IMG("pc-build-finished-rgb","(max-width: 860px) 100vw, 480px")} alt="${esc(t("pf.alt.finished"))}" width="1152" height="1536" loading="lazy" decoding="async"></figure>` : "";
+  return `<section class="area area-${a.id}" id="obl-${a.id}" aria-labelledby="obl-${a.id}-h">${photo}`
+    + `<header class="area-head"><p class="area-n">${pfNum(i)}</p><h3 id="obl-${a.id}-h">${esc(t("s.a."+a.id))}</h3><p class="area-d">${esc(t("s.a."+a.id+".d"))}</p></header>`
+    + `<ul class="area-list">${list.map(s=>areaItem(a.id, s)).join("")}</ul></section>`;
 }
 /*SVC_END*/
 function renderServices(){
-  const ft = $('svcFeature'), ul = $('svcList');
-  if(ft){ const b = findService("build"); if(b) ft.innerHTML = featureHTML(b); }
-  if(ul) ul.innerHTML = SERVICES.filter(s=>s.id!=="build").map(rowHTML).join("");
+  const box = $('svcList'), idx = $('svcIndex');
+  if(idx){
+    idx.setAttribute('aria-label', t("s.areas"));
+    idx.innerHTML = `<ol>${SVC_AREAS.map((a,i)=>`<li><a href="#obl-${a.id}"><span class="n">${pfNum(i)}</span> <span class="t">${esc(t("s.a."+a.id))}</span> `
+      + `<span class="c">${esc(t("s.count").replace("{n}", a.ids.length))}</span></a></li>`).join("")}</ol>`;
+  }
+  if(box) box.innerHTML = SVC_AREAS.map(areaHTML).join("");
   updateCartUI();
 }
 
 /* ===== Portfolio ===== */
 let pfFilter = "all";
-/* Portfolio jako případové studie: velký obraz + fakta. Vše jen z dat PORTFOLIO a existujících textů. */
+/* Portfolio jako případové studie, každá s vlastní kompozicí. Vše jen ze skutečných podkladů:
+   fotky sestavy z /assets/img/ a snímky tohoto webu (pf-web-*.webp), texty z dat PORTFOLIO. */
+/* pořadí na stránce Portfolio: nejdřív projekt se skutečnými fotkami (ukázky na úvodu mají pořadí z PORTFOLIO) */
+const PF_ORDER = ["pc","ap","tj"];
 const PF_SPECS = { pc:[["pf.cpu","Ryzen 7 5800X3D"],["pf.gpu","Radeon RX 7800 XT"],["pf.platform","AMD AM4"]] };
-function caseVisual(p){
-  if(p.pv==="tj") return `<div class="case-visual v-tj"><img src="${TJLOGO}" alt="" width="400" height="400"></div>`;
-  if(p.pv==="ap") return `<div class="case-visual v-ap"><div class="v-bar"><i></i><i></i><i></i><span>CS</span><span>EN</span><span>ES</span></div>`
-    + `<div class="v-in"><img src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"><div class="v-btns"><b></b><b></b></div></div></div>`;
-  if(p.pv==="pc") return `<div class="case-visual v-pc">${PCICON}<dl>${PF_SPECS.pc.map(([k,v])=>`<div><dt>${esc(t(k))}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>`;
-  return `<div class="case-visual">${preview(p)}</div>`;
+/* fotky sestavy: soubor v /assets/img/ (bez „-šířka.webp“), uložené šířky, rozměr originálu, klíč popisku (pf.fig.* a pf.alt.*), sizes
+   pořadí = kompozice: velká hotová sestava, vedle ní detail chlazení a pod ním specifikace */
+const PF_PHOTOS = { pc:[
+  ["pc-build-finished-rgb",[640,1152],1152,1536,"finished","(max-width: 600px) 100vw, (max-width: 1180px) 56vw, 640px"],
+  ["pc-build-cooling-detail",[640,1152],1152,1536,"cooling","(max-width: 600px) 100vw, (max-width: 1180px) 36vw, 420px"]
+]};
+function pfFig([file, ws, w, h, k, sizes], n){
+  const url = x => `/assets/img/${file}-${x}.webp`;
+  return `<figure class="pf-fig pf-${k}"><div class="pf-media"><img src="${url(ws[0])}" srcset="${ws.map(x=>url(x)+" "+x+"w").join(", ")}" sizes="${sizes}"`
+    + ` alt="${esc(t("pf.alt."+k))}" width="${w}" height="${h}" loading="lazy" decoding="async"></div>`
+    + `<figcaption><span>${n}</span> ${esc(t("pf.fig."+k))}</figcaption></figure>`;
+}
+function caseVisual(p, n){
+  if(p.pv==="pc") return `<div class="pf-gallery">${PF_PHOTOS.pc.map((ph,i)=>pfFig(ph, n+"."+(i+1))).join("")}`
+    + `<dl class="pf-specs">${[...PF_SPECS.pc.map(([k,v])=>[t(k),v]), [t("pf.use"), t("pf.useGaming")]].map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>`;
+  if(p.pv==="ap") return `<div class="pf-device"><div class="pf-browser"><div class="pf-bar" aria-hidden="true"><i></i><i></i><i></i><span>corphik.eu</span></div>`
+    + `<img src="/assets/img/pf-web-desktop.webp" alt="${esc(t("pf.alt.webD"))}" width="1280" height="1010" loading="lazy" decoding="async"></div>`
+    + `<div class="pf-phone"><img src="/assets/img/pf-web-mobile.webp" alt="${esc(t("pf.alt.webM"))}" width="520" height="1125" loading="lazy" decoding="async"></div></div>`;
+  if(p.pv==="tj") return `<div class="pf-logo"><img src="${TJLOGO}" alt="" width="400" height="400"></div>`;
+  return p.img ? `<div class="pf-media"><img src="${esc(p.img)}" alt="" loading="lazy"></div>` : preview(p);
 }
 function caseFacts(p){
   const f = [];
+  if(p.pv==="pc") return f;   /* sestava má fakta ve specifikacích pod fotkami */
   if(p.pv==="tj") f.push([t("pf.role"), t("tj.role")]);
-  if(p.pv==="ap") f.push([t("pf.langs"), "CS, EN, ES"]);
-  if(p.pv==="pc") f.push([t("pf.use"), t("pf.useGaming")]);
-  else f.push([t("pf.stack"), p.tags.join(", ")]);
+  if(p.pv==="ap") f.push([t("pf.langs"), "CS, EN, ES"], [t("pf.features"), t("pf.featuresAp")]);
+  f.push([t("pf.stack"), p.tags.join(", ")]);
   /* stav jen tam, kde ho data uvádějí (wip) – „dokončeno“ by si odporovalo s upozorněním „web je ve výstavbě“ */
   if(p.wip) f.push([t("pf.status"), t("pf.wip")]);
   return f;
@@ -568,20 +655,33 @@ function caseFacts(p){
 function renderPortfolio(){
   renderWorkTeaser();
   const box = $('pfList'); if(!box) return;
-  box.innerHTML = PORTFOLIO.map(p=>`<article class="case" id="pf-${p.pv}"${pfFilter!=="all" && p.cat!==pfFilter ? " hidden" : ""}>`
-    + `<div class="case-stage"><svg class="case-orbit" viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="100" rx="96" ry="30"/><ellipse cx="100" cy="100" rx="70" ry="21"/></svg>${caseVisual(p)}</div>`
-    + `<div class="case-body"><p class="case-k">${esc(t("pf.k."+p.pv))}</p><h2 class="case-t">${esc(p.title[lang])}</h2><p class="case-d">${esc(p.desc[lang])}</p>`
-    + `<dl class="case-facts">${caseFacts(p).map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`
-    + (p.url ? `<a class="btn case-link" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(t("pf.view"))}</a>` : "")
-    + `</div></article>`).join("");
+  const rank = p => { const i = PF_ORDER.indexOf(p.pv); return i < 0 ? PF_ORDER.length : i; };
+  const list = [...PORTFOLIO].sort((a, b) => rank(a) - rank(b));
+  const off = p => pfFilter!=="all" && p.cat!==pfFilter;
+  /* rejstřík projektů v hlavičce: odkazy na jednotlivé studie */
+  const idx = $('pfIndex');
+  if(idx){
+    idx.setAttribute('aria-label', t("pf.index"));
+    idx.innerHTML = `<ol>${list.map((p,i)=>`<li${off(p) ? " hidden" : ""}><a href="#pf-${p.pv}"><span class="n">${pfNum(i)}</span> `
+      + `<span class="t">${esc(p.title[lang])}</span> <span class="k">${esc(t("pf.k."+p.pv))}</span></a></li>`).join("")}</ol>`;
+  }
+  box.innerHTML = list.map((p,i)=>{
+    const n = pfNum(i), facts = caseFacts(p);
+    return `<article class="case case-${esc(p.pv)}" id="pf-${esc(p.pv)}"${off(p) ? " hidden" : ""}>`
+      + `<div class="case-body"><p class="case-k"><span class="case-n">${n}</span> ${esc(t("pf.k."+p.pv))}</p>`
+      + `<h2 class="case-t">${esc(p.title[lang])}</h2><p class="case-d">${esc(p.desc[lang])}</p>`
+      + (facts.length ? `<dl class="case-facts">${facts.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>` : "")
+      + (p.url ? `<a class="btn case-link" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(t("pf.view"))}</a>` : "")
+      + `</div><div class="case-visual">${caseVisual(p, n)}</div></article>`;
+  }).join("");
   /* odkaz /portfolio/#pf-xx z úvodu: karty vznikají až skriptem, tak k nim doskroluj po prvním vykreslení */
   if(!renderPortfolio.done && location.hash){ const el = document.getElementById(location.hash.slice(1)); if(el){ el.scrollIntoView(); el.classList.add('arrived'); } }
   renderPortfolio.done = true;
 }
-/* Ukázky portfolia na úvodu – každá vede na svou kartu v /portfolio/ */
+/* Ukázky portfolia na úvodu – každá vede na svou kartu v portfoliu ve stejném jazyce */
 function renderWorkTeaser(){
   const ul = $('pfTeaser'); if(!ul) return;
-  ul.innerHTML = PORTFOLIO.map(p=>`<li><a class="work-card" href="/portfolio/#pf-${p.pv}" data-pf="${p.pv}">${preview(p)}`
+  ul.innerHTML = PORTFOLIO.map(p=>`<li><a class="work-card" href="${inLang("/portfolio/")}#pf-${p.pv}" data-pf="${p.pv}">${preview(p)}`
     + `<h3><span class="t">${esc(p.title[lang])}</span>${p.wip?`<span class="mini">${esc(t("pf.wip"))}</span>`:""}</h3>`
     + `<p>${esc(p.desc[lang])}</p></a></li>`).join("");
 }
@@ -616,7 +716,7 @@ function updateCartUI(bump){
     const on = c.includes(b.dataset.add), s = findService(b.dataset.add);
     b.classList.toggle('in', on); b.setAttribute('aria-pressed', on);
     const lab = b.querySelector('.lab'); if(lab) lab.textContent = t(on ? "cart.added" : "cart.add");
-    if(s) b.setAttribute('aria-label', t(on ? "cart.added" : "cart.add") + ": " + s.name[lang]);
+    if(s) b.setAttribute('aria-label', t(on ? "cart.added" : "cart.add") + ": " + s.name[lang] + ", " + s.price[lang]);
   });
 }
 document.addEventListener('click', e=>{ const b = e.target.closest('[data-add]'); if(b) toggleCart(b.dataset.add); });
@@ -946,13 +1046,17 @@ function renderThanks(){
 }
 
 /* ===== Jazyk ===== */
-/* Na ostatních stránkách vedou odkazy na úvod („/“, „/#sluzby“) na úvod ve zvoleném jazyce */
-const HOME_URL = {cs:"/", en:"/en/", es:"/es/"};
+/* Úvod, O mně, Portfolio a Poptávka mají vlastní adresu pro každý jazyk: /…, /en/…, /es/… */
+const LANG_BASE = {cs:"", en:"/en", es:"/es"};
+const inLang = path => (LANG_BASE[lang] ?? "") + path;
+/* Stránky s jednou adresou pro všechny jazyky (poděkování, 404) přepnou odkazy na úvod, O mně, Portfolio
+   a Poptávku do zvoleného jazyka. Ostatní stránky mají správné odkazy přímo v HTML. */
+const LOCAL_PATH = /^\/(?:about\/|portfolio\/|orders\/)?(?:#.*)?$/;
 function localizeHomeLinks(){
   if(HAS_ALT) return;
-  document.querySelectorAll('a[href="/"], a[href^="/#"], a[data-home]').forEach(a=>{
-    if(a.dataset.home === undefined) a.dataset.home = a.getAttribute('href').slice(1);
-    a.setAttribute('href', (HOME_URL[lang] || "/") + a.dataset.home);
+  document.querySelectorAll('a[href^="/"], a[data-home]').forEach(a=>{
+    if(a.dataset.home === undefined){ const h = a.getAttribute('href'); if(!LOCAL_PATH.test(h)) return; a.dataset.home = h; }
+    a.setAttribute('href', inLang(a.dataset.home));
   });
 }
 function setLang(l, remember){
@@ -960,17 +1064,22 @@ function setLang(l, remember){
   document.querySelectorAll('[data-i18n]').forEach(el=>{ el.innerHTML = t(el.dataset.i18n); });
   document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.lang===lang));
   renderServices(); renderPortfolio(); renderCheckout(); renderThanks(); renderWip(); themeLabel(); localizeHomeLinks();
-  const titles = {home:"h.area", portfolio:"pf.h", about:"nav.about", orders:"ck.title", thanks:"ck.title", notfound:"nf.t"};
-  document.title = "Corphik – " + (PAGE==="home" ? t("h.area").split(",")[0] : t(titles[PAGE]||"h.area").replace(/<[^>]+>/g,""));
+  document.querySelectorAll('.foot-logo').forEach(i=>{ i.alt = t("ft.logoAlt"); });
+  /* stránky s adresou pro každý jazyk mají vlastní titulek v HTML; přepisuje se jen u stránek s jednou adresou */
+  if(!HAS_ALT){
+    const titles = {portfolio:"pf.h", about:"nav.about", orders:"ck.title", thanks:"ck.title", notfound:"nf.t"};
+    document.title = "Corphik – " + t(titles[PAGE]||"h.area").replace(/<[^>]+>/g,"");
+  }
   if(remember){ try{ localStorage.setItem('lang', lang); }catch(e){} }
 }
-/* Přepínač CS/EN/ES: na úvodu přejde na jinou adresu (/, /en/, /es/), jinde jen přepne texty */
+/* Přepínač CS/EN/ES: na stránkách s adresou pro každý jazyk přejde na jinou adresu (/…, /en/…, /es/…), jinde jen přepne texty */
 document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{
   const l = b.dataset.lang;
   if(HAS_ALT && ALT[l]){
     try{ localStorage.setItem('lang', l); }catch(e){}
-    /* jen cesta z hreflang odkazu – zůstane stejná doména (corphik.eu, www, náhled) i sekce (#sluzby…) */
-    if(l !== root.lang){ const u = new URL(ALT[l], location.href); location.href = u.pathname + location.hash; }
+    /* jen cesta z hreflang odkazu – zůstane stejná doména (corphik.eu, www, náhled), ?parametry (např. ?service=)
+       i sekce (#sluzby…) */
+    if(l !== root.lang){ const u = new URL(ALT[l], location.href); location.href = u.pathname + location.search + location.hash; }
     return;
   }
   setLang(l, true);
@@ -1018,12 +1127,15 @@ initCheckout();
 let saved=null; try{ saved=localStorage.getItem('lang'); }catch(e){}
 if(HAS_ALT){
   /* Stránka má vlastní adresu pro každý jazyk – roboti vidí přesně to, co je v HTML.
-     Nového návštěvníka na české verzi přesměruje podle země, jen pokud si jazyk ještě nevybral. */
+     Podle časového pásma přesměruje jen česká úvodní stránka (/), a to jen nového návštěvníka mimo Česko:
+     jazyk si ještě nevybral a nepřišel z jiné stránky tohoto webu (např. po ručním přepnutí na CS).
+     Podstránky (O mně, Portfolio, Poptávka) se nepřesměrovávají nikdy. */
   const pageLang = root.lang;
   const geo = langFromLocation();
-  if(!saved && !isBot && pageLang==="cs" && geo!=="cs" && ALT[geo]) location.replace(ALT[geo]);
+  let internal = false; try{ internal = !!document.referrer && new URL(document.referrer).origin === location.origin; }catch(e){}
+  if(PAGE==="home" && !saved && !internal && !isBot && pageLang==="cs" && geo!=="cs" && ALT[geo]) location.replace(new URL(ALT[geo], location.href).pathname + location.search + location.hash);
   else setLang(pageLang, !isBot);
 } else {
-  /* Ostatní stránky (O mně, Objednávka, Portfolio): uložený jazyk, jinak podle země, roboti česky */
+  /* Stránky s jednou adresou (poděkování, 404): uložený jazyk, jinak podle země, roboti česky */
   setLang(saved || (isBot ? "cs" : langFromLocation()), false);
 }

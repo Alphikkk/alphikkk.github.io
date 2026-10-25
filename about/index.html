@@ -3,10 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Corphik</title>
-<meta name="description" content="Corphik – IT podpora: sestavení PC, instalace Windows a Linuxu, opravy, zabezpečení a redesign webu.">
-<meta property="og:title" content="Corphik – IT podpora a zabezpečení">
+<title>O mně – Aleš Pospíšil | Corphik</title>
+<meta name="description" content="Pod značkou CORPHIK dělám IT řešení, stavím počítače na míru a poskytuju technickou podporu – osobně v Praze a okolí, na dálku po celé Evropě.">
+<link rel="canonical" href="https://corphik.eu/about/">
+<link rel="alternate" hreflang="cs" href="https://corphik.eu/about/">
+<link rel="alternate" hreflang="en" href="https://corphik.eu/en/about/">
+<link rel="alternate" hreflang="es" href="https://corphik.eu/es/about/">
+<link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/about/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Corphik">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:url" content="https://corphik.eu/about/">
+<meta property="og:title" content="O mně – Aleš Pospíšil | Corphik">
+<meta property="og:description" content="Pod značkou CORPHIK dělám IT řešení, stavím počítače na míru a poskytuju technickou podporu – osobně v Praze a okolí, na dálku po celé Evropě.">
 <meta property="og:image" content="https://corphik.eu/assets/img/og-corphik.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo Corphik – Reliable IT support &amp; custom PCs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="O mně – Aleš Pospíšil | Corphik">
+<meta name="twitter:description" content="Pod značkou CORPHIK dělám IT řešení, stavím počítače na míru a poskytuju technickou podporu – osobně v Praze a okolí, na dálku po celé Evropě.">
+<meta name="twitter:image" content="https://corphik.eu/assets/img/og-corphik.png">
+<meta name="twitter:image:alt" content="Logo Corphik – Reliable IT support &amp; custom PCs">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,16 +38,59 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/pages.css?v=1">
+<link rel="stylesheet" href="/assets/pages.css?v=4">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://corphik.eu/about/#webpage",
+      "url": "https://corphik.eu/about/",
+      "name": "O mně – Aleš Pospíšil | Corphik",
+      "inLanguage": "cs",
+      "isPartOf": {
+        "@id": "https://corphik.eu/#website"
+      },
+      "mainEntity": {
+        "@id": "https://corphik.eu/#founder"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://corphik.eu/#founder",
+      "name": "Aleš Pospíšil",
+      "jobTitle": "Zakladatel CORPHIK",
+      "description": "Pod značkou CORPHIK dělám IT řešení, stavím počítače na míru a poskytuju technickou podporu – osobně v Praze a okolí, na dálku po celé Evropě.",
+      "url": "https://corphik.eu/about/",
+      "worksFor": {
+        "@id": "https://corphik.eu/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://corphik.eu/#organization",
+      "name": "Corphik",
+      "url": "https://corphik.eu/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://corphik.eu/#website",
+      "name": "Corphik",
+      "url": "https://corphik.eu/"
+    }
+  ]
+}
+</script>
 </head>
 <body data-page="about">
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="/" aria-label="Corphik"><img src="/assets/img/corphik-wordmark.png" alt="Corphik" width="117" height="22"></a>
     <ul class="links">
-      <li><a href="/" data-i18n="nav.home"></a></li>
-      <li><a href="/portfolio/" data-i18n="nav.portfolio"></a></li>
-      <li><a href="/about/" data-i18n="nav.about" aria-current="page"></a></li>
+      <li><a href="/" data-i18n="nav.home">Služby</a></li>
+      <li><a href="/portfolio/" data-i18n="nav.portfolio">Portfolio</a></li>
+      <li><a href="/about/" data-i18n="nav.about" aria-current="page">O mně</a></li>
     </ul>
     <div class="tools">
       <div class="lang" role="group" aria-label="Language">
@@ -36,19 +99,19 @@
         <button type="button" data-lang="es">ES</button>
       </div>
       <button class="theme" id="theme" type="button" aria-label="Theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
-      <a class="cta" href="/orders/"><span data-i18n="nav.cart"></span><span class="cnt" hidden>0</span></a>
+      <a class="cta" href="/orders/"><span data-i18n="nav.cart">Košík</span><span class="cnt" hidden>0</span></a>
     </div>
   </div>
 </header>
 <main>
   <section class="wrap ab-hero">
     <div class="ab-id">
-      <p class="ab-role" data-i18n="ab.role"></p>
-      <h1>Aleš<br>Pospíšil</h1>
-      <p class="lead" data-i18n="ab.intro"></p>
+      <p class="ab-role" data-i18n="ab.role">Zakladatel CORPHIK</p>
+      <h1>Aleš <br>Pospíšil</h1>
+      <p class="lead" data-i18n="ab.intro">Pod značkou CORPHIK dělám IT řešení, stavím počítače na míru a poskytuju technickou podporu – osobně v Praze a okolí, na dálku po celé Evropě.</p>
       <div class="ab-links">
-        <a class="btn primary" href="/orders/" data-i18n="h.cta"></a>
-        <a class="btn" href="/portfolio/" data-i18n="nav.portfolio"></a>
+        <a class="btn primary" href="/orders/" data-i18n="h.cta">Objednat službu</a>
+        <a class="btn" href="/portfolio/" data-i18n="nav.portfolio">Portfolio</a>
       </div>
     </div>
     <div class="ab-emblem" aria-hidden="true">
@@ -67,27 +130,27 @@
 
   <section class="block">
     <div class="wrap">
-      <div class="ab-do-h"><h2 data-i18n="ab.doH"></h2><a class="btn" href="/#sluzby" data-i18n="ab.doLink"></a></div>
+      <div class="ab-do-h"><h2 data-i18n="ab.doH">Co dělám v CORPHIK</h2><a class="btn" href="/#sluzby" data-i18n="ab.doLink">Služby a ceny</a></div>
       <div class="pillars">
-        <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg></span><h3 data-i18n="ab.d1h"></h3><p data-i18n="ab.d1p"></p></article>
-        <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="14" r="3"/><path d="M9 6h6M9 9h6"/></svg></span><h3 data-i18n="ab.d2h"></h3><p data-i18n="ab.d2p"></p></article>
-        <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><h3 data-i18n="ab.d3h"></h3><p data-i18n="ab.d3p"></p></article>
+        <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg></span><h3 data-i18n="ab.d1h">IT řešení</h3><p data-i18n="ab.d1p">Domény a DNS, e-mailové záznamy (SPF, DKIM, DMARC) a redesign webu.</p></article>
+        <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="14" r="3"/><path d="M9 6h6M9 9h6"/></svg></span><h3 data-i18n="ab.d2h">Stavba PC</h3><p data-i18n="ab.d2p">Sestavy na míru podle rozpočtu, upgrady a čisté instalace Windows a Linuxu.</p></article>
+        <article><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><h3 data-i18n="ab.d3h">Technická podpora</h3><p data-i18n="ab.d3p">Diagnostika a opravy, osobně nebo vzdáleně přes internet.</p></article>
       </div>
     </div>
   </section>
 
   <section class="block">
     <div class="wrap cols">
-      <h2 data-i18n="ab.h"></h2>
-      <div class="prose"><p class="ab-quote" data-i18n="ab.lead"></p><p data-i18n="ab.p1"></p><p data-i18n="ab.p2"></p><p data-i18n="ab.p3"></p></div>
+      <h2 data-i18n="ab.h">O mně</h2>
+      <div class="prose"><p class="ab-quote" data-i18n="ab.lead">Dřív jsem opravoval stroje. <strong>Teď se učím, jak se rozbíjejí systémy</strong> – a jak je ochránit.</p><p data-i18n="ab.p1">Vyučil jsem se mechanikem zemědělských strojů a pár let jsem dělal s rukama – opravy, svařování, lisy. Naučilo mě to hledat, proč věci nefungují, a nevzdat se, dokud to nenajdu.</p><p data-i18n="ab.p2">Dnes vedu tým v logistice, při tom dělám IT podporu, stavím Tandjo a věnuju se kyberbezpečnosti. Baví mě ofenzivní strana: pochopit systém tak dobře, abych v něm našel slabé místo dřív než někdo jiný.</p><p data-i18n="ab.p3">Mluvím česky a anglicky (v práci denně), učím se španělsky.</p></div>
     </div>
     <div class="wrap">
       <nav class="route" aria-labelledby="routeH">
-        <h3 class="sr-only" id="routeH" data-i18n="ab.route"></h3>
+        <h3 class="sr-only" id="routeH" data-i18n="ab.route">Cesta</h3>
         <ol>
-          <li><span class="yr">2020–2024</span><h3 data-i18n="r.1h"></h3><p data-i18n="r.1p"></p></li>
-          <li><span class="yr" data-i18n="r.2y"></span><h3 data-i18n="r.2h"></h3><p data-i18n="r.2p"></p></li>
-          <li class="now"><span class="yr" data-i18n="r.3y"></span><h3 data-i18n="r.3h"></h3><p data-i18n="r.3p"></p></li>
+          <li><span class="yr">2020–2024</span><h3 data-i18n="r.1h">Mechanik</h3><p data-i18n="r.1p">Zemědělské stroje, nákladní auta, svařování.</p></li>
+          <li><span class="yr" data-i18n="r.2y">od 2026</span><h3 data-i18n="r.2h">Logistika</h3><p data-i18n="r.2p">Team lead a administrátor v DSV, Praha.</p></li>
+          <li class="now"><span class="yr" data-i18n="r.3y">teď</span><h3 data-i18n="r.3h">Kyberbezpečnost a Tandjo</h3><p data-i18n="r.3p">Mířím k penetračnímu testování a stavím vlastní produkt.</p></li>
         </ol>
       </nav>
     </div>
@@ -95,16 +158,16 @@
 
   <section class="block">
     <div class="wrap">
-      <p class="ab-k" data-i18n="ab.tjH"></p>
+      <p class="ab-k" data-i18n="ab.tjH">Vlastní projekt</p>
       <a class="tj" href="/portfolio/#pf-tj">
         <img class="tj-logo" src="data:image/webp;base64,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" alt="Tandjo logo" width="88" height="88">
         <div>
           <h3>Tandjo</h3>
-          <div class="role" data-i18n="tj.role"></div>
-          <p class="d" data-i18n="tj.d"></p>
-          <span class="pill"><i></i><span data-i18n="tj.status"></span></span>
+          <div class="role" data-i18n="tj.role">Zakladatel a CEO</div>
+          <p class="d" data-i18n="tj.d">Sociální síť pro páry, kterou stavím s pomocí AI.</p>
+          <span class="pill"><i></i><span data-i18n="tj.status">Ve vývoji</span></span>
         </div>
-        <span class="tj-go" data-i18n="ab.tjLink"></span>
+        <span class="tj-go" data-i18n="ab.tjLink">Detail v portfoliu</span>
       </a>
     </div>
   </section>
@@ -112,44 +175,44 @@
   <section class="block">
     <div class="wrap cols">
       <div>
-        <h2 data-i18n="le.h"></h2>
-        <div class="goal"><b data-i18n="le.goal"></b><span data-i18n="le.goalp"></span></div>
+        <h2 data-i18n="le.h">Co jsem se naučil</h2>
+        <div class="goal"><b data-i18n="le.goal">Další cíl: CompTIA Security+</b><span data-i18n="le.goalp">Právě se na certifikaci připravuji.</span></div>
       </div>
       <ul class="list">
-        <li><span class="t">Cisco – Introduction to Cybersecurity</span><span class="s" data-i18n="m.sep"></span></li>
-        <li><span class="t">TryHackMe – Cyber Security 101</span><span class="s" data-i18n="m.aug"></span></li>
-        <li><span class="t">TryHackMe – Hacker Holidays</span><span class="s" data-i18n="m.aug"></span></li>
-        <li><span class="t">TryHackMe – Pre Security</span><span class="s" data-i18n="m.jul"></span></li>
-        <li><span class="t">OverTheWire – Bandit</span><span class="s" data-i18n="m.ongoing"></span></li>
+        <li><span class="t">Cisco – Introduction to Cybersecurity</span><span class="s" data-i18n="m.sep">září 2026</span></li>
+        <li><span class="t">TryHackMe – Cyber Security 101</span><span class="s" data-i18n="m.aug">srpen 2026</span></li>
+        <li><span class="t">TryHackMe – Hacker Holidays</span><span class="s" data-i18n="m.aug">srpen 2026</span></li>
+        <li><span class="t">TryHackMe – Pre Security</span><span class="s" data-i18n="m.jul">červenec 2026</span></li>
+        <li><span class="t">OverTheWire – Bandit</span><span class="s" data-i18n="m.ongoing">průběžně</span></li>
       </ul>
     </div>
   </section>
 
   <section class="block">
     <div class="wrap">
-      <h2 data-i18n="ho.h"></h2>
+      <h2 data-i18n="ho.h">Mimo práci</h2>
       <div class="hob">
-        <div><h3>Hardware</h3><p data-i18n="ho.1"></p></div>
-        <div><h3>Linux</h3><p data-i18n="ho.2"></p></div>
-        <div><h3 data-i18n="ho.3h"></h3><p data-i18n="ho.3"></p></div>
+        <div><h3>Hardware</h3><p data-i18n="ho.1">Moje sestava: Ryzen 7 5800X3D a RX 7800 XT. Čekám na Zen 6.</p></div>
+        <div><h3>Linux</h3><p data-i18n="ho.2">Terminál, Bandit a všechno, co se dá rozebrat.</p></div>
+        <div><h3 data-i18n="ho.3h">Španělština</h3><p data-i18n="ho.3">Učím se třetí jazyk.</p></div>
       </div>
     </div>
   </section>
   <section class="end-cta">
     <div class="wrap"><div>
       <svg class="bh" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-10 32 32)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="32" cy="33" rx="30" ry="6" stroke-width="1.2" opacity=".45"/><circle cx="32" cy="32" r="17" stroke-width="7" opacity=".14"/><path d="M15 33a17 17 0 0 1 34 0" stroke-width="3.2"/><path d="M19.5 34.5a12.5 12.5 0 0 0 25 0" stroke-width="1.3" opacity=".75"/><circle cx="32" cy="32" r="11" fill="var(--ink)" stroke-width="1.3"/><path d="M2 33a30 6 0 0 0 60 0" stroke-width="2.8"/></g></svg>
-      <h2 data-i18n="cta.h"></h2>
-      <p data-i18n="cta.p"></p>
-      <a class="btn" href="/orders/" data-i18n="h.cta"></a>
+      <h2 data-i18n="cta.h">Pojďme to rozjet.</h2>
+      <p data-i18n="cta.p">Napiš mi, co potřebuješ. Ozvu se ti co nejdřív.</p>
+      <a class="btn" href="/orders/" data-i18n="h.cta">Objednat službu</a>
     </div></div>
   </section>
 </main>
 <footer><div class="wrap">
-  <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – Reliable IT support &amp; custom PCs" width="150" height="61" loading="lazy">
-  <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact"></span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
+  <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – spolehlivá IT podpora a počítače na míru" width="150" height="61" loading="lazy">
+  <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Kontakt</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=24"></script>
-<script src="/assets/pages.js?v=1"></script>
+<script src="/assets/app.js?v=30"></script>
+<script src="/assets/pages.js?v=2"></script>
 </body>
 </html>
