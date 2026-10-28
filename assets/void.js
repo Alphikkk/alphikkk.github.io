@@ -119,7 +119,7 @@ float word(vec3 p, vec3 d){
   return texture2D(uWord, uv).r;
 }
 
-/* akreční disk: teplota klesá s poloměrem, víří podle Keplera, Dopplerův jas */
+/* akreční disk: teplota klesá s poloměrem, víří podle Keplera, Dopplerův jas; do fialova */
 vec4 disk(vec3 p, vec3 rd){
   float r = length(p.xz);
   if(r < RIN || r > ROUT) return vec4(0.0);
@@ -142,10 +142,10 @@ vec4 disk(vec3 p, vec3 rd){
   float D = g*grav;
   float I = T*T*pow(D, 4.0)*n*rings*0.55;
   /* barva: horký střed bíle, okraje do teplé slonovinové, přibližující se strana do studené */
-  vec3 warm = vec3(1.0, 0.72, 0.46), hot = vec3(1.0, 0.95, 0.88), cool = vec3(0.78, 0.86, 1.0);
+  vec3 warm = vec3(0.66, 0.42, 1.0), hot = vec3(0.97, 0.92, 1.0), cool = vec3(0.7, 0.78, 1.0);
   vec3 col = mix(warm, hot, clamp(T*0.8, 0.0, 1.0));
   col = mix(col, cool, clamp((D - 1.0)*1.4, 0.0, 0.8));
-  col = mix(col*vec3(1.0, 0.8, 0.62), col, clamp(D, 0.0, 1.0));
+  col = mix(col*vec3(0.78, 0.55, 1.0), col, clamp(D, 0.0, 1.0));
   float edge = smoothstep(ROUT, ROUT*0.55, r)*smoothstep(RIN, RIN + 0.35, r);
   float alpha = clamp(I*0.9, 0.0, 1.0)*edge;
   return vec4(col*I*edge*ign, alpha*ign);
@@ -160,6 +160,7 @@ void main(){
   vec3 h = cross(p, rd); float h2 = dot(h, h);
   bool fell = false;
   float py = p.y;
+  vec3 glow = vec3(0.0);
   for(int i = 0; i < 400; i++){
     if(float(i) >= uSteps) break;
     float r = length(p);
@@ -170,6 +171,11 @@ void main(){
     vec3 acc = -1.5*h2*p/pow(r, 5.0);
     vec3 np = p + rd*dt + 0.5*acc*dt*dt;
     rd = normalize(rd + acc*dt);
+    /* jemná fialová záře nad diskem a kolem fotonové sféry (ohýbá se stejně jako světlo) */
+    float rxz = length(np.xz);
+    float halo = exp(-abs(np.y)*1.6)*smoothstep(ROUT*1.2, RIN, rxz)*smoothstep(RIN*0.7, RIN*1.3, rxz);
+    float ring = exp(-pow(r - 1.6, 2.0)*6.0);
+    glow += trans*(vec3(0.55, 0.32, 1.0)*halo*0.022 + vec3(0.75, 0.6, 1.0)*ring*0.03)*dt;
     /* průchod rovinou disku */
     if(py*np.y < 0.0){
       float k = py/(py - np.y);
@@ -181,6 +187,7 @@ void main(){
     }
     p = np; py = p.y;
   }
+  col += glow*smoothstep(0.15, 0.8, uIntro);
   if(!fell){
     vec3 bg = stars(rd)*smoothstep(0.0, 0.35, uIntro);
     float w = word(p, rd)*smoothstep(0.35, 0.95, uIntro);
