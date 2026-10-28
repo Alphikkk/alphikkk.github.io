@@ -62,14 +62,22 @@ let dive = 0, diveFrom = -1;
 go && go.addEventListener('click', e => {
   e.preventDefault();
   if(diving || inside) return;
+  if(typeof track === "function") track("dive");
   history.pushState(null, "", "#sluzby");
-  if(!gl || REDUCE){ root.classList.add('is-diving'); setTimeout(() => openInside("#sluzby"), REDUCE ? 250 : 500); return; }
+  if(!gl || REDUCE || root.classList.contains('no-gl')){ root.classList.add('is-diving'); setTimeout(() => openInside("#sluzby"), REDUCE ? 250 : 500); return; }
   diving = true; diveFrom = -1; root.classList.add('is-diving'); start();
 });
 
 /* ---------- WebGL ---------- */
 const gl = cv.getContext('webgl', {antialias: false, alpha: false, depth: false, powerPreference: "high-performance", preserveDrawingBuffer: false});
 if(!gl){ root.classList.add('no-gl'); return; }
+/* bez grafické karty (softwarové vykreslování) by díra zahltila procesor a stránka by se sekala:
+   takové zařízení dostane statický obraz z CSS, tlačítko i průlet fungují dál */
+try{
+  const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+  const name = dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : "";
+  if(/swiftshader|llvmpipe|softpipe|software/i.test(name)){ root.classList.add('no-gl'); return; }
+}catch(_){}
 
 const VS = `attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
 const FS = `

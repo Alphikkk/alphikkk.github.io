@@ -36,8 +36,8 @@
 <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/home.css?v=42">
+<link rel="stylesheet" href="/assets/style.css?v=16">
+<link rel="stylesheet" href="/assets/home.css?v=44">
 <script>document.documentElement.classList.add('void-on')</script>
 <script type="application/ld+json">
 {
@@ -280,21 +280,43 @@
   <section class="warp" id="warp" aria-labelledby="warp-h">
     <canvas class="warp-sky" id="warpSky" aria-hidden="true"></canvas>
     <ol class="warp-rail" id="warpRail" aria-label="Journey progress"></ol>
-    <div class="stop stop-intro">
+    <div class="stop stop-intro" id="w-start">
       <div class="stop-in"><div class="stop-txt">
         <button class="inside-out" type="button" data-out><span data-i18n="v.out">Back to the black hole</span></button>
-        <h2 class="warp-h" id="warp-h" data-i18n="w.h">What I offer.</h2>
-        <p class="warp-p" data-i18n="w.p">Seven services in three areas. Scroll to fly on.</p>
-        <span class="warp-hint" aria-hidden="true"></span>
+        <h2 class="warp-h" id="warp-h" data-i18n="w.q">How can I help?</h2>
+        <div class="w-pick">
+          <a class="w-it" href="#w-fix" data-pick="fix"><b data-i18n="w.q1">Something isn't working</b><span data-i18n="w.q1d">PC won't start, crashes or runs slow</span></a>
+          <a class="w-pc" href="#w-build" data-pick="build"><b data-i18n="w.q2">I want a new or faster PC</b><span data-i18n="w.q2d">Custom build or upgrade</span></a>
+          <a class="w-web" href="#w-web" data-pick="web"><b data-i18n="w.q3">I need a website or domain</b><span data-i18n="w.q3d">Website redesign, DNS and email</span></a>
+          <a class="w-ask-pick" href="#w-ask" data-pick="ask"><b data-i18n="w.q4">Not sure, advise me</b><span data-i18n="w.q4d">Write a few lines and I'll get back to you</span></a>
+        </div>
+        <ul class="w-trust">
+          <li data-i18n="w.t1">Price confirmed up front</li>
+          <li data-i18n="w.t2">In person in Prague, remotely anywhere</li>
+          <li data-i18n="w.t3">I'll reply as soon as I can</li>
+        </ul>
+        <p class="warp-p"><span data-i18n="w.more">Or scroll to see all 7 services.</span><span class="warp-hint" aria-hidden="true"></span></p>
       </div></div>
     </div>
     <div id="warpStops"></div>
     <section class="stop stop-end" id="w-end" aria-labelledby="w-end-h">
-      <div class="stop-in"><div class="stop-txt">
-        <h3 class="stop-h" id="w-end-h" data-i18n="w.end">End of the journey.</h3>
-        <div class="warp-cart" id="warpCart"></div>
-        <p class="wc-mail"><span data-i18n="w.mail">Or just email me:</span> <a href="mailto:ales@corphik.eu">ales@corphik.eu</a></p>
-      </div></div>
+      <div class="stop-in">
+        <div class="stop-txt">
+          <h3 class="stop-h" id="w-end-h" data-i18n="w.fh">Let's talk it through.</h3>
+          <p class="stop-d" data-i18n="w.fp">Write a few lines. I'll get back to you as soon as I can, no strings attached.</p>
+          <div class="warp-cart" id="warpCart"></div>
+          <p class="wc-mail"><a href="mailto:ales@corphik.eu">ales@corphik.eu</a></p>
+        </div>
+        <form class="w-form" id="w-ask" novalidate>
+          <label><span data-i18n="w.fn">Name</span><input id="wfName" name="name" autocomplete="name"></label>
+          <label><span data-i18n="w.fc">Email or phone</span><input id="wfContact" name="contact" autocomplete="email" required></label>
+          <label><span data-i18n="w.fm">What do you need help with?</span><textarea id="wfMsg" name="message" rows="4" required></textarea></label>
+          <label class="w-consent"><input type="checkbox" id="wfConsent" required><span data-i18n="ck.consent">I agree to my details being processed to handle this request.</span></label>
+          <input type="checkbox" id="wfHp" name="botcheck" tabindex="-1" autocomplete="off" hidden>
+          <button class="w-send" type="submit"><span data-i18n="w.fs">Send message</span></button>
+          <p class="w-status" id="wfStatus" role="status"></p>
+        </form>
+      </div>
     </section>
   </section>
 
@@ -349,8 +371,8 @@
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contact</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=35"></script>
-<script src="/assets/warp.js?v=2"></script>
-<script src="/assets/void.js?v=9"></script>
+<script src="/assets/app.js?v=36"></script>
+<script src="/assets/warp.js?v=4"></script>
+<script src="/assets/void.js?v=11"></script>
 </body>
 </html>

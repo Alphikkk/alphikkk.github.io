@@ -128,7 +128,7 @@ p{margin:0}
   .brand img{height:18px}
   .tools{gap:6px}
   .lang button{padding:6px 7px}
-  .nav .cta [data-i18n]{display:none}
+  .nav .cta [data-i18n]{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
   .nav .cta::before{margin-right:0}
 }
 @media (max-width:380px){ .brand img{height:15px} .lang button{padding:6px 6px} .tools{gap:5px} .nav .cta{padding:0 9px} .cnt{margin-left:6px} }

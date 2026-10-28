@@ -26,6 +26,7 @@ const ICON = {
 /* barva hvězd a akcentu podle oblasti (RGB) */
 const HUE = {it: [180, 156, 255], pc: [143, 176, 255], web: [240, 168, 255]};
 const ORDER = SVC_AREAS.flatMap(a => a.ids.map(id => ({id, area: a.id})));
+const tr = (n, d) => { if(typeof track === "function") track(n, d); };
 
 /* ---------- Zastávky ---------- */
 function tagOf(s){ return s.remote ? t(s.onlyRemote ? "s.only" : s.tag === "partial" ? "s.partial" : "s.remote") : ""; }
@@ -39,7 +40,7 @@ function render(){
       + `<h3 class="stop-h" id="w-${o.id}-h">${esc2(s.name[lang])}</h3>`
       + `<p class="stop-d">${esc2(s.desc[lang])}</p>`
       + (tag ? `<p class="stop-tag">${esc2(tag)}</p>` : "")
-      + buyHTML(s)
+      + `<div class="stop-act">${buyHTML(s)}<a class="stop-ask" href="#w-ask" data-ask="${o.id}">${esc2(t("w.ask"))}</a></div>`
       + `</div>`
       + `<div class="stop-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">${ICON[o.id] || ""}</svg></div>`
       + `</div></section>`;
@@ -61,22 +62,37 @@ function renderEnd(){
   const ids = getCart(), n = ids.length;
   bar.classList.toggle('full', n > 0);
   bar.innerHTML = n
-    ? `<ul class="wc-list">${ids.map(id => { const s = findService(id); const a = (SVC_AREAS.find(x => x.ids.includes(id)) || {id: "it"}).id;
+    ? `<p class="wc-h">${esc2(t("w.cart"))}</p><ul class="wc-list">${ids.map(id => { const s = findService(id); const a = (SVC_AREAS.find(x => x.ids.includes(id)) || {id: "it"}).id;
         return s ? `<li class="w-${a}"><span>${esc2(s.name[lang])}</span><b>${esc2(s.price[lang])}</b></li>` : ""; }).join("")}</ul>`
       + `<p class="wc-sum"><span>${n} ${esc2(plural(n))}, ${esc2(t("o2.from"))}</span> <b>${esc2(money(estimate()))}</b></p>`
-      + `<a class="wc-go" href="${esc2(typeof inLang === "function" ? inLang("/orders/") : "/orders/")}">${esc2(t("o2.go"))}</a>`
-    : `<p class="wc-empty">${esc2(t("w.empty"))}</p><a class="wc-back" href="#w-${ORDER[0].id}">${esc2(t("w.again"))}</a>`;
+      + `<a class="wc-go" href="${esc2(typeof inLang === "function" ? inLang("/orders/") : "/orders/")}" data-order>${esc2(t("o2.go"))}</a>`
+    : "";
 }
-document.addEventListener('click', e => { if(e.target.closest('[data-add]')) renderEnd(); });
+document.addEventListener('click', e => {
+  const add = e.target.closest('[data-add]');
+  if(add){ renderEnd(); if(getCart().includes(add.dataset.add)) tr("cart-add", {service: add.dataset.add}); }
+  const pick = e.target.closest('[data-pick]'); if(pick) tr("pick", {choice: pick.dataset.pick});
+  if(e.target.closest('[data-order]')) tr("order-click", {items: getCart().length});
+  /* „Zeptat se na tohle“: předvyplní zprávu a po doletu k formuláři dá kurzor do jména */
+  const ask = e.target.closest('[data-ask]');
+  if(ask){
+    const s = findService(ask.dataset.ask), m = document.getElementById('wfMsg');
+    if(s && m && (!m.value.trim() || m.dataset.auto === "1")){ m.value = t("w.pre") + s.name[lang] + "\n"; m.dataset.auto = "1"; }
+    tr("ask", {service: ask.dataset.ask});
+  }
+  if(ask || (pick && pick.dataset.pick === "ask")) setTimeout(() => { const f = document.getElementById('wfName'); f && f.focus({preventScroll: true}); }, 700);
+});
 addEventListener('storage', e => { if(e.key === "corphikCart") renderEnd(); });
 
 /* ---------- Kde právě jsem: zvýraznění zastávky, kolejnice, barva hvězd ---------- */
+const seen = new Set();
 let io = null, area = "it", targetHue = HUE.it.slice(), hue = HUE.it.slice();
 function watch(){
   if(io) io.disconnect();
   io = new IntersectionObserver(es => es.forEach(e => {
     if(!e.isIntersecting) return;
     const st = e.target;
+    if(st.dataset.i && !seen.has(st.id)){ seen.add(st.id); tr("service-view", {service: st.id.slice(2)}); }
     box.querySelectorAll('.stop.here').forEach(x => x !== st && x.classList.remove('here'));
     st.classList.add('here');
     area = st.dataset.area; targetHue = HUE[area].slice();
@@ -87,8 +103,8 @@ function watch(){
     root.style.setProperty('--w-c', `rgb(${HUE[area].join(",")})`);
   }), {rootMargin: "-45% 0px -45% 0px"});
   box.querySelectorAll('.stop').forEach(s => io.observe(s));
-  /* kolejnice i létající hvězdy jsou vidět jen během cesty */
-  const span = document.getElementById('warp');
+  /* kolejnice i létající hvězdy jsou vidět jen mezi zastávkami služeb (ne na úvodní otázce a u formuláře) */
+  const span = document.getElementById('warpStops');
   if(span) new IntersectionObserver(([e]) => { rail && rail.classList.toggle('show', e.isIntersecting); cv && cv.classList.toggle('show', e.isIntersecting); },
     {rootMargin: "-40% 0px -40% 0px"}).observe(span);
 }
@@ -138,6 +154,32 @@ addEventListener('resize', resize);
 document.addEventListener('visibilitychange', () => { if(!document.hidden) run(); });
 new MutationObserver(() => { if(root.classList.contains('is-inside')){ boost = 2.4; run(); } })
   .observe(root, {attributes: true, attributeFilter: ["class"]});
+
+/* ---------- Rychlá zpráva (Web3Forms jako objednávky; bez klíče se otevře e-mail) ---------- */
+const form = document.getElementById('w-ask');
+if(form) form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const $f = id => document.getElementById(id), st = $f('wfStatus'), btn = form.querySelector('.w-send');
+  const name = $f('wfName').value.trim(), contact = $f('wfContact').value.trim(), msg = $f('wfMsg').value.trim();
+  form.querySelectorAll('.bad').forEach(x => x.classList.remove('bad'));
+  const bad = [!contact && $f('wfContact'), !msg && $f('wfMsg'), !$f('wfConsent').checked && $f('wfConsent')].filter(Boolean);
+  if(bad.length){ bad.forEach(x => x.classList.add('bad')); st.textContent = t("w.err"); st.className = "w-status w-err"; bad[0].focus(); return; }
+  if($f('wfHp').checked) return;
+  const cart = getCart().map(findService).filter(Boolean).map(s => s.name[lang]);
+  const text = `${msg}\n\n${t("w.fn")}: ${name || "-"}\n${t("w.fc")}: ${contact}` + (cart.length ? `\n${t("w.cart")}: ${cart.join(", ")}` : "");
+  const key = typeof WEB3FORMS_KEY !== "undefined" ? WEB3FORMS_KEY : "";
+  if(!key){ location.href = "mailto:ales@corphik.eu?subject=" + encodeURIComponent(t("w.subj")) + "&body=" + encodeURIComponent(text); return; }
+  btn.disabled = true; st.textContent = t("ck.sending"); st.className = "w-status";
+  try{
+    const r = await fetch("https://api.web3forms.com/submit", {method: "POST", headers: {"Content-Type": "application/json", "Accept": "application/json"},
+      body: JSON.stringify({access_key: key, subject: `${t("w.subj")}: ${name || contact}`, from_name: "Corphik web", ...(contact.includes("@") ? {replyto: contact} : {}), message: text})});
+    const j = await r.json(); if(!j.success) throw 0;
+    form.reset(); $f('wfMsg').dataset.auto = "";
+    st.textContent = t("w.ok"); st.className = "w-status w-ok";
+    tr("lead", {cart: cart.length});
+  }catch(_){ st.textContent = t("ck.fail"); st.className = "w-status w-err"; }
+  btn.disabled = false;
+});
 
 /* odkazy z jiných stránek (#sluzby, #obl-it, #svc-fix) míří na zastávky; void.js se ptá tady */
 window.corphikWarpTarget = hash => {

@@ -350,7 +350,7 @@
 .stop-intro .inside-out{margin-bottom:clamp(24px,4vw,40px)}
 .warp-h{font-size:clamp(3rem,10vw,8.4rem);font-weight:800;font-stretch:125%;letter-spacing:-.035em;line-height:.92;text-shadow:0 0 70px rgba(150,100,255,.4)}
 .warp-p{margin-top:20px;color:var(--muted);font-size:clamp(1.05rem,1.7vw,1.3rem);max-width:40ch}
-.warp-hint{display:block;width:1px;height:72px;margin-top:clamp(36px,6vh,64px);background:linear-gradient(rgba(242,241,238,.7),transparent);transform-origin:top}
+.warp-hint{display:block;width:1px;height:56px;margin-top:18px;background:linear-gradient(rgba(242,241,238,.7),transparent);transform-origin:top}
 @media (prefers-reduced-motion:no-preference){ .warp-hint{animation:hint 2.2s var(--ease) infinite} }
 @keyframes hint{0%{transform:scaleY(0)}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
 
@@ -396,3 +396,53 @@
   .stop-ic::before{inset:10%}
   .stop{padding-block:clamp(110px,14vh,140px) 90px}
 }
+
+/* úvod cesty: otázka a čtyři volby místo opakovaného „Co nabízím“ */
+.stop-intro .warp-h{font-size:clamp(2.6rem,7.4vw,6.4rem)}
+.w-pick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;max-width:880px;margin-top:clamp(26px,4vw,44px)}
+.w-pick a{--c:#d9cfff;position:relative;display:flex;flex-direction:column;gap:4px;padding:20px 52px 20px 22px;border-radius:20px;text-decoration:none;color:var(--ink);
+  background:linear-gradient(140deg,color-mix(in srgb,var(--c) 14%,transparent),rgba(255,255,255,.02) 60%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 30%,transparent);
+  transition:box-shadow .3s,transform .25s var(--ease),background .3s}
+.w-pick a::after{content:"";position:absolute;right:20px;top:50%;width:18px;height:18px;margin-top:-9px;background:var(--c);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2.5v11M3.5 9 8 13.5 12.5 9'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2.5v11M3.5 9 8 13.5 12.5 9'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform .3s var(--ease)}
+.w-pick a:hover{box-shadow:inset 0 0 0 1px var(--c),0 0 40px -12px var(--c);transform:translateY(-2px)}
+.w-pick a:hover::after{transform:translateY(3px)}
+.w-pick b{font-size:1.12rem;font-weight:700;font-stretch:110%}
+.w-pick span{color:var(--muted);font-size:.92rem}
+.w-trust{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.9rem;color:var(--muted)}
+.w-trust li{display:flex;align-items:center;gap:8px}
+.w-trust li::before{content:"";width:6px;height:6px;border-radius:50%;background:#b49cff;box-shadow:0 0 8px #b49cff}
+.stop-intro .warp-p{margin-top:clamp(28px,4vh,44px);font-size:.95rem;display:flex;flex-direction:column}
+@media (max-width:640px){ .w-pick{grid-template-columns:minmax(0,1fr)} .w-pick a{padding:16px 48px 16px 18px} }
+
+/* zastávka: vedle košíku nenápadné „Zeptat se na tohle“ */
+.stop-act{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;margin-top:clamp(26px,3.6vw,40px)}
+.stop-act .buy{margin-top:0}
+.stop-ask{color:var(--muted);font-weight:600;font-size:.95rem;text-decoration:none;border-bottom:1px solid var(--line);padding:4px 0;transition:color .25s,border-color .25s}
+.stop-ask:hover{color:var(--ink);border-color:var(--c)}
+
+/* konec cesty: vlevo výzva a košík, vpravo krátký formulář */
+.stop-end .stop-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+.stop-end .stop-h{font-size:clamp(2.4rem,5.6vw,4.8rem)}
+.wc-h{margin-top:28px;font-size:.85rem;font-weight:650;color:#b49cff}
+.warp-cart{margin-top:0}
+.wc-list{margin-top:10px}
+.wc-go{margin-top:20px}
+.w-form{display:flex;flex-direction:column;gap:14px;padding:clamp(22px,3vw,32px);border-radius:24px;
+  background:linear-gradient(160deg,rgba(150,100,255,.12),rgba(255,255,255,.02) 55%);box-shadow:inset 0 0 0 1px rgba(180,156,255,.25),0 40px 90px -40px rgba(120,80,255,.6)}
+.w-form label{display:flex;flex-direction:column;gap:6px;font-size:.88rem;font-weight:600;color:var(--muted)}
+.w-form input:not([type=checkbox]),.w-form textarea{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.45);color:var(--ink);font:inherit;font-size:1rem;font-weight:450;resize:vertical}
+.w-form input:focus,.w-form textarea:focus{outline:none;border-color:#b49cff;box-shadow:0 0 0 3px rgba(180,156,255,.25)}
+.w-form .bad{border-color:#ff8a80!important}
+.w-consent{flex-direction:row!important;align-items:flex-start;gap:10px!important;font-weight:450!important;font-size:.84rem!important}
+.w-consent input{margin-top:3px;accent-color:#b49cff;width:16px;height:16px;flex:none}
+.w-consent input.bad{outline:2px solid #ff8a80;outline-offset:2px}
+.w-send{min-height:54px;border:0;border-radius:999px;background:var(--ink);color:#000;font:inherit;font-weight:700;font-size:1rem;cursor:pointer;transition:box-shadow .3s}
+.w-send:hover{box-shadow:0 0 50px -6px var(--violet-glow)}
+.w-send:disabled{opacity:.6;cursor:wait}
+.w-status{min-height:1.3em;font-size:.92rem;color:var(--muted)}
+.w-status.w-ok{color:#b8f5c8}
+.w-status.w-err{color:#ff8a80}
+@media (max-width:900px){ .stop-end .stop-in{grid-template-columns:minmax(0,1fr)} }
