@@ -20,7 +20,22 @@ const ORB = [
   {r: .7, speed: .1, hue: "pc"},
   {r: .96, speed: .065, hue: "web"}
 ];
-const TILT = -9*Math.PI/180;
+let TILT = -9*Math.PI/180;
+/* každá planeta má vlastní ikonu (24×24, tah) a povrch; krátké názvy pro telefon */
+const ICON = {
+  fix: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.9 1.9 0 0 0 2.7 2.7l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+  remote: '<rect x="2.5" y="5" width="13" height="9" rx="1.5"/><path d="M6 18h6M9 14v4M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"/>',
+  os: '<rect x="2.5" y="4" width="19" height="14" rx="2"/><path d="M6.5 9l2.5 2-2.5 2M11 13h4"/>',
+  build: '<rect x="6.5" y="2.5" width="11" height="19" rx="2"/><circle cx="12" cy="14.5" r="3"/><path d="M9.5 6.5h5"/>',
+  upgrade: '<rect x="5.5" y="5.5" width="13" height="13" rx="2"/><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3M12 15V9M9.5 11.5 12 9l2.5 2.5"/>',
+  web: '<rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M2.5 9h19"/><circle cx="5.5" cy="6.8" r=".4"/><circle cx="7.6" cy="6.8" r=".4"/><path d="M7 13h6M7 16h10"/>',
+  dns: '<circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><circle cx="12" cy="13" r="1.6"/><path d="M12 7.2v4.2M10.7 14l-4.1 2.6M13.3 14l4.1 2.6M7.2 18h9.6"/>'
+};
+const SHORT = {
+  cs: {fix: "Opravy", remote: "Na dálku", os: "Windows a Linux", build: "PC na míru", upgrade: "Upgrade", web: "Web", dns: "Doména a DNS"},
+  en: {fix: "Repairs", remote: "Remote", os: "Windows & Linux", build: "Custom PC", upgrade: "Upgrade", web: "Website", dns: "Domain & DNS"},
+  es: {fix: "Reparación", remote: "A distancia", os: "Windows y Linux", build: "PC a medida", upgrade: "Mejora", web: "Web", dns: "Dominio y DNS"}
+};
 
 /* ---------- Kostra: dráhy (SVG), díra uprostřed, planety ---------- */
 const svg = document.createElementNS(NS, "svg");
@@ -35,8 +50,9 @@ SVC_AREAS.forEach((area, ai) => {
   const n = area.ids.length;
   area.ids.forEach((id, k) => {
     const b = document.createElement("button");
-    b.type = "button"; b.className = "planet p-" + area.id; b.dataset.svc = id;
-    b.innerHTML = '<span class="orb"></span><span class="lbl"></span>';
+    b.type = "button"; b.className = "planet p-" + area.id + " pl-" + id; b.dataset.svc = id;
+    b.innerHTML = `<span class="orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[id] || ""}</svg></span>`
+      + '<span class="lbl"><span class="full"></span><span class="short"></span></span>';
     stage.appendChild(b);
     planets.push({el: b, id, area: area.id, ring: ai, a0: (k/n)*Math.PI*2 + ai*1.3 + .4});
   });
@@ -56,8 +72,10 @@ function layout(){
   W = r.width; H = r.height;
   const narrow = W < 640;
   cx = W/2; cy = H/2;
-  R = Math.min(W*(narrow ? .47 : .42), H*(narrow ? 1.05 : 1.25));
-  flat = narrow ? .42 : .34;
+  /* telefon je na výšku: soustava se natočí svisle, ať planety využijí výšku obrazovky */
+  TILT = (narrow ? -76 : -9)*Math.PI/180;
+  flat = narrow ? .5 : .34;
+  R = narrow ? Math.min(H*.47, W*.46/flat) : Math.min(W*.38, H*.46/flat);
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   ORB.forEach((o, i) => {
     const a = R*o.r, b = a*flat;
@@ -69,11 +87,10 @@ function layout(){
     };
     ringEls[i].back.setAttribute("d", arc(Math.PI, Math.PI*2));
     ringEls[i].front.setAttribute("d", arc(0, Math.PI));
-    /* popisek dráhy na její přední (spodní) části, každý v jiném úhlu, ať se nepřekrývají */
-    const th = Math.PI*(.5 + .17*(i - 1)) + .06, x = a*Math.cos(th), y = b*Math.sin(th);
-    const lx = cx + x*Math.cos(TILT) - y*Math.sin(TILT), ly = cy + x*Math.sin(TILT) + y*Math.cos(TILT) + 18;
+    /* popisek dráhy hned vně jejího levého konce: mezi dráhami je na něj místo */
+    const lx = cx - a*Math.cos(TILT) - 10, ly = cy - a*Math.sin(TILT) + 4;
     ringEls[i].label.setAttribute("x", lx.toFixed(1)); ringEls[i].label.setAttribute("y", ly.toFixed(1));
-    ringEls[i].label.setAttribute("text-anchor", "middle");
+    ringEls[i].label.setAttribute("text-anchor", "end");
   });
   hole.style.setProperty("--d", Math.max(54, R*.24) + "px");
 }
@@ -82,7 +99,8 @@ function layout(){
 function texts(){
   planets.forEach(p => {
     const s = findService(p.id);
-    p.el.querySelector(".lbl").textContent = s.name[lang];
+    p.el.querySelector(".full").textContent = s.name[lang];
+    p.el.querySelector(".short").textContent = (SHORT[lang] || SHORT.en)[p.id] || s.name[lang];
     p.el.setAttribute("aria-label", s.name[lang] + ", " + s.price[lang]);
   });
   ORB.forEach((o, i) => ringEls[i].label.textContent = t("s.a." + SVC_AREAS[i].id));
@@ -102,6 +120,8 @@ function place(){
     const sc = .78 + .3*(depth + 1)/2;
     p.el.style.transform = `translate(${px.toFixed(1)}px, ${py.toFixed(1)}px) scale(${sc.toFixed(3)})`;
     p.el.style.zIndex = depth > 0 ? 4 : 1;
+    /* planety u pravého okraje mají popisek vlevo, ať nevyjede z obrazovky */
+    p.el.classList.toggle('flip', px > W*.74);
     p.el.style.setProperty("--fade", (.55 + .45*(depth + 1)/2).toFixed(2));
   });
 }

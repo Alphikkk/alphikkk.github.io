@@ -324,22 +324,51 @@
     radial-gradient(ellipse 60% 10% at 50% 52%,rgba(220,200,255,.75),transparent 100%);
   box-shadow:0 0 90px -10px rgba(140,90,255,.7)}
 
-/* planeta: koule se světlem z díry, popisek vedle */
-.planet{position:absolute;left:0;top:0;translate:-50% -50%;display:flex;align-items:center;gap:10px;padding:8px;margin:0;border:0;background:none;color:var(--ink);
+/* planeta: střed tlačítka je přesně na dráze (popisek visí mimo, absolutně), každá má vlastní povrch a ikonu */
+.planet{position:absolute;left:0;top:0;translate:-50% -50%;display:block;padding:8px;margin:0;border:0;background:none;color:var(--ink);
   cursor:pointer;font:inherit;opacity:var(--fade,1);will-change:transform}
-.planet .orb{--s:22px;width:var(--s);height:var(--s);border-radius:50%;flex:none;position:relative;
-  background:radial-gradient(circle at 34% 30%,#fff 0,color-mix(in srgb,var(--c) 70%,#fff) 18%,var(--c) 46%,color-mix(in srgb,var(--c) 30%,#000) 100%);
-  box-shadow:0 0 18px -2px var(--c),0 0 46px -8px var(--c);transition:transform .35s var(--ease),box-shadow .35s}
-.planet.p-pc .orb{--s:28px}
-.planet.p-web .orb{--s:24px}
-.planet .orb::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid transparent;transition:border-color .3s,inset .35s var(--ease)}
-.planet .lbl{font-size:.86rem;font-weight:600;white-space:nowrap;text-shadow:0 1px 10px #000,0 0 2px #000;transition:color .25s}
-.planet:hover .orb,.planet:focus-visible .orb{transform:scale(1.25);box-shadow:0 0 24px 0 var(--c),0 0 70px -6px var(--c)}
+.planet .orb{--s:42px;width:var(--s);height:var(--s);border-radius:50%;position:relative;display:grid;place-items:center;color:#fff;
+  background:
+    radial-gradient(circle at 32% 28%,rgba(255,255,255,.85) 0,rgba(255,255,255,0) 26%),
+    radial-gradient(circle at 70% 75%,rgba(0,0,0,.55),rgba(0,0,0,0) 60%),
+    radial-gradient(circle at 40% 40%,var(--c),color-mix(in srgb,var(--c) 35%,#05020c) 100%);
+  box-shadow:inset -6px -8px 14px rgba(0,0,0,.55),0 0 22px -4px var(--c),0 0 60px -14px var(--c);transition:transform .35s var(--ease),box-shadow .35s}
+.planet .orb svg{width:52%;height:52%;position:relative;z-index:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+/* povrchy: pruhy plynných obrů, krátery kamenných planet */
+.pl-os .orb,.pl-web .orb,.pl-upgrade .orb{background:
+    radial-gradient(circle at 32% 28%,rgba(255,255,255,.8) 0,rgba(255,255,255,0) 26%),
+    radial-gradient(circle at 70% 75%,rgba(0,0,0,.55),rgba(0,0,0,0) 60%),
+    repeating-linear-gradient(-14deg,rgba(255,255,255,.1) 0 3px,rgba(0,0,0,.12) 3px 7px,transparent 7px 11px),
+    radial-gradient(circle at 40% 40%,var(--c),color-mix(in srgb,var(--c) 35%,#05020c) 100%)}
+.pl-fix .orb,.pl-dns .orb{background:
+    radial-gradient(circle at 32% 28%,rgba(255,255,255,.8) 0,rgba(255,255,255,0) 26%),
+    radial-gradient(circle at 26% 64%,rgba(0,0,0,.35) 0 7%,transparent 8%),radial-gradient(circle at 68% 30%,rgba(0,0,0,.3) 0 6%,transparent 7%),
+    radial-gradient(circle at 60% 68%,rgba(0,0,0,.28) 0 9%,transparent 10%),
+    radial-gradient(circle at 70% 75%,rgba(0,0,0,.55),rgba(0,0,0,0) 60%),
+    radial-gradient(circle at 40% 40%,var(--c),color-mix(in srgb,var(--c) 35%,#05020c) 100%)}
+.pl-build .orb{--s:56px}
+.pl-web .orb{--s:48px}
+.pl-upgrade .orb,.pl-remote .orb{--s:38px}
+/* prstenec jako Saturn: stavba PC a web */
+.pl-build .orb::before,.pl-web .orb::before{content:"";position:absolute;left:-34%;right:-34%;top:38%;bottom:38%;border-radius:50%;z-index:2;pointer-events:none;
+  border:2px solid color-mix(in srgb,var(--c) 70%,#fff);border-top-color:transparent;transform:rotate(-16deg);opacity:.8;
+  box-shadow:0 2px 8px -2px var(--c)}
+/* vzdálená pomoc: malý měsíc na vlastní dráze */
+.pl-remote .orb::before{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:#e9e4ff;box-shadow:0 0 8px #fff;
+  left:50%;top:50%;margin:-4.5px;animation:moon 5s linear infinite}
+@keyframes moon{from{transform:rotate(0) translateX(30px) rotate(0)}to{transform:rotate(360deg) translateX(30px) rotate(-360deg)}}
+.planet .orb::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid transparent;transition:border-color .3s,inset .35s var(--ease)}
+.planet .lbl{position:absolute;left:calc(100% - 2px);top:50%;translate:0 -50%;font-size:.86rem;font-weight:600;white-space:nowrap;pointer-events:none;
+  text-shadow:0 1px 10px #000,0 0 2px #000;transition:color .25s}
+.planet .short{display:none}
+.planet.flip .lbl{left:auto;right:calc(100% - 2px)}
+.planet:hover .orb,.planet:focus-visible .orb{transform:scale(1.15);box-shadow:inset -6px -8px 14px rgba(0,0,0,.5),0 0 28px 0 var(--c),0 0 80px -8px var(--c)}
 .planet:focus-visible{outline:none}
-.planet:focus-visible .orb::after,.planet.on .orb::after{border-color:var(--c);inset:-9px}
+.planet:focus-visible .orb::after,.planet.on .orb::after{border-color:var(--c);inset:-11px}
 .planet.on .lbl{color:var(--c)}
-/* služba v košíku: kolem planety drobný měsíc */
-.planet.in .orb::before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;right:-6px;top:-4px;box-shadow:0 0 10px #fff}
+/* služba v košíku: kolem planety čárkovaný kroužek */
+.planet.in .orb::after{border-color:rgba(255,255,255,.7);border-style:dashed;inset:-10px}
+@media (prefers-reduced-motion:reduce){.pl-remote .orb::before{animation:none;transform:translateX(30px)}}
 
 /* karta služby: vpravo vedle soustavy, na telefonu jako list zespodu */
 .orbit-card{position:absolute;z-index:6;right:max(16px,calc((100vw - var(--wrap))/2 + var(--gut)));top:clamp(180px,24vw,250px);width:min(380px,calc(100% - 32px));
@@ -377,9 +406,16 @@
 .orbit-list:hover{color:var(--ink);border-color:var(--ink)}
 
 @media (max-width:760px){
-  .orbit-stage{height:clamp(320px,52vh,440px)}
-  .planet .lbl{display:none}
-  .planet.on .lbl{display:block;position:absolute;left:50%;top:100%;translate:-50% 0;font-size:.78rem}
+  .orbit-stage{height:clamp(400px,64vh,560px)}
+  .planet .orb{--s:34px}
+  .pl-build .orb{--s:44px}
+  .pl-web .orb{--s:38px}
+  .pl-upgrade .orb,.pl-remote .orb{--s:30px}
+  .pl-remote .orb::before{width:7px;height:7px;margin:-3.5px}
+  @keyframes moon{from{transform:rotate(0) translateX(23px) rotate(0)}to{transform:rotate(360deg) translateX(23px) rotate(-360deg)}}
+  .planet .full{display:none}
+  .planet .short{display:block}
+  .planet .lbl,.planet.flip .lbl{left:50%;right:auto;top:calc(100% - 4px);translate:-50% 0;font-size:.7rem;font-weight:650}
   .orbit-card{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;border-radius:24px 24px 0 0;
     padding:22px max(18px,env(safe-area-inset-left,0px)) calc(18px + env(safe-area-inset-bottom,0px));max-height:70vh;overflow:auto}
   .orbit-bar{border-radius:20px;width:100%}
