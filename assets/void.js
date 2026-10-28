@@ -46,6 +46,11 @@ document.addEventListener('click', e => {
   if(u.pathname !== location.pathname || !INSIDE_HASH.test(u.hash)) return;
   if(!inside){ e.preventDefault(); history.pushState(null, "", u.hash); openInside(u.hash); }
 });
+/* tlačítko „Zpět k černé díře“ uvnitř */
+document.querySelectorAll('[data-out]').forEach(b => b.addEventListener('click', () => {
+  if(!inside) return;
+  history.pushState(null, "", location.pathname + location.search); closeInside();
+}));
 /* logo uvnitř vrátí zpět na scénu */
 document.querySelectorAll('.nav .brand').forEach(b => b.addEventListener('click', e => {
   if(!inside) return;

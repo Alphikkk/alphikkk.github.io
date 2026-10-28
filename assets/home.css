@@ -209,3 +209,92 @@
 /* konec ponoru: obraz se zavře do úplné černé */
 .void::after{content:"";position:absolute;inset:0;z-index:1;background:#000;pointer-events:none;opacity:clamp(0,calc((var(--dive,0) - .7)*3.4),1)}
 .no-gl.is-diving .void::after{opacity:1;transition:opacity .5s}
+
+/* =========================================================
+   Uvnitř díry: obsah po kliknutí na „Co nabízím“
+   Pořád stejný vesmír: vždy tmavé, jemné hvězdy v pozadí a fialová záře shora,
+   jako by nad stránkou svítil disk. Tokeny se přepíšou jen tady (třídu .is-inside má jen úvod).
+   ========================================================= */
+:root.is-inside{
+  --bg:#000;--ink:#f2f1ee;--soft:rgba(255,255,255,.05);--muted:rgba(242,241,238,.62);--line:rgba(242,241,238,.12);
+  --orbit:rgba(242,241,238,.3);--on-ink:#000;--nav:rgba(0,0,0,.55);--logo-filter:invert(1);
+  --violet:#b49cff;--violet-2:#8fa8ff;--violet-glow:rgba(150,100,255,.55);
+  color-scheme:dark}
+.is-inside .nav .theme{display:none}
+.is-inside .services{--acc:var(--violet);--acc-2:var(--violet-2);border-top:0}
+
+/* hvězdy: tři vrstvy teček s různou velikostí dlaždice, aby se opakování neprozradilo */
+.is-inside .inside{position:relative}
+.is-inside .inside::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.75;
+  background-image:
+    radial-gradient(1.2px 1.2px at 23px 41px,#fff,transparent),radial-gradient(1px 1px at 131px 87px,#dcd4ff,transparent),
+    radial-gradient(1px 1px at 197px 163px,#fff,transparent),radial-gradient(1.4px 1.4px at 61px 211px,#ffe9d6,transparent),
+    radial-gradient(1px 1px at 251px 19px,#cfdcff,transparent),
+    radial-gradient(.8px .8px at 37px 113px,rgba(255,255,255,.7),transparent),radial-gradient(.8px .8px at 149px 29px,rgba(255,255,255,.6),transparent),
+    radial-gradient(.8px .8px at 89px 151px,rgba(255,255,255,.6),transparent),radial-gradient(.8px .8px at 173px 97px,rgba(255,255,255,.5),transparent),
+    radial-gradient(1.6px 1.6px at 311px 233px,#fff,transparent),radial-gradient(1.2px 1.2px at 401px 59px,#e4dcff,transparent);
+  background-size:283px 283px,283px 283px,283px 283px,283px 283px,283px 283px,191px 191px,191px 191px,191px 191px,191px 191px,467px 467px,467px 467px}
+/* záře disku nad stránkou */
+.is-inside .inside::after{content:"";position:fixed;left:0;right:0;top:0;height:60vh;z-index:-1;pointer-events:none;
+  background:radial-gradient(70% 70% at 50% 0%,rgba(140,90,255,.26),rgba(90,60,200,.08) 55%,transparent 80%)}
+
+/* návrat ven: nenápadný textový odkaz nad nadpisem */
+.inside-out{display:none}
+.is-inside .inside-out{display:inline-flex;align-items:center;gap:10px;margin:0 0 clamp(28px,4vw,44px);padding:6px 0;border:0;background:none;cursor:pointer;
+  color:var(--muted);font:inherit;font-size:.92rem;font-weight:550;border-bottom:1px solid var(--line);transition:color .25s,border-color .25s}
+.is-inside .inside-out::before{content:"";width:14px;height:14px;border-radius:50%;flex:none;
+  background:radial-gradient(circle,#000 0 38%,var(--violet) 46%,rgba(180,156,255,.25) 60%,transparent 72%)}
+.is-inside .inside-out:hover{color:var(--ink);border-color:var(--violet)}
+.is-inside .services{padding-top:clamp(40px,6vw,72px)}
+
+/* nadpisy dostanou jemný světelný nádech */
+.is-inside .big-h,.is-inside .area-head h3{text-shadow:0 0 42px rgba(150,100,255,.28)}
+.is-inside .svc-index ol{border-top-color:rgba(180,156,255,.5)}
+
+/* tlačítko do košíku: stejný světelný prstenec jako „Co nabízím“ */
+.is-inside .buy .go{border-color:rgba(214,196,255,.4);background:rgba(255,255,255,.02);
+  transition:background .3s,color .3s,border-color .3s,box-shadow .35s}
+.is-inside .buy:hover .go{background:rgba(200,180,255,.1);color:var(--ink);border-color:rgba(214,196,255,.8);box-shadow:0 0 28px -6px var(--violet-glow)}
+.is-inside .buy.in .go{background:var(--violet);border-color:var(--violet);color:#000;box-shadow:0 0 30px -4px var(--violet-glow)}
+.is-inside .buy .pr{font-variant-numeric:tabular-nums}
+
+/* IT podpora: hrany oddělené slabou čarou, ikony svítí */
+.is-inside .area-it .area-list{border-top-color:rgba(180,156,255,.45)}
+.is-inside .area-it .ic{filter:drop-shadow(0 0 10px rgba(150,100,255,.6))}
+
+/* Stavba PC: panel z tmavého skla, fotka sestavy jako okno s fialovým světlem */
+.is-inside .area-pc{--bg:rgba(255,255,255,.025);--soft:rgba(255,255,255,.05);--line:rgba(242,241,238,.12);--muted:rgba(242,241,238,.64);
+  background:linear-gradient(160deg,rgba(150,100,255,.09),rgba(255,255,255,.015) 45%);border-color:rgba(180,156,255,.18);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.is-inside .area-photo{box-shadow:0 0 0 1px rgba(180,156,255,.18),0 30px 80px -30px rgba(120,80,255,.55)}
+
+/* Weby a domény */
+.is-inside .area-web .svc{border-top-color:rgba(180,156,255,.4)}
+
+/* Portfolio: náhledy jako okna do tmy */
+.is-inside .work{border-top:0}
+.is-inside .pv{background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .35s}
+.is-inside .work-card:hover .pv{box-shadow:inset 0 0 0 1px rgba(180,156,255,.5),0 18px 50px -20px var(--violet-glow)}
+.is-inside .pv-ap .b{background:var(--violet)}
+.is-inside .work-more{border-color:rgba(214,196,255,.4)}
+.is-inside .work-more:hover{border-color:var(--violet);box-shadow:0 0 28px -8px var(--violet-glow)}
+
+/* Závěrečná výzva: místo bílého panelu malá černá díra, ze které se dá zase „spadnout“ do objednávky */
+.is-inside .cta-end .wrap>div{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,rgba(130,80,255,.2),transparent 60%),rgba(255,255,255,.02);
+  color:var(--ink);box-shadow:inset 0 0 0 1px rgba(180,156,255,.2)}
+.is-inside .cta-end .bh{display:none}
+.is-inside .cta-end .wrap>div::before{content:"";width:132px;height:132px;margin-bottom:26px;border-radius:50%;flex:none;
+  background:
+    radial-gradient(circle,#000 0 33%,rgba(240,232,255,.95) 36%,rgba(180,140,255,.55) 41%,rgba(120,80,255,.18) 52%,transparent 66%),
+    radial-gradient(ellipse 50% 9% at 50% 50%,rgba(220,200,255,.7),transparent 100%);
+  box-shadow:0 0 70px -10px rgba(140,90,255,.6)}
+@media (prefers-reduced-motion:no-preference){
+  .is-inside .cta-end .wrap>div::before{animation:bhBreath 6s ease-in-out infinite}
+}
+@keyframes bhBreath{50%{box-shadow:0 0 90px -6px rgba(140,90,255,.8);transform:scale(1.03)}}
+.is-inside .cta-end p{color:var(--muted);opacity:1}
+.is-inside .cta-end .btn{background:var(--ink);color:#000;border-color:var(--ink)}
+.is-inside .cta-end .btn:hover{opacity:1;box-shadow:0 0 40px -6px var(--violet-glow)}
+
+.is-inside footer{border-top-color:var(--line);background:transparent}
+.is-inside #wipNote{background:rgba(10,8,18,.92);box-shadow:0 0 0 1px rgba(180,156,255,.25),0 20px 60px -20px rgba(0,0,0,.8)}
