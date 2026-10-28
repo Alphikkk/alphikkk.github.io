@@ -285,6 +285,11 @@ Object.assign(T.cs,{"bh.open":"Otevřít rozcestník","bh.close":"Zavřít rozce
 Object.assign(T.en,{"bh.open":"Open quick navigation","bh.close":"Close quick navigation","pf.more":"See the full portfolio"});
 Object.assign(T.es,{"bh.open":"Abrir navegación rápida","bh.close":"Cerrar navegación rápida","pf.more":"Ver todo el portafolio"});
 
+/* ===== Úvodní scéna s černou dírou (void.js) ===== */
+Object.assign(T.cs,{"v.h":"IT podpora, počítače na míru a weby.","v.p":"Osobně v Praze a okolí, na dálku po celé Evropě.","v.go":"Co nabízím"});
+Object.assign(T.en,{"v.h":"IT support, custom PCs and websites.","v.p":"In person around Prague, remotely across Europe.","v.go":"What I offer"});
+Object.assign(T.es,{"v.h":"Soporte informático, PCs a medida y webs.","v.p":"En persona en Praga y alrededores, a distancia en toda Europa.","v.go":"Qué ofrezco"});
+
 /* ===== Košík ===== */
 Object.assign(T.cs,{
   "h.seo":"Corphik – IT podpora a stavba PC na míru",

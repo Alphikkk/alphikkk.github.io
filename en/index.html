@@ -27,8 +27,7 @@
 <meta name="twitter:description" content="Corphik – IT support in the Prague area and remotely: custom PC builds, Windows and Linux installs, repairs, DNS setup and website redesign.">
 <meta name="twitter:image" content="https://corphik.eu/assets/img/og-corphik.png">
 <meta name="twitter:image:alt" content="Corphik logo – Reliable IT support &amp; custom PCs">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
@@ -38,7 +37,8 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/home.css?v=29">
+<link rel="stylesheet" href="/assets/home.css?v=30">
+<script>document.documentElement.classList.add('void-on')</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -268,35 +268,15 @@
   </div>
 </header>
 <main>
-  <svg class="bh-path" id="bhPath" aria-hidden="true" focusable="false"></svg>
-  <div class="bh-travel" id="bhTravel" aria-hidden="true"><canvas></canvas></div>
-  <section class="home-hero">
-    <div class="bh-hero">
-      <canvas id="bhCanvas" aria-hidden="true"></canvas>
-      <button class="bh-core" id="bhCore" type="button" aria-expanded="false" aria-controls="bhMenu" hidden></button>
-      <ul class="bh-menu" id="bhMenu" hidden>
-        <li><a href="#sluzby" data-i18n="nav.home">Services</a></li>
-        <li><a href="#prace" data-i18n="nav.portfolio">Portfolio</a></li>
-        <li><a href="#kontakt" data-i18n="ft.contact">Contact</a></li>
-      </ul>
-      <noscript><img class="hero-mark" src="/assets/img/corphik-wordmark.png" alt="" width="640" height="120"></noscript>
-    </div>
-    <div class="wrap hero-body">
-      <p class="hero-line" lang="en">IT SOLUTIONS<span class="sl"> / </span>PC ENGINEERING</p>
-      <h1 class="hero-h"><span class="sr-only">Corphik – </span><span data-i18n="h.lead">IT support and custom PC builds.</span></h1>
-      <p class="hero-sub" data-i18n="h.sub">PC builds and upgrades, Windows and Linux installs, diagnostics and repairs, domains, DNS and websites.</p>
-      <div class="hero-side">
-        <div class="hero-act">
-          <a class="btn primary" href="/en/orders/" data-i18n="h.cta">Order a service</a>
-          <a class="hero-more" href="#sluzby"><span data-i18n="h.cta2">What I offer</span></a>
-        </div>
-        <ul class="hero-reach">
-          <li data-i18n="h.r1">Czechia: in person or remotely</li>
-          <li data-i18n="h.r2">Spain and Europe: remote for now</li>
-        </ul>
-      </div>
+  <section class="void" id="void" aria-labelledby="void-h">
+    <canvas id="voidCanvas" role="img" aria-label="Space with a black hole whose gravity bends starlight and the Corphik name"></canvas>
+    <div class="void-ui">
+      <h1 class="void-h" id="void-h"><span class="sr-only">Corphik – </span><span data-i18n="v.h">IT support, custom PCs and websites.</span></h1>
+      <p class="void-p" data-i18n="v.p">In person around Prague, remotely across Europe.</p>
+      <a class="void-go" id="voidGo" href="#sluzby"><span data-i18n="v.go">What I offer</span></a>
     </div>
   </section>
+  <div class="inside" id="inside" tabindex="-1">
 
   <section class="services" id="sluzby">
     <div class="wrap">
@@ -342,13 +322,14 @@
       <a class="btn" href="/en/orders/" data-i18n="h.cta">Order a service</a>
     </div></div>
   </section>
+  </div>
 </main>
 <footer><div class="wrap">
   <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – reliable IT support and custom PCs" width="150" height="61" loading="lazy">
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contact</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=31"></script>
-<script src="/assets/blackhole.js?v=3"></script>
+<script src="/assets/app.js?v=32"></script>
+<script src="/assets/void.js?v=1"></script>
 </body>
 </html>
