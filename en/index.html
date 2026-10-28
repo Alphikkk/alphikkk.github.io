@@ -37,7 +37,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/home.css?v=39">
+<link rel="stylesheet" href="/assets/home.css?v=42">
 <script>document.documentElement.classList.add('void-on')</script>
 <script type="application/ld+json">
 {
@@ -273,22 +273,29 @@
     <div class="void-ui">
       <h1 class="void-h" id="void-h"><span class="sr-only">Corphik – </span><span data-i18n="v.h">IT support, custom PCs and websites.</span></h1>
       <p class="void-p" data-i18n="v.p">In person around Prague, remotely across Europe.</p>
-      <a class="void-go" id="voidGo" href="#orbit"><span data-i18n="v.go">What I offer</span></a>
+      <a class="void-go" id="voidGo" href="#sluzby"><span data-i18n="v.go">What I offer</span></a>
     </div>
   </section>
   <div class="inside" id="inside" tabindex="-1">
-  <section class="orbit" id="orbit" aria-labelledby="orbit-h">
-    <div class="wrap orbit-top">
-      <button class="inside-out" type="button" data-out><span data-i18n="v.out">Back to the black hole</span></button>
-      <h2 class="orbit-h" id="orbit-h" data-i18n="o2.h">Pick a service.</h2>
-      <p class="orbit-p" data-i18n="o2.p">Everything I do orbits around your computer. Click a planet.</p>
+  <section class="warp" id="warp" aria-labelledby="warp-h">
+    <canvas class="warp-sky" id="warpSky" aria-hidden="true"></canvas>
+    <ol class="warp-rail" id="warpRail" aria-label="Journey progress"></ol>
+    <div class="stop stop-intro">
+      <div class="stop-in"><div class="stop-txt">
+        <button class="inside-out" type="button" data-out><span data-i18n="v.out">Back to the black hole</span></button>
+        <h2 class="warp-h" id="warp-h" data-i18n="w.h">What I offer.</h2>
+        <p class="warp-p" data-i18n="w.p">Seven services in three areas. Scroll to fly on.</p>
+        <span class="warp-hint" aria-hidden="true"></span>
+      </div></div>
     </div>
-    <div class="orbit-stage" id="orbitStage"></div>
-    <aside class="orbit-card" id="orbitCard" aria-live="polite" hidden></aside>
-    <div class="orbit-foot wrap">
-      <div class="orbit-bar" id="orbitBar"></div>
-      <a class="orbit-list" href="#sluzby" data-i18n="o2.list">Or see everything as a list</a>
-    </div>
+    <div id="warpStops"></div>
+    <section class="stop stop-end" id="w-end" aria-labelledby="w-end-h">
+      <div class="stop-in"><div class="stop-txt">
+        <h3 class="stop-h" id="w-end-h" data-i18n="w.end">End of the journey.</h3>
+        <div class="warp-cart" id="warpCart"></div>
+        <p class="wc-mail"><span data-i18n="w.mail">Or just email me:</span> <a href="mailto:ales@corphik.eu">ales@corphik.eu</a></p>
+      </div></div>
+    </section>
   </section>
 
   <section class="services" id="sluzby">
@@ -342,8 +349,8 @@
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contact</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=34"></script>
-<script src="/assets/orbit.js?v=6"></script>
-<script src="/assets/void.js?v=8"></script>
+<script src="/assets/app.js?v=35"></script>
+<script src="/assets/warp.js?v=2"></script>
+<script src="/assets/void.js?v=9"></script>
 </body>
 </html>
