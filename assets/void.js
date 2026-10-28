@@ -191,7 +191,8 @@ void main(){
   if(!fell){
     vec3 bg = stars(rd)*smoothstep(0.0, 0.35, uIntro);
     float w = word(p, rd)*smoothstep(0.35, 0.95, uIntro);
-    bg += vec3(0.9, 0.9, 0.93)*w*0.6;
+    /* nápis tlumeně, v barvě světla z disku */
+    bg += vec3(0.6, 0.52, 0.86)*w*0.5;
     col += trans*bg;
   }
   /* slabá záře kolem fotonové sféry */
@@ -225,16 +226,34 @@ const U = {};
 
 /* ---------- Nápis jako textura (písmo Archivo, široký řez) ---------- */
 const tex = gl.createTexture();
-function drawWord(){
-  const c = document.createElement('canvas'), W = 2048, H = 400;
-  c.width = W; c.height = H;
+/* nápis rozdělený na COR a PHIK: díra sedí v mezeře a ohýbá jen okraje písmen.
+   Na šířku vedle sebe, na výšku nad a pod dírou. Rozměry ve světových jednotkách (rs = 1). */
+const GAP = +(new URLSearchParams(location.search).get('gap') || 0);
+let layout = "", wordSize = [1, 1];
+function drawWord(inFrame){
+  const tall = innerHeight > innerWidth;
+  layout = tall ? "tall" : "wide";
+  const c = document.createElement('canvas');
+  const PX = tall ? 40 : 54;                                  /* pixelů textury na jednotku */
+  const cw = tall ? 1280 : 3200, ch = tall ? 1280 : 400;
+  c.width = cw; c.height = ch;
   const x = c.getContext('2d');
-  x.fillStyle = "#000"; x.fillRect(0, 0, W, H);
-  x.fillStyle = "#fff"; x.textAlign = "center"; x.textBaseline = "middle";
-  x.font = '800 250px "Archivo", system-ui, sans-serif';
+  x.fillStyle = "#000"; x.fillRect(0, 0, cw, ch);
+  x.fillStyle = "#fff"; x.textBaseline = "middle";
+  x.font = '800 ' + (tall ? 200 : 250) + 'px "Archivo", system-ui, sans-serif';
   if('letterSpacing' in x) x.letterSpacing = "18px";
   try{ x.fontStretch = "expanded"; }catch(_){}
-  x.fillText("CORPHIK", W/2, H/2 + 8);
+  if(tall){
+    const g = (GAP || 17)*PX/2;
+    x.textAlign = "center";
+    x.fillText("COR", cw/2, ch/2 - g - 80);
+    x.fillText("PHIK", cw/2, ch/2 + g + 80);
+  }else{
+    const g = (GAP || 13.5)*PX/2;
+    x.textAlign = "right"; x.fillText("COR", cw/2 - g, ch/2 + 8);
+    x.textAlign = "left"; x.fillText("PHIK", cw/2 + g, ch/2 + 8);
+  }
+  wordSize = [cw/PX, ch/PX];
   gl.bindTexture(gl.TEXTURE_2D, tex);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, gl.LUMINANCE, gl.UNSIGNED_BYTE, c);
@@ -242,7 +261,7 @@ function drawWord(){
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  if(!raf && W) frame(performance.now());
+  if(!inFrame && !raf && W) frame(performance.now());
 }
 gl.activeTexture(gl.TEXTURE0);
 gl.uniform1i(U.uWord, 0);
@@ -291,7 +310,7 @@ function frame(now){
   let dist = (portrait ? 34 : 38)*(1 - dv) + 1.15*dv;
   /* nástup: kamera přiletí z dálky během první sekundy */
   if(!REDUCE) dist += 14*Math.pow(1 - clamp(time/1.6), 3);
-  const az = (portrait ? -0.03 : -0.18) + sx*0.22 + Math.sin(time*0.07)*0.06;
+  const az = (portrait ? -0.03 : -0.07) + sx*0.22 + Math.sin(time*0.07)*0.06;
   const el = 0.105 + sy*0.06 + dv*0.12;
   const cam = [Math.sin(az)*Math.cos(el)*dist, Math.sin(el)*dist, Math.cos(az)*Math.cos(el)*dist];
   /* cíl lehce nad dírou, aby nápis pod ní byl v záběru */
@@ -310,8 +329,8 @@ function frame(now){
   gl.uniform1f(U.uDist, dist);
   gl.uniform1f(U.uFov, (portrait ? 0.66 : 0.58) + dv*0.9);
   gl.uniform1f(U.uSteps, steps);
-  const ws = portrait ? 34 : 52;
-  gl.uniform2f(U.uWordSize, ws, ws*400/2048);
+  if(layout !== (portrait ? "tall" : "wide")) drawWord(true);
+  gl.uniform2f(U.uWordSize, wordSize[0], wordSize[1]);
   gl.uniform3fv(U.uCam, cam); gl.uniform3fv(U.uFwd, f); gl.uniform3fv(U.uRight, r); gl.uniform3fv(U.uUp, u);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
   voidEl.style.setProperty('--dive', dv.toFixed(3));
@@ -336,6 +355,6 @@ function start(){
 }
 document.addEventListener('visibilitychange', () => { if(!document.hidden) start(); });
 drawWord();
-if(document.fonts) document.fonts.load('800 250px "Archivo"').then(drawWord, () => {});
+if(document.fonts) document.fonts.load('800 250px "Archivo"').then(() => drawWord(), () => {});
 if(!inside) start();
 })();
