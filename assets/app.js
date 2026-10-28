@@ -885,8 +885,9 @@ function refreshCheckout(){ renderSummary(); updateRules(); renderReview(); }
 function renderCheckout(){
   if(!$('ckPick')) return;
   /* starší odkazy /orders/?service=xxx přidají službu do košíku */
-  const p = new URLSearchParams(location.search).get('service');
-  if(p && !urlServiceAdded && (p==="other" || findService(p))){ urlServiceAdded = true; const c = getCart(); if(!c.includes(p)) setCart([...c, p]); }
+  /* víc služeb najednou čárkou: ?service=build,web */
+  const ps = (new URLSearchParams(location.search).get('service') || "").split(",").filter(p => p==="other" || findService(p));
+  if(ps.length && !urlServiceAdded){ urlServiceAdded = true; const c = getCart(); setCart([...c, ...ps.filter(p => !c.includes(p))]); }
   $('ckMsg').placeholder = t("ck.msgPh");
   $('ckWhen').placeholder = t("ck.whenPh");
   renderPick(); renderOpts(); refreshCheckout();
