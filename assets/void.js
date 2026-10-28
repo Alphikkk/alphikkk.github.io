@@ -72,13 +72,11 @@ uniform vec2 uRes;
 uniform float uTime, uIntro, uDist, uFov, uSteps;
 uniform vec3 uCam, uFwd, uRight, uUp;
 uniform sampler2D uWord;
-uniform vec2 uWordSize;
-uniform float uWordY;
+uniform vec2 uWordSize;                           /* úhlová velikost textury souhvězdí (rad) */
+uniform vec3 uCon;                                /* směr k souhvězdí */
 uniform vec3 uGal;                                /* směr ke spirální galaxii (podle orientace obrazovky) */
 
 const float RIN = 2.6, ROUT = 15.0;
-const vec3 N0 = vec3(0.0, 0.0, -1.0);      /* nápis leží v rovině za dírou, kolmo na výchozí pohled */
-const float PLANE = 34.0;
 
 float hash(vec3 p){ p = fract(p*0.3183099 + 0.1); p *= 17.0; return fract(p.x*p.y*p.z*(p.x+p.y+p.z)); }
 float hash2(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7)))*43758.5453); }
@@ -140,14 +138,16 @@ vec3 stars(vec3 d){
   return c;
 }
 
-/* souhvězdí CORPHIK v rovině za dírou (paprsek už je mimo dosah díry, dál letí rovně);
+/* souhvězdí CORPHIK daleko na obloze (jako hvězdy: záleží jen na směru paprsku);
    textura: červený kanál = spojnice, zelený = hvězdy */
-vec2 word(vec3 p, vec3 d){
-  float dn = dot(d, N0);
-  if(dn <= 0.0) return vec2(0.0);
-  float t = (PLANE - dot(p, N0))/dn;   /* zpětný průsečík platí, paprsek letí rovně */
-  vec3 h = p + d*t;
-  vec2 uv = vec2(h.x, -h.y - uWordY)/uWordSize + 0.5;
+vec2 word(vec3 d){
+  vec3 C = normalize(uCon);
+  if(dot(d, C) < 0.8) return vec2(0.0);
+  vec3 e1 = normalize(cross(C, vec3(0.0, 1.0, 0.0))), e2 = cross(e1, C);
+  vec2 q = vec2(dot(d, e1), -dot(d, e2));
+  float ca = cos(-0.12), sa = sin(-0.12);           /* lehce natočené, jako skutečné souhvězdí */
+  q = mat2(ca, -sa, sa, ca)*q;
+  vec2 uv = q/uWordSize + 0.5;
   if(uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return vec2(0.0);
   return texture2D(uWord, uv).rg;
 }
@@ -223,10 +223,10 @@ void main(){
   col += glow*smoothstep(0.15, 0.8, uIntro);
   if(!fell){
     vec3 bg = stars(rd)*smoothstep(0.0, 0.35, uIntro);
-    vec2 w = word(p, rd)*smoothstep(0.35, 0.95, uIntro);
-    /* souhvězdí: tenké fialové spojnice a jasné hvězdy, které jemně mihotají */
-    float tw = 0.86 + 0.14*sin(uTime*1.7 + rd.x*900.0 + rd.y*700.0);
-    bg += vec3(0.62, 0.52, 1.0)*w.x*0.42 + vec3(0.96, 0.93, 1.0)*w.y*2.0*tw;
+    vec2 w = word(rd)*smoothstep(0.35, 0.95, uIntro);
+    /* souhvězdí: sotva viditelné spojnice, hvězdy stejné jako ostatní na obloze */
+    float tw = 0.88 + 0.12*sin(uTime*1.7 + rd.x*900.0 + rd.y*700.0);
+    bg += vec3(0.6, 0.55, 0.95)*w.x*0.22 + vec3(0.97, 0.95, 1.0)*w.y*2.6*tw;
     col += trans*bg;
   }
   /* slabá záře kolem fotonové sféry */
@@ -256,7 +256,7 @@ gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_
 const loc = gl.getAttribLocation(prog, 'p');
 gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
 const U = {};
-["uRes","uTime","uIntro","uDist","uFov","uSteps","uCam","uFwd","uRight","uUp","uWord","uWordSize","uWordY","uGal"].forEach(n => U[n] = gl.getUniformLocation(prog, n));
+["uRes","uTime","uIntro","uDist","uFov","uSteps","uCam","uFwd","uRight","uUp","uWord","uWordSize","uCon","uGal"].forEach(n => U[n] = gl.getUniformLocation(prog, n));
 
 /* ---------- Nápis jako textura (písmo Archivo, široký řez) ---------- */
 const tex = gl.createTexture();
@@ -271,64 +271,50 @@ const GLYPH = {
   K: [[[0,0],[0,.55],[0,1]],[[.76,0],[.3,.36],[0,.55]],[[.3,.36],[.8,1]]]
 };
 const ADV = {C: .98, O: 1.08, R: 1.0, P: .94, H: 1.0, I: .3, K: .9};
+const rnd = k => ((Math.sin(k*12.9898)*43758.5453) % 1 + 1) % 1;
+/* drobná nepravidelnost, ať písmena nevypadají narýsovaná */
+const jit = (k, s) => (rnd(k*3.7 + s*11.3) - .5)*.07;
 const wordWidth = (s, h) => [...s].reduce((w, ch) => w + ADV[ch]*h, 0) - .16*h;
 function constellation(x, s, left, top, h){
   const seen = new Map();
   let cx = left, n = 0;
   for(const ch of s){
     for(const line of GLYPH[ch]){
-      const pts = line.map(([gx, gy]) => [cx + gx*h, top + gy*h]);
+      const pts = line.map(([gx, gy]) => [cx + (gx + jit(gx*7 + cx, 1))*h, top + (gy + jit(gy*5 + cx, 2))*h]);
       x.globalCompositeOperation = "lighter";
-      x.strokeStyle = "rgba(255,0,0,.7)"; x.lineWidth = Math.max(2, h*.012); x.lineJoin = x.lineCap = "round";
+      x.strokeStyle = "rgba(255,0,0,.8)"; x.lineWidth = Math.max(2, h*.014); x.lineJoin = x.lineCap = "round";
       x.beginPath(); pts.forEach(([px, py], i) => i ? x.lineTo(px, py) : x.moveTo(px, py)); x.stroke();
       pts.forEach(p => { const k = Math.round(p[0]) + "," + Math.round(p[1]); if(!seen.has(k)) seen.set(k, p); });
     }
     cx += ADV[ch]*h;
   }
   for(const [px, py] of seen.values()){
-    const r = h*(.022 + .03*((Math.sin(++n*12.9898)*43758.5453) % 1 + 1) % 1);
+    /* různě jasné hvězdy: pár výrazných, většina slabších */
+    const m = rnd(++n), r = h*(.045 + .05*m*m), a = .4 + .6*m;
     const g = x.createRadialGradient(px, py, 0, px, py, r);
-    g.addColorStop(0, "rgba(0,255,0,1)"); g.addColorStop(.12, "rgba(0,255,0,.95)");
-    g.addColorStop(.35, "rgba(0,255,0,.28)"); g.addColorStop(1, "rgba(0,255,0,0)");
+    g.addColorStop(0, `rgba(0,255,0,${a})`); g.addColorStop(.18, `rgba(0,255,0,${a*.8})`);
+    g.addColorStop(.42, `rgba(0,255,0,${a*.12})`); g.addColorStop(1, "rgba(0,255,0,0)");
     x.fillStyle = g; x.beginPath(); x.arc(px, py, r, 0, Math.PI*2); x.fill();
   }
 }
-/* souhvězdí rozdělené na COR a PHIK: díra sedí v mezeře a ohýbá jen okraje.
-   Na šířku vedle sebe, na výšku nad a pod dírou. Rozměry ve světových jednotkách (rs = 1). */
-const GAP = +(new URLSearchParams(location.search).get('gap') || 0);
-let layout = "", wordSize = [1, 1];
-function drawWord(inFrame){
-  const tall = innerHeight > innerWidth;
-  layout = tall ? "tall" : "wide";
-  const c = document.createElement('canvas');
-  const PX = tall ? 40 : 54;                                  /* pixelů textury na jednotku */
-  const cw = tall ? 1280 : 3200, ch = tall ? 1280 : 400;
+/* textura 2048×512 (mocniny dvou, aby šly mipmapy a malé souhvězdí se nemihotalo) */
+function drawWord(){
+  const c = document.createElement('canvas'), cw = 2048, ch = 512, h = 230;
   c.width = cw; c.height = ch;
   const x = c.getContext('2d');
   x.fillStyle = "#000"; x.fillRect(0, 0, cw, ch);
-  const h = tall ? 230 : 230;
-  if(tall){
-    const g = (GAP || 21)*PX/2;
-    constellation(x, "COR", (cw - wordWidth("COR", h))/2, ch/2 - g - 60 - h/2, h);
-    constellation(x, "PHIK", (cw - wordWidth("PHIK", h))/2, ch/2 + g + 60 - h/2, h);
-  }else{
-    const g = (GAP || 13.5)*PX/2;
-    constellation(x, "COR", cw/2 - g - wordWidth("COR", h), ch/2 - h/2, h);
-    constellation(x, "PHIK", cw/2 + g, ch/2 - h/2, h);
-  }
-  wordSize = [cw/PX, ch/PX];
+  constellation(x, "CORPHIK", (cw - wordWidth("CORPHIK", h))/2, (ch - h)/2, h);
   gl.bindTexture(gl.TEXTURE_2D, tex);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, c);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.generateMipmap(gl.TEXTURE_2D);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  if(!inFrame && !raf && W) frame(performance.now());
 }
 gl.activeTexture(gl.TEXTURE0);
 gl.uniform1i(U.uWord, 0);
-gl.uniform1f(U.uWordY, 0);
 
 /* ---------- Kamera, myš, kvalita ---------- */
 let mx = 0, my = 0, sx = 0, sy = 0;
@@ -392,8 +378,10 @@ function frame(now){
   gl.uniform1f(U.uDist, dist);
   gl.uniform1f(U.uFov, (portrait ? 0.66 : 0.58) + dv*0.9);
   gl.uniform1f(U.uSteps, steps);
-  if(layout !== (portrait ? "tall" : "wide")) drawWord(true);
-  gl.uniform2f(U.uWordSize, wordSize[0], wordSize[1]);
+  /* souhvězdí: na šířku vpravo nahoře, na výšku nahoře nad dírou; šířka textury v radiánech */
+  const cs = portrait ? 0.5 : 0.3;
+  gl.uniform2f(U.uWordSize, cs, cs/4);
+  gl.uniform3fv(U.uCon, portrait ? [0, 0.13, -0.99] : [0.16, -0.04, -0.99]);
   gl.uniform3fv(U.uGal, portrait ? [0.14, -0.33, -0.93] : [-0.2, -0.25, -0.95]);
   gl.uniform3fv(U.uCam, cam); gl.uniform3fv(U.uFwd, f); gl.uniform3fv(U.uRight, r); gl.uniform3fv(U.uUp, u);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
