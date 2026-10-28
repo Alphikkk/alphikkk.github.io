@@ -209,5 +209,3 @@
 /* konec ponoru: obraz se zavře do úplné černé */
 .void::after{content:"";position:absolute;inset:0;z-index:1;background:#000;pointer-events:none;opacity:clamp(0,calc((var(--dive,0) - .7)*3.4),1)}
 .no-gl.is-diving .void::after{opacity:1;transition:opacity .5s}
-/* na scéně je jméno už ve velkém nápisu kolem díry, malé logo by ho jen opakovalo */
-.void-on:not(.is-inside) .nav .brand{visibility:hidden}
