@@ -298,3 +298,96 @@
 
 .is-inside footer{border-top-color:var(--line);background:transparent}
 .is-inside #wipNote{background:rgba(10,8,18,.92);box-shadow:0 0 0 1px rgba(180,156,255,.25),0 20px 60px -20px rgba(0,0,0,.8)}
+
+/* =========================================================
+   Planetární soustava služeb (kreslí orbit.js)
+   Tři dráhy kolem malé černé díry; služby jsou planety v barvě své oblasti.
+   ========================================================= */
+.orbit{display:none}
+.is-inside .orbit{display:block;position:relative;padding:clamp(28px,4vw,48px) 0 clamp(40px,6vw,72px)}
+.orbit{--c-it:#b49cff;--c-pc:#8fb0ff;--c-web:#f0a8ff}
+.p-it{--c:var(--c-it)}.p-pc{--c:var(--c-pc)}.p-web{--c:var(--c-web)}
+.orbit-top{display:flex;flex-direction:column;align-items:flex-start}
+.is-inside .orbit-top .inside-out{margin-bottom:clamp(20px,3vw,32px)}
+.orbit-h{font-size:clamp(2.4rem,6.4vw,5rem);font-weight:800;font-stretch:125%;letter-spacing:-.025em;line-height:.98;text-shadow:0 0 50px rgba(150,100,255,.35)}
+.orbit-p{margin-top:14px;color:var(--muted);font-size:clamp(1rem,1.4vw,1.15rem);max-width:46ch}
+
+.orbit-stage{position:relative;height:clamp(380px,60vh,600px);margin-top:clamp(8px,2vw,24px);touch-action:manipulation}
+.orbit-rings{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.orbit-rings .ring{fill:none;stroke:rgba(190,170,255,.18);stroke-width:1}
+.orbit-rings .ring.front{stroke:rgba(200,180,255,.34)}
+.orbit-rings .ring-l{fill:var(--muted);font:600 .74rem/1 var(--f);letter-spacing:.06em}
+.orbit-rings g{z-index:2}
+.orbit-hole{position:absolute;left:50%;top:50%;z-index:3;width:var(--d,80px);height:var(--d,80px);translate:-50% -50%;border-radius:50%;pointer-events:none;
+  background:
+    radial-gradient(circle,#000 0 33%,rgba(240,232,255,.95) 36%,rgba(180,140,255,.55) 41%,rgba(120,80,255,.18) 52%,transparent 66%),
+    radial-gradient(ellipse 60% 10% at 50% 52%,rgba(220,200,255,.75),transparent 100%);
+  box-shadow:0 0 90px -10px rgba(140,90,255,.7)}
+
+/* planeta: koule se světlem z díry, popisek vedle */
+.planet{position:absolute;left:0;top:0;translate:-50% -50%;display:flex;align-items:center;gap:10px;padding:8px;margin:0;border:0;background:none;color:var(--ink);
+  cursor:pointer;font:inherit;opacity:var(--fade,1);will-change:transform}
+.planet .orb{--s:22px;width:var(--s);height:var(--s);border-radius:50%;flex:none;position:relative;
+  background:radial-gradient(circle at 34% 30%,#fff 0,color-mix(in srgb,var(--c) 70%,#fff) 18%,var(--c) 46%,color-mix(in srgb,var(--c) 30%,#000) 100%);
+  box-shadow:0 0 18px -2px var(--c),0 0 46px -8px var(--c);transition:transform .35s var(--ease),box-shadow .35s}
+.planet.p-pc .orb{--s:28px}
+.planet.p-web .orb{--s:24px}
+.planet .orb::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid transparent;transition:border-color .3s,inset .35s var(--ease)}
+.planet .lbl{font-size:.86rem;font-weight:600;white-space:nowrap;text-shadow:0 1px 10px #000,0 0 2px #000;transition:color .25s}
+.planet:hover .orb,.planet:focus-visible .orb{transform:scale(1.25);box-shadow:0 0 24px 0 var(--c),0 0 70px -6px var(--c)}
+.planet:focus-visible{outline:none}
+.planet:focus-visible .orb::after,.planet.on .orb::after{border-color:var(--c);inset:-9px}
+.planet.on .lbl{color:var(--c)}
+/* služba v košíku: kolem planety drobný měsíc */
+.planet.in .orb::before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;right:-6px;top:-4px;box-shadow:0 0 10px #fff}
+
+/* karta služby: vpravo vedle soustavy, na telefonu jako list zespodu */
+.orbit-card{position:absolute;z-index:6;right:max(16px,calc((100vw - var(--wrap))/2 + var(--gut)));top:clamp(180px,24vw,250px);width:min(380px,calc(100% - 32px));
+  padding:26px 24px 20px;border-radius:24px;background:rgba(14,10,26,.78);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 40%,transparent),0 30px 80px -30px color-mix(in srgb,var(--c) 70%,transparent)}
+@media (prefers-reduced-motion:no-preference){.orbit-card:not([hidden]){animation:cardIn .45s var(--ease)}}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px) scale(.98)}}
+.oc-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.06);cursor:pointer;color:var(--ink)}
+.oc-x::before,.oc-x::after{content:"";position:absolute;left:11px;right:11px;top:50%;height:1.5px;background:currentColor;transform:rotate(45deg)}
+.oc-x::after{transform:rotate(-45deg)}
+.oc-x:hover{background:rgba(255,255,255,.12)}
+.oc-area{margin:0;font-size:.8rem;font-weight:650;color:var(--c)}
+.oc-h{margin-top:6px;padding-right:36px;font-size:1.5rem;font-weight:800;font-stretch:118%;letter-spacing:-.015em;line-height:1.1}
+.oc-tag{display:inline-block;margin-top:10px;font-size:.72rem;font-weight:650;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.oc-d{margin-top:12px;color:var(--muted);font-size:.96rem}
+.orbit-card .buy{margin-top:20px;justify-content:space-between;width:100%}
+.orbit-card .buy .pr{font-size:1.15rem}
+.oc-nav{display:flex;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.oc-nav button{border:0;background:none;color:var(--muted);font:inherit;font-size:.88rem;cursor:pointer;padding:6px 0}
+.oc-nav button:hover{color:var(--ink)}
+
+/* lišta košíku pod soustavou */
+.orbit-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px;margin-top:clamp(8px,2vw,20px)}
+.orbit-bar{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;min-height:60px;padding:10px 10px 10px 22px;border-radius:999px;
+  background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .4s}
+.orbit-bar.full{box-shadow:inset 0 0 0 1px rgba(190,170,255,.4),0 0 50px -20px rgba(150,100,255,.7)}
+.ob-dots{display:flex;gap:6px}
+.ob-dots i{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.ob-t{font-size:.95rem}
+.ob-t span{color:var(--muted);margin-left:6px}
+.ob-empty{color:var(--muted);padding-right:12px}
+.ob-go{display:inline-flex;align-items:center;min-height:44px;padding:0 1.3em;border-radius:999px;background:var(--ink);color:#000;text-decoration:none;font-weight:650;font-size:.95rem}
+.ob-go:hover{box-shadow:0 0 40px -6px var(--violet-glow)}
+.orbit-list{color:var(--muted);font-size:.92rem;text-decoration:none;border-bottom:1px solid var(--line);padding:4px 0}
+.orbit-list:hover{color:var(--ink);border-color:var(--ink)}
+
+@media (max-width:760px){
+  .orbit-stage{height:clamp(320px,52vh,440px)}
+  .planet .lbl{display:none}
+  .planet.on .lbl{display:block;position:absolute;left:50%;top:100%;translate:-50% 0;font-size:.78rem}
+  .orbit-card{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;border-radius:24px 24px 0 0;
+    padding:22px max(18px,env(safe-area-inset-left,0px)) calc(18px + env(safe-area-inset-bottom,0px));max-height:70vh;overflow:auto}
+  .orbit-bar{border-radius:20px;width:100%}
+}
+.is-inside .services{border-top:1px solid var(--line)}
+/* otevřená karta: soustava uhne doleva, ať karta nezakrývá planety */
+@media (min-width:761px){
+  .orbit-stage{transition:transform .7s var(--ease)}
+  .orbit-stage.has-card{transform:translateX(-9%)}
+}
+@media (max-width:760px){ .orbit-rings .ring-l{display:none} }

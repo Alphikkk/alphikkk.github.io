@@ -37,7 +37,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/home.css?v=34">
+<link rel="stylesheet" href="/assets/home.css?v=37">
 <script>document.documentElement.classList.add('void-on')</script>
 <script type="application/ld+json">
 {
@@ -273,14 +273,26 @@
     <div class="void-ui">
       <h1 class="void-h" id="void-h"><span class="sr-only">Corphik – </span><span data-i18n="v.h">IT support, custom PCs and websites.</span></h1>
       <p class="void-p" data-i18n="v.p">In person around Prague, remotely across Europe.</p>
-      <a class="void-go" id="voidGo" href="#sluzby"><span data-i18n="v.go">What I offer</span></a>
+      <a class="void-go" id="voidGo" href="#orbit"><span data-i18n="v.go">What I offer</span></a>
     </div>
   </section>
   <div class="inside" id="inside" tabindex="-1">
+  <section class="orbit" id="orbit" aria-labelledby="orbit-h">
+    <div class="wrap orbit-top">
+      <button class="inside-out" type="button" data-out><span data-i18n="v.out">Back to the black hole</span></button>
+      <h2 class="orbit-h" id="orbit-h" data-i18n="o2.h">Pick a service.</h2>
+      <p class="orbit-p" data-i18n="o2.p">Everything I do orbits around your computer. Click a planet.</p>
+    </div>
+    <div class="orbit-stage" id="orbitStage"></div>
+    <aside class="orbit-card" id="orbitCard" aria-live="polite" hidden></aside>
+    <div class="orbit-foot wrap">
+      <div class="orbit-bar" id="orbitBar"></div>
+      <a class="orbit-list" href="#sluzby" data-i18n="o2.list">Or see everything as a list</a>
+    </div>
+  </section>
 
   <section class="services" id="sluzby">
     <div class="wrap">
-      <button class="inside-out" type="button" data-out><span data-i18n="v.out">Back to the black hole</span></button>
       <div class="svc-head">
         <h2 class="big-h" data-i18n="s.big">Everything your computer needs. In one place.</h2>
         <nav class="svc-index" id="svcIndex" aria-label="Service areas"><ol><li><a href="#obl-it"><span class="n">01</span> <span class="t">IT support</span> <span class="c">3 services</span></a></li><li><a href="#obl-pc"><span class="n">02</span> <span class="t">PC engineering</span> <span class="c">2 services</span></a></li><li><a href="#obl-web"><span class="n">03</span> <span class="t">Web development</span> <span class="c">2 services</span></a></li></ol></nav>
@@ -331,6 +343,7 @@
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
 <script src="/assets/app.js?v=33"></script>
-<script src="/assets/void.js?v=7"></script>
+<script src="/assets/orbit.js?v=2"></script>
+<script src="/assets/void.js?v=8"></script>
 </body>
 </html>

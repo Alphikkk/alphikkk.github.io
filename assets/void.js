@@ -17,7 +17,7 @@ if(!voidEl || !cv) return;
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const COARSE = matchMedia('(pointer: coarse)').matches;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-const INSIDE_HASH = /^#(sluzby|prace|kontakt|obl-|svc-)/;
+const INSIDE_HASH = /^#(orbit|sluzby|prace|kontakt|obl-|svc-)/;
 
 /* ---------- Přepínání mezi scénou a obsahem „uvnitř“ ---------- */
 let inside = false, diving = false;
@@ -61,8 +61,8 @@ let dive = 0, diveFrom = -1;
 go && go.addEventListener('click', e => {
   e.preventDefault();
   if(diving || inside) return;
-  history.pushState(null, "", "#sluzby");
-  if(!gl || REDUCE){ root.classList.add('is-diving'); setTimeout(() => openInside("#sluzby"), REDUCE ? 250 : 500); return; }
+  history.pushState(null, "", "#orbit");
+  if(!gl || REDUCE){ root.classList.add('is-diving'); setTimeout(() => openInside("#orbit"), REDUCE ? 250 : 500); return; }
   diving = true; diveFrom = -1; root.classList.add('is-diving'); start();
 });
 
@@ -279,7 +279,7 @@ function frame(now){
   if(diving){
     if(diveFrom < 0) diveFrom = now;
     dive = clamp((now - diveFrom)/1700);
-    if(dive >= 1){ openInside("#sluzby"); return; }
+    if(dive >= 1){ openInside("#orbit"); return; }
   }
   const dv = easeIn(dive);
   const portrait = innerHeight > innerWidth;
