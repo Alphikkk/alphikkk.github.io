@@ -7,6 +7,12 @@ const EMAIL = "ales@corphik.eu";
 /* Volitelné: klíč z web3forms.com – pak se objednávky odesílají rovnou na tvůj e-mail.
    Když je prázdný, objednávka se dokončí odesláním z e-mailu zákazníka. */
 const WEB3FORMS_KEY = "2d1be97d-5752-427f-bbf3-e49d1acd0b37";
+/* Volitelné: návštěvnost z umami.is (zdarma, bez cookies, takže bez cookie lišty).
+   Na cloud.umami.is si založ web a sem vlož jeho „Website ID“; prázdné = nic se neměří.
+   Kromě návštěv se měří i kroky na úvodu: průlet, výběr, zobrazené služby, košík, poptávky. */
+const UMAMI_ID = "";
+if(UMAMI_ID){ const u = document.createElement('script'); u.defer = true; u.src = "https://cloud.umami.is/script.js"; u.dataset.websiteId = UMAMI_ID; document.head.appendChild(u); }
+function track(name, data){ try{ if(window.umami) window.umami.track(name, data); }catch(_){} }
 
 /* ===== SLUŽBY A CENY – uprav podle sebe (remote:true = jde i na dálku) =====
    tag:"partial" = štítek „Částečně na dálku“, tag:false = štítek se nezobrazí (služba jde na dálku dál)
@@ -285,6 +291,29 @@ Object.assign(T.cs,{"bh.open":"Otevřít rozcestník","bh.close":"Zavřít rozce
 Object.assign(T.en,{"bh.open":"Open quick navigation","bh.close":"Close quick navigation","pf.more":"See the full portfolio"});
 Object.assign(T.es,{"bh.open":"Abrir navegación rápida","bh.close":"Cerrar navegación rápida","pf.more":"Ver todo el portafolio"});
 
+/* ===== Úvodní scéna s černou dírou (void.js) ===== */
+Object.assign(T.cs,{"nf.p":"Tahle stránka spadla do černé díry.","ft.privacy": "Ochrana osobních údajů", "w.note": "Údaje použiju jen k odpovědi na tvou poptávku."});
+Object.assign(T.cs,{"pf.want.pc": "Chci podobný počítač", "pf.want.ap": "Chci podobný web", "pf.want.tj": "Chci vlastní aplikaci", "pf.lead2": "Weby, aplikace a počítače, které jsem postavil. Líbí se ti něco? Udělám ti podobné.", "pf.cta.h": "Máš nápad? Napiš mi.", "pf.cta.go": "Napsat mi"});
+Object.assign(T.cs,{"w.sub": "Vyber, co potřebuješ, a pošli. Nebo mi rovnou napiš, ozvu se co nejdřív.", "w.side": "Napiš mi"});
+Object.assign(T.cs,{"w.q": "S čím ti mám pomoct?", "w.q1": "Něco nefunguje", "w.q1d": "Počítač nejde zapnout, padá nebo je pomalý", "w.q2": "Chci nový nebo rychlejší počítač", "w.q2d": "Sestavení na míru nebo upgrade", "w.q3": "Potřebuju web nebo doménu", "w.q3d": "Redesign webu, DNS a e-mail", "w.q4": "Nevím, poraď mi", "w.q4d": "Napiš pár vět a ozvu se", "w.t1": "Cenu potvrdím předem", "w.t2": "Osobně v Praze, na dálku kdekoli", "w.t3": "Ozvu se co nejdřív", "w.more": "Nebo scrolluj a projdi všech 7 služeb.", "w.ask": "Zeptat se na tohle", "w.fh": "Pojďme to probrat.", "w.fp": "Napiš pár vět. Ozvu se ti co nejdřív, nezávazně.", "w.fn": "Jméno", "w.fc": "E-mail nebo telefon", "w.fm": "S čím potřebuješ pomoct?", "w.fs": "Odeslat zprávu", "w.ok": "Díky! Zpráva je odeslaná, ozvu se co nejdřív.", "w.err": "Vyplň prosím kontakt a zprávu.", "w.pre": "Mám zájem o: ", "w.cart": "Ve tvém košíku", "w.subj": "Dotaz z webu"});
+Object.assign(T.cs,{"w.h":"Co nabízím.","w.p":"Sedm služeb ve třech oblastech. Scrolluj a leť dál.","w.end":"Konec cesty.","w.mail":"Nebo mi rovnou napiš:","w.empty":"Košík je zatím prázdný.","w.again":"Proletět služby znovu"});
+Object.assign(T.cs,{"o2.h":"Vyber si službu.","o2.p":"Všechno, co dělám, obíhá kolem tvého počítače. Klikni na planetu.","o2.list":"Nebo všechno přehledně","o2.close":"Zavřít","o2.prev":"Předchozí","o2.next":"Další","o2.one":"služba","o2.few":"služby","o2.many":"služeb","o2.from":"orientačně od","o2.go":"Dokončit objednávku","o2.empty":"Košík je zatím prázdný. Vyber planetu a přidej službu."});
+Object.assign(T.cs,{"v.out":"Zpět k černé díře","v.h":"IT podpora, počítače na míru a weby.","v.p":"Osobně v Praze a okolí, na dálku po celé Evropě.","v.go":"Co nabízím"});
+Object.assign(T.en,{"nf.p":"This page fell into a black hole.","ft.privacy": "Privacy policy", "w.note": "I'll only use your details to reply to your request."});
+Object.assign(T.en,{"pf.want.pc": "I want a PC like this", "pf.want.ap": "I want a site like this", "pf.want.tj": "I want my own app", "pf.lead2": "Websites, apps and computers I've built. Like something? I'll make you one too.", "pf.cta.h": "Got an idea? Write to me.", "pf.cta.go": "Write to me"});
+Object.assign(T.en,{"w.sub": "Pick what you need and send it. Or just write to me, I'll reply as soon as I can.", "w.side": "Write to me"});
+Object.assign(T.en,{"w.q": "How can I help?", "w.q1": "Something isn't working", "w.q1d": "PC won't start, crashes or runs slow", "w.q2": "I want a new or faster PC", "w.q2d": "Custom build or upgrade", "w.q3": "I need a website or domain", "w.q3d": "Website redesign, DNS and email", "w.q4": "Not sure, advise me", "w.q4d": "Write a few lines and I'll get back to you", "w.t1": "Price confirmed up front", "w.t2": "In person in Prague, remotely anywhere", "w.t3": "I'll reply as soon as I can", "w.more": "Or scroll to see all 7 services.", "w.ask": "Ask about this", "w.fh": "Let's talk it through.", "w.fp": "Write a few lines. I'll get back to you as soon as I can, no strings attached.", "w.fn": "Name", "w.fc": "Email or phone", "w.fm": "What do you need help with?", "w.fs": "Send message", "w.ok": "Thanks! Your message is on its way. I'll reply as soon as I can.", "w.err": "Please fill in your contact and message.", "w.pre": "I'm interested in: ", "w.cart": "In your cart", "w.subj": "Question from the website"});
+Object.assign(T.en,{"w.h":"What I offer.","w.p":"Seven services in three areas. Scroll to fly on.","w.end":"End of the journey.","w.mail":"Or just email me:","w.empty":"Your cart is empty for now.","w.again":"Fly through the services again"});
+Object.assign(T.en,{"o2.h":"Pick a service.","o2.p":"Everything I do orbits around your computer. Click a planet.","o2.list":"Or see everything as a list","o2.close":"Close","o2.prev":"Previous","o2.next":"Next","o2.one":"service","o2.few":"services","o2.many":"services","o2.from":"estimated from","o2.go":"Finish your order","o2.empty":"Your cart is empty. Pick a planet and add a service."});
+Object.assign(T.en,{"v.out":"Back to the black hole","v.h":"IT support, custom PCs and websites.","v.p":"In person around Prague, remotely across Europe.","v.go":"What I offer"});
+Object.assign(T.es,{"nf.p":"Esta página cayó en un agujero negro.","ft.privacy": "Política de privacidad", "w.note": "Solo usaré tus datos para responder a tu solicitud."});
+Object.assign(T.es,{"pf.want.pc": "Quiero un PC así", "pf.want.ap": "Quiero una web así", "pf.want.tj": "Quiero mi propia app", "pf.lead2": "Webs, apps y ordenadores que he hecho. ¿Te gusta algo? Te hago uno parecido.", "pf.cta.h": "¿Tienes una idea? Escríbeme.", "pf.cta.go": "Escríbeme"});
+Object.assign(T.es,{"w.sub": "Elige lo que necesitas y envíalo. O escríbeme directamente, respondo lo antes posible.", "w.side": "Escríbeme"});
+Object.assign(T.es,{"w.q": "¿En qué te ayudo?", "w.q1": "Algo no funciona", "w.q1d": "El PC no arranca, se cuelga o va lento", "w.q2": "Quiero un PC nuevo o más rápido", "w.q2d": "Montaje a medida o mejora", "w.q3": "Necesito una web o un dominio", "w.q3d": "Rediseño web, DNS y correo", "w.q4": "No lo sé, aconséjame", "w.q4d": "Escribe unas líneas y te respondo", "w.t1": "Precio confirmado de antemano", "w.t2": "En persona en Praga, a distancia en cualquier lugar", "w.t3": "Respondo lo antes posible", "w.more": "O haz scroll para ver los 7 servicios.", "w.ask": "Preguntar por esto", "w.fh": "Hablemos.", "w.fp": "Escribe unas líneas. Te respondo lo antes posible, sin compromiso.", "w.fn": "Nombre", "w.fc": "Correo o teléfono", "w.fm": "¿Con qué necesitas ayuda?", "w.fs": "Enviar mensaje", "w.ok": "¡Gracias! Mensaje enviado. Te respondo lo antes posible.", "w.err": "Rellena el contacto y el mensaje.", "w.pre": "Me interesa: ", "w.cart": "En tu carrito", "w.subj": "Consulta desde la web"});
+Object.assign(T.es,{"w.h":"Qué ofrezco.","w.p":"Siete servicios en tres áreas. Haz scroll para seguir volando.","w.end":"Fin del viaje.","w.mail":"O escríbeme directamente:","w.empty":"Tu carrito está vacío por ahora.","w.again":"Volver a recorrer los servicios"});
+Object.assign(T.es,{"o2.h":"Elige un servicio.","o2.p":"Todo lo que hago gira alrededor de tu ordenador. Haz clic en un planeta.","o2.list":"O míralo todo en una lista","o2.close":"Cerrar","o2.prev":"Anterior","o2.next":"Siguiente","o2.one":"servicio","o2.few":"servicios","o2.many":"servicios","o2.from":"aprox. desde","o2.go":"Terminar el pedido","o2.empty":"Tu carrito está vacío. Elige un planeta y añade un servicio."});
+Object.assign(T.es,{"v.out":"Volver al agujero negro","v.h":"Soporte informático, PCs a medida y webs.","v.p":"En persona en Praga y alrededores, a distancia en toda Europa.","v.go":"Qué ofrezco"});
+
 /* ===== Košík ===== */
 Object.assign(T.cs,{
   "h.seo":"Corphik – IT podpora a stavba PC na míru",
@@ -515,6 +544,7 @@ function langFromLocation(){
 /* logo Tandjo v černobílé verzi (bílé písmo na černé, stejné proporce jako původní barevné) */
 const TJLOGO="data:image/webp;base64,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";
 /* ===== PORTFOLIO – přidávej projekty (img: "" = automatický náhled, nebo vlož odkaz/data obrázku) ===== */
+const PF_WANT = {pc: "svc-build", ap: "svc-web", tj: "w-ask"};
 const PORTFOLIO = [
  { cat:"web", pv:"tj", img:"", url:"", wip:true,
    title:{cs:"Tandjo",en:"Tandjo",es:"Tandjo"},
@@ -637,8 +667,8 @@ function caseVisual(p, n){
   if(p.pv==="pc") return `<div class="pf-gallery">${PF_PHOTOS.pc.map((ph,i)=>pfFig(ph, n+"."+(i+1))).join("")}`
     + `<dl class="pf-specs">${[...PF_SPECS.pc.map(([k,v])=>[t(k),v]), [t("pf.use"), t("pf.useGaming")]].map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl></div>`;
   if(p.pv==="ap") return `<div class="pf-device"><div class="pf-browser"><div class="pf-bar" aria-hidden="true"><i></i><i></i><i></i><span>corphik.eu</span></div>`
-    + `<img src="/assets/img/pf-web-desktop.webp" alt="${esc(t("pf.alt.webD"))}" width="1280" height="1010" loading="lazy" decoding="async"></div>`
-    + `<div class="pf-phone"><img src="/assets/img/pf-web-mobile.webp" alt="${esc(t("pf.alt.webM"))}" width="520" height="1125" loading="lazy" decoding="async"></div></div>`;
+    + `<img src="/assets/img/pf-web-desktop.webp?v=2" alt="${esc(t("pf.alt.webD"))}" width="1280" height="1010" loading="lazy" decoding="async"></div>`
+    + `<div class="pf-phone"><img src="/assets/img/pf-web-mobile.webp?v=2" alt="${esc(t("pf.alt.webM"))}" width="520" height="1125" loading="lazy" decoding="async"></div></div>`;
   if(p.pv==="tj") return `<div class="pf-logo"><img src="${TJLOGO}" alt="" width="400" height="400"></div>`;
   return p.img ? `<div class="pf-media"><img src="${esc(p.img)}" alt="" loading="lazy"></div>` : preview(p);
 }
@@ -672,6 +702,8 @@ function renderPortfolio(){
       + `<h2 class="case-t">${esc(p.title[lang])}</h2><p class="case-d">${esc(p.desc[lang])}</p>`
       + (facts.length ? `<dl class="case-facts">${facts.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>` : "")
       + (p.url ? `<a class="btn case-link" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(t("pf.view"))}</a>` : "")
+      /* poptávka: „chci něco podobného“ vede na úvodu rovnou na službu (nebo do zprávy) */
+      + (PF_WANT[p.pv] ? `<a class="case-want" href="${inLang("/")}#${PF_WANT[p.pv]}">${esc(t("pf.want." + p.pv))}</a>` : "")
       + `</div><div class="case-visual">${caseVisual(p, n)}</div></article>`;
   }).join("");
   /* odkaz /portfolio/#pf-xx z úvodu: karty vznikají až skriptem, tak k nim doskroluj po prvním vykreslení */
@@ -877,8 +909,9 @@ function refreshCheckout(){ renderSummary(); updateRules(); renderReview(); }
 function renderCheckout(){
   if(!$('ckPick')) return;
   /* starší odkazy /orders/?service=xxx přidají službu do košíku */
-  const p = new URLSearchParams(location.search).get('service');
-  if(p && !urlServiceAdded && (p==="other" || findService(p))){ urlServiceAdded = true; const c = getCart(); if(!c.includes(p)) setCart([...c, p]); }
+  /* víc služeb najednou čárkou: ?service=build,web */
+  const ps = (new URLSearchParams(location.search).get('service') || "").split(",").filter(p => p==="other" || findService(p));
+  if(ps.length && !urlServiceAdded){ urlServiceAdded = true; const c = getCart(); setCart([...c, ...ps.filter(p => !c.includes(p))]); }
   $('ckMsg').placeholder = t("ck.msgPh");
   $('ckWhen').placeholder = t("ck.whenPh");
   renderPick(); renderOpts(); refreshCheckout();
@@ -1106,7 +1139,10 @@ if(revealEls.length){
 }
 
 /* ===== Upozornění „Web je ve výstavbě“ (všechny stránky, dá se zavřít) ===== */
+/* oznámení „web je ve výstavbě“: vypnuté, web je hotový (true = znovu zobrazit) */
+const SHOW_WIP = false;
 function renderWip(){
+  if(!SHOW_WIP){ const n = $('wipNote'); if(n) n.remove(); return; }
   let box = $('wipNote');
   let closed = false; try{ closed = sessionStorage.getItem('wipClosed')==="1"; }catch(_){}
   if(closed){ if(box) box.remove(); return; }

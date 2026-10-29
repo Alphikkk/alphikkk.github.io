@@ -164,3 +164,123 @@ a.tj{color:inherit;text-decoration:none;position:relative;transition:transform .
 a.tj:hover{transform:translateY(-3px)}
 .tj-go{margin-left:auto;align-self:center;font-weight:600;font-size:.92rem;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
 @media (max-width:640px){a.tj{flex-wrap:wrap}.tj-go{margin-left:0}}
+
+/* =========================================================
+   Portfolio ve vesmíru (html.space): stejný svět jako služby na úvodu
+   Vždy tmavé, hvězdy v pohybu (sky.js), záře shora; každý projekt je skleněný panel
+   v barvě své oblasti (PC modrá, web růžová, aplikace fialová) a končí výzvou „chci podobné“.
+   ========================================================= */
+.space .nav .theme{display:none}
+.space body::after{content:"";position:fixed;left:0;right:0;top:0;height:60vh;z-index:-1;pointer-events:none;
+  background:radial-gradient(70% 70% at 50% 0%,rgba(140,90,255,.26),rgba(90,60,200,.08) 55%,transparent 80%)}
+.space .pf-filter,.space .pf-index{display:none}
+.space .pf-head{grid-template-columns:minmax(0,1fr)}
+.space .pf-head h1{text-shadow:0 0 60px rgba(150,100,255,.4)}
+.space .pf-lead{max-width:44ch}
+.space .cases{gap:clamp(40px,6vw,72px);padding-top:clamp(28px,4vw,48px)}
+.space .case{--c:#b49cff;position:relative;padding:clamp(20px,3.4vw,44px);border:0;border-radius:clamp(24px,3vw,36px);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--c) 12%,transparent),rgba(255,255,255,.015) 50%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 26%,transparent),0 60px 120px -60px color-mix(in srgb,var(--c) 55%,transparent)}
+.space .case-pc{--c:#8fb0ff}
+.space .case-ap{--c:#f0a8ff}
+.space .case-tj{--c:#b49cff}
+.space .case-k{color:var(--c)}
+.space .case-n{color:var(--c)}
+.space .case-n::after{background:color-mix(in srgb,var(--c) 50%,transparent)}
+.space .case-t{text-shadow:0 0 40px color-mix(in srgb,var(--c) 40%,transparent)}
+.space .case-facts,.space .case-facts div{border-color:var(--line)}
+.space .pf-media{background:rgba(255,255,255,.04)}
+.space .pf-specs{border-top-color:color-mix(in srgb,var(--c) 50%,transparent)}
+.space .pf-browser{background:#000;border-color:color-mix(in srgb,var(--c) 30%,transparent);box-shadow:0 40px 90px -40px color-mix(in srgb,var(--c) 50%,transparent)}
+.space .pf-bar{background:rgba(255,255,255,.04)}
+.space .pf-bar span{background:#000}
+.space .pf-phone{border-color:#050308;background:#000;outline-color:color-mix(in srgb,var(--c) 30%,transparent)}
+/* „Chci podobný…“: hlavní výzva projektu, s hvězdou z loga */
+.case-want{display:inline-flex;align-items:center;gap:10px;min-height:52px;margin-top:28px;padding:0 1.5em;border-radius:999px;
+  background:var(--ink);color:#000;text-decoration:none;font-weight:700;transition:box-shadow .3s,transform .2s var(--ease)}
+.case-want::before{content:"";width:16px;height:16px;flex:none;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1c1 10 5 14 15 15-10 1-14 5-15 15-1-10-5-14-15-15 10-1 14-5 15-15z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1c1 10 5 14 15 15-10 1-14 5-15 15-1-10-5-14-15-15 10-1 14-5 15-15z'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform .5s var(--ease)}
+.case-want:hover{box-shadow:0 0 46px -6px var(--c,#b49cff)}
+.case-want:hover::before{transform:rotate(90deg) scale(1.15)}
+.case-want:active{transform:scale(.98)}
+.space .case-pc .case-want{grid-column:1;justify-self:start}
+/* závěrečná výzva: tmavý panel s malou černou dírou místo bílého */
+.space .end-cta .wrap>div{position:relative;overflow:hidden;color:var(--ink);
+  background:radial-gradient(120% 90% at 50% 0%,rgba(130,80,255,.2),transparent 60%),rgba(255,255,255,.02);box-shadow:inset 0 0 0 1px rgba(180,156,255,.2)}
+.space .end-cta .bh{display:none}
+.cta-bh{width:min(100%,300px);height:auto;margin-bottom:18px;
+  -webkit-mask:radial-gradient(ellipse closest-side,#000 72%,transparent);mask:radial-gradient(ellipse closest-side,#000 72%,transparent)}
+.space .end-cta p{color:var(--muted);opacity:1}
+.space .end-cta .btn{background:var(--ink);color:#000;border-color:var(--ink)}
+.space .end-cta .btn:hover{opacity:1;box-shadow:0 0 40px -6px var(--violet-glow)}
+.space footer{background:transparent}
+
+/* =========================================================
+   O mně ve vesmíru (html.space): černá díra místo čárového znaku,
+   skleněné karty v barvách oblastí, cesta jako dráha s hvězdou „teď“
+   ========================================================= */
+.space .block{border-top:0}
+.space .ab-hero h1{text-shadow:0 0 60px rgba(150,100,255,.4)}
+.space .ab-role{color:#b49cff}
+.space .ab-links .btn.primary{background:var(--ink);color:#000;border-color:var(--ink)}
+.space .ab-links .btn.primary:hover{opacity:1;box-shadow:0 0 44px -6px var(--violet-glow)}
+.space .ab-links .btn:not(.primary){border-color:rgba(214,196,255,.45)}
+.space .ab-links .btn:not(.primary):hover{border-color:#b49cff;box-shadow:0 0 30px -8px var(--violet-glow)}
+/* černá díra: snímek skutečné díry z úvodu (stejný shader), okraje se rozplynou do pozadí */
+.ab-bh{justify-self:center;width:min(100%,460px);height:auto;
+  -webkit-mask:radial-gradient(ellipse closest-side,#000 72%,transparent);mask:radial-gradient(ellipse closest-side,#000 72%,transparent)}
+@media (prefers-reduced-motion:no-preference){ .ab-bh{animation:ahPulse 7s ease-in-out infinite} }
+@keyframes ahPulse{50%{transform:scale(1.03);filter:brightness(1.12)}}
+@media (max-width:760px){ .ab-bh{order:-1;justify-self:start;width:240px;margin-left:-20px} }
+/* co dělám: tři skleněné karty v barvě oblasti */
+.space .pillars article{--c:#b49cff;border:0;background:linear-gradient(150deg,color-mix(in srgb,var(--c) 13%,transparent),rgba(255,255,255,.015) 55%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 28%,transparent)}
+.space .pillars article.w-web{--c:#f0a8ff}.space .pillars article.w-pc{--c:#8fb0ff}.space .pillars article.w-it{--c:#b49cff}
+.space .pillars article:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px var(--c),0 30px 70px -30px var(--c)}
+.space .pillars .ic{border:0;color:var(--c);background:radial-gradient(circle,color-mix(in srgb,var(--c) 22%,transparent),transparent 72%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 35%,transparent)}
+.space .ab-do-h .btn{border-color:rgba(214,196,255,.45)}
+/* příběh a cesta: tečky na dráze, „teď“ jako hvězda z loga */
+.space .ab-quote strong{color:#d9cfff;text-shadow:0 0 30px rgba(150,100,255,.5)}
+.space .route ol::before{background:linear-gradient(90deg,rgba(180,156,255,.15),rgba(180,156,255,.6))}
+.space .route li::before{background:#000;border-color:rgba(180,156,255,.6)}
+.space .route li.now::before{width:18px;height:18px;top:-2px;border:0;border-radius:0;background:#d9cfff;filter:drop-shadow(0 0 8px #b49cff);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1c1 10 5 14 15 15-10 1-14 5-15 15-1-10-5-14-15-15 10-1 14-5 15-15z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1c1 10 5 14 15 15-10 1-14 5-15 15-1-10-5-14-15-15 10-1 14-5 15-15z'/%3E%3C/svg%3E") center/contain no-repeat}
+.space .route li.now h3{color:#d9cfff}
+@media (max-width:760px){ .space .route li.now::before{left:-35px;top:1px} }
+/* Tandjo, vzdělávání, záliby: skleněné plochy */
+.space .tj{background:linear-gradient(150deg,rgba(180,156,255,.12),rgba(255,255,255,.015) 55%);box-shadow:inset 0 0 0 1px rgba(180,156,255,.28)}
+.space .tj:hover{box-shadow:inset 0 0 0 1px #b49cff,0 30px 70px -30px rgba(150,100,255,.7)}
+.space .pill{background:#000;border-color:rgba(180,156,255,.35)}
+.space .pill i{background:#b49cff;box-shadow:0 0 8px #b49cff}
+.space .goal{border:0;background:linear-gradient(150deg,rgba(143,176,255,.14),rgba(255,255,255,.015) 60%);box-shadow:inset 0 0 0 1px rgba(143,176,255,.35)}
+.space .goal b{color:#c9d8ff}
+.space .list{border-top-color:rgba(180,156,255,.35)}
+.space .hob>div{border:0;background:rgba(255,255,255,.03);box-shadow:inset 0 0 0 1px var(--line)}
+
+/* ---------- Ochrana osobních údajů: čitelný text v jednom sloupci ---------- */
+.priv{max-width:820px;padding-top:clamp(48px,8vw,104px);padding-bottom:clamp(56px,8vw,96px)}
+.priv-head h1{font-size:clamp(2.4rem,7vw,4.6rem);line-height:.95;text-shadow:0 0 60px rgba(150,100,255,.4)}
+.priv-lead{margin-top:18px;color:var(--muted);font-size:clamp(1.05rem,1.6vw,1.2rem);max-width:52ch}
+.priv-valid{margin-top:10px;color:var(--muted);font-size:.85rem}
+.priv-sec{margin-top:clamp(36px,5vw,56px);padding-top:clamp(24px,3vw,32px);border-top:1px solid rgba(180,156,255,.25)}
+.priv-sec h2{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-bottom:16px}
+.priv-sec p{line-height:1.65;max-width:68ch}
+.priv-sec p+p{margin-top:.9em}
+.priv-sec a{color:var(--ink);text-underline-offset:3px}
+.priv-dl{margin:0 0 16px}
+.priv-dl div{display:grid;grid-template-columns:minmax(8rem,11rem) minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.priv-dl dt{color:#b49cff;font-weight:650;font-size:.92rem}
+.priv-dl dd{margin:0;line-height:1.6}
+@media (max-width:560px){.priv-dl div{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- 404: stránka spadla do černé díry ---------- */
+.space .thanks{display:flex;flex-direction:column;align-items:center;text-align:center;padding-block:clamp(56px,10vw,120px)}
+.nf-bh{width:min(100%,420px);height:auto;-webkit-mask:radial-gradient(ellipse closest-side,#000 72%,transparent);mask:radial-gradient(ellipse closest-side,#000 72%,transparent)}
+.space .thanks h1{font-size:clamp(4rem,14vw,9rem);line-height:.9;text-shadow:0 0 60px rgba(150,100,255,.45)}
+.nf-p{margin-top:16px;font-size:clamp(1.1rem,2vw,1.35rem);font-weight:650}
+.space .thanks .lead{margin-top:8px;color:var(--muted);font-size:.95rem}
+.space .thanks .btn{margin-top:28px;background:var(--ink);color:#000;border-color:var(--ink)}

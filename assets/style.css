@@ -3,6 +3,15 @@
    Monochromatický styl podle loga: černá, bílá, šedá dráha a hvězda.
    ========================================================= */
 
+/* Písmo Archivo (licence SIL OFL, assets/fonts/OFL.txt) je přímo na webu, ne z Google Fonts:
+   prohlížeč návštěvníka tak kvůli písmu nekontaktuje Google (GDPR). */
+@font-face{font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;
+  src:url(/assets/fonts/archivo-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;
+  src:url(/assets/fonts/archivo-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
 :root{
   --bg:#ffffff;
   --ink:#000000;
@@ -128,7 +137,7 @@ p{margin:0}
   .brand img{height:18px}
   .tools{gap:6px}
   .lang button{padding:6px 7px}
-  .nav .cta [data-i18n]{display:none}
+  .nav .cta [data-i18n]{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
   .nav .cta::before{margin-right:0}
 }
 @media (max-width:380px){ .brand img{height:15px} .lang button{padding:6px 6px} .tools{gap:5px} .nav .cta{padding:0 9px} .cnt{margin-left:6px} }
@@ -345,3 +354,6 @@ footer a:hover{text-decoration:underline;text-underline-offset:3px}
 .sum-list li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.95rem}
 .sum-list b{white-space:nowrap;font-stretch:112%}
 .sum-list:empty{display:none}
+/* odkaz na ochranu osobních údajů v patičce */
+.foot-meta .pv-link{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.foot-meta .pv-link:hover{color:var(--ink)}
