@@ -60,19 +60,19 @@ ES: Soporte informático para particulares, estudiantes y pequeñas empresas en 
 - [Úvod a služby](https://corphik.eu/)
 - [Portfolio](https://corphik.eu/portfolio/)
 - [O mně](https://corphik.eu/about/)
-- [Poptávka](https://corphik.eu/orders/)
+- [Poptávka](https://corphik.eu/#w-ask)
 
 ### English (EN)
 - [Home and services](https://corphik.eu/en/)
 - [Portfolio](https://corphik.eu/en/portfolio/)
 - [About me](https://corphik.eu/en/about/)
-- [Request a service](https://corphik.eu/en/orders/)
+- [Request a service](https://corphik.eu/en/#w-ask)
 
 ### Español (ES)
 - [Inicio y servicios](https://corphik.eu/es/)
 - [Portafolio](https://corphik.eu/es/portfolio/)
 - [Sobre mí](https://corphik.eu/es/about/)
-- [Solicitar un servicio](https://corphik.eu/es/orders/)
+- [Solicitar un servicio](https://corphik.eu/es/#w-ask)
 
 Sitemap: https://corphik.eu/sitemap.xml
 

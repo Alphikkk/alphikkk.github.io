@@ -209,7 +209,8 @@
 .work-card p{margin-top:6px;color:var(--muted);font-size:.96rem}
 .work-more{margin-top:clamp(28px,4vw,40px)}
 .cta-end{scroll-margin-top:90px}
-.void-on:not(.is-inside) #wipNote{display:none}
+/* oznámení „web je ve výstavbě“ by na úvodu zakrývalo scénu i formulář */
+.void-on 
 /* konec ponoru: obraz se zavře do úplné černé */
 .void::after{content:"";position:absolute;inset:0;z-index:1;background:#000;pointer-events:none;opacity:clamp(0,calc((var(--dive,0) - .7)*3.4),1)}
 .no-gl.is-diving .void::after{opacity:1;transition:opacity .5s}
@@ -377,9 +378,6 @@
 .dc-list button:hover{color:var(--ink);background:rgba(255,255,255,.12)}
 .dc-sum{margin-top:10px;font-size:.95rem}
 .dc-sum span{color:var(--muted)}
-.dc-go{display:flex;justify-content:center;align-items:center;min-height:46px;margin-top:12px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(214,196,255,.5);
-  color:var(--ink);text-decoration:none;font-weight:650;font-size:.95rem}
-.dc-go:hover{box-shadow:inset 0 0 0 1px #b49cff,0 0 30px -8px var(--violet-glow)}
 .w-form{display:flex;flex-direction:column;gap:12px;padding:clamp(20px,2.4vw,28px);border-radius:24px;
   background:linear-gradient(160deg,rgba(150,100,255,.12),rgba(255,255,255,.02) 55%);box-shadow:inset 0 0 0 1px rgba(180,156,255,.25),0 40px 90px -40px rgba(120,80,255,.6)}
 .w-form label{display:flex;flex-direction:column;gap:5px;font-size:.85rem;font-weight:600;color:var(--muted)}
@@ -403,3 +401,6 @@
 /* pohyblivé hvězdy (sky.js); statické tečky z CSS pak nejsou potřeba */
 .sky{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
 .sky-live .inside::before{display:none}
+
+/* oznámení „web je ve výstavbě“ by na úvodu zakrývalo scénu i formulář */
+.void-on #wipNote{display:none}

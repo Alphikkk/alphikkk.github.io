@@ -2,81 +2,22 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Poptávka odeslaná | Corphik</title>
-<meta name="description" content="Potvrzení odeslané poptávky na Corphik. Ozvu se a potvrdíme cenu i termín.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corphik</title>
 <meta name="robots" content="noindex">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Corphik">
-<meta property="og:locale" content="cs_CZ">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:locale:alternate" content="es_ES">
-<meta property="og:title" content="Poptávka odeslaná | Corphik">
-<meta property="og:description" content="Potvrzení odeslané poptávky na Corphik. Ozvu se a potvrdíme cenu i termín.">
-<meta property="og:image" content="https://corphik.eu/assets/img/og-corphik.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Logo Corphik – Reliable IT support &amp; custom PCs">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Poptávka odeslaná | Corphik">
-<meta name="twitter:description" content="Potvrzení odeslané poptávky na Corphik. Ozvu se a potvrdíme cenu i termín.">
-<meta name="twitter:image" content="https://corphik.eu/assets/img/og-corphik.png">
-<meta name="twitter:image:alt" content="Logo Corphik – Reliable IT support &amp; custom PCs">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
-<link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="stylesheet" href="/assets/style.css?v=16">
-<link rel="stylesheet" href="/assets/orders.css?v=1">
+<link rel="canonical" href="https://corphik.eu/">
+<meta http-equiv="refresh" content="0; url=/#w-ask">
+<script>
+/* Podrobná poptávka se zrušila: služby, košík i zpráva jsou na jedné obrazovce na úvodu.
+   Staré odkazy (/orders/?service=build,web) přidají služby do košíku a přesměrují tam. */
+try{
+  const add = (new URLSearchParams(location.search).get('service') || "").split(",").filter(Boolean);
+  if(add.length){ const c = JSON.parse(localStorage.getItem('corphikCart') || "[]"); localStorage.setItem('corphikCart', JSON.stringify([...new Set([...c, ...add])])); }
+}catch(_){}
+location.replace("/#w-ask");
+</script>
 </head>
-<body data-page="thanks">
-<header class="nav">
-  <div class="wrap">
-    <a class="brand" href="/" aria-label="Corphik"><img src="/assets/img/corphik-wordmark.png" alt="Corphik" width="117" height="22"></a>
-    <ul class="links">
-      <li><a href="/" data-i18n="nav.home"></a></li>
-      <li><a href="/portfolio/" data-i18n="nav.portfolio"></a></li>
-      <li><a href="/about/" data-i18n="nav.about"></a></li>
-    </ul>
-    <div class="tools">
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="cs">CS</button>
-        <button type="button" data-lang="en">EN</button>
-        <button type="button" data-lang="es">ES</button>
-      </div>
-      <button class="theme" id="theme" type="button" aria-label="Theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
-      <a class="cta" href="/orders/" aria-current="page"><span data-i18n="nav.cart"></span><span class="cnt" hidden>0</span></a>
-    </div>
-  </div>
-</header>
-<main>
-<div class="wrap"><div class="thanks" id="thBox">
-  <div id="thHas" hidden>
-    <div class="th-bh"><svg class="bh-mini" viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-10 32 32)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="32" cy="33" rx="30" ry="6" stroke-width="1.2" opacity=".45"/><circle cx="32" cy="32" r="17" stroke-width="7" opacity=".14"/><path d="M15 33a17 17 0 0 1 34 0" stroke-width="3.2"/><path d="M19.5 34.5a12.5 12.5 0 0 0 25 0" stroke-width="1.3" opacity=".75"/><circle cx="32" cy="32" r="11" fill="#000" stroke-width="1.3"/><path d="M2 33a30 6 0 0 0 60 0" stroke-width="2.8"/></g></svg></div>
-    <h1 id="thTitle" data-i18n="th.title"></h1>
-    <p class="lead" data-i18n="th.p"></p>
-    <div class="mailstep" id="thMail" hidden><b data-i18n="th.mailH"></b><p data-i18n="th.mailP"></p><a class="btn primary" id="thMailBtn" data-i18n="th.mailBtn"></a></div>
-    <pre id="thText"></pre>
-    <a class="btn" href="/" data-i18n="th.home"></a>
-  </div>
-  <div id="thNone" hidden>
-    <h1 data-i18n="th.none"></h1>
-    <p class="lead"></p>
-    <a class="btn primary" href="/orders/" data-i18n="th.order"></a>
-  </div>
-</div></div>
-</main>
-<footer><div class="wrap">
-  <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – spolehlivá IT podpora a počítače na míru" width="150" height="61" loading="lazy">
-  <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact"></span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span></div>
-  <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
-</div></footer>
-<script src="/assets/app.js?v=39"></script>
+<body style="background:#000;color:#f2f1ee;font-family:system-ui,sans-serif;padding:24px">
+<p><a href="/#w-ask" style="color:#f2f1ee">Pokračovat na služby a poptávku</a></p>
 </body>
 </html>

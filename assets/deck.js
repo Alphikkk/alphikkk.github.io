@@ -48,7 +48,7 @@ list.addEventListener('click', e => {
   if(open) tr("service-open", {service: b.closest('.d-row').id.slice(2)});
 });
 
-/* ---------- Košík nad formulářem ---------- */
+/* ---------- Košík nad formulářem (odejde se zprávou, samostatná objednávka už není) ---------- */
 function plural(n){
   if(lang === "cs") return n === 1 ? t("o2.one") : n < 5 ? t("o2.few") : t("o2.many");
   return n === 1 ? t("o2.one") : t("o2.many");
@@ -61,14 +61,12 @@ function renderCart(){
     ? `<ul class="dc-list">${ids.map(id => { const s = findService(id); const a = (SVC_AREAS.find(x => x.ids.includes(id)) || {id: "it"}).id;
         return s ? `<li class="w-${a}"><span>${esc2(s.name[lang])}</span><button type="button" data-remove="${id}" aria-label="${esc2(t("ck.remove") + ": " + s.name[lang])}">×</button></li>` : ""; }).join("")}</ul>`
       + `<p class="dc-sum"><span>${n} ${esc2(plural(n))}, ${esc2(t("o2.from"))}</span> <b>${esc2(money(estimate()))}</b></p>`
-      + `<a class="dc-go" href="${esc2(typeof inLang === "function" ? inLang("/orders/") : "/orders/")}" data-order>${esc2(t("o2.go"))}</a>`
     : "";
 }
 document.addEventListener('click', e => {
   const add = e.target.closest('[data-add]');
   if(add){ renderCart(); if(getCart().includes(add.dataset.add)) tr("cart-add", {service: add.dataset.add}); }
   const rm = e.target.closest('[data-remove]'); if(rm){ toggleCart(rm.dataset.remove); renderCart(); }
-  if(e.target.closest('[data-order]')) tr("order-click", {items: getCart().length});
   /* „Zeptat se na tohle“: předvyplní zprávu a dá kurzor do jména (formulář je hned vedle) */
   const ask = e.target.closest('[data-ask]');
   if(ask){

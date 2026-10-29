@@ -72,28 +72,4 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/portfolio/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/portfolio/"/>
   </url>
-  <url>
-    <loc>https://corphik.eu/orders/</loc>
-    <lastmod>2026-10-25</lastmod>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/orders/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/orders/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/orders/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/orders/"/>
-  </url>
-  <url>
-    <loc>https://corphik.eu/en/orders/</loc>
-    <lastmod>2026-10-25</lastmod>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/orders/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/orders/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/orders/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/orders/"/>
-  </url>
-  <url>
-    <loc>https://corphik.eu/es/orders/</loc>
-    <lastmod>2026-10-25</lastmod>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/orders/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/orders/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/orders/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/orders/"/>
-  </url>
 </urlset>
