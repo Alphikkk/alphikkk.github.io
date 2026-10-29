@@ -259,10 +259,12 @@ if(COARSE) addEventListener('deviceorientation', e => {
   if(e.gamma == null) return; mx = clamp(e.gamma/30, -1, 1); my = clamp((e.beta - 45)/30, -1, 1);
 }, {passive: true});
 
-/* rozlišení: začne střízlivě a podle času snímku se přizpůsobí (až do plného DPR) */
+/* rozlišení: začne ostře a podle času snímku se přizpůsobí. Prohlížeč kreslí nejvýš ~60 snímků/s,
+   takže „stíhá“ znamená snímek kolem 16,7 ms. Když nestíhá, ubírají se nejdřív kroky paprsku
+   (méně vidět), až potom rozlišení; když stíhá, rozlišení se vrací až na plné DPR. */
 const DPR = Math.min(devicePixelRatio || 1, 2);
 const FIXED = /[?&]hq\b/.test(location.search);
-let scale = FIXED ? 1 : COARSE ? 0.7 : 0.85, steps = COARSE ? 170 : 240;
+let scale = FIXED ? 1 : COARSE ? 0.85 : 1, steps = COARSE ? 200 : 240;
 let W = 0, H = 0;
 function resize(){
   const w = Math.max(1, Math.round(innerWidth*DPR*scale)), h = Math.max(1, Math.round(innerHeight*DPR*scale));
@@ -322,11 +324,19 @@ function frame(now){
   /* ladění kvality podle skutečné rychlosti (prvních ~2 s, pak jednou za čas) */
   if(last){ ft.push(now - last); }
   last = now;
-  if(ft.length >= 24 && !FIXED){
+  if(ft.length >= 30 && !FIXED){
     ft.sort((a, b) => a - b);
-    const med = ft[12]; ft = [];
-    if(med > 26 && scale > 0.45){ scale = Math.max(0.45, scale*0.8); if(steps > 140) steps -= 30; resize(); }
-    else if(med < 14 && scale < 1 && tuned < 6){ scale = Math.min(1, scale*1.15); tuned++; resize(); }
+    const med = ft[15]; ft = [];
+    if(time < 1.6) {}                                   /* během příletu se neměří, tam se kreslí víc */
+    else if(med > 24){
+      if(steps > 130) steps -= 35;
+      else if(scale > 0.55){ scale = Math.max(0.55, scale*0.85); resize(); }
+    }
+    else if(med < 18.5 && tuned < 12){
+      tuned++;
+      if(scale < 1){ scale = Math.min(1, scale*1.12); resize(); }
+      else if(steps < 240) steps = Math.min(240, steps + 30);
+    }
   }
 
   if(REDUCE && !diving){ running = false; return; }

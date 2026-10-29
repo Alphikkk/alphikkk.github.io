@@ -59,7 +59,11 @@
 .void-on:not(.is-inside) .nav{position:fixed;left:0;right:0;top:0;background:transparent;border-color:transparent;
   -webkit-backdrop-filter:none;backdrop-filter:none;
   --bg:#000;--ink:#f2f1ee;--soft:rgba(255,255,255,.08);--muted:rgba(242,241,238,.6);--logo-filter:invert(1);color-scheme:dark;color:var(--ink)}
-.void-on:not(.is-inside) .nav .links,.void-on:not(.is-inside) .nav .theme,.void-on:not(.is-inside) .nav .cta{display:none}
+.void-on:not(.is-inside) .nav .theme,.void-on:not(.is-inside) .nav .cta{display:none}
+/* z menu na scéně jen Portfolio a O mně: služby otevírá tlačítko „Co nabízím“ */
+.void-on:not(.is-inside) .nav .links li:first-child{display:none}
+.void-on:not(.is-inside) .nav .links a{color:rgba(242,241,238,.75)}
+.void-on:not(.is-inside) .nav .links a:hover{color:#fff;background:rgba(255,255,255,.08)}
 .void-on:not(.is-inside) .nav .tools{margin-left:auto}
 .void-on:not(.is-inside) .nav .lang button[aria-pressed="true"]{background:rgba(255,255,255,.16);color:#fff;box-shadow:none}
 /* uvnitř: scéna zmizí, stránka se vynoří z černé */
