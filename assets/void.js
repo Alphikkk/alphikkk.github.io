@@ -32,7 +32,9 @@ function openInside(hash, instant){
 function closeInside(){
   inside = false; dive = 0; diveFrom = -1;
   root.classList.remove('is-inside', 'is-diving');
-  scrollTo(0, 0); start();
+  scrollTo(0, 0);
+  /* bez WebGL (nebo když se díra nespustila) se nic nekreslí */
+  if(gl && !root.classList.contains('no-gl')) start();
 }
 if(INSIDE_HASH.test(location.hash)) openInside(location.hash, true);
 addEventListener('popstate', () => {
