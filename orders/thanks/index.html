@@ -7,15 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://corphik.eu/">
 <meta http-equiv="refresh" content="0; url=/#w-ask">
-<script>
-/* Podrobná poptávka se zrušila: služby, košík i zpráva jsou na jedné obrazovce na úvodu.
-   Staré odkazy (/orders/?service=build,web) přidají služby do košíku a přesměrují tam. */
-try{
-  const add = (new URLSearchParams(location.search).get('service') || "").split(",").filter(Boolean);
-  if(add.length){ const c = JSON.parse(localStorage.getItem('corphikCart') || "[]"); localStorage.setItem('corphikCart', JSON.stringify([...new Set([...c, ...add])])); }
-}catch(_){}
-location.replace("/#w-ask");
-</script>
+<script src="/assets/orders-redirect.js" data-to="/#w-ask"></script>
 </head>
 <body style="background:#000;color:#f2f1ee;font-family:system-ui,sans-serif;padding:24px">
 <p><a href="/#w-ask" style="color:#f2f1ee">Pokračovat na služby a poptávku</a></p>
