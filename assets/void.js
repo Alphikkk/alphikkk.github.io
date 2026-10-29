@@ -17,15 +17,15 @@ if(!voidEl || !cv) return;
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const COARSE = matchMedia('(pointer: coarse)').matches;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-const INSIDE_HASH = /^#(sluzby|w-|prace|kontakt|obl-|svc-)/;
+const INSIDE_HASH = /^#(sluzby|w-ask|prace|kontakt|obl-|svc-)/;
 
 /* ---------- Přepínání mezi scénou a obsahem „uvnitř“ ---------- */
 let inside = false, diving = false;
 function openInside(hash, instant){
   inside = true; diving = false;
   root.classList.add('is-inside'); root.classList.remove('is-diving');
-  /* služby jsou na úvodu jako průlet (warp.js); staré kotvy (#sluzby, #obl-…, #svc-…) míří na jeho zastávky */
-  const el = hash && ((window.corphikWarpTarget && window.corphikWarpTarget(hash)) || document.getElementById(hash.slice(1)));
+  /* služby jsou na úvodu jako jedna obrazovka (deck.js); staré kotvy (#sluzby, #obl-…, #svc-…) míří na ni */
+  const el = hash && ((window.corphikTarget && window.corphikTarget(hash)) || document.getElementById(hash.slice(1)));
   if(el) el.scrollIntoView({block: "start"}); else scrollTo(0, 0);
   if(!instant){ const ins = document.getElementById('inside'); ins && ins.focus({preventScroll: true}); }
 }
