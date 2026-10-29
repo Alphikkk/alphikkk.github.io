@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://corphik.eu/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/"/>
@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://corphik.eu/en/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/"/>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://corphik.eu/es/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/"/>
@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://corphik.eu/about/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/about/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/about/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/about/"/>
@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>https://corphik.eu/en/about/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/about/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/about/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/about/"/>
@@ -42,7 +42,7 @@
   </url>
   <url>
     <loc>https://corphik.eu/es/about/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/about/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/about/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/about/"/>
@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>https://corphik.eu/portfolio/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/portfolio/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/portfolio/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/portfolio/"/>
@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://corphik.eu/en/portfolio/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/portfolio/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/portfolio/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/portfolio/"/>
@@ -66,10 +66,34 @@
   </url>
   <url>
     <loc>https://corphik.eu/es/portfolio/</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/portfolio/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/portfolio/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/portfolio/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/portfolio/"/>
+  </url>
+  <url>
+    <loc>https://corphik.eu/soukromi/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/soukromi/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/privacidad/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://corphik.eu/en/privacy/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/soukromi/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/privacidad/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://corphik.eu/es/privacidad/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://corphik.eu/soukromi/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://corphik.eu/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://corphik.eu/es/privacidad/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corphik.eu/en/privacy/"/>
   </url>
 </urlset>

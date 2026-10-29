@@ -50,9 +50,19 @@ ES: Soporte informático para particulares, estudiantes y pequeñas empresas en 
 
 ## How it works / Jak to probíhá / Cómo funciona
 
-1. Send a request or describe the issue.
+1. On the website, open "What I offer", add the services you need to the cart and send a short message through the form (name optional, email or phone, message). Or email ales@corphik.eu directly.
 2. I reply to confirm the details, expected price, and suitable date.
 3. The work is completed and explained clearly after the job.
+
+## Portfolio
+
+- Gaming PC: custom build with Ryzen 7 5800X3D and Radeon RX 7800 XT for high-resolution gaming.
+- corphik.eu: this business website in three languages (CS, EN, ES) with a price list, cart and contact form; real-time WebGL black hole on the home page.
+- Tandjo: a web app for couples (calendar, gallery, places, plans and games for two), founder and CEO, in development.
+
+## About
+
+Aleš Pospíšil, founder of CORPHIK. Former agricultural machinery mechanic, now team lead in logistics in Prague, working on cybersecurity (preparing for CompTIA Security+) and building Tandjo. Speaks Czech and English, learning Spanish.
 
 ## Links / Odkazy / Enlaces
 
@@ -61,18 +71,21 @@ ES: Soporte informático para particulares, estudiantes y pequeñas empresas en 
 - [Portfolio](https://corphik.eu/portfolio/)
 - [O mně](https://corphik.eu/about/)
 - [Poptávka](https://corphik.eu/#w-ask)
+- [Ochrana osobních údajů](https://corphik.eu/soukromi/)
 
 ### English (EN)
 - [Home and services](https://corphik.eu/en/)
 - [Portfolio](https://corphik.eu/en/portfolio/)
 - [About me](https://corphik.eu/en/about/)
 - [Request a service](https://corphik.eu/en/#w-ask)
+- [Privacy policy](https://corphik.eu/en/privacy/)
 
 ### Español (ES)
 - [Inicio y servicios](https://corphik.eu/es/)
 - [Portafolio](https://corphik.eu/es/portfolio/)
 - [Sobre mí](https://corphik.eu/es/about/)
 - [Solicitar un servicio](https://corphik.eu/es/#w-ask)
+- [Política de privacidad](https://corphik.eu/es/privacidad/)
 
 Sitemap: https://corphik.eu/sitemap.xml
 
