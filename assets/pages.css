@@ -218,3 +218,50 @@ a.tj:hover{transform:translateY(-3px)}
 .space .end-cta .btn{background:var(--ink);color:#000;border-color:var(--ink)}
 .space .end-cta .btn:hover{opacity:1;box-shadow:0 0 40px -6px var(--violet-glow)}
 .space footer{background:transparent}
+
+/* =========================================================
+   O mně ve vesmíru (html.space): černá díra místo čárového znaku,
+   skleněné karty v barvách oblastí, cesta jako dráha s hvězdou „teď“
+   ========================================================= */
+.space .block{border-top:0}
+.space .ab-hero h1{text-shadow:0 0 60px rgba(150,100,255,.4)}
+.space .ab-role{color:#b49cff}
+.space .ab-links .btn.primary{background:var(--ink);color:#000;border-color:var(--ink)}
+.space .ab-links .btn.primary:hover{opacity:1;box-shadow:0 0 44px -6px var(--violet-glow)}
+.space .ab-links .btn:not(.primary){border-color:rgba(214,196,255,.45)}
+.space .ab-links .btn:not(.primary):hover{border-color:#b49cff;box-shadow:0 0 30px -8px var(--violet-glow)}
+/* černá díra: stejná jako v závěrečné výzvě, jen větší */
+.ab-hole{position:relative;justify-self:center;width:min(100%,360px);aspect-ratio:1;border-radius:50%;
+  background:
+    radial-gradient(circle,#000 0 31%,rgba(240,232,255,.95) 33.5%,rgba(180,140,255,.55) 38%,rgba(120,80,255,.18) 50%,transparent 66%),
+    radial-gradient(ellipse 50% 7% at 50% 50%,rgba(225,205,255,.75),transparent 100%)}
+.ab-hole>*{display:none}
+@media (prefers-reduced-motion:no-preference){ .ab-hole{animation:ahPulse 6s ease-in-out infinite} }
+@keyframes ahPulse{50%{transform:scale(1.03);filter:brightness(1.15)}}
+@media (max-width:760px){ .ab-hole{order:-1;justify-self:start;width:160px} }
+/* co dělám: tři skleněné karty v barvě oblasti */
+.space .pillars article{--c:#b49cff;border:0;background:linear-gradient(150deg,color-mix(in srgb,var(--c) 13%,transparent),rgba(255,255,255,.015) 55%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 28%,transparent)}
+.space .pillars article.w-web{--c:#f0a8ff}.space .pillars article.w-pc{--c:#8fb0ff}.space .pillars article.w-it{--c:#b49cff}
+.space .pillars article:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px var(--c),0 30px 70px -30px var(--c)}
+.space .pillars .ic{border:0;color:var(--c);background:radial-gradient(circle,color-mix(in srgb,var(--c) 22%,transparent),transparent 72%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 35%,transparent)}
+.space .ab-do-h .btn{border-color:rgba(214,196,255,.45)}
+/* příběh a cesta: tečky na dráze, „teď“ jako hvězda z loga */
+.space .ab-quote strong{color:#d9cfff;text-shadow:0 0 30px rgba(150,100,255,.5)}
+.space .route ol::before{background:linear-gradient(90deg,rgba(180,156,255,.15),rgba(180,156,255,.6))}
+.space .route li::before{background:#000;border-color:rgba(180,156,255,.6)}
+.space .route li.now::before{width:18px;height:18px;top:-2px;border:0;border-radius:0;background:#d9cfff;filter:drop-shadow(0 0 8px #b49cff);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1c1 10 5 14 15 15-10 1-14 5-15 15-1-10-5-14-15-15 10-1 14-5 15-15z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1c1 10 5 14 15 15-10 1-14 5-15 15-1-10-5-14-15-15 10-1 14-5 15-15z'/%3E%3C/svg%3E") center/contain no-repeat}
+.space .route li.now h3{color:#d9cfff}
+@media (max-width:760px){ .space .route li.now::before{left:-35px;top:1px} }
+/* Tandjo, vzdělávání, záliby: skleněné plochy */
+.space .tj{background:linear-gradient(150deg,rgba(180,156,255,.12),rgba(255,255,255,.015) 55%);box-shadow:inset 0 0 0 1px rgba(180,156,255,.28)}
+.space .tj:hover{box-shadow:inset 0 0 0 1px #b49cff,0 30px 70px -30px rgba(150,100,255,.7)}
+.space .pill{background:#000;border-color:rgba(180,156,255,.35)}
+.space .pill i{background:#b49cff;box-shadow:0 0 8px #b49cff}
+.space .goal{border:0;background:linear-gradient(150deg,rgba(143,176,255,.14),rgba(255,255,255,.015) 60%);box-shadow:inset 0 0 0 1px rgba(143,176,255,.35)}
+.space .goal b{color:#c9d8ff}
+.space .list{border-top-color:rgba(180,156,255,.35)}
+.space .hob>div{border:0;background:rgba(255,255,255,.03);box-shadow:inset 0 0 0 1px var(--line)}
