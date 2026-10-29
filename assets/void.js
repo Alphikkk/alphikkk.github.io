@@ -3,7 +3,7 @@
    Černá díra v reálném čase (WebGL): paprsky světla se ohýbají kolem díry
    (Schwarzschild, rs = 1), akreční disk s Dopplerovým jasem, hvězdy,
    Mléčná dráha a spirální galaxie – gravitační čočka ohýbá i je.
-   Tlačítko „Co nabízím“ kameru vtáhne do díry a uvnitř se otevřou služby.
+   Na úvodu je díra vpravo od nabídky, služby a ceník jsou hned pod ní.
    Bez knihoven. Bez WebGL zůstane statické pozadí z CSS, při
    prefers-reduced-motion se vykreslí jeden snímek a přechod je jen prolnutí.
    ========================================================= */
@@ -17,58 +17,23 @@ if(!voidEl || !cv) return;
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const COARSE = matchMedia('(pointer: coarse)').matches;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-const INSIDE_HASH = /^#(sluzby|w-ask|prace|kontakt|obl-|svc-)/;
-
-/* ---------- Přepínání mezi scénou a obsahem „uvnitř“ ---------- */
-let inside = false, diving = false;
-function openInside(hash, instant){
-  inside = true; diving = false;
-  root.classList.add('is-inside'); root.classList.remove('is-diving');
-  /* služby jsou na úvodu jako jedna obrazovka (deck.js); staré kotvy (#sluzby, #obl-…, #svc-…) míří na ni */
-  const el = hash && ((window.corphikTarget && window.corphikTarget(hash)) || document.getElementById(hash.slice(1)));
-  if(el) el.scrollIntoView({block: "start"}); else scrollTo(0, 0);
-  if(!instant){ const ins = document.getElementById('inside'); ins && ins.focus({preventScroll: true}); }
-}
-function closeInside(){
-  inside = false; dive = 0; diveFrom = -1;
-  root.classList.remove('is-inside', 'is-diving');
-  scrollTo(0, 0);
-  /* bez WebGL (nebo když se díra nespustila) se nic nekreslí */
-  if(gl && !root.classList.contains('no-gl')) start();
-}
-if(INSIDE_HASH.test(location.hash)) openInside(location.hash, true);
-addEventListener('popstate', () => {
-  if(INSIDE_HASH.test(location.hash)){ if(!inside) openInside(location.hash, true); }
-  else if(inside) closeInside();
+/* ---------- Úvod: díra se kreslí, jen když je vidět; obsah je normálně pod ní ---------- */
+let inside = false, diving = false, dive = 0, diveFrom = -1;   /* inside = scéna je mimo obrazovku (nekreslí se) */
+const nav = document.querySelector('.nav');
+new IntersectionObserver(([e]) => {
+  inside = !e.isIntersecting;
+  if(!inside && gl && !root.classList.contains('no-gl')) start();
+}, {rootMargin: "0px"}).observe(voidEl);
+/* navigace dostane tmavé sklo, když pod ní už není scéna */
+const navBg = () => nav && nav.classList.toggle('solid', scrollY > voidEl.offsetHeight - 120);
+addEventListener('scroll', navBg, {passive: true}); navBg();
+/* odkazy z jiných stránek (#sluzby, #obl-…, #svc-…, #w-ask) po vykreslení služeb dojedou na místo */
+addEventListener('load', () => {
+  if(!location.hash) return;
+  const el = (window.corphikTarget && window.corphikTarget(location.hash)) || document.getElementById(location.hash.slice(1));
+  if(el) el.scrollIntoView({block: "start"});
 });
-/* odkazy na sekce uvnitř (#sluzby, /#prace…) otevřou obsah i bez průletu */
-document.addEventListener('click', e => {
-  const a = e.target.closest && e.target.closest('a[href*="#"]');
-  if(!a || a === go) return;
-  const u = new URL(a.href, location.href);
-  if(u.pathname !== location.pathname || !INSIDE_HASH.test(u.hash)) return;
-  if(!inside){ e.preventDefault(); history.pushState(null, "", u.hash); openInside(u.hash); }
-});
-/* tlačítko „Zpět k černé díře“ uvnitř */
-document.querySelectorAll('[data-out]').forEach(b => b.addEventListener('click', () => {
-  if(!inside) return;
-  history.pushState(null, "", location.pathname + location.search); closeInside();
-}));
-/* logo uvnitř vrátí zpět na scénu */
-document.querySelectorAll('.nav .brand').forEach(b => b.addEventListener('click', e => {
-  if(!inside) return;
-  e.preventDefault(); history.pushState(null, "", location.pathname + location.search); closeInside();
-}));
-
-let dive = 0, diveFrom = -1;
-go && go.addEventListener('click', e => {
-  e.preventDefault();
-  if(diving || inside) return;
-  if(typeof track === "function") track("dive");
-  history.pushState(null, "", "#sluzby");
-  if(!gl || REDUCE || root.classList.contains('no-gl')){ root.classList.add('is-diving'); setTimeout(() => openInside("#sluzby"), REDUCE ? 250 : 500); return; }
-  diving = true; diveFrom = -1; root.classList.add('is-diving'); start();
-});
+void go;
 
 /* ---------- WebGL ---------- */
 const gl = cv.getContext('webgl', {antialias: false, alpha: false, depth: false, powerPreference: "high-performance", preserveDrawingBuffer: false});
@@ -265,17 +230,25 @@ if(COARSE) addEventListener('deviceorientation', e => {
    takže „stíhá“ znamená snímek kolem 16,7 ms. Když nestíhá, ubírají se nejdřív kroky paprsku
    (méně vidět), až potom rozlišení; když stíhá, rozlišení se vrací až na plné DPR. */
 const DPR = Math.min(devicePixelRatio || 1, 2);
+/* poloha díry v plátně: cíl kamery (posun) a vzdálenost; ?tx=&ty=&d= jen pro ladění */
+const QP = new URLSearchParams(location.search);
+let TX = 0, TY = 0, DIST0 = 30;
+function aim(){
+  const portrait = cv.clientHeight > cv.clientWidth;
+  TX = +(QP.get('tx') ?? (portrait ? 2.2 : -5)); TY = +(QP.get('ty') ?? (portrait ? 2 : -5)); DIST0 = +(QP.get('d') ?? (portrait ? 42 : 45));
+}
 const FIXED = /[?&]hq\b/.test(location.search);
 let scale = FIXED ? 1 : COARSE ? 0.85 : 1, steps = COARSE ? 200 : 240;
 let W = 0, H = 0;
 function resize(){
-  const w = Math.max(1, Math.round(innerWidth*DPR*scale)), h = Math.max(1, Math.round(innerHeight*DPR*scale));
+  /* plátno má velikost podle CSS (na úvodu jen část scény), ne podle okna */
+  const w = Math.max(1, Math.round(cv.clientWidth*DPR*scale)), h = Math.max(1, Math.round(cv.clientHeight*DPR*scale));
   if(w === W && h === H) return;
   W = cv.width = w; H = cv.height = h;
   gl.viewport(0, 0, W, H);
 }
-addEventListener('resize', resize);
-resize();
+addEventListener('resize', () => { resize(); aim(); });
+resize(); aim();
 
 const t0 = performance.now();
 let running = false, raf = 0, last = 0, ft = [], tuned = 0;
@@ -292,18 +265,19 @@ function frame(now){
   if(diving){
     if(diveFrom < 0) diveFrom = now;
     dive = clamp((now - diveFrom)/1700);
-    if(dive >= 1){ openInside("#sluzby"); return; }
+    if(dive >= 1){ diving = false; dive = 0; }
   }
   const dv = easeIn(dive);
-  const portrait = innerHeight > innerWidth;
-  let dist = (portrait ? 34 : 38)*(1 - dv) + 1.15*dv;
+  const portrait = cv.clientHeight > cv.clientWidth;
+  let dist = DIST0*(1 - dv) + 1.15*dv;
   /* nástup: kamera přiletí z dálky během první sekundy */
   if(!REDUCE) dist += 14*Math.pow(1 - clamp(time/1.6), 3);
   const az = (portrait ? -0.03 : -0.07) + sx*0.22 + Math.sin(time*0.07)*0.06;
   const el = 0.105 + sy*0.06 + dv*0.12;
   const cam = [Math.sin(az)*Math.cos(el)*dist, Math.sin(el)*dist, Math.cos(az)*Math.cos(el)*dist];
   /* cíl lehce pod dírou, aby nad textem a tlačítkem zůstala díra celá v záběru */
-  const tgt = [0, portrait ? -4 : -1.6, 0];
+  /* na šířku díra vpravo od textu (kamera se dívá vlevo od ní), na výšku nahoře */
+  const tgt = [TX, TY, 0];
   let f = [tgt[0]-cam[0], tgt[1]-cam[1], tgt[2]-cam[2]];
   const fl = Math.hypot(...f); f = f.map(v => v/fl);
   const roll = -0.07 + sx*0.02;

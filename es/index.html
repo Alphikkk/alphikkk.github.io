@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="space home">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -35,8 +35,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/style.css?v=17">
-<link rel="stylesheet" href="/assets/home.css?v=52">
-<script src="/assets/void-on.js"></script>
+<link rel="stylesheet" href="/assets/home.css?v=55">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -250,11 +249,12 @@
   <div class="wrap">
     <a class="brand" href="/es/" aria-label="Corphik"><img src="/assets/img/corphik-wordmark.png" alt="Corphik" width="117" height="22"></a>
     <ul class="links">
-      <li><a href="/es/" data-i18n="nav.home" aria-current="page">Servicios</a></li>
+      <li><a href="/es/#deck" data-i18n="nav.home">Servicios</a></li>
       <li><a href="/es/portfolio/" data-i18n="nav.portfolio">Portafolio</a></li>
       <li><a href="/es/about/" data-i18n="nav.about">Sobre mí</a></li>
     </ul>
     <div class="tools">
+      <a class="talk" href="/es/#w-ask" data-i18n="nav.talk">Escríbeme</a>
       <div class="lang" role="group" aria-label="Language">
         <button type="button" data-lang="cs">CS</button>
         <button type="button" data-lang="en">EN</button>
@@ -266,19 +266,30 @@
   </div>
 </header>
 <main>
-  <section class="void" id="void" aria-labelledby="void-h">
-    <canvas id="voidCanvas" role="img" aria-label="Espacio con un agujero negro cuya gravedad curva la luz de las estrellas y el nombre Corphik"></canvas>
-    <div class="void-ui">
-      <h1 class="void-h" id="void-h"><span class="sr-only">Corphik – </span><span data-i18n="v.h">Soporte informático, PCs a medida y webs.</span></h1>
-      <p class="void-p" data-i18n="v.p">En persona en Praga y alrededores, a distancia en toda Europa.</p>
-      <a class="void-go" id="voidGo" href="#sluzby"><span data-i18n="v.go">Qué ofrezco</span></a>
+  <section class="hero" id="void" aria-labelledby="hero-h">
+    <canvas id="voidCanvas" role="img" aria-label="Un agujero negro con un disco de acreción violeta en el espacio profundo"></canvas>
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <p class="hero-k" data-i18n="hero.k">Soporte informático fiable y soluciones a medida</p>
+        <h1 class="hero-h" id="hero-h"><span class="sr-only">Corphik – <span data-i18n="hero.h"></span></span><span class="wm" aria-hidden="true"><span>C</span><svg class="wm-o" viewBox="0 0 120 100" aria-hidden="true"><defs><linearGradient id="wmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#b9a8ff"/></linearGradient></defs><ellipse cx="60" cy="50" rx="27" ry="37" fill="none" stroke="url(#wmg)" stroke-width="7" transform="rotate(28 60 50)"/><ellipse cx="60" cy="52" rx="58" ry="17" fill="none" stroke="#d8ccff" stroke-width="3" transform="rotate(-22 60 52)" class="wm-ring"/></svg><span>RPHIK</span></span></h1>
+        <p class="hero-line" data-i18n="hero.line">Soporte informático <i>·</i> PCs a medida <i>·</i> Webs</p>
+        <p class="hero-p" data-i18n="hero.p2">Soporte informático fiable, PCs a medida de alto rendimiento y webs modernas para particulares y empresas. En persona en Praga, a distancia en toda Europa.</p>
+        <div class="hero-act">
+          <a class="hero-btn main" href="#deck" data-i18n="hero.b1">Ver servicios</a>
+          <a class="hero-btn ghost" href="/es/portfolio/" data-i18n="hero.b2">Ver proyectos</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap hero-cards">
+      <a class="hcard w-it" href="#obl-it-d"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><h2 data-i18n="hc.it">Soporte informático</h2><p data-i18n="hc.itp">Ayuda rápida y fiable con tu ordenador y programas.</p><span class="go" aria-hidden="true">→</span></a>
+      <a class="hcard w-pc" href="#obl-pc-d"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5" rx=".5"/><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"/></svg></span><h2 data-i18n="hc.pc">PCs a medida</h2><p data-i18n="hc.pcp">Equipos potentes a la medida de tu presupuesto.</p><span class="go" aria-hidden="true">→</span></a>
+      <a class="hcard w-web" href="#obl-web-d"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 7 3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15"/></svg></span><h2 data-i18n="hc.web">Webs y dominios</h2><p data-i18n="hc.webp">Webs modernas para personas y empresas.</p><span class="go" aria-hidden="true">→</span></a>
     </div>
   </section>
-  <div class="inside" id="inside" tabindex="-1">
+  <div class="inside" id="inside">
   <section class="deck" id="deck" aria-labelledby="deck-h">
     <div class="wrap deck-wrap">
       <header class="deck-head">
-        <button class="inside-out" type="button" data-out><span data-i18n="v.out">Volver al agujero negro</span></button>
         <h2 class="deck-h" id="deck-h" data-i18n="w.q">¿En qué te ayudo?</h2>
         <p class="deck-sub" data-i18n="w.sub">Elige lo que necesitas y envíalo. O escríbeme directamente, respondo lo antes posible.</p>
         <ul class="w-trust">
@@ -316,7 +327,7 @@
 <li class="svc" id="svc-remote"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="13" height="9" rx="1.5"></rect><path d="M6 18h6M9 14v4"></path><path d="M18.5 9.5a3 3 0 0 1 0 4M20.8 7.5a6 6 0 0 1 0 8"></path></svg></span><div class="svc-t"><h4>Ayuda a distancia</h4></div><p class="d">Me conecto a tu ordenador de forma remota para solucionar problemas, configurar ajustes e instalar programas, estés donde estés. ¡Asistencia informática rápida, cómoda y sin necesidad de desplazarte! Se factura por cada 15 minutos iniciados.</p><button class="buy add" type="button" data-add="remote" aria-pressed="false" aria-label="Carrito: Ayuda a distancia, 400 CZK / hora (≈ 16 €)"><span class="pr">400 CZK / hora (≈ 16 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
 <li class="svc" id="svc-os"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2"></rect><path d="M8 21h8M12 17v4M6.5 8.5l2.5 2-2.5 2M11 12.5h4"></path></svg></span><div class="svc-t"><h4>Instalación de Windows y Linux</h4></div><p class="d">Instalación limpia del sistema, drivers, actualizaciones y configuración para que todo funcione desde el primer arranque. La licencia de Windows no está incluida.</p><button class="buy add" type="button" data-add="os" aria-pressed="false" aria-label="Carrito: Instalación de Windows y Linux, desde 700 CZK (≈ 28 €)"><span class="pr">desde 700 CZK (≈ 28 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li></ul></section>
 
-<section class="area area-pc" id="obl-pc" aria-labelledby="obl-pc-h"><figure class="area-photo"><img src="/assets/img/pc-build-finished-rgb-clean-640.webp" srcset="/assets/img/pc-build-finished-rgb-clean-640.webp 640w, /assets/img/pc-build-finished-rgb-clean-1152.webp 1152w" sizes="(max-width: 860px) 100vw, 480px" alt="El equipo terminado en una caja blanca con iluminación RGB morada y azul: refrigeración líquida con pantalla redonda sobre el procesador, ventiladores y una tarjeta gráfica con cables blancos" width="1152" height="1536" loading="lazy" decoding="async"></figure><header class="area-head"><p class="area-n">02</p><h3 id="obl-pc-h">Ingeniería de PC</h3><p class="area-d">Equipos a medida y mejoras, montados y probados por mí.</p></header><ul class="area-list">
+<section class="area area-pc" id="obl-pc" aria-labelledby="obl-pc-h"><figure class="area-photo"></figure><header class="area-head"><p class="area-n">02</p><h3 id="obl-pc-h">Ingeniería de PC</h3><p class="area-d">Equipos a medida y mejoras, montados y probados por mí.</p></header><ul class="area-list">
 <li class="svc" id="svc-build"><div class="svc-t"><h4>PC a medida</h4></div><p class="d">Elijo los componentes según tu presupuesto y uso (juegos, trabajo, estudios), monto el PC y lo pruebo.</p><ol class="pc-steps"><li><strong>Anticipo para los componentes</strong><span>Pido las piezas en cuanto se paga el anticipo.</span></li><li><strong>Montaje y pruebas</strong><span>Monto y pruebo el PC yo mismo.</span></li><li><strong>Te lo llevo a casa</strong><span>Te entrego el equipo ya probado. Gratis en Praga y alrededores; más lejos, según acuerdo.</span></li></ol><button class="buy add" type="button" data-add="build" aria-pressed="false" aria-label="Carrito: PC a medida, desde 1.500 CZK (≈ 60 €)"><span class="pr">desde 1.500 CZK (≈ 60 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li>
 <li class="svc" id="svc-upgrade"><div class="svc-t"><h4>Mejora y aceleración del PC</h4></div><p class="d">Cambio de SSD, RAM o tarjeta gráfica, limpieza y pasta térmica nueva. Las piezas se pagan aparte.</p><button class="buy add" type="button" data-add="upgrade" aria-pressed="false" aria-label="Carrito: Mejora y aceleración del PC, desde 500 CZK (≈ 20 €)"><span class="pr">desde 500 CZK (≈ 20 €)</span><span class="go"><span class="lab">Carrito</span></span></button></li></ul></section>
 
@@ -355,9 +366,9 @@
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contacto</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span><a class="pv-link" href="/es/privacidad/" data-i18n="ft.privacy">Política de privacidad</a></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=40"></script>
+<script src="/assets/app.js?v=42"></script>
 <script src="/assets/deck.js?v=5"></script>
 <script src="/assets/sky.js?v=1"></script>
-<script src="/assets/void.js?v=14"></script>
+<script src="/assets/void.js?v=17"></script>
 </body>
 </html>
