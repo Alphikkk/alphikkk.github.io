@@ -164,3 +164,57 @@ a.tj{color:inherit;text-decoration:none;position:relative;transition:transform .
 a.tj:hover{transform:translateY(-3px)}
 .tj-go{margin-left:auto;align-self:center;font-weight:600;font-size:.92rem;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
 @media (max-width:640px){a.tj{flex-wrap:wrap}.tj-go{margin-left:0}}
+
+/* =========================================================
+   Portfolio ve vesmíru (html.space): stejný svět jako služby na úvodu
+   Vždy tmavé, hvězdy v pohybu (sky.js), záře shora; každý projekt je skleněný panel
+   v barvě své oblasti (PC modrá, web růžová, aplikace fialová) a končí výzvou „chci podobné“.
+   ========================================================= */
+.space .nav .theme{display:none}
+.space body::after{content:"";position:fixed;left:0;right:0;top:0;height:60vh;z-index:-1;pointer-events:none;
+  background:radial-gradient(70% 70% at 50% 0%,rgba(140,90,255,.26),rgba(90,60,200,.08) 55%,transparent 80%)}
+.space .pf-filter,.space .pf-index{display:none}
+.space .pf-head{grid-template-columns:minmax(0,1fr)}
+.space .pf-head h1{text-shadow:0 0 60px rgba(150,100,255,.4)}
+.space .pf-lead{max-width:44ch}
+.space .cases{gap:clamp(40px,6vw,72px);padding-top:clamp(28px,4vw,48px)}
+.space .case{--c:#b49cff;position:relative;padding:clamp(20px,3.4vw,44px);border:0;border-radius:clamp(24px,3vw,36px);
+  background:linear-gradient(150deg,color-mix(in srgb,var(--c) 12%,transparent),rgba(255,255,255,.015) 50%);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 26%,transparent),0 60px 120px -60px color-mix(in srgb,var(--c) 55%,transparent)}
+.space .case-pc{--c:#8fb0ff}
+.space .case-ap{--c:#f0a8ff}
+.space .case-tj{--c:#b49cff}
+.space .case-k{color:var(--c)}
+.space .case-n{color:var(--c)}
+.space .case-n::after{background:color-mix(in srgb,var(--c) 50%,transparent)}
+.space .case-t{text-shadow:0 0 40px color-mix(in srgb,var(--c) 40%,transparent)}
+.space .case-facts,.space .case-facts div{border-color:var(--line)}
+.space .pf-media{background:rgba(255,255,255,.04)}
+.space .pf-specs{border-top-color:color-mix(in srgb,var(--c) 50%,transparent)}
+.space .pf-browser{background:#000;border-color:color-mix(in srgb,var(--c) 30%,transparent);box-shadow:0 40px 90px -40px color-mix(in srgb,var(--c) 50%,transparent)}
+.space .pf-bar{background:rgba(255,255,255,.04)}
+.space .pf-bar span{background:#000}
+.space .pf-phone{border-color:#050308;background:#000;outline-color:color-mix(in srgb,var(--c) 30%,transparent)}
+/* „Chci podobný…“: hlavní výzva projektu, s hvězdou z loga */
+.case-want{display:inline-flex;align-items:center;gap:10px;min-height:52px;margin-top:28px;padding:0 1.5em;border-radius:999px;
+  background:var(--ink);color:#000;text-decoration:none;font-weight:700;transition:box-shadow .3s,transform .2s var(--ease)}
+.case-want::before{content:"";width:16px;height:16px;flex:none;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1c1 10 5 14 15 15-10 1-14 5-15 15-1-10-5-14-15-15 10-1 14-5 15-15z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1c1 10 5 14 15 15-10 1-14 5-15 15-1-10-5-14-15-15 10-1 14-5 15-15z'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform .5s var(--ease)}
+.case-want:hover{box-shadow:0 0 46px -6px var(--c,#b49cff)}
+.case-want:hover::before{transform:rotate(90deg) scale(1.15)}
+.case-want:active{transform:scale(.98)}
+.space .case-pc .case-want{grid-column:1;justify-self:start}
+/* závěrečná výzva: tmavý panel s malou černou dírou místo bílého */
+.space .end-cta .wrap>div{position:relative;overflow:hidden;color:var(--ink);
+  background:radial-gradient(120% 90% at 50% 0%,rgba(130,80,255,.2),transparent 60%),rgba(255,255,255,.02);box-shadow:inset 0 0 0 1px rgba(180,156,255,.2)}
+.space .end-cta .bh{display:none}
+.space .end-cta .wrap>div::before{content:"";width:132px;height:132px;margin-bottom:26px;border-radius:50%;flex:none;
+  background:radial-gradient(circle,#000 0 33%,rgba(240,232,255,.95) 36%,rgba(180,140,255,.55) 41%,rgba(120,80,255,.18) 52%,transparent 66%),
+    radial-gradient(ellipse 50% 9% at 50% 50%,rgba(220,200,255,.7),transparent 100%);
+  box-shadow:0 0 70px -10px rgba(140,90,255,.6)}
+.space .end-cta p{color:var(--muted);opacity:1}
+.space .end-cta .btn{background:var(--ink);color:#000;border-color:var(--ink)}
+.space .end-cta .btn:hover{opacity:1;box-shadow:0 0 40px -6px var(--violet-glow)}
+.space footer{background:transparent}

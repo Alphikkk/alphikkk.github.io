@@ -215,7 +215,7 @@
    Pořád stejný vesmír: vždy tmavé, jemné hvězdy v pozadí a fialová záře shora,
    jako by nad stránkou svítil disk. Tokeny se přepíšou jen tady (třídu .is-inside má jen úvod).
    ========================================================= */
-:root.is-inside{
+:root.is-inside,:root.space{
   --bg:#000;--ink:#f2f1ee;--soft:rgba(255,255,255,.05);--muted:rgba(242,241,238,.62);--line:rgba(242,241,238,.12);
   --orbit:rgba(242,241,238,.3);--on-ink:#000;--nav:rgba(0,0,0,.55);--logo-filter:invert(1);
   --violet:#b49cff;--violet-2:#8fa8ff;--violet-glow:rgba(150,100,255,.55);
@@ -396,6 +396,6 @@
   .deck-side{position:static}
 }
 
-/* pohyblivé hvězdy za službami (deck.js); statické tečky z CSS pak nejsou potřeba */
-.deck-sky{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+/* pohyblivé hvězdy (sky.js); statické tečky z CSS pak nejsou potřeba */
+.sky{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
 .sky-live .inside::before{display:none}
