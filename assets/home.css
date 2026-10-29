@@ -6,30 +6,25 @@
    Celá stránka je ve „vesmírném“ stylu (html.space): služby, ceník, portfolio i formulář jsou hned pod úvodem.
    Bez WebGL se díra nahradí gradientem v pozadí .hero. */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.hero{--lav:#c9bcff;position:relative;overflow:hidden;color:var(--ink);
-  padding-top:calc(64px + env(safe-area-inset-top,0px));
-  background:
-    radial-gradient(circle at 70% 36%,#000 0 7vmax,rgba(236,222,255,.9) 7.4vmax,rgba(160,110,255,.4) 8.6vmax,transparent 12vmax),
-    radial-gradient(ellipse 34vmax 3vmax at 70% 37%,rgba(190,150,255,.5),transparent 70%),
-    radial-gradient(ellipse at 70% 36%,#0e0a16,#000 60%)}
-.hero canvas{position:absolute;top:0;right:0;width:68%;height:100%;display:block;background:#000;
-  -webkit-mask:linear-gradient(90deg,transparent,#000 28%);mask:linear-gradient(90deg,transparent,#000 28%)}
-.no-gl .hero canvas{display:none}
-/* čitelnost textu vlevo a plynulý přechod do zbytku stránky dole */
+.hero{--lav:#c9bcff;position:relative;overflow:hidden;color:var(--ink);background:#000;padding-top:calc(64px + env(safe-area-inset-top,0px))}
+/* pozadí: černá díra s kameny (z konceptu), vpravo; nahoře, vlevo i dole se rozplyne do černé */
+.hero-bg img{position:absolute;top:0;right:0;width:min(66%,1100px);height:calc(100% - 120px);object-fit:cover;object-position:50% 40%;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 26%),linear-gradient(180deg,transparent,#000 12%,#000 78%,transparent);-webkit-mask-composite:source-in;
+  mask:linear-gradient(90deg,transparent,#000 26%) intersect,linear-gradient(180deg,transparent,#000 12%,#000 78%,transparent)}
+@media (prefers-reduced-motion:no-preference){ .hero-bg img{animation:bgDrift 30s ease-in-out infinite alternate} }
+@keyframes bgDrift{to{transform:scale(1.04) translate(-1%,1%)}}
 .hero::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(0,0,0,.7) 0,rgba(0,0,0,.35) 30%,transparent 50%),linear-gradient(180deg,transparent 70%,#000 100%)}
+  background:linear-gradient(90deg,rgba(0,0,0,.55) 0,rgba(0,0,0,.2) 32%,transparent 50%)}
 .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;
   min-height:clamp(480px,calc(100svh - 64px - 230px),680px);padding-block:clamp(28px,5vh,56px)}
 .hero-copy{max-width:760px}
-.hero-k{margin:0;font-size:.8rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.hero-k{margin:0;font-family:"Orbitron",var(--f);font-size:.78rem;font-weight:400;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
 .hero-h{margin-top:22px;line-height:1}
-/* nápis CORPHIK s „O“ jako planetou s prstencem */
-.wm{display:inline-flex;align-items:center;font-size:clamp(3.4rem,9vw,8.4rem);font-weight:800;font-stretch:125%;letter-spacing:.02em;line-height:.9;
-  background:linear-gradient(180deg,#fff 30%,#c9bcff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 30px rgba(140,110,255,.35))}
-.wm-o{width:1.12em;height:.94em;margin:0 -.05em 0 -.02em;overflow:visible;filter:drop-shadow(0 0 14px rgba(170,140,255,.7))}
-@media (prefers-reduced-motion:no-preference){ .wm-ring{transform-box:fill-box;transform-origin:center;animation:wmRing 9s ease-in-out infinite} }
-@keyframes wmRing{50%{transform:rotate(-16deg) scale(1.03)}}
-.hero-line{margin-top:clamp(14px,2vw,22px);font-size:clamp(.9rem,1.35vw,1.2rem);font-weight:700;font-stretch:118%;letter-spacing:.12em;text-transform:uppercase;color:#f2f1ee}
+/* nápis CORPHIK: Orbitron, kovový přechod z bílé do levandulové (podle konceptu) */
+.wm{display:inline-block;font-family:"Orbitron",var(--f);font-size:clamp(3rem,8.4vw,7.6rem);font-weight:900;letter-spacing:.03em;line-height:1;white-space:nowrap;
+  background:linear-gradient(180deg,#fff 0%,#f3f0ff 42%,#c4b7f5 74%,#9a8bde 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 30px rgba(140,110,255,.35))}
+.hero-line{margin-top:clamp(16px,2vw,24px);font-family:"Orbitron",var(--f);font-size:clamp(.85rem,1.3vw,1.15rem);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#f2f1ee}
 .hero-line i{font-style:normal;color:var(--muted);margin:0 .5em}
 .hero-p{margin-top:16px;font-size:clamp(1.05rem,1.5vw,1.22rem);line-height:1.5;color:rgba(242,241,238,.82);max-width:46ch}
 .hero-act{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(26px,4vh,38px)}
@@ -82,15 +77,13 @@
 }
 /* telefon: díra nahoře, text pod ní */
 @media (max-width:700px){
-  .hero{background:
-    radial-gradient(circle at 50% 22%,#000 0 15vw,rgba(236,222,255,.9) 16vw,rgba(160,110,255,.4) 19vw,transparent 27vw),
-    radial-gradient(ellipse 70vw 6vw at 50% 23%,rgba(190,150,255,.5),transparent 70%),#000}
-  .hero::after{background:linear-gradient(180deg,transparent 22%,rgba(0,0,0,.7) 46%,#000 100%)}
-  .hero canvas{width:100%;height:min(92vw,470px);-webkit-mask:linear-gradient(180deg,#000 70%,transparent);mask:linear-gradient(180deg,#000 70%,transparent)}
-  .hero-in{min-height:0;padding-top:min(66vw,350px);padding-bottom:28px}
-  .wm{font-size:clamp(2.6rem,13vw,4rem)}
-  .hero-line{letter-spacing:.08em}
-  .hero-k{font-size:.7rem;letter-spacing:.18em}
+  .hero-bg img{width:100%;height:min(80vw,420px);object-position:50% 50%;
+    -webkit-mask:linear-gradient(180deg,#000 60%,transparent);mask:linear-gradient(180deg,#000 60%,transparent)}
+  .hero::after{display:none}
+  .hero-in{min-height:0;padding-top:min(58vw,300px);padding-bottom:28px}
+  .wm{font-size:clamp(2.3rem,12vw,3.6rem)}
+  .hero-line{letter-spacing:.06em;font-size:.78rem}
+  .hero-k{font-size:.62rem;letter-spacing:.2em}
   .hero-btn{flex:1 1 auto;justify-content:center}
   .hcard{grid-template-columns:56px minmax(0,1fr) 40px;gap:2px 14px;padding:18px 16px 14px}
   .hcard .ic{width:52px;height:52px;border-radius:14px}
@@ -98,7 +91,6 @@
   .hcard h2{font-size:1.15rem}
   .hcard p{font-size:.92rem}
   .hcard .go{width:38px;height:38px}
-  .hcard>img{width:46%;opacity:.35}
 }
 @media (prefers-reduced-motion:no-preference){
   .hero-k,.hero-h,.hero-p,.hero-act,.hcard{animation:heroIn .9s var(--ease) both}

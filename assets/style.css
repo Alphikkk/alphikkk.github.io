@@ -3,7 +3,7 @@
    Monochromatický styl podle loga: černá, bílá, šedá dráha a hvězda.
    ========================================================= */
 
-/* Písmo Archivo (licence SIL OFL, assets/fonts/OFL.txt) je přímo na webu, ne z Google Fonts:
+/* Písmo Archivo (licence SIL OFL, assets/fonts/OFL-Archivo.txt) je přímo na webu, ne z Google Fonts:
    prohlížeč návštěvníka tak kvůli písmu nekontaktuje Google (GDPR). */
 @font-face{font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;
   src:url(/assets/fonts/archivo-latin-ext.woff2) format("woff2");
@@ -11,6 +11,9 @@
 @font-face{font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;
   src:url(/assets/fonts/archivo-latin.woff2) format("woff2");
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* Orbitron (licence SIL OFL, assets/fonts/OFL-Orbitron.txt): logo CORPHIK a technické popisky na úvodu */
+@font-face{font-family:"Orbitron";font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/fonts/orbitron-latin.woff2) format("woff2")}
 
 :root{
   --bg:#ffffff;
@@ -357,3 +360,7 @@ footer a:hover{text-decoration:underline;text-underline-offset:3px}
 /* odkaz na ochranu osobních údajů v patičce */
 .foot-meta .pv-link{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 .foot-meta .pv-link:hover{color:var(--ink)}
+/* logo v navigaci: CORPHIK v Orbitronu se širokými mezerami (podle konceptu) */
+.brand{text-decoration:none}
+.brand-wm{font-family:"Orbitron",var(--f);font-weight:500;font-size:1.28rem;letter-spacing:.3em;margin-right:-.3em;color:var(--ink);white-space:nowrap;line-height:1}
+@media (max-width:380px){.brand-wm{font-size:1.05rem;letter-spacing:.22em}}

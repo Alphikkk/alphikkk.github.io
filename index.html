@@ -34,8 +34,8 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/style.css?v=17">
-<link rel="stylesheet" href="/assets/home.css?v=55">
+<link rel="stylesheet" href="/assets/style.css?v=19">
+<link rel="stylesheet" href="/assets/home.css?v=56">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -247,7 +247,7 @@
 <body data-page="home">
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Corphik"><img src="/assets/img/corphik-wordmark.png" alt="Corphik" width="117" height="22"></a>
+    <a class="brand" href="/" aria-label="Corphik"><span class="brand-wm">CORPHIK</span></a>
     <ul class="links">
       <li><a href="/#deck" data-i18n="nav.home">Služby</a></li>
       <li><a href="/portfolio/" data-i18n="nav.portfolio">Portfolio</a></li>
@@ -266,12 +266,12 @@
   </div>
 </header>
 <main>
-  <section class="hero" id="void" aria-labelledby="hero-h">
-    <canvas id="voidCanvas" role="img" aria-label="Černá díra s fialovým akrečním diskem v hlubokém vesmíru"></canvas>
+  <section class="hero" id="uvod" aria-labelledby="hero-h">
+    <picture class="hero-bg"><source media="(max-width:700px)" srcset="/assets/img/hero-space-m.webp"><img src="/assets/img/hero-space.webp" alt="Černá díra s fialovým akrečním diskem v hlubokém vesmíru" width="1748" height="1320" fetchpriority="high"></picture>
     <div class="wrap hero-in">
       <div class="hero-copy">
         <p class="hero-k" data-i18n="hero.k">Spolehlivá IT podpora a řešení na míru</p>
-        <h1 class="hero-h" id="hero-h"><span class="sr-only">Corphik – <span data-i18n="hero.h"></span></span><span class="wm" aria-hidden="true"><span>C</span><svg class="wm-o" viewBox="0 0 120 100" aria-hidden="true"><defs><linearGradient id="wmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#b9a8ff"/></linearGradient></defs><ellipse cx="60" cy="50" rx="27" ry="37" fill="none" stroke="url(#wmg)" stroke-width="7" transform="rotate(28 60 50)"/><ellipse cx="60" cy="52" rx="58" ry="17" fill="none" stroke="#d8ccff" stroke-width="3" transform="rotate(-22 60 52)" class="wm-ring"/></svg><span>RPHIK</span></span></h1>
+        <h1 class="hero-h" id="hero-h"><span class="sr-only">Corphik – <span data-i18n="hero.h"></span></span><span class="wm" aria-hidden="true">CORPHIK</span></h1>
         <p class="hero-line" data-i18n="hero.line">IT podpora <i>·</i> Počítače na míru <i>·</i> Weby</p>
         <p class="hero-p" data-i18n="hero.p2">Spolehlivá IT podpora, výkonné počítače na míru a moderní weby pro lidi i firmy. Osobně v Praze, na dálku po celé Evropě.</p>
         <div class="hero-act">
@@ -369,6 +369,6 @@
 <script src="/assets/app.js?v=42"></script>
 <script src="/assets/deck.js?v=5"></script>
 <script src="/assets/sky.js?v=1"></script>
-<script src="/assets/void.js?v=17"></script>
+<script src="/assets/home.js?v=1"></script>
 </body>
 </html>
