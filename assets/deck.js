@@ -87,7 +87,7 @@ if(form) form.addEventListener('submit', async e => {
   const $f = id => document.getElementById(id), st = $f('wfStatus'), btn = form.querySelector('.w-send');
   const name = $f('wfName').value.trim(), contact = $f('wfContact').value.trim(), msg = $f('wfMsg').value.trim();
   form.querySelectorAll('.bad').forEach(x => x.classList.remove('bad'));
-  const bad = [!contact && $f('wfContact'), !msg && $f('wfMsg'), !$f('wfConsent').checked && $f('wfConsent')].filter(Boolean);
+  const bad = [!contact && $f('wfContact'), !msg && $f('wfMsg')].filter(Boolean);
   if(bad.length){ bad.forEach(x => x.classList.add('bad')); st.textContent = t("w.err"); st.className = "w-status w-err"; bad[0].focus(); return; }
   if($f('wfHp').checked) return;
   const cart = getCart().map(findService).filter(Boolean).map(s => s.name[lang]);

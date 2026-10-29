@@ -404,3 +404,6 @@
 
 /* oznámení „web je ve výstavbě“ by na úvodu zakrývalo scénu i formulář */
 .void-on #wipNote{display:none}
+/* místo souhlasu krátká informace s odkazem na ochranu osobních údajů */
+.w-note{font-size:.8rem;color:var(--muted);line-height:1.45}
+.w-note a{color:var(--ink);text-underline-offset:3px}
