@@ -201,7 +201,16 @@ void main(){
   bool fell = false;
   float py = p.y;
   vec3 glow = vec3(0.0);
-  for(int i = 0; i < 400; i++){
+  /* paprsek, který míjí díru daleko (b > 22), se jen mírně ohne a disk ani záři nepotká:
+     ohyb ve slabém poli (rs/b)·(1 + cos α) se spočítá najednou místo krokování.
+     Na telefonu je to většina obrazovky pod dírou, na počítači pás vlevo pod textem. */
+  if(h2 > 484.0){
+    float b = sqrt(h2);
+    vec3 c = p - dot(p, rd)*rd;
+    float a = (1.0 - dot(p, rd)/length(p))/b;
+    rd = normalize(rd*cos(a) - normalize(c)*sin(a));
+  }
+  else for(int i = 0; i < 400; i++){
     if(float(i) >= uSteps) break;
     float r = length(p);
     if(r < 1.0){ fell = true; break; }
@@ -269,12 +278,14 @@ if(COARSE) addEventListener('deviceorientation', e => {
   if(e.gamma == null) return; mx = clamp(e.gamma/30, -1, 1); my = clamp((e.beta - 45)/30, -1, 1);
 }, {passive: true});
 
-/* rozlišení: začne ostře a podle času snímku se přizpůsobí. Prohlížeč kreslí nejvýš ~60 snímků/s,
+/* rozlišení: podle času snímku se přizpůsobí. Prohlížeč kreslí nejvýš ~60 snímků/s,
    takže „stíhá“ znamená snímek kolem 16,7 ms. Když nestíhá, ubírají se nejdřív kroky paprsku
-   (méně vidět), až potom rozlišení; když stíhá, rozlišení se vrací až na plné DPR. */
-const DPR = Math.min(devicePixelRatio || 1, 2);
+   (méně vidět), až potom rozlišení; když stíhá, rozlišení se vrací až na plné DPR.
+   Slabší zařízení (telefon, málo jader nebo paměti) začne níž a přidává, jen když stíhá. */
+const LOW = COARSE || (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
+const DPR = Math.min(devicePixelRatio || 1, LOW ? 1.5 : 2);
 const FIXED = /[?&]hq\b/.test(location.search);
-let scale = FIXED ? 1 : COARSE ? 0.85 : 1, steps = COARSE ? 200 : 240;
+let scale = FIXED ? 1 : LOW ? 0.6 : 1, steps = LOW ? 150 : 240;
 let W = 0, H = 0;
 /* kde má díra být a jak velká: určuje home.css (--hole-x, --hole-y = střed jako podíl okna, --hole-dist = vzdálenost kamery) */
 let hx = .5, hy = .5, hd = 38;
@@ -343,13 +354,17 @@ function frame(now){
   /* ladění kvality podle skutečné rychlosti (prvních ~2 s, pak jednou za čas) */
   if(last){ ft.push(now - last); }
   last = now;
-  if(ft.length >= 30 && !FIXED){
+  if(ft.length >= 20 && !FIXED){
     ft.sort((a, b) => a - b);
-    const med = ft[15]; ft = [];
+    const med = ft[10]; ft = [];
+    const slow = med > 40;                              /* pod 25 snímků/s: ubírá se ve větších krocích */
     if(time < 1.6) {}                                   /* během příletu se neměří, tam se kreslí víc */
     else if(med > 24){
-      if(steps > 130) steps -= 35;
-      else if(scale > 0.55){ scale = Math.max(0.55, scale*0.85); resize(); }
+      if(steps > 120) steps = Math.max(120, steps - (slow ? 60 : 35));
+      if((steps <= 120 || slow) && scale > 0.45){ scale = Math.max(0.45, scale*(slow ? 0.7 : 0.85)); resize(); }
+      /* nestíhá ani na minimu: díra zůstane jako statický obraz z CSS a procesor si odpočine
+         (tlačítka dál fungují, přechod je pak prolnutí) */
+      else if(slow && scale <= 0.45 && !diving){ root.classList.add('no-gl'); running = false; return; }
     }
     else if(med < 18.5 && tuned < 12){
       tuned++;
@@ -363,7 +378,7 @@ function frame(now){
   else running = false;
 }
 function start(){
-  if(inside) return;
+  if(inside || root.classList.contains('no-gl')) return;
   if(!raf){ running = true; last = 0; ft = []; raf = requestAnimationFrame(frame); }
 }
 document.addEventListener('visibilitychange', () => { if(!document.hidden) start(); });
