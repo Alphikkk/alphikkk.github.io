@@ -97,7 +97,8 @@ uniform float uTime, uIntro, uDist, uFov, uSteps;
 uniform vec3 uCam, uFwd, uRight, uUp;
 uniform vec3 uGal;                                /* směr ke spirální galaxii (podle orientace obrazovky) */
 uniform vec2 uOff;                                /* posun díry na obrazovce (vpravo vedle textu, na mobilu nahoru) */
-uniform vec2 uJit;                                /* posun o zlomek pixelu pro vyhlazování (TAA) */
+uniform vec2 uJit;
+uniform float uDither;                                /* posun o zlomek pixelu pro vyhlazování (TAA) */
 
 const float RIN = 2.6, ROUT = 15.0;
 
@@ -150,13 +151,8 @@ vec3 stars(vec3 d){
       c += tint*b;
     }
   }
-  /* Mléčná dráha: světlý pás, jasnější střed a tmavé prachové žíly */
-  float n1 = fbm(vec2(lon*4.0, lat*12.0));
-  float n2 = fbm(vec2(lon*10.0 + 3.0, lat*34.0));
-  float core = exp(-lat*lat*70.0);
-  float dust = smoothstep(0.42, 0.72, n2)*exp(-lat*lat*40.0);
-  vec3 mw = (vec3(0.4, 0.34, 0.62)*band*n1 + vec3(0.8, 0.66, 0.82)*core*n1*n1*1.4)*(1.0 - 0.9*dust);
-  c += mw*0.2;
+  /* Mléčná dráha jen jako hustší pás jednotlivých hvězd (práh výše podle band): žádný rozptýlený svit,
+     ten by čočka kolem díry rozmazala do kouřového oparu */
   c += galaxy(d);
   return c;
 }
@@ -212,13 +208,19 @@ void main(){
     float a = (1.0 - dot(p, rd)/length(p))/b;
     rd = normalize(rd*cos(a) - normalize(c)*sin(a));
   }
-  else for(int i = 0; i < 400; i++){
+  else{
+  /* náhodný posun startu paprsku (jiný v každém snímku): vzorky záře nesedí na pevné mřížce kroků,
+     takže místo soustředných „letokruhů“ vznikne šum, který vyhlazování (TAA) zprůměruje */
+  p += rd*hash2(gl_FragCoord.xy + fract(uTime*7.31)*97.0);
+  for(int i = 0; i < 400; i++){
     if(float(i) >= uSteps) break;
     float r = length(p);
     if(r < 1.0){ fell = true; break; }
     if(r > 60.0 && dot(p, rd) > 0.0) break;
     float dt = clamp(0.065*r*r/(1.0 + 0.25*r), 0.03, 2.4);
     if(r < 3.2) dt = min(dt, 0.08);
+    /* ve vrstvě záře nad diskem kratší kroky, jinak záře (silná ~1) padá mezi kroky (až 2,4) a dělá vlny */
+    else if(abs(p.y) < 3.0 && length(p.xz) < ROUT*1.3) dt = min(dt, 0.5);
     vec3 acc = -1.5*h2*p/pow(r, 5.0);
     vec3 np = p + rd*dt + 0.5*acc*dt*dt;
     rd = normalize(rd + acc*dt);
@@ -238,6 +240,12 @@ void main(){
     }
     p = np; py = p.y;
   }
+  }
+  /* záře svítí jen u disku a kolem díry: její slabé okraje, které by se rozlévaly do prostoru jako kouř,
+     se plynule stáhnou do nuly, takže prázdný vesmír zůstane čistě černý */
+  glow *= smoothstep(0.02, 0.09, max(glow.r, max(glow.g, glow.b)));
+  /* stín díry je úplně černý: paprsek, který spadl dovnitř, si záři nenese */
+  if(fell) glow = vec3(0.0);
   col += glow*smoothstep(0.15, 0.8, uIntro);
   if(!fell){
     vec3 bg = stars(rd)*smoothstep(0.0, 0.35, uIntro);
@@ -249,7 +257,11 @@ void main(){
   col = 1.0 - exp(-col*ex*1.4);
   col = pow(col, vec3(1.05));
   col *= 1.0 - 0.35*dot(uv, uv)*0.6;
-  col += (hash2(gl_FragCoord.xy + fract(uTime)*100.0) - 0.5)/255.0;
+  /* černý bod: slabý opar z tisíců drobných hvězd a rozptýlené záře se stáhne do čisté černé (OLED) */
+  col = max(col - 0.02, 0.0)*1.02;
+  /* šum proti stupňům v přechodech, jen kde něco svítí: černá zůstane přesně 0.
+     S TAA ho přidává až výstup (průměrování by ho smazalo). */
+  col += uDither*step(0.004, max(col.r, max(col.g, col.b)))*(hash2(gl_FragCoord.xy + fract(uTime)*100.0) - 0.5)/255.0;
   gl_FragColor = vec4(col, 1.0);
 }`;
 
@@ -269,7 +281,7 @@ gl.bindBuffer(gl.ARRAY_BUFFER, buf);
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
 gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 const U = {};
-["uRes","uTime","uIntro","uDist","uFov","uSteps","uCam","uFwd","uRight","uUp","uGal","uOff","uJit"].forEach(n => U[n] = gl.getUniformLocation(prog, n));
+["uRes","uTime","uIntro","uDist","uFov","uSteps","uCam","uFwd","uRight","uUp","uGal","uOff","uJit","uDither"].forEach(n => U[n] = gl.getUniformLocation(prog, n));
 
 /* ---------- Vyhlazování v čase (TAA) ----------
    Jemné proužky disku jsou užší než pixel, u díry se lámou do schodů a blikají. Každý snímek se kreslí
@@ -282,20 +294,32 @@ function mk(src){
   return gl.getProgramParameter(p, gl.LINK_STATUS) ? p : null;
 }
 const progR = mk(`precision mediump float;
-uniform sampler2D uCur, uHist; uniform vec2 uPx; uniform float uBlend;
+uniform sampler2D uCur, uHist; uniform vec2 uPx; uniform float uBlend, uSeed;
+float h(vec2 q){ return fract(sin(dot(q, vec2(12.9898, 78.233)))*43758.5453); }
 void main(){
   vec2 t = gl_FragCoord.xy*uPx;
   vec3 c = texture2D(uCur, t).rgb, lo = c, hi = c;
   for(int y = -1; y <= 1; y++) for(int x = -1; x <= 1; x++){
     vec3 s = texture2D(uCur, t + vec2(float(x), float(y))*uPx).rgb; lo = min(lo, s); hi = max(hi, s);
   }
-  gl_FragColor = vec4(mix(c, clamp(texture2D(uHist, t).rgb, lo, hi), uBlend), 1.0);
+  /* šum ±½ úrovně: v 8bitové historii se jinak malé změny zaokrouhlí na nulu a barva se zasekne ve stupních */
+  vec3 o = mix(c, clamp(texture2D(uHist, t).rgb, lo, hi), uBlend);
+  gl_FragColor = vec4(o + step(0.002, max(o.r, max(o.g, o.b)))*(h(gl_FragCoord.xy + uSeed) - 0.5)/255.0, 1.0);
 }`);
 const progC = mk(`precision mediump float;
-uniform sampler2D uTex; uniform vec2 uPx;
-void main(){ gl_FragColor = texture2D(uTex, gl_FragCoord.xy*uPx); }`);
-const UR = progR && {cur: gl.getUniformLocation(progR, 'uCur'), hist: gl.getUniformLocation(progR, 'uHist'), px: gl.getUniformLocation(progR, 'uPx'), blend: gl.getUniformLocation(progR, 'uBlend')};
-const UC = progC && {tex: gl.getUniformLocation(progC, 'uTex'), px: gl.getUniformLocation(progC, 'uPx')};
+uniform sampler2D uTex; uniform vec2 uPx; uniform float uSeed;
+float h(vec2 q){ return fract(sin(dot(q, vec2(12.9898, 78.233)))*43758.5453); }
+void main(){
+  vec3 o = texture2D(uTex, gl_FragCoord.xy*uPx).rgb;
+  /* černá zůstane přesně černá: šum jen tam, kde něco svítí */
+  gl_FragColor = vec4(o + step(0.002, max(o.r, max(o.g, o.b)))*(h(gl_FragCoord.xy + uSeed + 17.0) - 0.5)/255.0, 1.0);
+}`);
+const UR = progR && {cur: gl.getUniformLocation(progR, 'uCur'), hist: gl.getUniformLocation(progR, 'uHist'), px: gl.getUniformLocation(progR, 'uPx'), blend: gl.getUniformLocation(progR, 'uBlend'), seed: gl.getUniformLocation(progR, 'uSeed')};
+const UC = progC && {tex: gl.getUniformLocation(progC, 'uTex'), px: gl.getUniformLocation(progC, 'uPx'), seed: gl.getUniformLocation(progC, 'uSeed')};
+/* historie v 16bitových barvách, kde to grafika umí (jemné přechody bez stupňů); jinak 8 bitů s šumem */
+const HF = gl.getExtension('OES_texture_half_float');
+gl.getExtension('EXT_color_buffer_half_float');
+let texType = HF ? HF.HALF_FLOAT_OES : gl.UNSIGNED_BYTE;
 /* tři cíle: aktuální snímek a dvě historie, které se střídají */
 const RT = [0, 1, 2].map(() => ({tex: gl.createTexture(), fb: gl.createFramebuffer()}));
 let taa = !!(progR && progC), hist = 0, histOk = false, jit = 0;
@@ -304,32 +328,38 @@ function allocRT(){
   if(!taa) return;
   for(const t of RT){
     gl.bindTexture(gl.TEXTURE_2D, t.tex);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, W, H, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, W, H, 0, gl.RGBA, texType, null);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.bindFramebuffer(gl.FRAMEBUFFER, t.fb);
     gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t.tex, 0);
-    if(gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) taa = false;
+    if(gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE){
+      /* do half-float nejde kreslit: znovu s 8 bity */
+      if(texType !== gl.UNSIGNED_BYTE){ texType = gl.UNSIGNED_BYTE; gl.bindFramebuffer(gl.FRAMEBUFFER, null); return allocRT(); }
+      taa = false;
+    }
   }
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
   histOk = false;
 }
 /* scéna do textury s posunem, smíchání s historií, výsledek na obrazovku */
 function draw(blend){
-  if(!taa){ gl.uniform2f(U.uJit, 0, 0); gl.drawArrays(gl.TRIANGLES, 0, 3); return; }
+  if(!taa){ gl.uniform2f(U.uJit, 0, 0); gl.uniform1f(U.uDither, 1); gl.drawArrays(gl.TRIANGLES, 0, 3); return; }
+  const seed = (jit*7.13) % 101;
+  gl.uniform1f(U.uDither, 0);
   const j = HALTON[jit++ & 7], cur = RT[2], from = RT[hist], to = RT[1 - hist];
   gl.uniform2f(U.uJit, j[0] - .5, j[1] - .5);
   gl.bindFramebuffer(gl.FRAMEBUFFER, cur.fb); gl.drawArrays(gl.TRIANGLES, 0, 3);
   gl.useProgram(progR);
   gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, cur.tex);
   gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, from.tex);
-  gl.uniform1i(UR.cur, 0); gl.uniform1i(UR.hist, 1); gl.uniform2f(UR.px, 1/W, 1/H); gl.uniform1f(UR.blend, histOk ? blend : 0);
+  gl.uniform1i(UR.cur, 0); gl.uniform1i(UR.hist, 1); gl.uniform2f(UR.px, 1/W, 1/H); gl.uniform1f(UR.blend, histOk ? blend : 0); gl.uniform1f(UR.seed, seed);
   gl.bindFramebuffer(gl.FRAMEBUFFER, to.fb); gl.drawArrays(gl.TRIANGLES, 0, 3);
   gl.useProgram(progC);
   gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, to.tex);
-  gl.uniform1i(UC.tex, 0); gl.uniform2f(UC.px, 1/W, 1/H);
+  gl.uniform1i(UC.tex, 0); gl.uniform2f(UC.px, 1/W, 1/H); gl.uniform1f(UC.seed, seed);
   gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.drawArrays(gl.TRIANGLES, 0, 3);
   gl.useProgram(prog);
   hist = 1 - hist; histOk = true;
