@@ -23,7 +23,7 @@ const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const INSIDE_HASH = /^#(sluzby|w-ask|prace|kontakt|obl-|svc-)/;
 
 /* ---------- Přepínání mezi scénou a obsahem „uvnitř“ ---------- */
-let inside = false, diving = false;
+let inside = false, diving = false, frozen = false;   /* frozen: pomalé zařízení, obraz stojí na posledním snímku */
 function openInside(hash, instant){
   inside = true; diving = false;
   root.classList.add('is-inside'); root.classList.remove('is-diving');
@@ -73,7 +73,7 @@ divers.forEach(el => el.addEventListener('click', e => {
   diveTo = new URL(el.href, location.href).hash || "#sluzby";
   if(typeof track === "function") track("dive", {to: diveTo.slice(1)});
   history.pushState(null, "", diveTo);
-  if(!gl || REDUCE || root.classList.contains('no-gl')){ root.classList.add('is-diving'); setTimeout(() => openInside(diveTo), REDUCE ? 250 : 500); return; }
+  if(!gl || REDUCE || frozen || root.classList.contains('no-gl')){ root.classList.add('is-diving'); setTimeout(() => openInside(diveTo), REDUCE ? 250 : 500); return; }
   diving = true; diveFrom = -1; root.classList.add('is-diving'); start();
 }));
 
@@ -278,14 +278,15 @@ if(COARSE) addEventListener('deviceorientation', e => {
   if(e.gamma == null) return; mx = clamp(e.gamma/30, -1, 1); my = clamp((e.beta - 45)/30, -1, 1);
 }, {passive: true});
 
-/* rozlišení: podle času snímku se přizpůsobí. Prohlížeč kreslí nejvýš ~60 snímků/s,
-   takže „stíhá“ znamená snímek kolem 16,7 ms. Když nestíhá, ubírají se nejdřív kroky paprsku
-   (méně vidět), až potom rozlišení; když stíhá, rozlišení se vrací až na plné DPR.
-   Slabší zařízení (telefon, málo jader nebo paměti) začne níž a přidává, jen když stíhá. */
+/* kvalita: plátno má strop počtu pixelů (díra je měkká, roztažení obrazu není znát), slabší zařízení
+   (telefon, málo jader nebo paměti) nižší. Podle času snímku se kvalita jen ubírá, nikdy nepřidává,
+   takže se obraz neustále nepřepíná: nejdřív kroky paprsku, pak rozlišení, pak kreslení na 30 snímků/s,
+   a když nestíhá ani to, obraz se zastaví na posledním snímku (frozen). */
 const LOW = COARSE || (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
-const DPR = Math.min(devicePixelRatio || 1, LOW ? 1.5 : 2);
+const DPR = Math.min(devicePixelRatio || 1, 1.5);
 const FIXED = /[?&]hq\b/.test(location.search);
-let scale = FIXED ? 1 : LOW ? 0.6 : 1, steps = LOW ? 150 : 240;
+const BUDGET = FIXED ? Infinity : LOW ? 0.35e6 : 1.0e6;
+let scale = 1, steps = FIXED ? 240 : LOW ? 140 : 200, every = 1;
 let W = 0, H = 0;
 /* kde má díra být a jak velká: určuje home.css (--hole-x, --hole-y = střed jako podíl okna, --hole-dist = vzdálenost kamery) */
 let hx = .5, hy = .5, hd = 38;
@@ -293,23 +294,31 @@ function place(){
   const cs = getComputedStyle(voidEl), n = (v, d) => { const x = parseFloat(cs.getPropertyValue(v)); return isNaN(x) ? d : x; };
   hx = n('--hole-x', .5); hy = n('--hole-y', .5); hd = n('--hole-dist', 38);
 }
+/* nová velikost plátna se nastaví až těsně před kreslením: změna velikosti plátno vymaže
+   a mimo snímek by na okamžik probliklo černé */
+let sized = false;
 function resize(){
+  sized = true;
   place();
-  const w = Math.max(1, Math.round(innerWidth*DPR*scale)), h = Math.max(1, Math.round(innerHeight*DPR*scale));
+  const px = innerWidth*innerHeight*DPR*DPR, k = scale*Math.min(1, Math.sqrt(BUDGET/px));
+  const w = Math.max(1, Math.round(innerWidth*DPR*k)), h = Math.max(1, Math.round(innerHeight*DPR*k));
   if(w === W && h === H) return;
   W = cv.width = w; H = cv.height = h;
   gl.viewport(0, 0, W, H);
 }
-addEventListener('resize', resize);
+addEventListener('resize', () => { sized = false; if(frozen) start(); });
 resize();
 
 const t0 = performance.now();
-let running = false, raf = 0, last = 0, ft = [], tuned = 0;
+let running = false, raf = 0, last = 0, ft = [], tick = 0;
 const ease = x => x < 0.5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3)/2;
 const easeIn = x => Math.pow(x, 2.4);
 
 function frame(now){
   raf = 0;
+  /* zpomalený režim: kreslí se jen každý druhý snímek (30 snímků/s) */
+  if(every > 1 && (tick++ % every) && !diving){ raf = requestAnimationFrame(frame); return; }
+  if(!sized) resize();
   const time = (now - t0)/1000;
   const intro = REDUCE ? 1 : clamp(time/1.1);
   sx += (mx - sx)*0.04; sy += (my - sy)*0.04;
@@ -351,29 +360,22 @@ function frame(now){
   gl.drawArrays(gl.TRIANGLES, 0, 3);
   voidEl.style.setProperty('--dive', dv.toFixed(3));
 
-  /* ladění kvality podle skutečné rychlosti (prvních ~2 s, pak jednou za čas) */
+  /* ladění kvality podle skutečné rychlosti: po 20 snímcích nebo 1,5 s, jen dolů a rovnou o tolik,
+     kolik chybí (need = kolikrát rychleji by snímek musel být), takže obraz se změní jen párkrát */
   if(last){ ft.push(now - last); }
   last = now;
-  if(ft.length >= 20 && !FIXED){
+  if(!FIXED && (ft.length >= 20 || (ft.length >= 4 && ft.reduce((a, b) => a + b, 0) > 1500))){
     ft.sort((a, b) => a - b);
-    const med = ft[10]; ft = [];
-    const slow = med > 40;                              /* pod 25 snímků/s: ubírá se ve větších krocích */
-    if(time < 1.6) {}                                   /* během příletu se neměří, tam se kreslí víc */
-    else if(med > 24){
-      if(steps > 120) steps = Math.max(120, steps - (slow ? 60 : 35));
-      if((steps <= 120 || slow) && scale > 0.45){ scale = Math.max(0.45, scale*(slow ? 0.7 : 0.85)); resize(); }
-      /* nestíhá ani na minimu: díra zůstane jako statický obraz z CSS a procesor si odpočine
-         (tlačítka dál fungují, přechod je pak prolnutí) */
-      else if(slow && scale <= 0.45 && !diving){ root.classList.add('no-gl'); running = false; return; }
-    }
-    else if(med < 18.5 && tuned < 12){
-      tuned++;
-      if(scale < 1){ scale = Math.min(1, scale*1.12); resize(); }
-      else if(steps < 240) steps = Math.min(240, steps + 30);
-    }
+    const med = ft[ft.length >> 1], need = every*16.7/med; ft = [];
+    if(time < 1.6 || diving || need > 0.75) {}         /* během příletu se neměří, tam se kreslí víc */
+    else if(need < 0.15) frozen = true;                 /* pod ~9 snímků/s ani snížená kvalita nepomůže */
+    else if(steps > 110) steps = Math.max(110, Math.round(steps*Math.max(0.6, need)));
+    else if(scale > 0.5){ scale = Math.max(0.5, scale*Math.max(0.6, Math.sqrt(need))); sized = false; }
+    else if(every === 1) every = 2;
+    else frozen = true;                                 /* obraz zůstane stát na posledním snímku, tlačítka fungují dál */
   }
 
-  if(REDUCE && !diving){ running = false; return; }
+  if((REDUCE || frozen) && !diving){ running = false; return; }
   if(!inside && !document.hidden) raf = requestAnimationFrame(frame);
   else running = false;
 }
