@@ -451,6 +451,8 @@ function frame(now){
   gl.uniform1f(U.uSteps, diving ? Math.round(Math.min(steps, 140)*(1 - 0.4*dv)) : steps);
   gl.uniform3fv(U.uGal, portrait ? [0.14, -0.33, -0.93] : [-0.2, -0.25, -0.95]);
   gl.uniform3fv(U.uCam, cam); gl.uniform3fv(U.uFwd, f); gl.uniform3fv(U.uRight, r); gl.uniform3fv(U.uUp, u);
+  /* kamera pro obíhající IT problémy (orbit.js): kreslí je stejnou projekcí, aby seděly k disku */
+  window.corphikVoidCam = {cam, f, r, u, fov: (portrait ? 0.66 : 0.58) + dv*0.9, ox: (hx - .5)*innerWidth*k, oy: (.5 - hy)*innerHeight*k};
   /* historie: v klidu silně (~5 snímků), při ponoru a nástupu slabě, ať pohyb nezanechává stopu */
   draw(diving || intro < 1 ? 0.4 : 0.82);
   voidEl.style.setProperty('--dive', dv.toFixed(3));

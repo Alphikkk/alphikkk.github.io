@@ -20,6 +20,9 @@
     #000}
 .void canvas{position:absolute;inset:0;width:100%;height:100%;display:block;background:#000}
 .no-gl .void canvas{display:none}
+/* IT problémy obíhající kolem díry (orbit.js): průhledná vrstva nad dírou, pod textem; bez WebGL zůstává */
+.void #itOrbit{z-index:1;background:transparent;pointer-events:none}
+.no-gl .void #itOrbit{display:block}
 /* ztmavení za textem vlevo, ať disk díry nepřebíjí nadpis */
 .void-ui::before{content:"";position:absolute;inset:0 auto 0 calc(50% - 50vw);width:100vw;z-index:-1;pointer-events:none;
   background:linear-gradient(90deg,rgba(0,0,0,.6) 0,rgba(0,0,0,.35) 40%,transparent 62%)}
