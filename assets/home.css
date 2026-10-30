@@ -17,7 +17,7 @@
   background:
     radial-gradient(circle at var(--hx) var(--hy),#000 0 9vmin,rgba(236,222,255,.95) 9.6vmin,rgba(160,110,255,.4) 11vmin,transparent 15vmin),
     radial-gradient(ellipse 46vmin 4vmin at var(--hx) var(--hy),rgba(190,150,255,.55),transparent 70%),
-    radial-gradient(ellipse at var(--hx) var(--hy),#0e0a16,#000 60%)}
+    #000}
 .void canvas{position:absolute;inset:0;width:100%;height:100%;display:block;background:#000}
 .no-gl .void canvas{display:none}
 /* ztmavení za textem vlevo, ať disk díry nepřebíjí nadpis */
