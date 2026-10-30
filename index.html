@@ -35,7 +35,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/style.css?v=17">
-<link rel="stylesheet" href="/assets/home.css?v=52">
+<link rel="stylesheet" href="/assets/home.css?v=53">
 <script src="/assets/void-on.js"></script>
 <script type="application/ld+json">
 {
@@ -269,9 +269,21 @@
   <section class="void" id="void" aria-labelledby="void-h">
     <canvas id="voidCanvas" role="img" aria-label="Vesmír s černou dírou, jejíž gravitace ohýbá světlo hvězd i nápis Corphik"></canvas>
     <div class="void-ui">
-      <h1 class="void-h" id="void-h"><span class="sr-only">Corphik – </span><span data-i18n="v.h">IT podpora, počítače na míru a weby.</span></h1>
-      <p class="void-p" data-i18n="v.p">Osobně v Praze a okolí, na dálku po celé Evropě.</p>
-      <a class="void-go" id="voidGo" href="#sluzby"><span data-i18n="v.go">Co nabízím</span></a>
+      <div class="void-copy">
+        <p class="void-p" data-i18n="v.p">Osobně v Praze a okolí, na dálku po celé Evropě.</p>
+        <h1 class="void-h" id="void-h"><span class="sr-only">Corphik – </span><span data-i18n="v.h">IT podpora, počítače <em>na míru</em> a weby.</span></h1>
+        <p class="void-lead" data-i18n="v.lead">Opravím počítač, postavím nový na míru nebo předělám web.</p>
+        <div class="void-ctas">
+          <a class="void-go" id="voidGo" href="#sluzby" data-dive><span data-i18n="v.go">Vybrat službu</span></a>
+          <a class="void-ask" href="#w-ask" data-dive data-i18n="v.ask">Napsat mi</a>
+        </div>
+        <ul class="void-trust"><li data-i18n="v.t1">Cenu potvrdím předem</li><li data-i18n="v.t2">Dovoz PC po Praze v ceně</li><li data-i18n="v.t3">Ozvu se co nejdřív</li></ul>
+      </div>
+      <ul class="void-cards">
+        <li><a class="void-card void-card-it" href="#obl-it" data-dive><span class="n">01</span><span class="t" data-i18n="v.c.it">IT podpora</span><span class="d" data-i18n="v.c.itd">Opravy, instalace Windows a Linuxu, vzdálená pomoc.</span><span class="pr" data-i18n="v.c.itp">od 400 Kč</span></a></li>
+        <li><a class="void-card void-card-pc" href="#obl-pc" data-dive><span class="n">02</span><span class="t" data-i18n="v.c.pc">Stavba PC</span><span class="d" data-i18n="v.c.pcd">Počítač na míru podle rozpočtu, upgrade starého PC.</span><span class="pr" data-i18n="v.c.pcp">od 500 Kč</span></a></li>
+        <li><a class="void-card void-card-web" href="#obl-web" data-dive><span class="n">03</span><span class="t" data-i18n="v.c.web">Weby a domény</span><span class="d" data-i18n="v.c.webd">Redesign webu, propojení domény s webem a e-mailem.</span><span class="pr" data-i18n="v.c.webp">od 800 Kč</span></a></li>
+      </ul>
     </div>
   </section>
   <div class="inside" id="inside" tabindex="-1">
@@ -355,9 +367,9 @@
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Kontakt</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span><a class="pv-link" href="/soukromi/" data-i18n="ft.privacy">Ochrana osobních údajů</a></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=40"></script>
+<script src="/assets/app.js?v=41"></script>
 <script src="/assets/deck.js?v=5"></script>
 <script src="/assets/sky.js?v=1"></script>
-<script src="/assets/void.js?v=14"></script>
+<script src="/assets/void.js?v=15"></script>
 </body>
 </html>

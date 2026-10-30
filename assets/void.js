@@ -3,7 +3,8 @@
    Černá díra v reálném čase (WebGL): paprsky světla se ohýbají kolem díry
    (Schwarzschild, rs = 1), akreční disk s Dopplerovým jasem, hvězdy,
    Mléčná dráha a spirální galaxie – gravitační čočka ohýbá i je.
-   Tlačítko „Co nabízím“ kameru vtáhne do díry a uvnitř se otevřou služby.
+   Díra je vedle nabídky na úvodu; tlačítka a karty služeb kameru vtáhnou do díry
+   a uvnitř se otevře vybrané místo (služby, formulář).
    Bez knihoven. Bez WebGL zůstane statické pozadí z CSS, při
    prefers-reduced-motion se vykreslí jeden snímek a přechod je jen prolnutí.
    ========================================================= */
@@ -12,6 +13,8 @@ const root = document.documentElement;
 const voidEl = document.getElementById('void');
 const cv = document.getElementById('voidCanvas');
 const go = document.getElementById('voidGo');
+/* tlačítka a karty služeb na úvodu: všechny vtáhnou do díry, každé otevře svoje místo uvnitř */
+const divers = document.querySelectorAll('.void [data-dive]');
 if(!voidEl || !cv) return;
 
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -27,6 +30,9 @@ function openInside(hash, instant){
   /* služby jsou na úvodu jako jedna obrazovka (deck.js); staré kotvy (#sluzby, #obl-…, #svc-…) míří na ni */
   const el = hash && ((window.corphikTarget && window.corphikTarget(hash)) || document.getElementById(hash.slice(1)));
   if(el) el.scrollIntoView({block: "start"}); else scrollTo(0, 0);
+  /* karta oblasti z úvodu: služby začínají nahoře, oblast se jen doroluje do záběru (na telefonu bývá níž) */
+  const area = /^#obl-/.test(hash || "") && document.getElementById(hash.slice(1) + "-d");
+  if(area) area.scrollIntoView({block: "nearest"});
   if(!instant){ const ins = document.getElementById('inside'); ins && ins.focus({preventScroll: true}); }
 }
 function closeInside(){
@@ -44,7 +50,7 @@ addEventListener('popstate', () => {
 /* odkazy na sekce uvnitř (#sluzby, /#prace…) otevřou obsah i bez průletu */
 document.addEventListener('click', e => {
   const a = e.target.closest && e.target.closest('a[href*="#"]');
-  if(!a || a === go) return;
+  if(!a || a.closest('.void [data-dive]')) return;
   const u = new URL(a.href, location.href);
   if(u.pathname !== location.pathname || !INSIDE_HASH.test(u.hash)) return;
   if(!inside){ e.preventDefault(); history.pushState(null, "", u.hash); openInside(u.hash); }
@@ -60,15 +66,16 @@ document.querySelectorAll('.nav .brand').forEach(b => b.addEventListener('click'
   e.preventDefault(); history.pushState(null, "", location.pathname + location.search); closeInside();
 }));
 
-let dive = 0, diveFrom = -1;
-go && go.addEventListener('click', e => {
+let dive = 0, diveFrom = -1, diveTo = "#sluzby";
+divers.forEach(el => el.addEventListener('click', e => {
   e.preventDefault();
   if(diving || inside) return;
-  if(typeof track === "function") track("dive");
-  history.pushState(null, "", "#sluzby");
-  if(!gl || REDUCE || root.classList.contains('no-gl')){ root.classList.add('is-diving'); setTimeout(() => openInside("#sluzby"), REDUCE ? 250 : 500); return; }
+  diveTo = new URL(el.href, location.href).hash || "#sluzby";
+  if(typeof track === "function") track("dive", {to: diveTo.slice(1)});
+  history.pushState(null, "", diveTo);
+  if(!gl || REDUCE || root.classList.contains('no-gl')){ root.classList.add('is-diving'); setTimeout(() => openInside(diveTo), REDUCE ? 250 : 500); return; }
   diving = true; diveFrom = -1; root.classList.add('is-diving'); start();
-});
+}));
 
 /* ---------- WebGL ---------- */
 const gl = cv.getContext('webgl', {antialias: false, alpha: false, depth: false, powerPreference: "high-performance", preserveDrawingBuffer: false});
@@ -87,7 +94,8 @@ precision highp float;
 uniform vec2 uRes;
 uniform float uTime, uIntro, uDist, uFov, uSteps;
 uniform vec3 uCam, uFwd, uRight, uUp;
-uniform vec3 uGal;                                /* směr ke spirální galaxii (podle orientace obrazovky) */
+uniform vec3 uGal;
+uniform vec2 uOff;                                /* posun díry na obrazovce (vpravo vedle textu, na mobilu nahoru) */                                /* směr ke spirální galaxii (podle orientace obrazovky) */
 
 const float RIN = 2.6, ROUT = 15.0;
 
@@ -184,7 +192,7 @@ vec4 disk(vec3 p, vec3 rd){
 }
 
 void main(){
-  vec2 uv = (gl_FragCoord.xy - 0.5*uRes)/min(uRes.x, uRes.y);
+  vec2 uv = (gl_FragCoord.xy - 0.5*uRes)/min(uRes.x, uRes.y) - uOff;
   vec3 rd = normalize(uFwd + (uRight*uv.x + uUp*uv.y)*uFov);
   vec3 p = uCam;
   vec3 col = vec3(0.0);
@@ -251,7 +259,7 @@ gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_
 const loc = gl.getAttribLocation(prog, 'p');
 gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
 const U = {};
-["uRes","uTime","uIntro","uDist","uFov","uSteps","uCam","uFwd","uRight","uUp","uGal"].forEach(n => U[n] = gl.getUniformLocation(prog, n));
+["uRes","uTime","uIntro","uDist","uFov","uSteps","uCam","uFwd","uRight","uUp","uGal","uOff"].forEach(n => U[n] = gl.getUniformLocation(prog, n));
 
 /* ---------- Nápis jako textura (písmo Archivo, široký řez) ---------- */
 /* ---------- Kamera, myš, kvalita ---------- */
@@ -268,7 +276,14 @@ const DPR = Math.min(devicePixelRatio || 1, 2);
 const FIXED = /[?&]hq\b/.test(location.search);
 let scale = FIXED ? 1 : COARSE ? 0.85 : 1, steps = COARSE ? 200 : 240;
 let W = 0, H = 0;
+/* kde má díra být a jak velká: určuje home.css (--hole-x, --hole-y = střed jako podíl okna, --hole-dist = vzdálenost kamery) */
+let hx = .5, hy = .5, hd = 38;
+function place(){
+  const cs = getComputedStyle(voidEl), n = (v, d) => { const x = parseFloat(cs.getPropertyValue(v)); return isNaN(x) ? d : x; };
+  hx = n('--hole-x', .5); hy = n('--hole-y', .5); hd = n('--hole-dist', 38);
+}
 function resize(){
+  place();
   const w = Math.max(1, Math.round(innerWidth*DPR*scale)), h = Math.max(1, Math.round(innerHeight*DPR*scale));
   if(w === W && h === H) return;
   W = cv.width = w; H = cv.height = h;
@@ -292,18 +307,17 @@ function frame(now){
   if(diving){
     if(diveFrom < 0) diveFrom = now;
     dive = clamp((now - diveFrom)/1700);
-    if(dive >= 1){ openInside("#sluzby"); return; }
+    if(dive >= 1){ openInside(diveTo); return; }
   }
   const dv = easeIn(dive);
   const portrait = innerHeight > innerWidth;
-  let dist = (portrait ? 34 : 38)*(1 - dv) + 1.15*dv;
+  let dist = hd*(1 - dv) + 1.15*dv;
   /* nástup: kamera přiletí z dálky během první sekundy */
   if(!REDUCE) dist += 14*Math.pow(1 - clamp(time/1.6), 3);
   const az = (portrait ? -0.03 : -0.07) + sx*0.22 + Math.sin(time*0.07)*0.06;
   const el = 0.105 + sy*0.06 + dv*0.12;
   const cam = [Math.sin(az)*Math.cos(el)*dist, Math.sin(el)*dist, Math.cos(az)*Math.cos(el)*dist];
-  /* cíl lehce pod dírou, aby nad textem a tlačítkem zůstala díra celá v záběru */
-  const tgt = [0, portrait ? -4 : -1.6, 0];
+  const tgt = [0, 0, 0];
   let f = [tgt[0]-cam[0], tgt[1]-cam[1], tgt[2]-cam[2]];
   const fl = Math.hypot(...f); f = f.map(v => v/fl);
   const roll = -0.07 + sx*0.02;
@@ -313,6 +327,9 @@ function frame(now){
   const u = [r[1]*f[2]-r[2]*f[1], r[2]*f[0]-r[0]*f[2], r[0]*f[1]-r[1]*f[0]];
 
   gl.uniform2f(U.uRes, W, H);
+  /* při ponoru se díra stáhne do středu, kamera letí přímo do ní */
+  const k = (1 - dv)/Math.min(innerWidth, innerHeight);
+  gl.uniform2f(U.uOff, (hx - .5)*innerWidth*k, (.5 - hy)*innerHeight*k);
   gl.uniform1f(U.uTime, time);
   gl.uniform1f(U.uIntro, intro);
   gl.uniform1f(U.uDist, dist);
