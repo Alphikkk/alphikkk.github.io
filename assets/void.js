@@ -211,11 +211,11 @@ void main(){
     vec3 acc = -1.5*h2*p/pow(r, 5.0);
     vec3 np = p + rd*dt + 0.5*acc*dt*dt;
     rd = normalize(rd + acc*dt);
-    /* jemná fialová záře nad diskem a kolem fotonové sféry (ohýbá se stejně jako světlo) */
+    /* fialová záře nad diskem a kolem fotonové sféry (ohýbá se stejně jako světlo) */
     float rxz = length(np.xz);
-    float halo = exp(-abs(np.y)*1.6)*smoothstep(ROUT*1.2, RIN, rxz)*smoothstep(RIN*0.7, RIN*1.3, rxz);
+    float halo = exp(-abs(np.y)*1.1)*smoothstep(ROUT*1.2, RIN, rxz)*smoothstep(RIN*0.7, RIN*1.3, rxz);
     float ring = exp(-pow(r - 1.6, 2.0)*6.0);
-    glow += trans*(vec3(0.55, 0.32, 1.0)*halo*0.022 + vec3(0.75, 0.6, 1.0)*ring*0.03)*dt;
+    glow += trans*(vec3(0.55, 0.32, 1.0)*halo*0.05 + vec3(0.75, 0.6, 1.0)*ring*0.075)*dt;
     /* průchod rovinou disku */
     if(py*np.y < 0.0){
       float k = py/(py - np.y);
