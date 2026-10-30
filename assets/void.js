@@ -97,8 +97,8 @@ uniform float uTime, uIntro, uDist, uFov, uSteps;
 uniform vec3 uCam, uFwd, uRight, uUp;
 uniform vec3 uGal;                                /* směr ke spirální galaxii (podle orientace obrazovky) */
 uniform vec2 uOff;                                /* posun díry na obrazovce (vpravo vedle textu, na mobilu nahoru) */
-uniform vec2 uJit;
-uniform float uDither;                                /* posun o zlomek pixelu pro vyhlazování (TAA) */
+uniform vec2 uJit;                                /* posun o zlomek pixelu pro vyhlazování (TAA) */
+uniform float uDither;
 
 const float RIN = 2.6, ROUT = 15.0;
 
@@ -148,7 +148,7 @@ vec3 stars(vec3 d){
       if(k == 0) b *= 0.85 + 0.15*sin(uTime*2.3 + h*400.0);
       float tc = fract(h*53.0);
       vec3 tint = tc < 0.3 ? vec3(1.0, 0.84, 0.68) : (tc < 0.75 ? vec3(1.0, 0.98, 0.96) : vec3(0.72, 0.8, 1.0));
-      c += tint*b;
+      c += tint*b*2.0;
     }
   }
   /* Mléčná dráha jen jako hustší pás jednotlivých hvězd (práh výše podle band): žádný rozptýlený svit,
@@ -226,9 +226,9 @@ void main(){
     rd = normalize(rd + acc*dt);
     /* fialová záře nad diskem a kolem fotonové sféry (ohýbá se stejně jako světlo) */
     float rxz = length(np.xz);
-    float halo = exp(-abs(np.y)*1.1)*smoothstep(ROUT*1.2, RIN, rxz)*smoothstep(RIN*0.7, RIN*1.3, rxz);
+    float halo = exp(-abs(np.y)*1.272)*smoothstep(ROUT*1.2, RIN, rxz)*smoothstep(RIN*0.7, RIN*1.3, rxz);
     float ring = exp(-pow(r - 1.6, 2.0)*6.0);
-    glow += trans*(vec3(0.55, 0.32, 1.0)*halo*0.05 + vec3(0.75, 0.6, 1.0)*ring*0.075)*dt;
+    glow += trans*(vec3(0.55, 0.32, 1.0)*halo*0.06 + vec3(0.75, 0.6, 1.0)*ring*0.0788)*dt;
     /* průchod rovinou disku */
     if(py*np.y < 0.0){
       float k = py/(py - np.y);
@@ -241,9 +241,6 @@ void main(){
     p = np; py = p.y;
   }
   }
-  /* záře svítí jen u disku a kolem díry: její slabé okraje, které by se rozlévaly do prostoru jako kouř,
-     se plynule stáhnou do nuly, takže prázdný vesmír zůstane čistě černý */
-  glow *= smoothstep(0.02, 0.09, max(glow.r, max(glow.g, glow.b)));
   /* stín díry je úplně černý: paprsek, který spadl dovnitř, si záři nenese */
   if(fell) glow = vec3(0.0);
   col += glow*smoothstep(0.15, 0.8, uIntro);
@@ -257,8 +254,8 @@ void main(){
   col = 1.0 - exp(-col*ex*1.4);
   col = pow(col, vec3(1.05));
   col *= 1.0 - 0.35*dot(uv, uv)*0.6;
-  /* černý bod: slabý opar z tisíců drobných hvězd a rozptýlené záře se stáhne do čisté černé (OLED) */
-  col = max(col - 0.02, 0.0)*1.02;
+  /* černý bod: slabé okraje záře a hvězd se stáhnou do čisté černé (OLED); záře má měkký okraj, jen to nejslabší zmizí */
+  col = max(col - 0.04, 0.0)*1.04;
   /* šum proti stupňům v přechodech, jen kde něco svítí: černá zůstane přesně 0.
      S TAA ho přidává až výstup (průměrování by ho smazalo). */
   col += uDither*step(0.004, max(col.r, max(col.g, col.b)))*(hash2(gl_FragCoord.xy + fract(uTime)*100.0) - 0.5)/255.0;
