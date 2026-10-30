@@ -35,7 +35,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/style.css?v=17">
-<link rel="stylesheet" href="/assets/home.css?v=52">
+<link rel="stylesheet" href="/assets/home.css?v=53">
 <script src="/assets/void-on.js"></script>
 <script type="application/ld+json">
 {
@@ -269,9 +269,21 @@
   <section class="void" id="void" aria-labelledby="void-h">
     <canvas id="voidCanvas" role="img" aria-label="Space with a black hole whose gravity bends starlight and the Corphik name"></canvas>
     <div class="void-ui">
-      <h1 class="void-h" id="void-h"><span class="sr-only">Corphik – </span><span data-i18n="v.h">IT support, custom PCs and websites.</span></h1>
-      <p class="void-p" data-i18n="v.p">In person around Prague, remotely across Europe.</p>
-      <a class="void-go" id="voidGo" href="#sluzby"><span data-i18n="v.go">What I offer</span></a>
+      <div class="void-copy">
+        <p class="void-p" data-i18n="v.p">In person around Prague, remotely across Europe.</p>
+        <h1 class="void-h" id="void-h"><span class="sr-only">Corphik – </span><span data-i18n="v.h">IT support, <em>custom</em> PCs and websites.</span></h1>
+        <p class="void-lead" data-i18n="v.lead">I fix computers, build new ones to order and redesign websites.</p>
+        <div class="void-ctas">
+          <a class="void-go" id="voidGo" href="#sluzby" data-dive><span data-i18n="v.go">Pick a service</span></a>
+          <a class="void-ask" href="#w-ask" data-dive data-i18n="v.ask">Write to me</a>
+        </div>
+        <ul class="void-trust"><li data-i18n="v.t1">Price confirmed up front</li><li data-i18n="v.t2">PC delivery in Prague included</li><li data-i18n="v.t3">I'll reply as soon as I can</li></ul>
+      </div>
+      <ul class="void-cards">
+        <li><a class="void-card void-card-it" href="#obl-it" data-dive><span class="n">01</span><span class="t" data-i18n="v.c.it">IT support</span><span class="d" data-i18n="v.c.itd">Repairs, Windows and Linux installs, remote help.</span><span class="pr" data-i18n="v.c.itp">from CZK 400</span></a></li>
+        <li><a class="void-card void-card-pc" href="#obl-pc" data-dive><span class="n">02</span><span class="t" data-i18n="v.c.pc">PC building</span><span class="d" data-i18n="v.c.pcd">A custom PC for your budget, or an upgrade of your old one.</span><span class="pr" data-i18n="v.c.pcp">from CZK 500</span></a></li>
+        <li><a class="void-card void-card-web" href="#obl-web" data-dive><span class="n">03</span><span class="t" data-i18n="v.c.web">Websites & domains</span><span class="d" data-i18n="v.c.webd">Website redesign, connecting your domain to web and email.</span><span class="pr" data-i18n="v.c.webp">from CZK 800</span></a></li>
+      </ul>
     </div>
   </section>
   <div class="inside" id="inside" tabindex="-1">
@@ -355,9 +367,9 @@
   <div class="foot-meta"><span>© <span class="year">2026</span> Corphik, Aleš Pospíšil</span><span><span data-i18n="ft.contact">Contact</span>: <a class="mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a></span><a class="pv-link" href="/en/privacy/" data-i18n="ft.privacy">Privacy policy</a></div>
   <div class="social"><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></div>
 </div></footer>
-<script src="/assets/app.js?v=40"></script>
+<script src="/assets/app.js?v=41"></script>
 <script src="/assets/deck.js?v=5"></script>
 <script src="/assets/sky.js?v=1"></script>
-<script src="/assets/void.js?v=14"></script>
+<script src="/assets/void.js?v=16"></script>
 </body>
 </html>

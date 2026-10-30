@@ -50,7 +50,7 @@ ES: Soporte informático para particulares, estudiantes y pequeñas empresas en 
 
 ## How it works / Jak to probíhá / Cómo funciona
 
-1. On the website, open "What I offer", add the services you need to the cart and send a short message through the form (name optional, email or phone, message). Or email ales@corphik.eu directly.
+1. On the website, pick a service area on the homepage, add the services you need to the cart and send a short message through the form (name optional, email or phone, message). Or email ales@corphik.eu directly.
 2. I reply to confirm the details, expected price, and suitable date.
 3. The work is completed and explained clearly after the job.
 
