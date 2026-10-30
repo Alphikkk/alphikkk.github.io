@@ -95,8 +95,9 @@ precision highp float;
 uniform vec2 uRes;
 uniform float uTime, uIntro, uDist, uFov, uSteps;
 uniform vec3 uCam, uFwd, uRight, uUp;
-uniform vec3 uGal;
-uniform vec2 uOff;                                /* posun díry na obrazovce (vpravo vedle textu, na mobilu nahoru) */                                /* směr ke spirální galaxii (podle orientace obrazovky) */
+uniform vec3 uGal;                                /* směr ke spirální galaxii (podle orientace obrazovky) */
+uniform vec2 uOff;                                /* posun díry na obrazovce (vpravo vedle textu, na mobilu nahoru) */
+uniform vec2 uJit;                                /* posun o zlomek pixelu pro vyhlazování (TAA) */
 
 const float RIN = 2.6, ROUT = 15.0;
 
@@ -193,7 +194,7 @@ vec4 disk(vec3 p, vec3 rd){
 }
 
 void main(){
-  vec2 uv = (gl_FragCoord.xy - 0.5*uRes)/min(uRes.x, uRes.y) - uOff;
+  vec2 uv = (gl_FragCoord.xy + uJit - 0.5*uRes)/min(uRes.x, uRes.y) - uOff;
   vec3 rd = normalize(uFwd + (uRight*uv.x + uUp*uv.y)*uFov);
   vec3 p = uCam;
   vec3 col = vec3(0.0);
@@ -260,16 +261,79 @@ function sh(type, src){
 const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
 const prog = gl.createProgram();
 if(!vs || !fs){ root.classList.add('no-gl'); return; }
-gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.bindAttribLocation(prog, 0, 'p'); gl.linkProgram(prog);
 if(!gl.getProgramParameter(prog, gl.LINK_STATUS)){ root.classList.add('no-gl'); return; }
 gl.useProgram(prog);
 const buf = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, buf);
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
-const loc = gl.getAttribLocation(prog, 'p');
-gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 const U = {};
-["uRes","uTime","uIntro","uDist","uFov","uSteps","uCam","uFwd","uRight","uUp","uGal","uOff"].forEach(n => U[n] = gl.getUniformLocation(prog, n));
+["uRes","uTime","uIntro","uDist","uFov","uSteps","uCam","uFwd","uRight","uUp","uGal","uOff","uJit"].forEach(n => U[n] = gl.getUniformLocation(prog, n));
+
+/* ---------- Vyhlazování v čase (TAA) ----------
+   Jemné proužky disku jsou užší než pixel, u díry se lámou do schodů a blikají. Každý snímek se kreslí
+   s posunem o zlomek pixelu (Halton 2,3) do textury a míchá se s historií předchozích snímků;
+   historie se ořízne na rozsah barev okolních pixelů, aby za pohybem nezůstávaly šmouhy.
+   Dva levné průchody navíc (10 čtení z textury na pixel) proti stovkám kroků paprsku. */
+function mk(src){
+  const f2 = sh(gl.FRAGMENT_SHADER, src); if(!f2) return null;
+  const p = gl.createProgram(); gl.attachShader(p, vs); gl.attachShader(p, f2); gl.bindAttribLocation(p, 0, 'p'); gl.linkProgram(p);
+  return gl.getProgramParameter(p, gl.LINK_STATUS) ? p : null;
+}
+const progR = mk(`precision mediump float;
+uniform sampler2D uCur, uHist; uniform vec2 uPx; uniform float uBlend;
+void main(){
+  vec2 t = gl_FragCoord.xy*uPx;
+  vec3 c = texture2D(uCur, t).rgb, lo = c, hi = c;
+  for(int y = -1; y <= 1; y++) for(int x = -1; x <= 1; x++){
+    vec3 s = texture2D(uCur, t + vec2(float(x), float(y))*uPx).rgb; lo = min(lo, s); hi = max(hi, s);
+  }
+  gl_FragColor = vec4(mix(c, clamp(texture2D(uHist, t).rgb, lo, hi), uBlend), 1.0);
+}`);
+const progC = mk(`precision mediump float;
+uniform sampler2D uTex; uniform vec2 uPx;
+void main(){ gl_FragColor = texture2D(uTex, gl_FragCoord.xy*uPx); }`);
+const UR = progR && {cur: gl.getUniformLocation(progR, 'uCur'), hist: gl.getUniformLocation(progR, 'uHist'), px: gl.getUniformLocation(progR, 'uPx'), blend: gl.getUniformLocation(progR, 'uBlend')};
+const UC = progC && {tex: gl.getUniformLocation(progC, 'uTex'), px: gl.getUniformLocation(progC, 'uPx')};
+/* tři cíle: aktuální snímek a dvě historie, které se střídají */
+const RT = [0, 1, 2].map(() => ({tex: gl.createTexture(), fb: gl.createFramebuffer()}));
+let taa = !!(progR && progC), hist = 0, histOk = false, jit = 0;
+const HALTON = [[.5,.333],[.25,.667],[.75,.111],[.125,.444],[.625,.778],[.375,.222],[.875,.556],[.0625,.889]];
+function allocRT(){
+  if(!taa) return;
+  for(const t of RT){
+    gl.bindTexture(gl.TEXTURE_2D, t.tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, W, H, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, t.fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t.tex, 0);
+    if(gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) taa = false;
+  }
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  histOk = false;
+}
+/* scéna do textury s posunem, smíchání s historií, výsledek na obrazovku */
+function draw(blend){
+  if(!taa){ gl.uniform2f(U.uJit, 0, 0); gl.drawArrays(gl.TRIANGLES, 0, 3); return; }
+  const j = HALTON[jit++ & 7], cur = RT[2], from = RT[hist], to = RT[1 - hist];
+  gl.uniform2f(U.uJit, j[0] - .5, j[1] - .5);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, cur.fb); gl.drawArrays(gl.TRIANGLES, 0, 3);
+  gl.useProgram(progR);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, cur.tex);
+  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, from.tex);
+  gl.uniform1i(UR.cur, 0); gl.uniform1i(UR.hist, 1); gl.uniform2f(UR.px, 1/W, 1/H); gl.uniform1f(UR.blend, histOk ? blend : 0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, to.fb); gl.drawArrays(gl.TRIANGLES, 0, 3);
+  gl.useProgram(progC);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, to.tex);
+  gl.uniform1i(UC.tex, 0); gl.uniform2f(UC.px, 1/W, 1/H);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.drawArrays(gl.TRIANGLES, 0, 3);
+  gl.useProgram(prog);
+  hist = 1 - hist; histOk = true;
+}
 
 /* ---------- Nápis jako textura (písmo Archivo, široký řez) ---------- */
 /* ---------- Kamera, myš, kvalita ---------- */
@@ -306,6 +370,7 @@ function resize(){
   if(w === W && h === H) return;
   W = cv.width = w; H = cv.height = h;
   gl.viewport(0, 0, W, H);
+  allocRT();
 }
 addEventListener('resize', () => { sized = false; if(frozen) start(); });
 resize();
@@ -359,7 +424,8 @@ function frame(now){
   gl.uniform1f(U.uSteps, diving ? Math.round(Math.min(steps, 140)*(1 - 0.4*dv)) : steps);
   gl.uniform3fv(U.uGal, portrait ? [0.14, -0.33, -0.93] : [-0.2, -0.25, -0.95]);
   gl.uniform3fv(U.uCam, cam); gl.uniform3fv(U.uFwd, f); gl.uniform3fv(U.uRight, r); gl.uniform3fv(U.uUp, u);
-  gl.drawArrays(gl.TRIANGLES, 0, 3);
+  /* historie: v klidu silně (~5 snímků), při ponoru a nástupu slabě, ať pohyb nezanechává stopu */
+  draw(diving || intro < 1 ? 0.4 : 0.82);
   voidEl.style.setProperty('--dive', dv.toFixed(3));
 
   /* ladění kvality podle skutečné rychlosti: po 20 snímcích nebo 1,5 s, jen dolů a rovnou o tolik,
