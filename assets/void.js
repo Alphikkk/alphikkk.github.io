@@ -151,13 +151,8 @@ vec3 stars(vec3 d){
       c += tint*b;
     }
   }
-  /* Mléčná dráha: světlý pás, jasnější střed a tmavé prachové žíly */
-  float n1 = fbm(vec2(lon*4.0, lat*12.0));
-  float n2 = fbm(vec2(lon*10.0 + 3.0, lat*34.0));
-  float core = exp(-lat*lat*70.0);
-  float dust = smoothstep(0.42, 0.72, n2)*exp(-lat*lat*40.0);
-  vec3 mw = (vec3(0.4, 0.34, 0.62)*band*n1 + vec3(0.8, 0.66, 0.82)*core*n1*n1*1.4)*(1.0 - 0.9*dust);
-  c += mw*0.09;                                     /* slabě: kolem díry ji čočka ohýbá do soustředných pruhů */
+  /* Mléčná dráha jen jako hustší pás jednotlivých hvězd (práh výše podle band): žádný rozptýlený svit,
+     ten by čočka kolem díry rozmazala do kouřového oparu */
   c += galaxy(d);
   return c;
 }
@@ -231,9 +226,9 @@ void main(){
     rd = normalize(rd + acc*dt);
     /* fialová záře nad diskem a kolem fotonové sféry (ohýbá se stejně jako světlo) */
     float rxz = length(np.xz);
-    float halo = exp(-abs(np.y)*1.5)*smoothstep(ROUT*1.2, RIN, rxz)*smoothstep(RIN*0.7, RIN*1.3, rxz);
+    float halo = exp(-abs(np.y)*1.1)*smoothstep(ROUT*1.2, RIN, rxz)*smoothstep(RIN*0.7, RIN*1.3, rxz);
     float ring = exp(-pow(r - 1.6, 2.0)*6.0);
-    glow += trans*(vec3(0.55, 0.32, 1.0)*halo*0.045 + vec3(0.75, 0.6, 1.0)*ring*0.075)*dt;
+    glow += trans*(vec3(0.55, 0.32, 1.0)*halo*0.05 + vec3(0.75, 0.6, 1.0)*ring*0.075)*dt;
     /* průchod rovinou disku */
     if(py*np.y < 0.0){
       float k = py/(py - np.y);
@@ -246,6 +241,11 @@ void main(){
     p = np; py = p.y;
   }
   }
+  /* záře svítí jen u disku a kolem díry: její slabé okraje, které by se rozlévaly do prostoru jako kouř,
+     se plynule stáhnou do nuly, takže prázdný vesmír zůstane čistě černý */
+  glow *= smoothstep(0.02, 0.09, max(glow.r, max(glow.g, glow.b)));
+  /* stín díry je úplně černý: paprsek, který spadl dovnitř, si záři nenese */
+  if(fell) glow = vec3(0.0);
   col += glow*smoothstep(0.15, 0.8, uIntro);
   if(!fell){
     vec3 bg = stars(rd)*smoothstep(0.0, 0.35, uIntro);
@@ -259,8 +259,9 @@ void main(){
   col *= 1.0 - 0.35*dot(uv, uv)*0.6;
   /* černý bod: slabý opar z tisíců drobných hvězd a rozptýlené záře se stáhne do čisté černé (OLED) */
   col = max(col - 0.02, 0.0)*1.02;
-  /* šum proti stupňům v přechodech; s TAA ho přidává až výstup (průměrování by ho smazalo) */
-  col += uDither*(hash2(gl_FragCoord.xy + fract(uTime)*100.0) - 0.5)/255.0;
+  /* šum proti stupňům v přechodech, jen kde něco svítí: černá zůstane přesně 0.
+     S TAA ho přidává až výstup (průměrování by ho smazalo). */
+  col += uDither*step(0.004, max(col.r, max(col.g, col.b)))*(hash2(gl_FragCoord.xy + fract(uTime)*100.0) - 0.5)/255.0;
   gl_FragColor = vec4(col, 1.0);
 }`;
 
@@ -302,12 +303,17 @@ void main(){
     vec3 s = texture2D(uCur, t + vec2(float(x), float(y))*uPx).rgb; lo = min(lo, s); hi = max(hi, s);
   }
   /* šum ±½ úrovně: v 8bitové historii se jinak malé změny zaokrouhlí na nulu a barva se zasekne ve stupních */
-  gl_FragColor = vec4(mix(c, clamp(texture2D(uHist, t).rgb, lo, hi), uBlend) + (h(gl_FragCoord.xy + uSeed) - 0.5)/255.0, 1.0);
+  vec3 o = mix(c, clamp(texture2D(uHist, t).rgb, lo, hi), uBlend);
+  gl_FragColor = vec4(o + step(0.002, max(o.r, max(o.g, o.b)))*(h(gl_FragCoord.xy + uSeed) - 0.5)/255.0, 1.0);
 }`);
 const progC = mk(`precision mediump float;
 uniform sampler2D uTex; uniform vec2 uPx; uniform float uSeed;
 float h(vec2 q){ return fract(sin(dot(q, vec2(12.9898, 78.233)))*43758.5453); }
-void main(){ gl_FragColor = texture2D(uTex, gl_FragCoord.xy*uPx) + (h(gl_FragCoord.xy + uSeed + 17.0) - 0.5)/255.0; }`);
+void main(){
+  vec3 o = texture2D(uTex, gl_FragCoord.xy*uPx).rgb;
+  /* černá zůstane přesně černá: šum jen tam, kde něco svítí */
+  gl_FragColor = vec4(o + step(0.002, max(o.r, max(o.g, o.b)))*(h(gl_FragCoord.xy + uSeed + 17.0) - 0.5)/255.0, 1.0);
+}`);
 const UR = progR && {cur: gl.getUniformLocation(progR, 'uCur'), hist: gl.getUniformLocation(progR, 'uHist'), px: gl.getUniformLocation(progR, 'uPx'), blend: gl.getUniformLocation(progR, 'uBlend'), seed: gl.getUniformLocation(progR, 'uSeed')};
 const UC = progC && {tex: gl.getUniformLocation(progC, 'uTex'), px: gl.getUniformLocation(progC, 'uPx'), seed: gl.getUniformLocation(progC, 'uSeed')};
 /* historie v 16bitových barvách, kde to grafika umí (jemné přechody bez stupňů); jinak 8 bitů s šumem */
