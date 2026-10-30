@@ -24,6 +24,7 @@ const INSIDE_HASH = /^#(sluzby|w-ask|prace|kontakt|obl-|svc-)/;
 
 /* ---------- Přepínání mezi scénou a obsahem „uvnitř“ ---------- */
 let inside = false, diving = false, frozen = false;   /* frozen: pomalé zařízení, obraz stojí na posledním snímku */
+let sized = false;                                  /* false: velikost plátna se přepočítá před dalším snímkem */
 function openInside(hash, instant){
   inside = true; diving = false;
   root.classList.add('is-inside'); root.classList.remove('is-diving');
@@ -36,7 +37,7 @@ function openInside(hash, instant){
   if(!instant){ const ins = document.getElementById('inside'); ins && ins.focus({preventScroll: true}); }
 }
 function closeInside(){
-  inside = false; dive = 0; diveFrom = -1;
+  inside = false; dive = 0; diveFrom = -1; sized = false;
   root.classList.remove('is-inside', 'is-diving');
   scrollTo(0, 0);
   /* bez WebGL (nebo když se díra nespustila) se nic nekreslí */
@@ -74,7 +75,7 @@ divers.forEach(el => el.addEventListener('click', e => {
   if(typeof track === "function") track("dive", {to: diveTo.slice(1)});
   history.pushState(null, "", diveTo);
   if(!gl || REDUCE || frozen || root.classList.contains('no-gl')){ root.classList.add('is-diving'); setTimeout(() => openInside(diveTo), REDUCE ? 250 : 500); return; }
-  diving = true; diveFrom = -1; root.classList.add('is-diving'); start();
+  diving = true; diveFrom = -1; sized = false; root.classList.add('is-diving'); start();
 }));
 
 /* ---------- WebGL ---------- */
@@ -296,11 +297,11 @@ function place(){
 }
 /* nová velikost plátna se nastaví až těsně před kreslením: změna velikosti plátno vymaže
    a mimo snímek by na okamžik probliklo černé */
-let sized = false;
 function resize(){
   sized = true;
   place();
-  const px = innerWidth*innerHeight*DPR*DPR, k = scale*Math.min(1, Math.sqrt(BUDGET/px));
+  /* při ponoru poloviční rozlišení: obraz letí a tmavne, rozdíl není vidět */
+  const px = innerWidth*innerHeight*DPR*DPR, k = scale*Math.min(1, Math.sqrt(BUDGET/px))*(diving ? 0.55 : 1);
   const w = Math.max(1, Math.round(innerWidth*DPR*k)), h = Math.max(1, Math.round(innerHeight*DPR*k));
   if(w === W && h === H) return;
   W = cv.width = w; H = cv.height = h;
@@ -317,7 +318,7 @@ const easeIn = x => Math.pow(x, 2.4);
 function frame(now){
   raf = 0;
   /* zpomalený režim: kreslí se jen každý druhý snímek (30 snímků/s) */
-  if(every > 1 && (tick++ % every) && !diving){ raf = requestAnimationFrame(frame); return; }
+  if(every > 1 && (tick++ % every)){ raf = requestAnimationFrame(frame); return; }
   if(!sized) resize();
   const time = (now - t0)/1000;
   const intro = REDUCE ? 1 : clamp(time/1.1);
@@ -354,7 +355,8 @@ function frame(now){
   gl.uniform1f(U.uIntro, intro);
   gl.uniform1f(U.uDist, dist);
   gl.uniform1f(U.uFov, (portrait ? 0.66 : 0.58) + dv*0.9);
-  gl.uniform1f(U.uSteps, steps);
+  /* při ponoru jde skoro každý paprsek těsně kolem díry (nejdražší část): méně kroků, čím blíž */
+  gl.uniform1f(U.uSteps, diving ? Math.round(Math.min(steps, 140)*(1 - 0.4*dv)) : steps);
   gl.uniform3fv(U.uGal, portrait ? [0.14, -0.33, -0.93] : [-0.2, -0.25, -0.95]);
   gl.uniform3fv(U.uCam, cam); gl.uniform3fv(U.uFwd, f); gl.uniform3fv(U.uRight, r); gl.uniform3fv(U.uUp, u);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
