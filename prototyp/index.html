@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 <title>Corphik – prototyp úvodní stránky</title>
 <meta name="description" content="Prototyp nové úvodní stránky Corphik: IT podpora v Praze a okolí i na dálku, sestavení PC, instalace Windows a Linuxu, opravy, DNS a redesign webu.">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#f4f1ea">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -35,16 +35,25 @@
 <main id="obsah">
 
   <section class="hero" aria-labelledby="hero-h">
-    <div class="hero-hole" aria-hidden="true">
-      <img src="/assets/img/black-hole.webp" alt="" width="1040" height="440" fetchpriority="high" decoding="async">
-    </div>
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap hero-in">
+      <p class="label hero-label"><span class="label-n">00</span>IT podpora · Praha a na dálku</p>
       <h1 class="hero-h" id="hero-h">
         <span class="sr-only">Corphik – </span>
         <span class="ln">Opravím počítač.</span>
         <span class="ln">Postavím nový.</span>
         <span class="ln">Předělám web.</span>
       </h1>
+      <div class="port hero-port" aria-hidden="true">
+        <div class="port-orbit"></div>
+        <div class="port-bezel">
+          <div class="port-glass hero-hole">
+            <img src="/assets/img/black-hole.webp" alt="" width="1040" height="440" fetchpriority="high" decoding="async">
+          </div>
+        </div>
+        <span class="port-tag port-tag-a">Praha · 50.08° N 14.44° E</span>
+        <span class="port-tag port-tag-b">Na dálku · EU</span>
+      </div>
       <div class="hero-side">
         <p class="hero-lead">IT podpora od jednoho člověka. Osobně v Praze a okolí, na dálku po celé Evropě.</p>
         <div class="hero-ctas">
@@ -62,6 +71,7 @@
 
   <section class="triage" id="pomoc" aria-labelledby="triage-h">
     <div class="wrap">
+      <p class="label"><span class="label-n">01</span>Rychlá volba</p>
       <h2 class="h2" id="triage-h">Co se děje?</h2>
       <p class="sub">Vyber, co tě trápí. Ukážu ti, která služba to řeší a kolik stojí.</p>
       <div class="triage-grid">
@@ -88,11 +98,13 @@
 
   <section class="services" id="sluzby" aria-labelledby="sluzby-h">
     <div class="wrap">
+      <p class="label"><span class="label-n">02</span>Služby a ceny</p>
       <h2 class="h2" id="sluzby-h">Všechno kolem počítače. Na&nbsp;jednom místě.</h2>
       <p class="sub">Sedm služeb ve třech oblastech. Konečnou cenu ti vždy potvrdím předem.</p>
 
       <section class="area" aria-labelledby="obl-it-h">
         <header class="area-head">
+          <p class="area-n" aria-hidden="true">02.1</p>
           <h3 id="obl-it-h">IT podpora</h3>
           <p>Když něco nefunguje: osobně v Praze a okolí, nebo na dálku.</p>
         </header>
@@ -118,6 +130,7 @@
 
       <section class="area" aria-labelledby="obl-pc-h">
         <header class="area-head">
+          <p class="area-n" aria-hidden="true">02.2</p>
           <h3 id="obl-pc-h">Stavba PC</h3>
           <p>Počítače na míru a upgrady. Sestavím a otestuju je sám.</p>
         </header>
@@ -146,6 +159,7 @@
 
       <section class="area" aria-labelledby="obl-web-h">
         <header class="area-head">
+          <p class="area-n" aria-hidden="true">02.3</p>
           <h3 id="obl-web-h">Weby a domény</h3>
           <p>Redesign webu, doména a e-mail. Obojí jde na dálku.</p>
         </header>
@@ -169,6 +183,7 @@
 
   <section class="steps" id="postup" aria-labelledby="postup-h">
     <div class="wrap">
+      <p class="label"><span class="label-n">03</span>Postup</p>
       <h2 class="h2" id="postup-h">Jak to probíhá</h2>
       <ol class="steps-list">
         <li>
@@ -188,14 +203,17 @@
     </div>
   </section>
 
+  <div class="wrap band-wrap">
   <figure class="band">
     <img src="/prototyp/img/pc-desk-wide-1280.webp" srcset="/prototyp/img/pc-desk-wide-1280.webp 1280w, /prototyp/img/pc-desk-wide-2048.webp 2048w" sizes="100vw" alt="Herní sestava v bílé skříni s modrým podsvícením vedle monitoru na stole v potemnělém pokoji" width="2048" height="1536" loading="lazy" decoding="async">
-    <figcaption class="wrap"><span class="band-k">Sestavení PC</span> Herní PC z portfolia, hotové a zapojené.</figcaption>
+    <figcaption><span class="band-k">Sestavení PC</span> Herní PC z portfolia, hotové a zapojené.</figcaption>
   </figure>
+  </div>
 
   <section class="work" id="portfolio" aria-labelledby="portfolio-h">
     <div class="wrap">
       <div class="work-head">
+        <p class="label"><span class="label-n">04</span>Portfolio</p>
         <h2 class="h2" id="portfolio-h">Co už jsem postavil</h2>
         <p class="sub">Weby, aplikace a počítače. Líbí se ti něco? Udělám ti podobné.</p>
       </div>
@@ -232,6 +250,7 @@
     <div class="wrap about-in">
       <div class="about-main">
         <h2 class="sr-only" id="about-h">O mně</h2>
+        <p class="label" aria-hidden="true"><span class="label-n">05</span>O mně</p>
         <p class="about-quote">Dřív jsem opravoval stroje. Teď se učím, jak se rozbíjejí systémy – a&nbsp;jak je ochránit.</p>
         <p class="about-by">Aleš Pospíšil, zakladatel Corphik</p>
       </div>
@@ -244,15 +263,19 @@
   </section>
 
   <section class="end" id="kontakt" aria-labelledby="end-h">
+    <div class="aurora aurora-end" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap end-in">
+      <p class="label"><span class="label-n">06</span>Kontakt</p>
       <h2 class="end-h" id="end-h">Pojďme to rozjet.</h2>
       <p class="end-p">Napiš mi, co potřebuješ. Ozvu se ti co nejdřív.</p>
       <div class="end-ctas">
         <a class="btn btn-solid btn-lg" href="/orders/">Objednat službu</a>
         <a class="end-mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a>
       </div>
+      <div class="port end-port" aria-hidden="true">
+        <div class="port-bezel"><div class="port-glass"><img src="/assets/img/black-hole.webp" alt="" width="1040" height="440" loading="lazy" decoding="async"></div></div>
+      </div>
     </div>
-    <div class="end-hole" aria-hidden="true"><img src="/assets/img/black-hole.webp" alt="" width="1040" height="440" loading="lazy" decoding="async"></div>
   </section>
 </main>
 

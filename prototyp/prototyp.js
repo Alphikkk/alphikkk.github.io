@@ -37,13 +37,33 @@
       $('tDesc').textContent = s.d;
       $('tMode').textContent = s.m;
       $('tMode').hidden = !s.m;
+      place(b);
       out.classList.remove('swap');
       void out.offsetWidth;
       out.classList.add('swap');
     });
+
+    // Na úzkém displeji se výsledek vloží přímo pod zvolenou položku (nic nepřekrývá);
+    // na širokém zůstává vedle seznamu.
+    var grid = list.parentNode;
+    var narrow = window.matchMedia('(max-width: 820px)');
+    var place = function (btn) {
+      var cur = btn || list.querySelector('button[aria-pressed="true"]');
+      if (narrow.matches && cur) {
+        var before = btn ? btn.getBoundingClientRect().top : 0;
+        cur.parentNode.appendChild(out);
+        // Když se panel nad položkou zavře, stránka poskočí – vrátíme položku pod prst.
+        if (btn) window.scrollBy(0, btn.getBoundingClientRect().top - before);
+      } else if (out.parentNode !== grid) {
+        grid.appendChild(out);
+      }
+    };
+    place();
+    if (narrow.addEventListener) narrow.addEventListener('change', function () { place(); });
+    else if (narrow.addListener) narrow.addListener(function () { place(); });
   }
 
-  // Černá díra v hero se při scrollu pomalu přibližuje.
+  // Černá díra v průzoru se při scrollu pomalu přibližuje.
   var hole = document.querySelector('.hero-hole');
   var still = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (hole && !still.matches) {
