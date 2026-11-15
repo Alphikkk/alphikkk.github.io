@@ -257,3 +257,12 @@ a{color:inherit}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero-hole{transform:none}
 }
+
+/* Fotopás – vlastní fotky sestavy */
+.band{position:relative;margin:0;border-top:1px solid var(--line);overflow:hidden;background:#000}
+.band img{display:block;width:100%;height:clamp(320px,62vw,820px);object-fit:cover;object-position:62% 55%}
+.band::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,#000 0%,transparent 18%,transparent 62%,#000 100%)}
+.band figcaption{position:absolute;z-index:1;left:0;right:0;bottom:clamp(18px,4vw,48px);color:var(--muted);font-size:.95rem}
+.band-k{color:var(--ink);font-weight:700;margin-right:.4em}
+@media (max-width:760px){.band img{height:clamp(300px,90vw,520px);object-position:80% 55%}}
