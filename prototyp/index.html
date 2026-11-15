@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Corphik – prototyp úvodní stránky</title>
+<meta name="description" content="Prototyp nové úvodní stránky Corphik: IT podpora v Praze a okolí i na dálku, sestavení PC, instalace Windows a Linuxu, opravy, DNS a redesign webu.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/prototyp/prototyp.css">
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="top-brand" href="/prototyp/" aria-label="Corphik – úvod"><img src="/assets/img/corphik-wordmark.png" alt="Corphik" width="640" height="120"></a>
+    <span class="top-proto">Prototyp</span>
+    <nav class="top-nav" aria-label="Hlavní navigace">
+      <ul>
+        <li><a href="#sluzby">Služby a ceny</a></li>
+        <li><a href="#postup">Jak to probíhá</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#o-mne">O mně</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-solid top-cta" href="/orders/">Objednat službu</a>
+  </div>
+</header>
+
+<main id="obsah">
+
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero-hole" aria-hidden="true">
+      <img src="/assets/img/black-hole.webp" alt="" width="1040" height="440" fetchpriority="high" decoding="async">
+    </div>
+    <div class="wrap hero-in">
+      <h1 class="hero-h" id="hero-h">
+        <span class="sr-only">Corphik – </span>
+        <span class="ln">Opravím počítač.</span>
+        <span class="ln">Postavím nový.</span>
+        <span class="ln">Předělám web.</span>
+      </h1>
+      <div class="hero-side">
+        <p class="hero-lead">IT podpora od jednoho člověka. Osobně v Praze a okolí, na dálku po celé Evropě.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid btn-lg" href="/orders/">Objednat službu</a>
+          <a class="btn btn-line btn-lg" href="#pomoc">Nevím, co potřebuju</a>
+        </div>
+        <ul class="hero-trust">
+          <li>Cenu potvrdím předem</li>
+          <li>Dovoz PC po Praze v ceně</li>
+          <li>Ozvu se co nejdřív</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="triage" id="pomoc" aria-labelledby="triage-h">
+    <div class="wrap">
+      <h2 class="h2" id="triage-h">Co se děje?</h2>
+      <p class="sub">Vyber, co tě trápí. Ukážu ti, která služba to řeší a kolik stojí.</p>
+      <div class="triage-grid">
+        <ul class="triage-list" id="triageList">
+          <li><a href="#svc-fix" data-k="fix" aria-current="true">Počítač nejde zapnout, padá, je pomalý nebo hlučný</a></li>
+          <li><a href="#svc-remote" data-k="remote">Potřebuju něco nastavit nebo nainstalovat, a to hned</a></li>
+          <li><a href="#svc-os" data-k="os">Chci čistý systém, který funguje od prvního spuštění</a></li>
+          <li><a href="#svc-build" data-k="build">Chci nový počítač na hry, práci nebo do školy</a></li>
+          <li><a href="#svc-upgrade" data-k="upgrade">Starý počítač už nestíhá</a></li>
+          <li><a href="#svc-web" data-k="web">Můj web vypadá zastarale a na mobilu se rozpadá</a></li>
+          <li><a href="#svc-dns" data-k="dns">Potřebuju propojit doménu s webem a e-mailem</a></li>
+        </ul>
+        <div class="triage-out" id="triageOut" aria-live="polite">
+          <p class="triage-k">Tohle řeší</p>
+          <h3 class="triage-name" id="tName">Diagnostika a opravy</h3>
+          <p class="triage-price" id="tPrice">od 400 Kč</p>
+          <p class="triage-d" id="tDesc">Najdu příčinu a vyřeším ji. Cena diagnostiky se odečte z opravy.</p>
+          <p class="triage-mode" id="tMode">Částečně na dálku</p>
+          <a class="btn btn-solid" href="/orders/">Objednat službu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="sluzby" aria-labelledby="sluzby-h">
+    <div class="wrap">
+      <h2 class="h2" id="sluzby-h">Všechno kolem počítače. Na&nbsp;jednom místě.</h2>
+      <p class="sub">Sedm služeb ve třech oblastech. Konečnou cenu ti vždy potvrdím předem.</p>
+
+      <section class="area" aria-labelledby="obl-it-h">
+        <header class="area-head">
+          <h3 id="obl-it-h">IT podpora</h3>
+          <p>Když něco nefunguje: osobně v Praze a okolí, nebo na dálku.</p>
+        </header>
+        <ul class="cards">
+          <li class="card" id="svc-fix">
+            <div class="card-img"><img src="/assets/img/svc-bsod.webp" alt="Modrá obrazovka Windows s chybovým hlášením" width="700" height="525" loading="lazy" decoding="async"></div>
+            <div class="card-top"><h4>Diagnostika a opravy</h4><p class="price">od 400 Kč</p></div>
+            <p class="card-d">PC nejde zapnout, padá, je pomalé nebo hlučné? Najdu příčinu a vyřeším ji. Cena diagnostiky se odečte z opravy.</p>
+            <p class="tag">Částečně na dálku</p>
+          </li>
+          <li class="card" id="svc-os">
+            <div class="card-img"><img src="/assets/img/svc-windows.webp" alt="Logo Windows v modrém světle" width="600" height="333" loading="lazy" decoding="async"></div>
+            <div class="card-top"><h4>Instalace Windows a Linuxu</h4><p class="price">od 700 Kč</p></div>
+            <p class="card-d">Čistá instalace systému, ovladače, aktualizace a nastavení, aby vše fungovalo od prvního spuštění. Licence Windows není v ceně.</p>
+          </li>
+          <li class="card card-wide" id="svc-remote">
+            <div class="card-top"><h4>Vzdálená pomoc</h4><p class="price">400 Kč / hod</p></div>
+            <p class="card-d">Připojím se k tvému počítači přes internet a vyřeším problém, nastavení nebo instalaci programů – ať jsi kdekoli. Účtuje se každých započatých 15 minut.</p>
+            <p class="tag">Na dálku</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="area" aria-labelledby="obl-pc-h">
+        <header class="area-head">
+          <h3 id="obl-pc-h">Stavba PC</h3>
+          <p>Počítače na míru a upgrady. Sestavím a otestuju je sám.</p>
+        </header>
+        <ul class="cards">
+          <li class="card card-build" id="svc-build">
+            <div class="card-img"><img src="/assets/img/pc-build-finished-rgb-clean-640.webp" srcset="/assets/img/pc-build-finished-rgb-clean-640.webp 640w, /assets/img/pc-build-finished-rgb-clean-1152.webp 1152w" sizes="(max-width: 760px) 100vw, 380px" alt="Hotová sestava v bílé skříni s fialovým a modrým RGB podsvícením, vodním chlazením a bílými kabely" width="1152" height="1536" loading="lazy" decoding="async"></div>
+            <div class="card-body">
+              <div class="card-top"><h4>Sestavení PC na míru</h4><p class="price">od 1 500 Kč</p></div>
+              <p class="card-d">Vyberu komponenty podle rozpočtu a účelu (hry, práce, škola), PC sestavím a otestuju.</p>
+              <ol class="build-steps">
+                <li><strong>Záloha na komponenty předem</strong><span>Díly objednám až po zaplacení zálohy.</span></li>
+                <li><strong>Stavba a testy u mě doma</strong><span>Počítač sestavím a otestuju u sebe.</span></li>
+                <li><strong>Dovoz hotového PC až k tobě</strong><span>Po Praze a okolí v ceně, dál podle domluvy.</span></li>
+              </ol>
+            </div>
+          </li>
+          <li class="card card-wide card-row" id="svc-upgrade">
+            <div class="card-img"><img src="/assets/img/pc-kabely.webp" alt="Detail grafické karty s bílými opletenými kabely uvnitř skříně" width="640" height="480" loading="lazy" decoding="async"></div>
+            <div class="card-body">
+              <div class="card-top"><h4>Upgrade a zrychlení PC</h4><p class="price">od 500 Kč</p></div>
+              <p class="card-d">Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Díly se platí zvlášť.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="area" aria-labelledby="obl-web-h">
+        <header class="area-head">
+          <h3 id="obl-web-h">Weby a domény</h3>
+          <p>Redesign webu, doména a e-mail. Obojí jde na dálku.</p>
+        </header>
+        <ul class="cards">
+          <li class="card" id="svc-web">
+            <div class="card-img"><img src="/assets/img/pf-web-desktop.webp" alt="Úvodní stránka corphik.eu na počítači" width="1280" height="1010" loading="lazy" decoding="async"></div>
+            <div class="card-top"><h4>Redesign webu</h4><p class="price">od 3 499 Kč</p></div>
+            <p class="card-d">Starý web předělám do moderní podoby: nový vzhled, mobilní verze, rychlejší načítání a základní zabezpečení.</p>
+            <p class="tag">I na dálku</p>
+          </li>
+          <li class="card" id="svc-dns">
+            <div class="card-img card-img-svg"><img src="/assets/img/svc-dns.svg" alt="Schéma domény propojené s DNS záznamy" width="400" height="300" loading="lazy" decoding="async"></div>
+            <div class="card-top"><h4>Nastavení domény a DNS</h4><p class="price">od 800 Kč</p></div>
+            <p class="card-d">Záznamy A, AAAA, CNAME, MX a TXT (SPF, DKIM, DMARC). Propojím doménu s webem i e-mailem.</p>
+            <p class="tag">Pouze na dálku</p>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <section class="steps" id="postup" aria-labelledby="postup-h">
+    <div class="wrap">
+      <h2 class="h2" id="postup-h">Jak to probíhá</h2>
+      <ol class="steps-list">
+        <li>
+          <h3>Vybereš službu nebo mi napíšeš</h3>
+          <p>V objednávce zaškrtneš, co potřebuješ, a popíšeš problém. Stačí pár vět.</p>
+        </li>
+        <li>
+          <h3>Ozvu se a potvrdím cenu</h3>
+          <p>Odpovím co nejdřív. Cenu znáš předem, dřív než začnu cokoli dělat.</p>
+        </li>
+        <li>
+          <h3>Udělám práci</h3>
+          <p>Osobně v Praze a okolí, nebo se připojím na dálku – podle toho, co služba dovolí.</p>
+        </li>
+      </ol>
+      <a class="btn btn-line" href="/orders/">Objednat službu</a>
+    </div>
+  </section>
+
+  <section class="work" id="portfolio" aria-labelledby="portfolio-h">
+    <div class="wrap">
+      <div class="work-head">
+        <h2 class="h2" id="portfolio-h">Co už jsem postavil</h2>
+        <p class="sub">Weby, aplikace a počítače. Líbí se ti něco? Udělám ti podobné.</p>
+      </div>
+      <ul class="work-list">
+        <li class="work-pc">
+          <a href="/portfolio/#pf-pc">
+            <div class="work-img"><img src="/assets/img/pc-build-cooling-detail-640.webp" srcset="/assets/img/pc-build-cooling-detail-640.webp 640w, /assets/img/pc-build-cooling-detail-1152.webp 1152w" sizes="(max-width: 760px) 100vw, 420px" alt="Detail čerpadla vodního chlazení s kulatým displejem v modrém světle" width="1152" height="1536" loading="lazy" decoding="async"></div>
+            <p class="work-k">Sestavení PC</p>
+            <h3>Herní PC</h3>
+            <p class="work-d">Sestava s Ryzen 7 5800X3D a Radeon RX 7800 XT pro hraní ve vysokém rozlišení.</p>
+          </a>
+        </li>
+        <li class="work-web">
+          <a href="/portfolio/#pf-ap">
+            <div class="work-img"><img src="/assets/img/pf-web-desktop.webp" alt="Úvodní stránka corphik.eu s černou dírou" width="1280" height="1010" loading="lazy" decoding="async"></div>
+            <p class="work-k">Web</p>
+            <h3>Tento web</h3>
+            <p class="work-d">Firemní web ve třech jazycích s ceníkem a objednávkovým formulářem.</p>
+          </a>
+        </li>
+        <li class="work-tj">
+          <a href="/portfolio/#pf-tj">
+            <p class="work-k">Webová aplikace, ve vývoji</p>
+            <h3>Tandjo</h3>
+            <p class="work-d">Webová aplikace pro páry: kalendář, galerie, místa, plány a hry pro dva.</p>
+          </a>
+        </li>
+      </ul>
+      <a class="btn btn-line" href="/portfolio/">Celé portfolio</a>
+    </div>
+  </section>
+
+  <section class="about" id="o-mne" aria-labelledby="about-h">
+    <div class="wrap about-in">
+      <div class="about-main">
+        <h2 class="sr-only" id="about-h">O mně</h2>
+        <p class="about-quote">Dřív jsem opravoval stroje. Teď se učím, jak se rozbíjejí systémy – a&nbsp;jak je ochránit.</p>
+        <p class="about-by">Aleš Pospíšil, zakladatel Corphik</p>
+      </div>
+      <div class="about-text">
+        <p>Vyučil jsem se mechanikem zemědělských strojů a pár let jsem dělal s rukama – opravy, svařování, lisy. Naučilo mě to hledat, proč věci nefungují, a nevzdat se, dokud to nenajdu.</p>
+        <p>Dnes vedu tým v logistice, při tom dělám IT podporu, stavím Tandjo a věnuju se kyberbezpečnosti. Mluvím česky a anglicky, učím se španělsky.</p>
+        <a class="btn btn-line" href="/about/">Víc o mně</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="end" id="kontakt" aria-labelledby="end-h">
+    <div class="wrap end-in">
+      <h2 class="end-h" id="end-h">Pojďme to rozjet.</h2>
+      <p class="end-p">Napiš mi, co potřebuješ. Ozvu se ti co nejdřív.</p>
+      <div class="end-ctas">
+        <a class="btn btn-solid btn-lg" href="/orders/">Objednat službu</a>
+        <a class="end-mail" href="mailto:ales@corphik.eu">ales@corphik.eu</a>
+      </div>
+    </div>
+    <div class="end-hole" aria-hidden="true"><img src="/assets/img/black-hole.webp" alt="" width="1040" height="440" loading="lazy" decoding="async"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <img class="foot-logo" src="/assets/img/corphik-logo.png" alt="Corphik – spolehlivá IT podpora a počítače na míru" width="1000" height="404" loading="lazy">
+    <p>© <span id="year">2026</span> Corphik, Aleš Pospíšil</p>
+    <ul class="foot-links">
+      <li><a href="/soukromi/">Ochrana osobních údajů</a></li>
+      <li><a href="https://www.instagram.com/corphik" target="_blank" rel="me noopener">Instagram</a></li>
+      <li><a href="https://www.linkedin.com/company/corphik" target="_blank" rel="me noopener">LinkedIn</a></li>
+      <li><a href="/en/" lang="en" hreflang="en">English</a></li>
+      <li><a href="/es/" lang="es" hreflang="es">Español</a></li>
+    </ul>
+    <p class="foot-note">Tohle je prototyp. <a href="/">Zpět na současný web</a></p>
+  </div>
+</footer>
+<script src="/prototyp/prototyp.js" defer></script>
+</body>
+</html>
