@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio – Corphik prototyp</title>
+<meta name="description" content="Portfolio Corphik: herní PC, weby a webové aplikace.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#eef2ff">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/prototyp/p.css">
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/prototyp/" aria-label="Corphik – úvod"><span class="brand-hole" aria-hidden="true"></span><span class="brand-mark" aria-hidden="true"></span></a>
+    <span class="tag">Prototyp</span>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Hlavní"><a href="/prototyp/sluzby/">Služby a ceny</a><a href="/prototyp/pc/">Stavba PC</a><a href="/prototyp/portfolio/" aria-current="page">Portfolio</a><a href="/prototyp/o-mne/">O mně</a><a href="/prototyp/kontakt/">Kontakt</a><a class="nav-cta" href="/orders/">Objednat</a></nav>
+  </div>
+</header>
+<main id="obsah">
+<div class="wrap">
+  <header class="page-head" style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between">
+    <div><p class="kicker">Portfolio</p><h1 class="h1">Co už funguje.</h1><p class="lead">Počítače, weby a aplikace. Líbí se ti něco? Udělám ti podobné.</p></div>
+    <div class="rail-ctl"><button class="prev" type="button" aria-label="Předchozí">←</button><button class="next" type="button" aria-label="Další">→</button></div>
+  </header>
+</div>
+<div class="rail-wrap">
+  <div class="rail" tabindex="0" aria-label="Projekty – posouvej do stran">
+    <a class="work" href="/prototyp/pc/"><div class="work-pic"><img src="/prototyp/img/pc-interior-640.webp" alt="Pohled do skříně herního PC" loading="lazy" draggable="false"></div><div class="work-body"><p class="kicker">Sestavení PC</p><h2>Herní PC</h2><p>Sestava s Ryzen 7 5800X3D a Radeon RX 7800 XT pro hraní ve vysokém rozlišení.</p></div></a>
+    <a class="work" href="/portfolio/#pf-ap"><div class="work-pic"><img src="/assets/img/pf-web-desktop.webp" alt="Úvodní stránka corphik.eu" loading="lazy" draggable="false"></div><div class="work-body"><p class="kicker">Web</p><h2>Corphik.eu</h2><p>Firemní web ve třech jazycích s ceníkem a objednávkovým formulářem.</p></div></a>
+    <a class="work" href="/portfolio/#pf-tj"><div class="work-pic work-tj">Tandjo</div><div class="work-body"><p class="kicker">Webová aplikace, ve vývoji</p><h2>Tandjo</h2><p>Webová aplikace pro páry: kalendář, galerie, místa, plány a hry pro dva.</p></div></a>
+    <a class="work" href="/prototyp/pc/"><div class="work-pic"><img src="/prototyp/img/pc-desk-angle-640.webp" alt="Hotová sestava na stole" loading="lazy" draggable="false"></div><div class="work-body"><p class="kicker">Sestavení PC</p><h2>Hotové a zapojené</h2><p>Stejná sestava na stole, připravená hrát.</p></div></a>
+  </div>
+  <div class="wrap"><div class="progress" aria-hidden="true"><i></i></div></div>
+</div>
+<section class="sec" aria-labelledby="pf-cta">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
+    <h2 class="h2" id="pf-cta" style="max-width:16ch">Chceš být další v portfoliu?</h2>
+    <div class="btns"><a class="btn" href="/orders/">Objednat</a><a class="btn btn-ghost" href="/portfolio/">Celé portfolio</a></div>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Corphik, Aleš Pospíšil</span>
+    <a href="/soukromi/">Ochrana osobních údajů</a>
+    <a href="https://www.instagram.com/corphik" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/company/corphik" rel="noopener">LinkedIn</a>
+    <a class="sp" href="/">Tohle je prototyp – zpět na současný web</a>
+  </div>
+</footer>
+<script src="/prototyp/p.js" defer></script>
+</body>
+</html>

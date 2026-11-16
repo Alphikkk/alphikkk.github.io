@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Služby a ceny – Corphik prototyp</title>
+<meta name="description" content="Služby a ceny Corphik: opravy, instalace, vzdálená pomoc, stavba PC, weby a DNS.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#eef2ff">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/prototyp/p.css">
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/prototyp/" aria-label="Corphik – úvod"><span class="brand-hole" aria-hidden="true"></span><span class="brand-mark" aria-hidden="true"></span></a>
+    <span class="tag">Prototyp</span>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Hlavní"><a href="/prototyp/sluzby/" aria-current="page">Služby a ceny</a><a href="/prototyp/pc/">Stavba PC</a><a href="/prototyp/portfolio/">Portfolio</a><a href="/prototyp/o-mne/">O mně</a><a href="/prototyp/kontakt/">Kontakt</a><a class="nav-cta" href="/orders/">Objednat</a></nav>
+  </div>
+</header>
+<main id="obsah">
+<div class="wrap">
+  <header class="page-head">
+    <p class="kicker">Služby a ceny</p>
+    <h1 class="h1">Cenu znáš dřív, než začnu.</h1>
+    <p class="lead">Sedm služeb ve třech oblastech. Konečnou cenu ti vždy potvrdím předem.</p>
+  </header>
+  <div class="filter" role="group" aria-label="Filtrovat služby">
+    <button type="button" data-f="all" aria-pressed="true">Vše</button>
+    <button type="button" data-f="osobne" aria-pressed="false">Osobně v Praze</button>
+    <button type="button" data-f="dalku" aria-pressed="false">Na dálku</button>
+  </div>
+  <ul class="svc-list" style="list-style:none">
+      <li><details class="svc" id="fix" data-m="osobne dalku"><summary><h2><span class="area">IT podpora</span>Diagnostika a opravy</h2><span class="pr">od 400 Kč</span><span class="pm" aria-hidden="true">+</span></summary>
+        <div class="svc-body"><div><p>PC nejde zapnout, padá, je pomalé nebo hlučné? Najdu příčinu a vyřeším ji. Cena diagnostiky se odečte z opravy.</p><div class="modes"><span class="mode">Osobně</span><span class="mode r">Částečně na dálku</span></div></div><div class="btns"><a class="btn" href="/orders/">Objednat</a></div></div></details></li>
+      <li><details class="svc" id="os" data-m="osobne"><summary><h2><span class="area">IT podpora</span>Instalace Windows a Linuxu</h2><span class="pr">od 700 Kč</span><span class="pm" aria-hidden="true">+</span></summary>
+        <div class="svc-body"><div><p>Čistá instalace systému, ovladače, aktualizace a nastavení, aby vše fungovalo od prvního spuštění. Licence Windows není v ceně.</p><div class="modes"><span class="mode">Osobně</span></div></div><div class="btns"><a class="btn" href="/orders/">Objednat</a></div></div></details></li>
+      <li><details class="svc" id="remote" data-m="dalku"><summary><h2><span class="area">IT podpora</span>Vzdálená pomoc</h2><span class="pr">400 Kč / hod</span><span class="pm" aria-hidden="true">+</span></summary>
+        <div class="svc-body"><div><p>Připojím se k tvému počítači přes internet a vyřeším problém, nastavení nebo instalaci programů – ať jsi kdekoli. Účtuje se každých započatých 15 minut.</p><div class="modes"><span class="mode r">Na dálku</span></div></div><div class="btns"><a class="btn" href="/orders/">Objednat</a></div></div></details></li>
+      <li><details class="svc" id="build" data-m="osobne"><summary><h2><span class="area">Stavba PC</span>Sestavení PC na míru</h2><span class="pr">od 1 500 Kč</span><span class="pm" aria-hidden="true">+</span></summary>
+        <div class="svc-body"><div><p>Vyberu komponenty podle rozpočtu a účelu (hry, práce, škola), PC sestavím a otestuju. Záloha na díly předem, dovoz po Praze a okolí v ceně.</p><div class="modes"><span class="mode">Osobně</span></div></div><div class="btns"><a class="btn" href="/orders/">Objednat</a><a class="btn btn-ghost" href="/prototyp/pc/">Jak stavím PC</a></div></div></details></li>
+      <li><details class="svc" id="upgrade" data-m="osobne"><summary><h2><span class="area">Stavba PC</span>Upgrade a zrychlení PC</h2><span class="pr">od 500 Kč</span><span class="pm" aria-hidden="true">+</span></summary>
+        <div class="svc-body"><div><p>Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Díly se platí zvlášť.</p><div class="modes"><span class="mode">Osobně</span></div></div><div class="btns"><a class="btn" href="/orders/">Objednat</a><a class="btn btn-ghost" href="/prototyp/pc/">Jak stavím PC</a></div></div></details></li>
+      <li><details class="svc" id="web" data-m="osobne dalku"><summary><h2><span class="area">Weby a domény</span>Redesign webu</h2><span class="pr">od 3 499 Kč</span><span class="pm" aria-hidden="true">+</span></summary>
+        <div class="svc-body"><div><p>Starý web předělám do moderní podoby: nový vzhled, mobilní verze, rychlejší načítání a základní zabezpečení.</p><div class="modes"><span class="mode">Osobně</span><span class="mode r">I na dálku</span></div></div><div class="btns"><a class="btn" href="/orders/">Objednat</a></div></div></details></li>
+      <li><details class="svc" id="dns" data-m="dalku"><summary><h2><span class="area">Weby a domény</span>Nastavení domény a DNS</h2><span class="pr">od 800 Kč</span><span class="pm" aria-hidden="true">+</span></summary>
+        <div class="svc-body"><div><p>Záznamy A, AAAA, CNAME, MX a TXT (SPF, DKIM, DMARC). Propojím doménu s webem i e-mailem.</p><div class="modes"><span class="mode r">Pouze na dálku</span></div></div><div class="btns"><a class="btn" href="/orders/">Objednat</a></div></div></details></li>
+  </ul>
+</div>
+<section class="sec" aria-labelledby="calc-h">
+  <div class="wrap">
+    <div class="calc rv">
+      <div><p class="kicker">Vzdálená pomoc</p><h2 class="h2" id="calc-h" style="margin-top:10px">Kolik zaplatím?</h2><p style="margin-top:12px;opacity:.85">Účtuje se každých započatých 15 minut. Žádný paušál navíc.</p></div>
+      <div>
+        <label for="mins">Jak dlouho to bude trvat: <span id="minsOut">30 min</span></label>
+        <input id="mins" type="range" min="5" max="180" step="5" value="30">
+        <div class="out"><span class="big" id="price">200 Kč</span><small id="blocks"></small></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec" aria-labelledby="st-h" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="h2" id="st-h">Jak to probíhá</h2>
+    <ol class="steps">
+      <li class="rv"><h3>Napíšeš mi</h3><p>V objednávce zaškrtneš, co potřebuješ, a popíšeš problém. Stačí pár vět.</p></li>
+      <li class="rv"><h3>Potvrdím cenu</h3><p>Ozvu se co nejdřív. Cenu znáš dřív, než začnu cokoli dělat.</p></li>
+      <li class="rv"><h3>Udělám to</h3><p>Osobně v Praze a okolí, nebo se připojím na dálku.</p></li>
+    </ol>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Corphik, Aleš Pospíšil</span>
+    <a href="/soukromi/">Ochrana osobních údajů</a>
+    <a href="https://www.instagram.com/corphik" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/company/corphik" rel="noopener">LinkedIn</a>
+    <a class="sp" href="/">Tohle je prototyp – zpět na současný web</a>
+  </div>
+</footer>
+<script src="/prototyp/p.js" defer></script>
+</body>
+</html>

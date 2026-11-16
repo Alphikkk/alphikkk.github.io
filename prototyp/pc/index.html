@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stavba PC – Corphik prototyp</title>
+<meta name="description" content="Stavba PC na míru od Corphik: komponenty podle rozpočtu, sestavení, testy a dovoz po Praze.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#eef2ff">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/prototyp/p.css">
+</head>
+<body>
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/prototyp/" aria-label="Corphik – úvod"><span class="brand-hole" aria-hidden="true"></span><span class="brand-mark" aria-hidden="true"></span></a>
+    <span class="tag">Prototyp</span>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Hlavní"><a href="/prototyp/sluzby/">Služby a ceny</a><a href="/prototyp/pc/" aria-current="page">Stavba PC</a><a href="/prototyp/portfolio/">Portfolio</a><a href="/prototyp/o-mne/">O mně</a><a href="/prototyp/kontakt/">Kontakt</a><a class="nav-cta" href="/orders/">Objednat</a></nav>
+  </div>
+</header>
+<main id="obsah">
+<div class="wrap">
+  <section class="pc-hero">
+    <div>
+      <p class="kicker">Stavba PC</p>
+      <h1 class="h1">Počítač, který postavím, jako by byl můj.</h1>
+      <p class="lead">Vyberu komponenty podle rozpočtu a účelu – hry, práce, škola. Sestavím, otestuju a přivezu.</p>
+      <div class="price-row"><div><b>od 1 500 Kč</b><span>sestavení na míru</span></div><div><b>od 500 Kč</b><span>upgrade a zrychlení</span></div></div>
+      <div class="btns" style="margin-top:28px"><a class="btn" href="/orders/">Chci počítač</a><a class="btn btn-ghost" href="#uvnitr">Co je uvnitř</a></div>
+    </div>
+    <figure><img src="/prototyp/img/pc-desk-angle-640.webp" srcset="/prototyp/img/pc-desk-angle-640.webp 640w, /prototyp/img/pc-desk-angle-1152.webp 1152w" sizes="(max-width:860px) 100vw, 45vw" alt="Hotová sestava v bílé prosklené skříni vedle monitoru a podsvícené klávesnice" width="1152" height="1536"></figure>
+  </section>
+</div>
+<section class="sec" id="uvnitr" aria-labelledby="in-h">
+  <div class="wrap anat">
+    <div class="anat-pic rv">
+      <img src="/prototyp/img/pc-interior-640.webp" srcset="/prototyp/img/pc-interior-640.webp 640w, /prototyp/img/pc-interior-1152.webp 1152w" sizes="(max-width:860px) 100vw, 50vw" alt="Pohled do skříně herního PC: grafická karta Radeon, vodní chlazení, bílé kabely a RGB ventilátory" width="1152" height="1536" loading="lazy">
+      <button class="hs" type="button" data-k="gpu" style="left:23%;top:50%" aria-pressed="false" aria-label="Grafická karta Radeon">1</button>
+      <button class="hs" type="button" data-k="cpu" style="left:47%;top:35%" aria-pressed="false" aria-label="Vodní chlazení procesoru">2</button>
+      <button class="hs" type="button" data-k="ram" style="left:66%;top:34%" aria-pressed="false" aria-label="Paměti Kingston Fury Beast">3</button>
+      <button class="hs" type="button" data-k="mb" style="left:38%;top:27%" aria-pressed="false" aria-label="Základní deska ASUS ROG">4</button>
+      <button class="hs" type="button" data-k="cab" style="left:33%;top:62%" aria-pressed="false" aria-label="Bílé opletené kabely">5</button>
+      <button class="hs" type="button" data-k="fan" style="left:84%;top:60%" aria-pressed="false" aria-label="RGB ventilátory">6</button>
+    </div>
+    <div>
+      <p class="kicker">Co je uvnitř</p>
+      <h2 class="h2" id="in-h" style="margin-top:10px">Klikni na čísla na fotce.</h2>
+      <p class="lead" style="margin-top:14px">Herní PC z mého portfolia. U každé součástky víš, proč tam je.</p>
+      <ul class="parts">
+      <li><button type="button" data-k="gpu" aria-expanded="false"><span class="n">1</span><span><b>Grafická karta Radeon</b><span class="d">Srdce herního PC. Vybírám ji podle her a rozlišení, ve kterém chceš hrát.</span></span></button></li>
+      <li><button type="button" data-k="cpu" aria-expanded="false"><span class="n">2</span><span><b>Vodní chlazení procesoru</b><span class="d">Tichý a chladný procesor i při dlouhém hraní. Hadice vedu tak, aby nepřekážely proudění vzduchu.</span></span></button></li>
+      <li><button type="button" data-k="ram" aria-expanded="false"><span class="n">3</span><span><b>Paměti Kingston Fury Beast</b><span class="d">Operační paměť DDR4. Vždy ověřím, že paměti s deskou spolehlivě běží v plné rychlosti.</span></span></button></li>
+      <li><button type="button" data-k="mb" aria-expanded="false"><span class="n">4</span><span><b>Základní deska ASUS ROG</b><span class="d">Na desce závisí, co půjde do počítače přidat za pár let. Proto ji vybírám s rezervou.</span></span></button></li>
+      <li><button type="button" data-k="cab" aria-expanded="false"><span class="n">5</span><span><b>Bílé opletené kabely</b><span class="d">Kabely vedu a stahuju ručně. Vypadá to čistě a vzduch ve skříni má volnou cestu.</span></span></button></li>
+      <li><button type="button" data-k="fan" aria-expanded="false"><span class="n">6</span><span><b>RGB ventilátory</b><span class="d">Proudění vzduchu skrz celou skříň. Podsvícení se dá nastavit, nebo úplně vypnout.</span></span></button></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="sec" aria-labelledby="tr-h" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="h2" id="tr-h">Od objednávky po první hru</h2>
+    <ol class="track">
+      <li class="rv"><h3>Záloha na komponenty</h3><p>Díly objednám až po zaplacení zálohy.</p></li>
+      <li class="rv"><h3>Stavba a testy u mě</h3><p>Počítač sestavím a otestuju u sebe.</p></li>
+      <li class="rv"><h3>Dovoz až k tobě</h3><p>Po Praze a okolí v ceně, dál podle domluvy.</p></li>
+    </ol>
+  </div>
+</section>
+<div class="wrap"><figure class="wide-pic rv"><img src="/prototyp/img/pc-desk-wide-1280.webp" srcset="/prototyp/img/pc-desk-wide-1280.webp 1280w, /prototyp/img/pc-desk-wide-2048.webp 2048w" sizes="100vw" alt="Herní sestava v bílé skříni s modrým podsvícením vedle monitoru na stole" width="2048" height="1536" loading="lazy"></figure></div>
+<section class="sec" aria-labelledby="up-h">
+  <div class="wrap">
+    <div class="upg rv">
+      <img src="/assets/img/pc-kabely.webp" alt="Detail grafické karty s bílými opletenými kabely" width="640" height="480" loading="lazy">
+      <div><p class="kicker">Nechceš nový?</p><h2 class="h2" id="up-h" style="margin-top:10px">Zrychlím ten starý.</h2><p>Výměna disku, RAM nebo grafiky, vyčištění a nová teplovodivá pasta. Od 500 Kč, díly se platí zvlášť.</p><div class="btns"><a class="btn" href="/orders/">Objednat upgrade</a></div></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Corphik, Aleš Pospíšil</span>
+    <a href="/soukromi/">Ochrana osobních údajů</a>
+    <a href="https://www.instagram.com/corphik" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/company/corphik" rel="noopener">LinkedIn</a>
+    <a class="sp" href="/">Tohle je prototyp – zpět na současný web</a>
+  </div>
+</footer>
+<script src="/prototyp/p.js" defer></script>
+</body>
+</html>
